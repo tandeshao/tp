@@ -27,9 +27,9 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
 import seedu.address.logic.ui.Ui;
 import seedu.address.logic.ui.UiManager;
+import seedu.address.storage.UserPrefsStorage;
 
 /**
  * Runs the application.
