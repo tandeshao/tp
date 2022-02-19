@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.logic.ui;
 
 import javafx.stage.Stage;
 

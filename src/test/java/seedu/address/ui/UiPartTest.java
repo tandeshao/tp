@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
 import seedu.address.MainApp;
+import seedu.address.logic.ui.UiPart;
 
 public class UiPartTest {
 

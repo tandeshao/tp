@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.logic.ui;
 
 import java.util.logging.Logger;
 
