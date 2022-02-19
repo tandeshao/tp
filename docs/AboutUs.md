@@ -15,8 +15,8 @@ You can reach us at the email `e0544426@u.nus.edu` or `e0544387@u.nus.edu`.
 
 [github](https://github.com/atmh) | [portfolio](team/atmh.md)
 
-* Role: Deliverables and deadlines.
-* Responsibilities: Ensure project deliverables are done on time and in the right format.
+* Role: Scheduling and tracking.
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
 
 ### Huang Xing Chen
 
@@ -33,8 +33,8 @@ You can reach us at the email `e0544426@u.nus.edu` or `e0544387@u.nus.edu`.
 
 [github](http://github.com/tandeshao) | [portfolio](team/tandeshao.md)
 
-* Role: Scheduling and tracking.
-* Responsibilities: In charge of defining, assigning, and tracking project tasks.
+* Role: Deliverables and deadlines.
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Xu Peizhe
 
