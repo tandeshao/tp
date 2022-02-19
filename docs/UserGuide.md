@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AddressBook Level 3.14 (Abπ) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -148,24 +148,44 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Locate persons by name, phone number, tags and email:``find``
+
+### Features coming in `v1.2`
+
+### Locate persons by name, phone number, tags and email :`find`
+
 Finds persons whose names contain any of the given keywords.
 
-Format: ``find KEYWORD`` 
-- The search is case-insensitive. e.g hans will match Hans
-- The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
-- Name, phone number and tags are eligible keywords.
-- Only full words will be matched e.g. Han will not match Hans
-- Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
+Format: `find KEYWORD`
+* The search is case-insensitive. e.g hans will match Hans
+* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+* Name, phone number and tags are eligible keywords.
+* Only full words will be matched e.g. Han will not match Hans
+* Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
 
 Examples:
-- ``find John`` returns john and John Doe
-- ``find alex david`` returns Alex Yeoh, David Li
-- If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then ``find davidLi98@gmail.com`` would only return David Li.
-- If John has a tag family and David Li has a phone number 90400203, then ``find 90400204`` would only return John.
-- If John has a tag family and David Li has a tag friends, then ``find family`` would only return John.
-- If John has a tag family and David Li has a tag friends, then ``find fam`` would return no result.
+* `find John` returns john and John Doe
+* `find alex david` returns Alex Yeoh, David Li 
+* If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then `find davidLi98@gmail.com` would only return David Li. 
+* If John has a tag family and David Li has a phone number 90400203, then `find 90400204` would only return John. 
+* If John has a tag family and David Li has a tag friends, then `find family` would only return John. 
+* If John has a tag family and David Li has a tag friends, then `find fam` would return no result.
 
+### Adding a memo : `memo`
+
+Adds a memo to a specified person in the address book.
+
+Format: `memo INDEX m/TEXT`
+* Adds a memo in the form of a `TEXT` to the person at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
+* `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
+
+### No duplicate entries :
+
+Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
 
 --------------------------------------------------------------------------------------------------------------------
 
