@@ -257,28 +257,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* Marcus is a 26 years old fresh graduate and has started working as a financial advisor.
+* He is well versed in tech and prefers a command-line interface for performing tasks.
+* Due to the nature of his work, he stores numerous client contacts on his google contacts, but dislikes it’s interface.
+* He dislikes mixing his professional and personal contacts.
+* He wants a way to store his clientele details in a separate place.
+* He likes to get things done fast.
+* He prefers typing over using a mouse.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+- Manage contacts faster than a typical mouse/GUI driven app
+- Display all relevant information of clients on a single application.
+- Saves the insurance agent time and effort to look for a contact.
+- Allow users to consolidate notes pertaining to their clients in a convenient way.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​                                    | I want to …​                                              | So that I can…​                                                               |
+|----------|--------------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                    | refer to instructions when I forget how to use the App                        |
+| `* * *`  | user                                       | see the app already populated with sample contacts        | see how the app will look when it’s running                                   |
+| `* * *`  | user                                       | add my new contacts                                       | store my contacts in the app                                                  |
+| `* * *`  | user                                       | list all my contacts                                      | see all my contacts in the app                                                |
+| `* * *`  | user                                       | edit a contact                                            | correct mistakes I’ve made when adding in the contacts                        |
+| `* * *`  | user                                       | find my contacts by name                                  | access my desired contact without having to sieve through my entire phonebook |
+| `* * *`  | user                                       | save my contacts in the phonebook                         | whenever I re-launch the application, my contacts will still be in it         |
+| `* * *`  | user                                       | create tags and group the contacts using them             | separate my work and personal contacts                                        |
+| `* * *`  | user                                       | clear all my entries with a single command                | remove all my contacts without having to manually delete them one at a time   |
+| `* * *`  | user                                       | delete a person                                           | remove entries that I no longer need                                          |
+| `* * *`  | user                                       | find a person by name                                     | locate details of persons without having to go through the entire list        |
+| `* * *`  | user                                       | add duplicate contacts (phone number / email)             | add contacts without keeping track of duplicates                              |
+| `* *`    | intermediate user                          | invoke my most recently used command                      | add/modify/delete multiple contacts in a more efficient manner                |
+| `* *`    | intermediate user                          | find contacts by their name, phone number, tags and email | find the contacts I want quickly                                              |
+| `* *`    | intermediate user                          | add memos to contracts                                    | keep track of additional information about a client                           |
+| `*`      | user with many persons in the address book | sort persons by name                                      | locate a person easily                                                        |
 *{More to be added}*
 
 ### Use cases
@@ -308,20 +326,95 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Edit a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to Edit a specific person in the list
+4.  AddressBook update the person with new information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
+**Use case: Adding a tag to a person**
+
+**MSS**
+
+1.  User find a person
+2.  AddressBook shows the searching result of the person
+3.  User requests to add a tap to a specific person
+4.  AddressBook adds that tag to the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Cannot find the user.
+
+  Use case ends.
+
+* 3a. The tag is invalid.
+
+    * 3a1. The tag exist already.
+
+      Use case ends.
+
+    * 3a2. The tag exceeds the max length.
+
+      ABπ show error message. 
+      
+      Use case resumes at step 2.
+
+**Use case: Adding memo to a person**
+
+**MSS**
+
+1.  User find a person
+2.  AddressBook shows the searching result of the person
+3.  User requests to add memo to a specific person
+4.  AddressBook adds that memo to the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Cannot find the user.
+
+  Use case ends.
+
+* 3a. The memo is invalid.
+
+    * 3a1. The memo exceeds the max length.
+
+      ABπ show error message.
+
+      Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The main window should be resizable in order to fit different screen size.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **ABπ**: Name of this AddressBook 
+* **Memo**: remark or note for a specific person.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
