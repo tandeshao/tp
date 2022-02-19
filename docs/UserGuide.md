@@ -110,24 +110,6 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -166,9 +148,24 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Locate persons by name, phone number, tags and email:``find``
+Finds persons whose names contain any of the given keywords.
 
-_Details coming soon ..._
+Format: ``find KEYWORD`` 
+- The search is case-insensitive. e.g hans will match Hans
+- The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+- Name, phone number and tags are eligible keywords.
+- Only full words will be matched e.g. Han will not match Hans
+- Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+Examples:
+- ``find John`` returns john and John Doe
+- ``find alex david`` returns Alex Yeoh, David Li
+- If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then ``find davidLi98@gmail.com`` would only return David Li.
+- If John has a tag family and David Li has a phone number 90400203, then ``find 90400204`` would only return John.
+- If John has a tag family and David Li has a tag friends, then ``find family`` would only return John.
+- If John has a tag family and David Li has a tag friends, then ``find fam`` would return no result.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
