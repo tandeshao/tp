@@ -183,6 +183,16 @@ Examples:
 * `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
 * `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
 
+### Invoke recent command :`invoke`
+
+Invoke the most recent command being used.
+
+Format: `invoke`
+* Invokes the most recent command and autofill it in the textbox.
+
+Examples:
+* if the last command is `memo 2 m/meet at 6pm`, `invoke` autofills the textbox with `memo 2 m/meet at 6pm`.
+
 ### No duplicate entries :
 
 Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
