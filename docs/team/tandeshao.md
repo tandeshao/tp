@@ -2,6 +2,7 @@
 layout: page
 title: Tan De Shao's Project Portfolio Page
 ---
+`To be added soon` tags are added beside the headings to show that the information under the headings are just placeholders and does not accurately represent the project progression.
 
 ### Project: AddressBook Level π (Abπ)
 
