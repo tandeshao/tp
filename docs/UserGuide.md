@@ -183,6 +183,16 @@ Examples:
 * `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
 * `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
 
+### Invoking recent command : `invoke`
+
+Invokes the most recent command being used.
+
+Format: `invoke`
+* Invokes the most recent command and autofill it in the textbox.
+
+Examples:
+* If the last command is `memo 2 m/meet at 6pm`, `invoke` autofills the textbox with `memo 2 m/meet at 6pm`.
+
 ### Copying Emails : `copyemails`
 
 Copies a comma-separated list of all displayed emails to clipboard.
@@ -192,7 +202,6 @@ Format: `copyemails`
 Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard. 
 * When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com, betsycrowe@example.com")
-
 
 ### No duplicate entries :
 
