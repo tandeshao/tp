@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **ABπ**: Name of this AddressBook
-* **Memo**: remark or note for a specific person
+* **Memo**: Remark or note for a specific person
 
 
 --------------------------------------------------------------------------------------------------------------------
