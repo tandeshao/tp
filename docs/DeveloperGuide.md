@@ -257,7 +257,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* is reasonably comfortable using CLI apps
 * Marcus is a 26 years old fresh graduate and has started working as a financial advisor.
 * He is well versed in tech and prefers a command-line interface for performing tasks.
 * Due to the nature of his work, he stores numerous client contacts on his google contacts, but dislikes it’s interface.
@@ -265,10 +264,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * He wants a way to store his clientele details in a separate place.
 * He likes to get things done fast.
 * He prefers typing over using a mouse.
+* He is reasonably comfortable using CLI apps.
 
 
 **Value proposition**:
-- Manage contacts faster than a typical mouse/GUI driven app
+- Manage contacts faster than a typical mouse/GUI driven app.
 - Display all relevant information of clients on a single application.
 - Saves the insurance agent time and effort to look for a contact.
 - Allow users to consolidate notes pertaining to their clients in a convenient way.
@@ -307,10 +307,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AddressBook deletes the person.
 
     Use case ends.
 
@@ -330,10 +330,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to Edit a specific person in the list
-4.  AddressBook update the person with new information
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to Edit a specific person in the list.
+4.  AddressBook update the person with new information.
 
     Use case ends.
 
@@ -348,10 +348,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User find a person
-2.  AddressBook shows the searching result of the person
-3.  User requests to add a tap to a specific person
-4.  AddressBook adds that tag to the person
+1.  User find a person.
+2.  AddressBook shows the searching result of the person.
+3.  User requests to add a tap to a specific person.
+4.  AddressBook adds that tag to the person.
 
     Use case ends.
 
@@ -365,6 +365,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. The tag exist already.
 
+      ABπ show notification message.
+
       Use case ends.
 
     * 3a2. The tag exceeds the max length.
@@ -377,10 +379,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User find a person
-2.  AddressBook shows the searching result of the person
-3.  User requests to add memo to a specific person
-4.  AddressBook adds that memo to the person
+1.  User find a person.
+2.  AddressBook shows the searching result of the person.
+3.  User requests to add memo to a specific person.
+4.  AddressBook adds that memo to the person.
 
     Use case ends.
 
@@ -413,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **ABπ**: Name of this AddressBook
-* **Memo**: remark or note for a specific person.
+* **Memo**: remark or note for a specific person
 
 
 --------------------------------------------------------------------------------------------------------------------
