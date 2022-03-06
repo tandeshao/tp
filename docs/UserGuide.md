@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AddressBook Level 3.14 (Abπ) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Abπ can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `abpie.jar` from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -66,7 +66,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -110,24 +110,6 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -166,9 +148,64 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+### Features coming in `v1.2`
+
+### Locate persons by name, phone number, tags and email :`find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD`
+* The search is case-insensitive. e.g hans will match Hans
+* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+* Name, phone number and tags are eligible keywords.
+* Only full words will be matched e.g. Han will not match Hans
+* Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+Examples:
+* `find John` returns john and John Doe
+* `find alex david` returns Alex Yeoh, David Li 
+* If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then `find davidLi98@gmail.com` would only return David Li. 
+* If John has a tag family and David Li has a phone number 90400203, then `find 90400204` would only return John. 
+* If John has a tag family and David Li has a tag friends, then `find family` would only return John. 
+* If John has a tag family and David Li has a tag friends, then `find fam` would return no result.
+
+### Adding a memo : `memo`
+
+Adds a memo to a specified person in the address book.
+
+Format: `memo INDEX m/TEXT`
+* Adds a memo in the form of a `TEXT` to the person at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
+* `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
+
+### Invoking recent command : `invoke`
+
+Invokes the most recent command being used.
+
+Format: `invoke`
+* Invokes the most recent command and autofill it in the textbox.
+
+Examples:
+* If the last command is `memo 2 m/meet at 6pm`, `invoke` autofills the textbox with `memo 2 m/meet at 6pm`.
+
+### Copying Emails : `copyemails`
+
+Copies a comma-separated list of all displayed emails to clipboard.
+
+Format: `copyemails`
+
+Examples:
+* `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard. 
+* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com, betsycrowe@example.com")
+
+### No duplicate entries :
+
+Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,5 +225,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Memo** | `memo INDEX m/TEXT` <br> e.g., `memo 2 m/meet at 6pm`
 **List** | `list`
 **Help** | `help`
