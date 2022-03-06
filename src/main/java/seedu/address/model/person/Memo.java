@@ -1,12 +1,19 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's memo in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Memo {
+
+    public static final String MESSAGE_CONSTRAINTS = "Memo should not contain /";
+
+    /** Every character is allowed except /. */
+    public static final String VALIDATION_REGEX = "[^/]*";
+
     public final String memo;
 
     /**
@@ -16,7 +23,15 @@ public class Memo {
      */
     public Memo(String memo) {
         requireNonNull(memo);
+        checkArgument(isValidMemo(memo), MESSAGE_CONSTRAINTS);
         this.memo = memo;
+    }
+
+    /**
+     * Returns true if a given string is a valid memo.
+     */
+    public static boolean isValidMemo(String memo) {
+        return memo.matches(VALIDATION_REGEX);
     }
 
     @Override
