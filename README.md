@@ -28,7 +28,7 @@ It helps users kep track of their professional contacts, separating it from thei
 **Upcoming Features in ABπ that is not in AB3:**
 - [ ] Find contacts by their name, phone number, tags and email.
 - [ ] Copy all emails into the clipboard.
-- [ ] Unique phone number and email.
+- [ ] Uniqueness check for phone number and email.
 - [ ] Memo command.
 - [ ] Shortcuts to invoke most recently used command.
 
