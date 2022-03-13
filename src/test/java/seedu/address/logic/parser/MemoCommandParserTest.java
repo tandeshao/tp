@@ -1,4 +1,5 @@
 package seedu.address.logic.parser;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -12,8 +13,9 @@ import seedu.address.logic.commands.MemoCommand;
 import seedu.address.model.person.Memo;
 
 public class MemoCommandParserTest {
-    private MemoCommandParser parser = new MemoCommandParser();
     private final String nonEmptyMemo = "Some memo.";
+    private final MemoCommandParser parser = new MemoCommandParser();
+
     public void parse_indexSpecified_success() {
         // have memo
         Index targetIndex = INDEX_FIRST_PERSON;

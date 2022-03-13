@@ -11,7 +11,9 @@ public class Memo extends PersonAttribute {
 
     public static final String MESSAGE_CONSTRAINTS = "Memo should not contain /";
 
-    /** Every character is allowed except /. */
+    /**
+     * Every character is allowed except /.
+     */
     public static final String VALIDATION_REGEX = "[^/]*";
 
     public final String memo;

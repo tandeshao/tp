@@ -15,7 +15,9 @@ import java.util.Optional;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -71,6 +73,7 @@ public class ArgumentMultimap {
     /**
      * If there is no key in {@link #argMultimap} this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
+     *
      * @return Returns all Prefix keys that exist in the tokenized input.
      */
     public List<Prefix> getAllKeys() {
@@ -87,6 +90,12 @@ public class ArgumentMultimap {
         return getValue(new Prefix("")).orElse("");
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ArgumentMultimap // instanceof handles nulls
+                && argMultimap.equals(((ArgumentMultimap) other).argMultimap)); // state check
+    }
 
     @Override
     public String toString() {

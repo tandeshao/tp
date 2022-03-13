@@ -29,7 +29,7 @@ import seedu.address.testutil.PersonBuilder;
 public class MemoCommandTest {
     private static final String MEMO_STUB = "Some memo";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addMemoUnfilteredList_success() {
@@ -51,8 +51,7 @@ public class MemoCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withMemo("").build();
 
-        MemoCommand memoCommand = new MemoCommand(INDEX_FIRST_PERSON,
-                new Memo(editedPerson.getMemo().toString()));
+        MemoCommand memoCommand = new MemoCommand(INDEX_FIRST_PERSON, new Memo(editedPerson.getMemo().toString()));
 
         String expectedMessage = String.format(MemoCommand.MESSAGE_DELETE_MEMO_SUCCESS, editedPerson);
 
@@ -67,8 +66,8 @@ public class MemoCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withMemo(MEMO_STUB).build();
+        Person editedPerson = new PersonBuilder(
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())).withMemo(MEMO_STUB).build();
 
         MemoCommand memoCommand = new MemoCommand(INDEX_FIRST_PERSON, new Memo(editedPerson.getMemo().memo));
 
@@ -105,12 +104,10 @@ public class MemoCommandTest {
 
     @Test
     public void equals() {
-        final MemoCommand standardCommand = new MemoCommand(INDEX_FIRST_PERSON,
-                new Memo(VALID_MEMO_AMY));
+        final MemoCommand standardCommand = new MemoCommand(INDEX_FIRST_PERSON, new Memo(VALID_MEMO_AMY));
 
         // same values -> returns true
-        MemoCommand commandWithSameValues = new MemoCommand(INDEX_FIRST_PERSON,
-                new Memo(VALID_MEMO_AMY));
+        MemoCommand commandWithSameValues = new MemoCommand(INDEX_FIRST_PERSON, new Memo(VALID_MEMO_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -123,11 +120,9 @@ public class MemoCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MemoCommand(INDEX_SECOND_PERSON,
-                new Memo(VALID_MEMO_AMY))));
+        assertFalse(standardCommand.equals(new MemoCommand(INDEX_SECOND_PERSON, new Memo(VALID_MEMO_AMY))));
 
         // different memo -> returns false
-        assertFalse(standardCommand.equals(new MemoCommand(INDEX_FIRST_PERSON,
-                new Memo(VALID_MEMO_BOB))));
+        assertFalse(standardCommand.equals(new MemoCommand(INDEX_FIRST_PERSON, new Memo(VALID_MEMO_BOB))));
     }
 }

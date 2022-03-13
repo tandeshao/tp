@@ -19,23 +19,27 @@ import seedu.address.model.person.Person;
  */
 public class MemoCommand extends Command {
 
-    /** Command word to invoke the memo command. */
+    /**
+     * Command word to invoke the memo command.
+     */
     public static final String COMMAND_WORD = "memo";
 
-    /** Instructions on how to use the memo command. */
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the memo of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing memo will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEMO + "[MEMO]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MEMO + "Likes to swim.";
+    /**
+     * Instructions on how to use the memo command.
+     */
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the memo of the person identified " + "by the "
+            + "index number used in the last person listing. " + "Existing memo will be overwritten by the input.\n"
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_MEMO + "[MEMO]\n" + "Example: " + COMMAND_WORD
+            + " 1 " + PREFIX_MEMO + "Likes to swim.";
 
-    /** Success add message. */
+    /**
+     * Success add message.
+     */
     public static final String MESSAGE_ADD_MEMO_SUCCESS = "Added memo to Person: %1$s";
 
-    /** Success delete message. */
+    /**
+     * Success delete message.
+     */
     public static final String MESSAGE_DELETE_MEMO_SUCCESS = "Removed memo from Person: %1$s";
 
     private final Index index;
@@ -43,7 +47,7 @@ public class MemoCommand extends Command {
 
     /**
      * @param index of the person in the filtered person list to edit the memo
-     * @param memo of the person to be updated to
+     * @param memo  of the person to be updated to
      */
     public MemoCommand(Index index, Memo memo) {
         requireAllNonNull(index, memo);
@@ -60,8 +64,7 @@ public class MemoCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), memo, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -94,7 +97,6 @@ public class MemoCommand extends Command {
 
         // state check
         MemoCommand e = (MemoCommand) other;
-        return index.equals(e.index)
-                && memo.equals(e.memo);
+        return index.equals(e.index) && memo.equals(e.memo);
     }
 }

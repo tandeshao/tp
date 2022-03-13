@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -77,12 +81,13 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherPerson != null && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail()
+                .equals(getEmail()));
     }
 
     /**
      * Retrieves the corresponding person attribute that matches with the prefix.
+     *
      * @param prefix The prefix that is used for
      * @return Returns an immutable set that contains the person attribute.
      */
@@ -90,17 +95,21 @@ public class Person {
         Set<PersonAttribute> resultSet = new HashSet<>();
         if (PREFIX_NAME.equals(prefix)) {
             resultSet.add(getName());
-        } else if (PREFIX_ADDRESS.equals(prefix)) {
-            resultSet.add(getAddress());
-        } else if (PREFIX_EMAIL.equals(prefix)) {
-            resultSet.add(getEmail());
-        } else if (PREFIX_MEMO.equals(prefix)) {
-            resultSet.add(getMemo());
-        } else if (PREFIX_PHONE.equals((prefix))) {
-            resultSet.add(getPhone());
-        } else {
-            resultSet.addAll(getTags());
-        }
+        } else
+            if (PREFIX_ADDRESS.equals(prefix)) {
+                resultSet.add(getAddress());
+            } else
+                if (PREFIX_EMAIL.equals(prefix)) {
+                    resultSet.add(getEmail());
+                } else
+                    if (PREFIX_MEMO.equals(prefix)) {
+                        resultSet.add(getMemo());
+                    } else
+                        if (PREFIX_PHONE.equals((prefix))) {
+                            resultSet.add(getPhone());
+                        } else {
+                            resultSet.addAll(getTags());
+                        }
         return Collections.unmodifiableSet(resultSet);
     }
 
@@ -119,10 +128,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+        return otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail()) && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -136,15 +143,8 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append(" Memo: ")
-                .append(getMemo());
+        builder.append(getName()).append("; Phone: ").append(getPhone()).append("; Email: ").append(getEmail())
+                .append("; Address: ").append(getAddress()).append(" Memo: ").append(getMemo());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

@@ -20,8 +20,7 @@ public class JsonUserPrefsStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
 
-    @TempDir
-    public Path testFolder;
+    @TempDir public Path testFolder;
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
@@ -44,9 +43,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
-        return userPrefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
-                : null;
+        return userPrefsFileInTestDataFolder != null ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder) : null;
     }
 
     @Test
@@ -92,8 +89,7 @@ public class JsonUserPrefsStorageTest {
      */
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {
-            new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                    .saveUserPrefs(userPrefs);
+            new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder)).saveUserPrefs(userPrefs);
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file", ioe);
         }
