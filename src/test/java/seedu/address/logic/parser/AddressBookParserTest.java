@@ -80,8 +80,8 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String args = " n/" + String.join(" ", keywords);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
         String constructedArgs = FindCommand.COMMAND_WORD + " n/" + String.join(" ", keywords);
         FindCommand command = (FindCommand) parser.parseCommand(constructedArgs);
         assertEquals(new FindCommand(new PersonContainsKeywordsPredicate(argMultimap)), command);

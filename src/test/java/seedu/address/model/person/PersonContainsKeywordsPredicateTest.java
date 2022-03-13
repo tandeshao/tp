@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,19 +30,25 @@ public class PersonContainsKeywordsPredicateTest {
 
     // Create multiMap for predicate constructor.
     private static final ArgumentMultimap EMPTY_MULTI_MAP = ArgumentTokenizer.tokenize(EMPTY_TEST_USER_INPUT,
-            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_NAME = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_NAME, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_NAME, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_PHONE = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_PHONE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_PHONE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_EMAIL = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_EMAIL, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_EMAIL, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_TAG = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_TAG, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_TAG, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_MEMO = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_MEMO, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_MEMO, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
     private static final ArgumentMultimap POPULATED_MULTI_MAP_WITH_ALL = ArgumentTokenizer.tokenize(
-            POPULATED_TEST_USER_INPUT_WITH_ALL, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            POPULATED_TEST_USER_INPUT_WITH_ALL, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+            PREFIX_MEMO);
 
     // Create Person predicate with the argMultiMap.
     public static final PersonContainsKeywordsPredicate EMPTY_PREDICATE = new PersonContainsKeywordsPredicate(
@@ -126,13 +133,18 @@ public class PersonContainsKeywordsPredicateTest {
         // Partial address of the full address -> returns true.
         assertTrue(ADDRESS_PREDICATE.test(new PersonBuilder().withAddress("QueensTown").build()));
 
-        // Person only contains one of the tags -> returns true.
+        // Person contains one of the tags -> returns true.
         assertTrue(TAG_PREDICATE.test(new PersonBuilder().withTags("friends").build()));
         assertTrue(TAG_PREDICATE.test(new PersonBuilder().withTags("colleagues").build()));
 
         // Person contains both tags -> returns true.
         String[] personTags = {"colleagues", "friends"};
         assertTrue(TAG_PREDICATE.test(new PersonBuilder().withTags(personTags).build()));
+
+        // Person contains one of the memo word -> returns true.
+        assertTrue(MEMO_PREDICATE.test(new PersonBuilder().withMemo("close").build()));
+        assertTrue(MEMO_PREDICATE.test(new PersonBuilder().withMemo("contract").build()));
+        assertTrue(MEMO_PREDICATE.test(new PersonBuilder().withMemo("Close Contract").build()));
 
     }
 
@@ -163,10 +175,6 @@ public class PersonContainsKeywordsPredicateTest {
         // Person do not contain both tags -> returns false.
         String[] personTags = {"colleague", "friend"};
         assertFalse(TAG_PREDICATE.test(new PersonBuilder().withTags(personTags).build()));
-
-        // Person do not have that memo -> returns false.
-        assertFalse(MEMO_PREDICATE.test(new PersonBuilder().withMemo("close").build()));
-        assertFalse(MEMO_PREDICATE.test(new PersonBuilder().withMemo(" ").build()));
     }
 
 }

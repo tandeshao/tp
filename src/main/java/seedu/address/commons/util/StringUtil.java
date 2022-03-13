@@ -58,10 +58,11 @@ public class StringUtil {
         // Split sentence by white space.
         String[] wordsInPreppedSentence1 = sentence1.split("\\s+");
         String[] wordsInPreppedSentence2 = sentence2.split("\\s+");
-
         return Arrays.stream(wordsInPreppedSentence1)
                 .anyMatch(word -> Arrays.stream(wordsInPreppedSentence2).anyMatch(word::equalsIgnoreCase));
     }
+
+
 
     /**
      * Returns a detailed message of the t, including the stack trace.
