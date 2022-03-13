@@ -159,20 +159,26 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
 * The search is case-insensitive. e.g hans will match Hans
+* At least 1 parameter must be present.
+* Name, phone number, email, address, memo and tags are eligible parameters.
+* Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute. 
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
-* Name, phone number and tags are eligible keywords.
-* Only full words will be matched e.g. Han will not match Hans
+* Only full words will be matched e.g. Han will not match Hans. 
 * Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
 
+**Note: A word is defined as consecutive characters that is bounded by whitespaces.**
+e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".
+
 Examples:
-* `find John` returns john and John Doe
-* `find alex david` returns Alex Yeoh, David Li 
-* If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then `find davidLi98@gmail.com` would only return David Li. 
-* If John has a tag family and David Li has a phone number 90400203, then `find 90400204` would only return John. 
-* If John has a tag family and David Li has a tag friends, then `find family` would only return John. 
-* If John has a tag family and David Li has a tag friends, then `find fam` would return no result.
+* `find n/ John` returns john and John Doe
+* `find n/alex david` returns Alex Yeoh and David Li. 
+* If David Li has an email davidLi98@gmail.com, then `find e/davidLi98@gmail.com` would return David Li. 
+* If John has a phone number 90400202, then `find p/90400202` would return John.
+* If John has a phone number 90400202, then `find p/90400203` would return no result.
+* If John has a tag family, then `find t/family` would return John. 
+* If John has a tag family, then `find t/fam` would return no result.
 
 ### Adding a memo : `memo`
 
