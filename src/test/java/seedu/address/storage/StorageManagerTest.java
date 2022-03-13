@@ -17,8 +17,7 @@ import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
 
-    @TempDir
-    public Path testFolder;
+    @TempDir public Path testFolder;
 
     private StorageManager storageManager;
 

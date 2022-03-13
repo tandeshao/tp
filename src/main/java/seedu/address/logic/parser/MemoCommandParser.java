@@ -17,6 +17,7 @@ public class MemoCommandParser implements Parser<MemoCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code MemoCommand}
      * and returns a {@code MemoCommand} object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public MemoCommand parse(String args) throws ParseException {

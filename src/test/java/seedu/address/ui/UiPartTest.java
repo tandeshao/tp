@@ -21,8 +21,7 @@ public class UiPartTest {
     private static final String VALID_FILE_WITH_FX_ROOT_PATH = "UiPartTest/validFileWithFxRoot.fxml";
     private static final TestFxmlObject VALID_FILE_ROOT = new TestFxmlObject("Hello World!");
 
-    @TempDir
-    public Path testFolder;
+    @TempDir public Path testFolder;
 
     @Test
     public void constructor_nullFileUrl_throwsNullPointerException() {
@@ -88,8 +87,7 @@ public class UiPartTest {
      */
     private static class TestUiPart<T> extends UiPart<T> {
 
-        @FXML
-        private TestFxmlObject validFileRoot; // Check that @FXML annotations work
+        @FXML private TestFxmlObject validFileRoot; // Check that @FXML annotations work
 
         TestUiPart(URL fxmlFileUrl, T root) {
             super(fxmlFileUrl, root);
