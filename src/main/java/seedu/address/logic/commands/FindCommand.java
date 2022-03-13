@@ -28,6 +28,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        // Update model with the filter person list.
+        // Note: Everytime a find command is called, a new filtered list is generated in ModelManager class.
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

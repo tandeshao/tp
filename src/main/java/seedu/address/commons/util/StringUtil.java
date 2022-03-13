@@ -38,6 +38,17 @@ public class StringUtil {
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
+    public static boolean containsWordIgnoreCaseForTwoSentence(String sentence1, String sentence2) {
+        requireNonNull(sentence1);
+        requireNonNull(sentence2);
+
+        String[] wordsInPreppedSentence1 = sentence1.split("\\s+");
+        String[] wordsInPreppedSentence2 = sentence2.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence1)
+                .anyMatch(word -> Arrays.stream(wordsInPreppedSentence2).anyMatch(word::equalsIgnoreCase));
+    }
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

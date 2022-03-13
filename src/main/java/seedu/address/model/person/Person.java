@@ -1,12 +1,14 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,6 +82,29 @@ public class Person {
     }
 
     /**
+     * Retrieves the corresponding person attribute that matches with the prefix.
+     * @param prefix The prefix that is used for
+     * @return Returns an immutable set that contains the person attribute.
+     */
+    public Set<PersonAttribute> getCorrespondingAttribute(Prefix prefix) {
+        Set<PersonAttribute> resultSet = new HashSet<>();
+        if (PREFIX_NAME.equals(prefix)) {
+            resultSet.add(getName());
+        } else if (PREFIX_ADDRESS.equals(prefix)) {
+            resultSet.add(getAddress());
+        } else if (PREFIX_EMAIL.equals(prefix)) {
+            resultSet.add(getEmail());
+        } else if (PREFIX_MEMO.equals(prefix)) {
+            resultSet.add(getMemo());
+        } else if (PREFIX_PHONE.equals((prefix))) {
+            resultSet.add(getPhone());
+        } else {
+            resultSet.addAll(getTags());
+        }
+        return Collections.unmodifiableSet(resultSet);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -100,6 +125,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
     }
+
 
     @Override
     public int hashCode() {

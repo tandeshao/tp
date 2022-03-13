@@ -6,11 +6,12 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s matches any of the keywords passed by user.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    // For normal name search.
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
@@ -27,5 +28,4 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
                 || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }
