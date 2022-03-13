@@ -5,6 +5,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class PersonContainsKeywordPredicate implements Predicate<Person> {
@@ -20,11 +21,27 @@ public class PersonContainsKeywordPredicate implements Predicate<Person> {
 
     private boolean personContainsKeyWord(Person person) {
         List<Prefix> prefixKeys = tokenizedInput.getAllKeys();
-        return value = prefixKeys.stream().anyMatch(prefixKey ->
-                tokenizedInput.getAllValues(prefixKey).stream()
-                 .anyMatch(keyword -> person.getCorrespondingAttribute(prefixKey)
-                   .stream().anyMatch(personAttribute ->
-                     StringUtil.containsWordIgnoreCaseForTwoSentence(personAttribute.toString(), keyword))));
+        for (Prefix prefix : prefixKeys) {
+            Set<PersonAttribute> personAttributes = person.getCorrespondingAttribute(prefix);
+            if (checksAnyTokenMatches(prefix, personAttributes)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checksAnyTokenMatches(Prefix prefix, Set<PersonAttribute> personAttributes) {
+        for (PersonAttribute attribute : personAttributes) {
+            if (anyMatch(prefix, attribute)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean anyMatch(Prefix prefix, PersonAttribute personAttribute) {
+        return tokenizedInput.getAllValues(prefix).stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCaseForTwoSentence(personAttribute.toString(), keyword));
     }
 
     @Override
