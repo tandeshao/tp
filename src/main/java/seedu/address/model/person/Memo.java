@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's memo in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Memo {
+public class Memo extends PersonAttribute {
 
     public static final String MESSAGE_CONSTRAINTS = "Memo should not contain /";
 
