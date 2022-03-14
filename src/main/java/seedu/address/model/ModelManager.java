@@ -93,6 +93,10 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book,
+     * excluding {@code except}.
+     */
     @Override
     public boolean hasPersonExcept(Person person, Person except) {
         requireNonNull(person);
