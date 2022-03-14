@@ -109,7 +109,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePhoneNumberUnfilteredList_failure() {
+    public void execute_duplicatePhoneUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPersonDescriptor descriptor =

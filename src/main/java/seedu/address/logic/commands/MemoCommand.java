@@ -51,6 +51,13 @@ public class MemoCommand extends Command {
         this.memo = memo;
     }
 
+    /**
+     * Executes the memo command and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -80,6 +87,12 @@ public class MemoCommand extends Command {
         return String.format(message, personToEdit);
     }
 
+    /**
+     * Checks if two MemoCommand object is equal.
+     *
+     * @param other The other MemoCommand object.
+     * @return true if equal; otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

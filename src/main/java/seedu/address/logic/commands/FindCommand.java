@@ -44,7 +44,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if two FindCommand mezthod is equal.
+     * Checks if two FindCommand method is equal.
      *
      * @param other The other FindCommand object.
      * @return Result of the check.

@@ -44,22 +44,47 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Returns name.
+     *
+     * @return name.
+     */
     public Name getName() {
         return name;
     }
 
+    /**
+     * Returns phone.
+     *
+     * @return phone/
+     */
     public Phone getPhone() {
         return phone;
     }
 
+    /**
+     * Returns email.
+     *
+     * @return email.
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Returns address.
+     *
+     * @return address.
+     */
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * Returns memo.
+     *
+     * @return memo.
+     */
     public Memo getMemo() {
         return memo;
     }
@@ -112,6 +137,8 @@ public class Person {
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     *
+     * @return true if both persons have the same identity and data fields; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
@@ -131,12 +158,22 @@ public class Person {
                 && otherPerson.getTags().equals(getTags());
     }
 
+    /**
+     * Returns hashcode of Person.
+     *
+     * @return hashcode of Person.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
     }
 
+    /**
+     * Returns string representation of Person.
+     *
+     * @return string representation of Person.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
