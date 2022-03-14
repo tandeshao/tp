@@ -2,12 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.InvokeCommandException;
 import seedu.address.logic.parser.CommandRecorder;
 import seedu.address.model.Model;
 
 /**
- * Finds and lists all persons in address book whose {@link seedu.address.model.person.PersonAttribute Attribute}
- * contains any of the tokenized argument. Keyword matching is case-insensitive.
+ * Invoke the most recent command that was typed in by user.
+ * Invoke will not count "invoke" as a result, it will return the most recent command that is not "invoke".
  */
 public class InvokeCommand extends Command {
 
@@ -21,16 +22,15 @@ public class InvokeCommand extends Command {
     public InvokeCommand() {}
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws InvokeCommandException {
         requireNonNull(model);
-
-        return new CommandResult(CommandRecorder.getLastCommand());
+        throw new InvokeCommandException(CommandRecorder.getLastCommand());
     }
 
     /**
-     * Checks if two FindCommand method is equal.
+     * Checks if two InvokeCommand methods is equal.
      *
-     * @param other The other FindCommand object.
+     * @param other The other InvokeCommand object.
      * @return Result of the check.
      */
     @Override
