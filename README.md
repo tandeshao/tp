@@ -29,7 +29,7 @@ It helps users kep track of their professional contacts, separating it from thei
 - [ ] Find contacts by their name, phone number, tags and email.
 - [ ] Copy all emails into the clipboard.
 - [ ] Uniqueness check for phone number and email.
-- [ ] Memo command.
+- [ ] Memo feature.
 - [ ] Shortcuts to invoke most recently used command.
 
 ## Instructions
