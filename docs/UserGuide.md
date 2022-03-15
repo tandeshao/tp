@@ -193,11 +193,11 @@ Examples:
 * `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
 * `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
 
-### Invoking recent command : `invoke`
+### Invoking recent command : `history`
 
 Invokes the most recent command being used.
 
-Format: `invoke`
+Format: `history`
 * Invokes the most recent command and autofill it in the textbox.
 
 Examples:
@@ -238,3 +238,4 @@ Action | Format, Examples
 **Memo** | `memo INDEX m/TEXT` <br> e.g., `memo 2 m/meet at 6pm`
 **List** | `list`
 **Help** | `help`
+**History**| `history`

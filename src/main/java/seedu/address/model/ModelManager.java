@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.CommandRecorder;
+import seedu.address.logic.parser.CommandHistory;
 import seedu.address.model.person.Person;
 
 /**
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
     @Override
     public void recordCommand(String userInput) {
-        CommandRecorder.record(userInput);
+        CommandHistory.record(userInput);
     }
 
     @Override

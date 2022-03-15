@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 /**
- * Record the latest user input for InvokeCommand.
+ * Record the latest user input for HistoryCommand.
  */
-public class CommandRecorder {
+public class CommandHistory {
     private static String userInput = "";
 
     /**
@@ -15,7 +15,7 @@ public class CommandRecorder {
     }
 
     /**
-     * Get the recorded user input for InvokeCommand.
+     * Get the recorded user input for HistoryCommand.
      */
     public static String getLastCommand() {
         return userInput;
