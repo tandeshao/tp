@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.CommandRemark;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
@@ -11,22 +13,15 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final CommandRemark commandRemark;
 
-    /** The application should exit. */
-    private final boolean exit;
-
-    private final boolean history;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean history) {
+    public CommandResult(String feedbackToUser, CommandRemark commandRemark) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.history = history;
+        this.commandRemark = commandRemark;
     }
 
     /**
@@ -34,7 +29,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, CommandRemark.UI_IRRELEVANT);
     }
 
     public String getFeedbackToUser() {
@@ -42,15 +37,15 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return commandRemark == CommandRemark.HELP;
     }
 
     public boolean isExit() {
-        return exit;
+        return commandRemark == CommandRemark.EXIT;
     }
 
     public boolean isHistory() {
-        return history;
+        return commandRemark == CommandRemark.HISTORY;
     }
 
     @Override
@@ -66,13 +61,12 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && commandRemark == ((CommandResult) other).commandRemark;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, commandRemark);
     }
 
 }
