@@ -91,5 +91,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /** Record the most recent user input except "invoke". */
     void recordCommand(String userInput);
 }
