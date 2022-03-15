@@ -1,5 +1,8 @@
 package seedu.address.logic.parser;
 
+/**
+ * Record the latest user input for InvokeCommand.
+ */
 public class CommandRecorder {
     private static String userInput = "";
 
