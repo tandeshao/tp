@@ -33,12 +33,12 @@ public class CommandList {
 
     /** Gets the most recent commands(number capped at MAX_RECORD_NUMBER). */
     public static String getRecentCommands() {
-        StringBuilder result = new StringBuilder(getLastCommand());
+        StringBuilder result = new StringBuilder("");
         for (int i = 1; i <= inputHistory.size(); i++) {
+            result.append(inputHistory.get(inputHistory.size() - i));
             if (i != inputHistory.size()) {
                 result.append("\n");
             }
-            result.append(inputHistory.get(inputHistory.size() - i));
         }
         return result.toString();
     }
@@ -50,5 +50,12 @@ public class CommandList {
 
     private static void clearOldCommand() {
         inputHistory.remove(0);
+    }
+
+    /**
+     * Only used in test currently.
+     */
+    public static void clearAllCommand() {
+        inputHistory.clear();
     }
 }
