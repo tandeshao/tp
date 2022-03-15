@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.exceptions.HistoryCommandException;
-import seedu.address.logic.parser.CommandHistory;
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
@@ -22,9 +21,15 @@ public class HistoryCommand extends Command {
     public HistoryCommand() {}
 
     @Override
-    public CommandResult execute(Model model) throws HistoryCommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-        throw new HistoryCommandException(CommandHistory.getLastCommand());
+        if (!CommandHistory.isEmpty()) {
+            String message = "These are the recent commands:\n" + CommandHistory.getRecentCommands();
+            return new CommandResult(message, false, false, true);
+        } else {
+            String message = "Your history is still a blank waiting for you to write it.";
+            return new CommandResult(message);
+        }
     }
 
     /**

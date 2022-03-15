@@ -179,7 +179,7 @@ public class AddCommandTest {
 
         @Override
         public void recordCommand(String userInput) {
-            //This is a dummy test.
+            throw new AssertionError("This method should not be called.");
         }
     }
 

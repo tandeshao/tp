@@ -42,6 +42,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        model.recordCommand(commandText);
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
@@ -51,7 +52,6 @@ public class LogicManager implements Logic {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
-        model.recordCommand(commandText);
         return commandResult;
     }
 

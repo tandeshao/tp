@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -163,6 +164,15 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Set the text box to the history.
+     */
+    @FXML
+    private void handleHistory() {
+        commandBoxPlaceholder.getChildren().get(commandBoxPlaceholder.getChildren().size() - 1).
+                setAccessibleText(CommandHistory.getLastCommand());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isHistory()) {
+                handleHistory();
             }
 
             return commandResult;
