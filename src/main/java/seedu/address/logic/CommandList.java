@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Records the latest user inputs.
  * Only the latest MAX_RECORD_NUMBER inputs will be recorded.
  */
-public class CommandHistory {
+public class CommandList {
     private static final int MAX_RECORD_NUMBER = 3;
     private static final ArrayList<String> inputHistory = new ArrayList<>();
 
