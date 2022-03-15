@@ -51,7 +51,7 @@ public class CommandResult {
     }
 
     public String getNewCommandTextField() {
-        return isHistory() ? CommandList.getLastCommand() :  "";
+        return isHistory() ? CommandList.getLastCommand() : "";
     }
 
     @Override

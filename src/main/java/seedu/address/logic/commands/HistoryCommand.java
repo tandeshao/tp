@@ -31,7 +31,7 @@ public class HistoryCommand extends Command {
         if (CommandList.isEmpty()) {
             throw new CommandException(MESSAGE_ON_EMPTY_HISTORY);
         }
-        String message =  MESSAGE_ON_HISTORY_SUCCESS + CommandList.getRecentCommands();
+        String message = MESSAGE_ON_HISTORY_SUCCESS + CommandList.getRecentCommands();
         return new CommandResult(message, CommandRemark.HISTORY);
     }
 
