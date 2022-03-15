@@ -165,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Set the text box to the history.
+     * Set the text box to the recorded history.
      */
     @FXML
     private void handleHistory() {

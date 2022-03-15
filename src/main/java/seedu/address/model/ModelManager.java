@@ -140,6 +140,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /** Records the command being executed. */
     @Override
     public void recordCommand(String userInput) {
         CommandHistory.record(userInput);

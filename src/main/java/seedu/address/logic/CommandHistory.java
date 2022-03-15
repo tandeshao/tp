@@ -3,14 +3,15 @@ package seedu.address.logic;
 import java.util.ArrayList;
 
 /**
- * Record the latest user input for HistoryCommand.
+ * Records the latest user inputs.
+ * Only the latest MAX_RECORD_NUMBER inputs will be recorded.
  */
 public class CommandHistory {
     private static final int MAX_RECORD_NUMBER = 3;
     private static final ArrayList<String> inputHistory = new ArrayList<>();
 
     /**
-     * Record the latest user input.
+     * Records the latest user input.
      * @param lastCommand the last user input.
      */
     public static void record(String lastCommand) {
@@ -22,9 +23,7 @@ public class CommandHistory {
         }
     }
 
-    /**
-     * Get the recorded user input for HistoryCommand.
-     */
+    /** Gets the latest user input. */
     public static String getLastCommand() {
         if (inputHistory.size() == 0) {
             return "";
@@ -32,9 +31,7 @@ public class CommandHistory {
         return inputHistory.get(inputHistory.size() - 1);
     }
 
-    /**
-     * Get the most recent commands(number capped at MAX_RECORD_NUMBER).
-     */
+    /** Gets the most recent commands(number capped at MAX_RECORD_NUMBER). */
     public static String getRecentCommands() {
         StringBuilder result = new StringBuilder(inputHistory.get(0));
         for (int i = 1; i < inputHistory.size(); i++) {
@@ -44,6 +41,7 @@ public class CommandHistory {
         return result.toString();
     }
 
+    /** Checks whether there is any command history or not. */
     public static boolean isEmpty() {
         return inputHistory.size() == 0;
     }

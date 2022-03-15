@@ -7,7 +7,8 @@ import seedu.address.logic.CommandRemark;
 import seedu.address.model.Model;
 
 /**
- * Invoke the most recent command that was typed in by user.
+ * Invokes the most recent command that was typed in by user and auto-fill in the text box.
+ * The most 3 commands will be showed in message box.
  * History will not count "history" as a result, it will return the most recent command that is not "invoke".
  */
 public class HistoryCommand extends Command {
