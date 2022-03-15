@@ -33,9 +33,11 @@ public class CommandList {
 
     /** Gets the most recent commands(number capped at MAX_RECORD_NUMBER). */
     public static String getRecentCommands() {
-        StringBuilder result = new StringBuilder(inputHistory.get(0));
-        for (int i = 1; i < inputHistory.size(); i++) {
-            result.append("\n");
+        StringBuilder result = new StringBuilder(getLastCommand());
+        for (int i = 1; i <= inputHistory.size(); i++) {
+            if (i != inputHistory.size()) {
+                result.append("\n");
+            }
             result.append(inputHistory.get(inputHistory.size() - i));
         }
         return result.toString();
