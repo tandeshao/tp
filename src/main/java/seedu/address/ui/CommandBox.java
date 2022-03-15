@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -44,7 +44,7 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-            if(commandText.replaceAll("\\s+","").equals("history")) {
+            if (commandText.replaceAll("\\s+", "").equals("history")) {
                 commandTextField.setText(CommandHistory.getLastCommand());
             } else {
                 commandTextField.setText("");

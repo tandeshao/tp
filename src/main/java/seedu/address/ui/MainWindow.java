@@ -169,8 +169,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleHistory() {
-        commandBoxPlaceholder.getChildren().get(commandBoxPlaceholder.getChildren().size() - 1).
-                setAccessibleText(CommandHistory.getLastCommand());
+        commandBoxPlaceholder.getChildren().get(commandBoxPlaceholder.getChildren().size() - 1)
+                .setAccessibleText(CommandHistory.getLastCommand());
     }
 
     public PersonListPanel getPersonListPanel() {
