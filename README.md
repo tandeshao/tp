@@ -9,7 +9,7 @@
 
 **Abπ** is an improvement of **[AB3](https://se-education.org/addressbook-level3)** and it is optimized specifically for
 users who prefer typing via the Command Line Interface(CLI) while still having the benefits of a Graphical User Interface (GUI).
-It helps users kep track of their professional contacts, separating it from their personal contacts. 
+It helps users keep track of their professional contacts, separating it from their personal contacts. 
 <br>
 
 ![Ui](docs/images/Ui.png)
@@ -28,7 +28,7 @@ It helps users kep track of their professional contacts, separating it from thei
 **Upcoming Features in ABπ that is not in AB3:**
 - [ ] Find contacts by their name, phone number, tags and email.
 - [ ] Copy all emails into the clipboard.
-- [ ] Uniqueness check for phone number and email.
+- [ ] Prevent duplicated phone number and email.
 - [ ] Memo feature.
 - [ ] Shortcuts to invoke most recently used command.
 
