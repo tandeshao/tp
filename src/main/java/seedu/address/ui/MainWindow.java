@@ -164,15 +164,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    /**
-     * Set the text box to the recorded history.
-     */
-    @FXML
-    private void handleHistory() {
-        commandBoxPlaceholder.getChildren().get(commandBoxPlaceholder.getChildren().size() - 1)
-                .setAccessibleText(CommandList.getLastCommand());
-    }
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -194,10 +185,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
-            }
-
-            if (commandResult.isHistory()) {
-                handleHistory();
             }
 
             return commandResult;

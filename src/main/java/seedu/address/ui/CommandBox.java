@@ -43,12 +43,8 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(commandText);
-            if (commandText.replaceAll("\\s+", "").equals("history")) {
-                commandTextField.setText(CommandList.getLastCommand());
-            } else {
-                commandTextField.setText("");
-            }
+            CommandResult commandResult = commandExecutor.execute(commandText);
+            commandTextField.setText(commandResult.getNewCommandTextField());
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

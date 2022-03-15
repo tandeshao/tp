@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.logic.CommandList;
 import seedu.address.logic.CommandRemark;
 
 
@@ -47,6 +48,10 @@ public class CommandResult {
 
     public boolean isHistory() {
         return commandRemark == CommandRemark.HISTORY;
+    }
+
+    public String getNewCommandTextField() {
+        return isHistory() ? CommandList.getLastCommand() :  "";
     }
 
     @Override

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandList;
 import seedu.address.logic.CommandRemark;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -14,6 +15,8 @@ import seedu.address.model.Model;
 public class HistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";
+    public static final String MESSAGE_ON_HISTORY_SUCCESS = "These are the recent commands:\n";
+    public static final String MESSAGE_ON_EMPTY_HISTORY = "Your history is blank.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Invoke the most recently used command "
@@ -23,15 +26,13 @@ public class HistoryCommand extends Command {
     public HistoryCommand() {}
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!CommandList.isEmpty()) {
-            String message = "These are the recent commands:\n" + CommandList.getRecentCommands();
-            return new CommandResult(message, CommandRemark.HISTORY);
-        } else {
-            String message = "Your history is still a blank waiting for you to write it.";
-            return new CommandResult(message);
+        if (CommandList.isEmpty()) {
+            throw new CommandException(MESSAGE_ON_EMPTY_HISTORY);
         }
+        String message =  MESSAGE_ON_HISTORY_SUCCESS + CommandList.getRecentCommands();
+        return new CommandResult(message, CommandRemark.HISTORY);
     }
 
     /**
