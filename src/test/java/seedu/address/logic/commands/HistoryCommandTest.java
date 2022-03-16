@@ -47,8 +47,8 @@ public class HistoryCommandTest {
     @Test
     public void execute_historyForNoCommands_fail() {
         CommandList.clearAllCommand();
-        assertThrows(CommandException.class, HistoryCommand.MESSAGE_ON_EMPTY_HISTORY,
-            () -> new HistoryCommand().execute(model));
+        assertThrows(CommandException.class, HistoryCommand.MESSAGE_ON_EMPTY_HISTORY, () ->
+                new HistoryCommand().execute(model));
     }
 
 }
