@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandList;
 import seedu.address.model.person.Person;
 
 /**
@@ -137,6 +138,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /** Records the command being executed. */
+    @Override
+    public void recordCommand(String userInput) {
+        CommandList.record(userInput);
     }
 
     @Override

@@ -90,4 +90,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Record the most recent user input except "history". */
+    void recordCommand(String userInput);
 }

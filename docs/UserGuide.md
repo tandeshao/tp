@@ -181,11 +181,11 @@ Examples:
 * `edit 2 m/Peter's friend` edits the memo of the 2nd person to be “Peter's friend”.
 * `edit 2 m/` edits the memo of the 2nd person to be empty.
 
-### Invoking recent command : `invoke`
+### Invoking recent command : `history`
 
 Invokes the most recent command being used.
 
-Format: `invoke`
+Format: `history`
 * Invokes the most recent command and autofill it in the textbox.
 
 Examples:
@@ -225,3 +225,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**History**| `history`
