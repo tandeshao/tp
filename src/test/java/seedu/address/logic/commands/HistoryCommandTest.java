@@ -14,7 +14,7 @@ import seedu.address.model.ModelManager;
 
 public class HistoryCommandTest {
 
-    Model model = new ModelManager();
+    private final Model model = new ModelManager();
 
     @Test
     public void execute_historyForFourCommands_success() {
@@ -48,7 +48,7 @@ public class HistoryCommandTest {
     public void execute_historyForNoCommands_fail() {
         CommandList.clearAllCommand();
         assertThrows(CommandException.class, HistoryCommand.MESSAGE_ON_EMPTY_HISTORY,
-                () -> new HistoryCommand().execute(model));
+            () -> new HistoryCommand().execute(model));
     }
 
 }
