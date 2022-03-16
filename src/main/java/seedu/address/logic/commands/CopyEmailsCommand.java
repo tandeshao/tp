@@ -16,8 +16,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class CopyEmailsCommand extends Command{
     public static final String COMMAND_WORD = "copyemails";
-    public static final String MESSAGE_COPY_EMAILS_FAILURE = "Unable to copy to clipboard.";
+    public static final String EMAIL_LIST_SEPARATOR = "; ";
     public static final String MESSAGE_EMPTY_EMAIL_LIST = "There are no emails to copy!";
+    public static final String MESSAGE_COPY_EMAILS_FAILURE = "Unable to copy to clipboard.";
     public static final String MESSAGE_COPY_EMAILS_SUCCESS = "Successfully copied \"%s\" to clipboard!";
 
     @Override
@@ -50,10 +51,15 @@ public class CopyEmailsCommand extends Command{
         StringBuilder emailString = new StringBuilder();
         for (Person person: lastShownList) {
             if (emailString.length() != 0) {
-                emailString.append(", ");
+                emailString.append(EMAIL_LIST_SEPARATOR);
             }
             emailString.append(person.getEmail().toString());
         }
         return emailString.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof CopyEmailsCommand; // All CopyEmailsCommand are identical
     }
 }
