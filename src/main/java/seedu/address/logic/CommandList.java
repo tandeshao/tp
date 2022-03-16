@@ -25,7 +25,7 @@ public class CommandList {
 
     /** Gets the latest user input. */
     public static String getLastCommand() {
-        if (inputHistory.size() == 0) {
+        if (isEmpty()) {
             return "";
         }
         return inputHistory.get(inputHistory.size() - 1);
