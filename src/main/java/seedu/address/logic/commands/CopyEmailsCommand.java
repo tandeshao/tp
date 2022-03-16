@@ -1,20 +1,20 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import static java.util.Objects.requireNonNull;
 
-import java.awt.*;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Copies the emails of the currently displayed list of people to clipboard.
  */
-public class CopyEmailsCommand extends Command{
+public class CopyEmailsCommand extends Command {
     public static final String COMMAND_WORD = "copyemails";
     public static final String EMAIL_LIST_SEPARATOR = "; ";
     public static final String MESSAGE_EMPTY_EMAIL_LIST = "There are no emails to copy!";
