@@ -23,7 +23,6 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
-
       <VBox>
         <MenuBar fx:id="menuBar" maxHeight="1.7976931348623157E308" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
@@ -37,7 +36,6 @@
               <items>
                 <AnchorPane maxHeight="1.7976931348623157E308" minHeight="200.0">
                      <children>
-            
                     <VBox fx:id="personList" maxHeight="1.7976931348623157E308" minWidth="340" prefHeight="158.0" prefWidth="55.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
                            <padding>
@@ -48,7 +46,6 @@
                   </AnchorPane>
                 <AnchorPane minWidth="300.0" prefHeight="600.0" prefWidth="300.0">
                      <children>
-            
                     <StackPane fx:id="resultDisplayPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
@@ -58,13 +55,11 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-
               <StackPane fx:id="commandBoxPlaceholder" maxHeight="1.7976931348623157E308" prefHeight="39.0" prefWidth="664.0" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
