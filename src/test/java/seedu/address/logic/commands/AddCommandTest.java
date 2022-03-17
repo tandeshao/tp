@@ -51,6 +51,30 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePhone_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Duplicate phone number.
+        Person invalidPerson = new PersonBuilder().withName("Alice").withEmail("bob@gmail.com").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Duplicate email.
+        Person invalidPerson = new PersonBuilder().withName("Alice").withPhone("98765432").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -150,6 +174,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void recordCommand(String userInput) {
             throw new AssertionError("This method should not be called.");
         }
     }

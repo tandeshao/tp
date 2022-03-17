@@ -1,12 +1,18 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,22 +44,47 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Returns name.
+     *
+     * @return name.
+     */
     public Name getName() {
         return name;
     }
 
+    /**
+     * Returns phone.
+     *
+     * @return phone/
+     */
     public Phone getPhone() {
         return phone;
     }
 
+    /**
+     * Returns email.
+     *
+     * @return email.
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Returns address.
+     *
+     * @return address.
+     */
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * Returns memo.
+     *
+     * @return memo.
+     */
     public Memo getMemo() {
         return memo;
     }
@@ -80,8 +111,34 @@ public class Person {
     }
 
     /**
+     * Retrieves the corresponding person attribute that matches with the prefix.
+     *
+     * @param prefix The prefix that is used for
+     * @return Returns an immutable set that contains the person attribute.
+     */
+    public Set<PersonAttribute> getCorrespondingAttribute(Prefix prefix) {
+        Set<PersonAttribute> resultSet = new HashSet<>();
+        if (PREFIX_NAME.equals(prefix)) {
+            resultSet.add(getName());
+        } else if (PREFIX_ADDRESS.equals(prefix)) {
+            resultSet.add(getAddress());
+        } else if (PREFIX_EMAIL.equals(prefix)) {
+            resultSet.add(getEmail());
+        } else if (PREFIX_MEMO.equals(prefix)) {
+            resultSet.add(getMemo());
+        } else if (PREFIX_PHONE.equals((prefix))) {
+            resultSet.add(getPhone());
+        } else {
+            resultSet.addAll(getTags());
+        }
+        return Collections.unmodifiableSet(resultSet);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     *
+     * @return true if both persons have the same identity and data fields; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
@@ -101,12 +158,22 @@ public class Person {
                 && otherPerson.getTags().equals(getTags());
     }
 
+    /**
+     * Returns hashcode of Person.
+     *
+     * @return hashcode of Person.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
     }
 
+    /**
+     * Returns string representation of Person.
+     *
+     * @return string representation of Person.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

@@ -39,6 +39,32 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if any word in {@code sentence1} matches with any word
+     * from {@code sentence2}.
+     * <br>examples:<pre>
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "abc") == true
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "DEF DEF") == true
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "AB de") == false //not a full word match
+     *      *       </pre>
+     *
+     * @param sentence1 Cannot be null.
+     * @param sentence2 Cannot be null.
+     * @return Result of the check.
+     */
+    public static boolean containsWordIgnoreCaseForTwoSentence(String sentence1, String sentence2) {
+        requireNonNull(sentence1);
+        requireNonNull(sentence2);
+
+        // Split sentence by white space.
+        String[] wordsInPreppedSentence1 = sentence1.split("\\s+");
+        String[] wordsInPreppedSentence2 = sentence2.split("\\s+");
+        return Arrays.stream(wordsInPreppedSentence1)
+                .anyMatch(word -> Arrays.stream(wordsInPreppedSentence2).anyMatch(word::equalsIgnoreCase));
+    }
+
+
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

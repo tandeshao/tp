@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandList;
 import seedu.address.model.person.Person;
 
 /**
@@ -93,6 +94,10 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book,
+     * excluding {@code except}.
+     */
     @Override
     public boolean hasPersonExcept(Person person, Person except) {
         requireNonNull(person);
@@ -133,6 +138,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /** Records the command being executed. */
+    @Override
+    public void recordCommand(String userInput) {
+        CommandList.record(userInput);
     }
 
     @Override

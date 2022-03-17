@@ -72,47 +72,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MEMO] [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Memo is optional
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/partner in crime t/criminal`
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Deleting a person : `delete`
 
@@ -159,39 +123,69 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
 * The search is case-insensitive. e.g hans will match Hans
+* At least 1 parameter must be present.
+* Name, phone number, email, address, memo and tags are eligible parameters.
+* Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute. 
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
-* Name, phone number and tags are eligible keywords.
-* Only full words will be matched e.g. Han will not match Hans
+* Only full words will be matched e.g. Han will not match Hans. 
 * Persons matching at least one keyword will be returned. e.g. Hans Bo will return Hans Gruber, Bo Yang
 
-Examples:
-* `find John` returns john and John Doe
-* `find alex david` returns Alex Yeoh, David Li 
-* If John has an email john@gmail.com and David Li has an email davidLi98@gmail.com, then `find davidLi98@gmail.com` would only return David Li. 
-* If John has a tag family and David Li has a phone number 90400203, then `find 90400204` would only return John. 
-* If John has a tag family and David Li has a tag friends, then `find family` would only return John. 
-* If John has a tag family and David Li has a tag friends, then `find fam` would return no result.
-
-### Adding a memo : `memo`
-
-Adds a memo to a specified person in the address book.
-
-Format: `memo INDEX m/TEXT`
-* Adds a memo in the form of a `TEXT` to the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
-* The index **must be a positive integer** 1, 2, 3, …​
+**Note: A word is defined as consecutive characters that is bounded by whitespaces.**
+e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".
 
 Examples:
-* `list` followed by `memo 2 m/meet at 6pm` adds the memo “meet at 6pm” to the 2nd person in the address book. 
-* `find Betsy` followed by `memo 1 m/meet at 6pm` adds the memo “meet at 6pm” to the 1st person in the results of the `find` command.
+* `find n/ John` returns john and John Doe
+* `find n/alex david` returns Alex Yeoh and David Li. 
+* If David Li has an email davidLi98@gmail.com, then `find e/davidLi98@gmail.com` would return David Li. 
+* If John has a phone number 90400202, then `find p/90400202` would return John.
+* If John has a phone number 90400202, then `find p/90400203` would return no result.
+* If John has a tag family, then `find t/family` would return John. 
+* If John has a tag family, then `find t/fam` would return no result.
 
-### Invoking recent command : `invoke`
+### Adding a person: `add`
+
+Adds a person to the address book.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MEMO] [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Memo is optional
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/Peter's friend`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/partner in crime t/criminal`
+
+### Editing a person : `edit`
+
+Edits an existing person in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can remove a person’s memo by typing `m/` without specifying any memo after it.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+Examples:
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 m/Peter's friend` edits the memo of the 2nd person to be “Peter's friend”.
+* `edit 2 m/` edits the memo of the 2nd person to be empty.
+
+### Invoking recent command : `history`
 
 Invokes the most recent command being used.
 
-Format: `invoke`
+Format: `history`
 * Invokes the most recent command and autofill it in the textbox.
 
 Examples:
@@ -207,7 +201,7 @@ Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard. 
 * When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com, betsycrowe@example.com")
 
-### No duplicate entries :
+### No duplicate entries (phone and email) :
 
 Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
 
@@ -229,6 +223,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Memo** | `memo INDEX m/TEXT` <br> e.g., `memo 2 m/meet at 6pm`
 **List** | `list`
 **Help** | `help`
+**History**| `history`
