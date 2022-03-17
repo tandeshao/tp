@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class PrefixTest {
 
     @Test
-    void getPrefix_ValidPrefix_Equals() {
+    void getPrefix_validPrefix_equals() {
         String emptyString = "";
         String tagString = "t/";
         Prefix emptyPrefix = new Prefix("");
@@ -18,7 +18,7 @@ class PrefixTest {
     }
 
     @Test
-    void getPrefix_ValidPrefix_notEquals() {
+    void getPrefix_validPrefix_notEquals() {
         String tagString = "t/";
         String addressString = "a/";
         Prefix emptyPrefix = new Prefix("");
@@ -28,7 +28,7 @@ class PrefixTest {
     }
 
     @Test
-    void hashCode_AnyString_Equals() {
+    void hashCode_anyString_equals() {
         String randomInputString = "1234214214";
         String validInputString = "n/";
         Prefix randomStringPrefix = new Prefix(randomInputString);
@@ -38,7 +38,7 @@ class PrefixTest {
     }
 
     @Test
-    void hashCode_AnyString_NotEquals() {
+    void hashCode_anyString_notEquals() {
         String randomString = "1234214214";
         String validString = "a/";
         String randomStringComparison = "123431351";
@@ -50,7 +50,7 @@ class PrefixTest {
     }
 
     @Test
-    void equals_AnyString_Equals() {
+    void equals_anyString_equals() {
         // Comparison between 2 identical and valid prefix should return true.
         assertEquals(new Prefix("a/"), new Prefix("a/"));
         assertEquals(new Prefix("t/"), new Prefix("t/"));
@@ -64,7 +64,7 @@ class PrefixTest {
     }
 
     @Test
-    void equals_AnyString_NotEquals() {
+    void equals_anyString_notEquals() {
         // Different prefix should not be equal to each other.
         assertNotEquals(new Prefix("a/"), new Prefix("t/"));
         assertNotEquals(new Prefix("t/"), new Prefix("n/"));
