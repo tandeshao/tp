@@ -37,7 +37,7 @@ public class ArgumentMultimap {
      * For tokenized inputs that don't have a start index, {@link #argMultimap} would always
      * have "" as the first key. We can trim it by calling this function.
      */
-    public void trim() {
+    public void trimEmptyKeys() {
         argMultimap.remove(new Prefix(""));
     }
 
@@ -80,6 +80,13 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.keySet());
+    }
+
+    /**
+     * Checks if {@link #argMultimap} is empty.
+     */
+    public boolean isEmpty() {
+        return argMultimap.isEmpty();
     }
 
     /**

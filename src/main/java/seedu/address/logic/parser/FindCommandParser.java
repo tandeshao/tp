@@ -31,9 +31,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
+        ArgumentMultimap argMultimap = createArgumentMultimap(modifiedString);
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate((argMultimap));
         return new FindCommand(predicate);
+    }
+
+    private ArgumentMultimap createArgumentMultimap(String modifiedString) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
+        argMultimap.trimEmptyKeys();
+        // If no prefix is passed into the command.
+        if (argMultimap.isEmpty()) {
+            throw new ParseException(FindCommand.MESSAGE_NOT_EDITED);
+        }
+        return argMultimap;
     }
 }
