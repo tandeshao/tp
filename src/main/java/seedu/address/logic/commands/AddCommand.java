@@ -50,6 +50,13 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Executes the add command and returns the result message.
+     *
+     * @param model {@code Model} which the add command should operate on.
+     * @return feedback message of the add operation result for display.
+     * @throws CommandException If an error occurs during add command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -62,6 +69,12 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    /**
+     * Checks if two {@code AddCommand} is equal.
+     *
+     * @param other the other {@code AddCommand} object.
+     * @return true if equal; otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

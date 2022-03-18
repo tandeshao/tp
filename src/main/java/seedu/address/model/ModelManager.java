@@ -146,6 +146,72 @@ public class ModelManager implements Model {
         CommandList.record(userInput);
     }
 
+    //=========== Undo and redo ==============================================================================
+
+    /**
+     * Restores address book to its previous state.
+     */
+    @Override
+    public void undoAddressBook() {
+        addressBook.undo();
+    }
+
+    /**
+     * Restores address book to its previous undid state.
+     */
+    @Override
+    public void redoAddressBook() {
+        addressBook.redo();
+    };
+
+    /**
+     * Returns true if address book is undoable; otherwise returns false.
+     *
+     * @return true if undoable; false otherwise.
+     */
+    @Override
+    public boolean canUndoAddressBook() {
+        return addressBook.isUndoable();
+    };
+
+    /**
+     * Returns true if address book is redoable; otherwise returns false.
+     *
+     * @return true if redoable; false otherwise.
+     */
+    @Override
+    public boolean canRedoAddressBook() {
+        return addressBook.isRedoable();
+    };
+
+    /**
+     * Saves the current address book state and the input that result in this state.
+     *
+     * @param previousInput previous input that result in this address book state.
+     */
+    @Override
+    public void saveAddressBookState(String previousInput) {
+        addressBook.saveState(previousInput);
+    };
+
+    /**
+     * Returns previous input that resulted in the address book state.
+     *
+     * @return previous input.
+     */
+    public String getUndoStatePreviousInput() {
+        return addressBook.getUndoStatePreviousInput();
+    };
+
+    /**
+     * Returns the undid input that will restore the undid address book state.
+     *
+     * @return previous undid input.
+     */
+    public String getRedoStatePreviousInput() {
+        return addressBook.getRedoStatePreviousInput();
+    };
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

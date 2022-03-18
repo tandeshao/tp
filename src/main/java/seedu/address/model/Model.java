@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.exceptions.EmptyRedoStateDequeException;
+import seedu.address.model.exceptions.EmptyUndoStateDequeException;
 import seedu.address.model.person.Person;
 
 /**
@@ -93,4 +95,49 @@ public interface Model {
 
     /** Record the most recent user input except "history". */
     void recordCommand(String userInput);
+
+    /**
+     * Restores address book to its previous state.
+     */
+    void undoAddressBook();
+
+    /**
+     * Restores address book to its previous undid state.
+     */
+    void redoAddressBook();
+
+    /**
+     * Returns true if address book is undoable; otherwise returns false.
+     *
+     * @return true if undoable; false otherwise.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Returns true if address book is redoable; otherwise returns false.
+     *
+     * @return true if redoable; false otherwise.
+     */
+    boolean canRedoAddressBook();
+
+    /**
+     * Saves the current address book state and the input that result in this state.
+     *
+     * @param previousInput previous input that result in this address book state.
+     */
+    void saveAddressBookState(String previousInput);
+
+    /**
+     * Returns previous input that resulted in the address book state.
+     *
+     * @return previous input.
+     */
+    String getUndoStatePreviousInput();
+
+    /**
+     * Returns the undid input that will restore the undid address book state.
+     *
+     * @return previous undid input.
+     */
+    String getRedoStatePreviousInput();
 }

@@ -44,10 +44,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if two FindCommand method is equal.
+     * Checks if two {@code FindCommand} is equal.
      *
-     * @param other The other FindCommand object.
-     * @return Result of the check.
+     * @param other the other {@code FindCommand} object.
+     * @return true if equal; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
