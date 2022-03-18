@@ -29,7 +29,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         // To trim off Preamble dummy in ArgumentMultiMap since user input for
         // the SpecialFindCommand do not need a preamble index unlike
         // the edit command.
-        tokenizedInput.trim();
+        tokenizedInput.trimEmptyKeys();
         this.tokenizedInput = tokenizedInput;
     }
 
