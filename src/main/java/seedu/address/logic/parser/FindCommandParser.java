@@ -42,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.trimEmptyKeys();
         // If no prefix is passed into the command.
         if (argMultimap.isEmpty()) {
-            throw new ParseException(FindCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(FindCommand.NO_PREFIX_MESSAGE);
         }
         return argMultimap;
     }
