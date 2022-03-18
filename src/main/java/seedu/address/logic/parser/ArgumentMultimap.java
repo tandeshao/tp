@@ -84,7 +84,7 @@ public class ArgumentMultimap {
 
     /**
      * Checks if {@link #argMultimap} is empty.
-     * @return True if {@link #argMultimap} is empty. False otherwise.
+     * @return true if {@link #argMultimap} is empty. False otherwise.
      */
     public boolean isEmpty() {
         return argMultimap.isEmpty();
