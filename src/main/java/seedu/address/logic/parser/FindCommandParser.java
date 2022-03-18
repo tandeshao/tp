@@ -39,7 +39,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     private ArgumentMultimap createArgumentMultimap(String modifiedString) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
-        argMultimap.trimEmptyKeys();
+        // There is no need for preamble for FindCommand
+        argMultimap.removePreamble();
         // If no prefix is passed into the command.
         if (argMultimap.isEmpty()) {
             throw new ParseException(FindCommand.NO_PREFIX_MESSAGE);
