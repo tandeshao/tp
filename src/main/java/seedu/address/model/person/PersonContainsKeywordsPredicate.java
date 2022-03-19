@@ -37,8 +37,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * Checks if the {@link seedu.address.model.person.Person Person} contains any
      * of the {@link #tokenizedInput token}.
      *
-     * @param person Person to be checked on.
-     * @return Result of the check.
+     * @param person {@link Person} to be checked on.
+     * @return true if person contains any keywords, false otherwise.
      */
     private boolean personContainsKeyWords(Person person) {
         List<Prefix> prefixKeys = tokenizedInput.getAllKeys();
@@ -57,9 +57,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * {@link seedu.address.model.person.PersonAttribute Attribute},
      * function returns true.
      *
-     * @param prefix           Used to indicate which attribute of the person should the function check for.
-     * @param personAttributes Corresponding person attribute to be checked with.
-     * @return Result of the check.
+     * @param prefix           indicate which attribute of the person should the function check for.
+     * @param personAttributes corresponding person attribute to be checked with.
+     * @return true if any token matches any of the attributes, false otherwise.
      */
     private boolean checksAnyTokenMatches(Prefix prefix, Set<PersonAttribute> personAttributes) {
         for (PersonAttribute attribute : personAttributes) {
@@ -74,9 +74,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * Helper function for {@link #checksAnyTokenMatches(seedu.address.logic.parser.Prefix, java.util.Set)}.
      * Checks if any of the token matches the person's attribute.
      *
-     * @param prefix          Used to get all the keywords from {@link #tokenizedInput}.
-     * @param personAttribute Person attribute to be checked with.
-     * @return Result of the check.
+     * @param prefix          used to get all the keywords from {@link #tokenizedInput}.
+     * @param personAttribute person attribute to be checked with.
+     * @return true if any of the token matches the specified person attribute, false otherwise.
      */
     private boolean anyMatch(Prefix prefix, PersonAttribute personAttribute) {
         return tokenizedInput.getAllValues(prefix).stream().anyMatch(
@@ -85,10 +85,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      * Test method for {@link javafx.collections.transformation.FilteredList}.
-     * Conducts the test on the {@link seedu.address.model.person.Person Person} in the list.
+     * Conducts a {@link #personContainsKeyWords(Person)} check
+     * on the {@link seedu.address.model.person.Person Person} in the list.
      *
-     * @param person Person to be tested.
-     * @return Boolean result of the test.
+     * @param person person to be tested.
+     * @return true if person contains keywords, false otherwise.
      */
     @Override
     public boolean test(Person person) {
@@ -96,10 +97,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Equal method to check if two tokenized inputs are equal.
+     * Equal method to check if two {@link PersonContainsKeywordsPredicate} are equal.
      *
-     * @param other Other PersonContainsKeywordsPredicate object.
-     * @return Result of the check.
+     * @param other other PersonContainsKeywordsPredicate object.
+     * @return true if both {@link PersonContainsKeywordsPredicate} object are the same, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
