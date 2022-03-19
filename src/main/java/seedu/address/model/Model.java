@@ -5,8 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.exceptions.EmptyRedoStateDequeException;
-import seedu.address.model.exceptions.EmptyUndoStateDequeException;
 import seedu.address.model.person.Person;
 
 /**
@@ -121,23 +119,8 @@ public interface Model {
     boolean canRedoAddressBook();
 
     /**
-     * Saves the current address book state and the input that result in this state.
-     *
-     * @param previousInput previous input that result in this address book state.
+     * Saves the current address book state.
      */
-    void saveAddressBookState(String previousInput);
+    void saveAddressBookState();
 
-    /**
-     * Returns previous input that resulted in the address book state.
-     *
-     * @return previous input.
-     */
-    String getUndoStatePreviousInput();
-
-    /**
-     * Returns the undid input that will restore the undid address book state.
-     *
-     * @return previous undid input.
-     */
-    String getRedoStatePreviousInput();
 }

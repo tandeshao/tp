@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.StateAddressBook;
 
 /**
  * Restores the {@code Model}'s address book to its previous state.
@@ -15,13 +15,12 @@ public class RedoCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Restores the address book to its previous undid state. "
-            + "(Up to " + AddressBook.UNDO_REDO_CAPACITY + " redo)\n"
+            + "(Up to " + StateAddressBook.UNDO_REDO_CAPACITY + " redo)\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_REDO_SUCCESS = "Redo success! Redid: '%1$s'";
-    public static final String MESSAGE_REDO_EMPTY = "There is nothing to redo.";
-
-    private String previousUndidInput;
+    public static final String MESSAGE_REDO_SUCCESS = "Redo success";
+    public static final String MESSAGE_REDO_EMPTY = "There is nothing to redo (Max "
+            + StateAddressBook.UNDO_REDO_CAPACITY + " redoable actions)";;
 
     /**
      * Executes the redo command and returns the result message.
@@ -39,19 +38,9 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_REDO_EMPTY);
         }
 
-        setRedoStatePreviousInput(model);
         model.redoAddressBook();
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_REDO_SUCCESS, previousUndidInput));
-    }
-
-    /**
-     * Sets {@code previousUndidInput} that resulted in the address book state.
-     *
-     * @param model {@code model} of the address book.
-     */
-    private void setRedoStatePreviousInput(Model model) {
-        this.previousUndidInput = model.getRedoStatePreviousInput();
+        return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 
     /**
