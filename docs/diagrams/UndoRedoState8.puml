@@ -4,20 +4,21 @@ skinparam ClassFontColor BLACK_COLOR
 skinparam ClassBorderColor BLACK_COLOR
 skinparam ClassHeaderBackgroundColor ORANGE_COLOR
 
-title After "undo" command
+title After "add n/Tom ..." command
 
 package stateHistory {
     class State1 as "__state1:AddressBook__"
     class State2 as "__state2:AddressBook__"
-    class State3 as "__state3:AddressBook__"
+    class State4 as "__state4:AddressBook__"
 }
 
 class State1 WHITE_COLOR
-class State3 WHITE_COLOR
+class State2 WHITE_COLOR
 
 State1 -[hidden]right-> State2
-State2 -[hidden]right-> State3
+State2 -[hidden]right-> State4
 
 class Pointer as "currentStateIndex" WHITE_COLOR
-Pointer -up-> State2
+Pointer -up-> State4
+note right on link: state3 deleted
 @end
