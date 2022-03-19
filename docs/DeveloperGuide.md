@@ -248,13 +248,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Current implementation:** Saves the entire address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
-    * Temporary workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20. 
-    
+    * Temporary workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20.
+
 * **Current implementation:** `stateHistory` is an `ArrayList`
     * Pros: Easy to implement and less prone to bugs.
     * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to the `UNDO_REDO_CAPACITY`, the first index is removed via `ArrayList.remove(0)`, which is an O(n) operation.
     * Solution: Use a doubly linked list with next and previous pointers to achieve O(1) for all `StateAddressBook` methods. Java in-built lists do not support next and previous pointers. Hence, we need to carefully implement a doubly linked list and ensure that it is bug free.
-  
+
 * **Alternative 1:** Individual command knows how to undo and redo by itself.
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
     * Cons: We must ensure that the implementation of each individual command are correct.
