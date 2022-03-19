@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      * {@link #predicate} condition.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return Message that should be reflected in the {@link seedu.address.ui.Ui}.
+     * @return message that should be reflected in the {@link seedu.address.ui.Ui}.
      */
     @Override
     public CommandResult execute(Model model) {
@@ -48,8 +48,8 @@ public class FindCommand extends Command {
     /**
      * Checks if two FindCommand method is equal.
      *
-     * @param other The other FindCommand object.
-     * @return Result of the check.
+     * @param other the other FindCommand object.
+     * @return result of the check.
      */
     @Override
     public boolean equals(Object other) {
