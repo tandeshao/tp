@@ -233,7 +233,7 @@ Step 8. The user executes the `list` command. Commands that do not modify the ad
 
 ![UndoRedoState7](images/UndoRedoState7.png)
 
-Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared. Why this is so is because it no longer makes sense to redo the `clear` command. This behaviour follows modern application undo and redo functionality.
+Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared by calling `StateAddressBook#clearAfterCurrentStateIndex()`. Why this is so is because it no longer makes sense to redo the `clear` command. This behaviour follows modern application undo and redo functionality.
 
 ![UndoRedoState8](images/UndoRedoState8.png)
 
