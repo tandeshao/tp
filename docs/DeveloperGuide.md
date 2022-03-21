@@ -197,7 +197,7 @@ Step 4. The user executes `clear` to clear the address book. The `clear` command
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If `stateHistory#isFull()` is true, i.e. size of `stateHistory` is equal to `UNDO_REDO_CAPACITY` the state at index 0 of `stateHistory` will be removed.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If `stateHistory#isFull()` is true, i.e. size of `stateHistory` is equal to `UNDO_REDO_CAPACITY` + 1, then the state at index 0 of `stateHistory` will be removed.
 
 </div>
 
@@ -252,7 +252,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Current implementation:** `stateHistory` is an `ArrayList`
     * Pros: Easy to implement and less prone to bugs.
-    * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to the `UNDO_REDO_CAPACITY`, the first index is removed via `ArrayList.remove(0)`, which is an O(n) operation.
+    * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which is an O(n) operation.
     * Solution: Use a doubly linked list with next and previous pointers to achieve O(1) for all `StateAddressBook` methods. Java in-built lists do not support next and previous pointers. Hence, we need to carefully implement a doubly linked list and ensure that it is bug free.
 
 * **Alternative 1:** Individual command knows how to undo and redo by itself.
