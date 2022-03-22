@@ -94,9 +94,11 @@ public class AddressBookParser {
             return new HistoryCommand();
 
         case UndoCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to UndoCommand");
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to RedoCommand");
             return new RedoCommand();
 
         default:
