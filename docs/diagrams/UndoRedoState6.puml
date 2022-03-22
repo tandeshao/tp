@@ -4,7 +4,7 @@ skinparam ClassFontColor BLACK_COLOR
 skinparam ClassBorderColor BLACK_COLOR
 skinparam ClassHeaderBackgroundColor ORANGE_COLOR
 
-title After "undo" command
+title After "redo" command
 
 package stateHistory {
     class State1 as "__state1:AddressBook__"
