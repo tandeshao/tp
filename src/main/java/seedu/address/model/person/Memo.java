@@ -37,6 +37,15 @@ public class Memo extends PersonAttribute {
     }
 
     /**
+     * Returns true if {@code memo} is empty. False otherwise.
+     *
+     * @return true if {@code memo} is empty; otherwise false.
+     */
+    public boolean isEmpty() {
+        return memo.isEmpty();
+    }
+
+    /**
      * Returns string representation of Memo.
      *
      * @return string representation of Memo.

@@ -19,6 +19,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,6 +92,14 @@ public class AddressBookParser {
         case HistoryCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to HistoryCommand");
             return new HistoryCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to UndoCommand");
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to RedoCommand");
+            return new RedoCommand();
 
         default:
             LOGGER.log(Level.INFO, "Unknown command");

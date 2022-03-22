@@ -21,7 +21,7 @@ public class FindCommand extends Command {
             + "KEYWORD" + "n/ [NAME_PARAMETER]...\n"
             + "p/ [PHONE_PARAMETER]" + "...\n"
             + "e/ [EMAIL_PARAMETER]...\n" + "a/ [ADDRESS_PARAMETER]...\n" + "t/ [TAG_PARAMETER]...\n"
-            + "m/ [MEMO_PARAMETER]...\n" + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " e/alice@gmail.com";
+            + "m/ [MEMO_PARAMETER]...\n" + "Example: " + COMMAND_WORD + " n/ alice bob charlie" + " e/ alice@gmail.com";
     public static final String NO_PREFIX_MESSAGE = "At least one field to find must be provided.";
     private final PersonContainsKeywordsPredicate predicate;
 
@@ -46,10 +46,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if two FindCommand method is equal.
+     * Checks if two {@code FindCommand} is equal.
      *
-     * @param other the other FindCommand object.
-     * @return result of the check.
+     * @param other the other {@code FindCommand} object.
+     * @return true if equal; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
