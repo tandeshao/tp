@@ -93,8 +93,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/Peter's friend`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/partner in crime t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/Avid free climber`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
 ### Editing a person : `edit`
 
@@ -112,7 +112,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 m/Peter's friend` edits the memo of the 2nd person to be “Peter's friend”.
+* `edit 2 m/Avid free climber` edits the memo of the 2nd person to be “Avid free climber”.
 * `edit 2 m/` edits the memo of the 2nd person to be empty.
 
 ### Locate persons by name, phone number, tags and email :`find`
@@ -148,7 +148,7 @@ Format: `history`
 * Invokes the most recent command and autofill it in the textbox.
 
 Examples:
-* If the last command is `memo 2 m/meet at 6pm`, `invoke` autofills the textbox with `memo 2 m/meet at 6pm`.
+* If the last command is `delete 1`, `invoke` autofills the textbox with `delete 1`.
 
 ### Copying Emails : `copyemails`
 
