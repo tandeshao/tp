@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -132,4 +134,47 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Edits the first person in {@code model}.
+     *
+     * @param model model.
+     */
+    public static void editFirstPerson(Model model) {
+        Person person = model.getFilteredPersonList().get(0);
+        PersonBuilder personBuilder = new PersonBuilder(person);
+        Person editedPerson = personBuilder.withName(VALID_NAME_AMY).build();
+        model.setPerson(person, editedPerson);
+        model.saveAddressBookState();
+    }
+
+    /**
+     * Deletes the first person in {@code model}.
+     *
+     * @param model model.
+     */
+    public static void deleteFirstPerson(Model model) {
+        Person person = model.getFilteredPersonList().get(0);
+        model.deletePerson(person);
+        model.saveAddressBookState();
+    }
+
+    /**
+     * Adds a person in {@code model}.
+     *
+     * @param model model.
+     */
+    public static void addDefaultPerson(Model model) {
+        model.addPerson(AMY);
+        model.saveAddressBookState();
+    }
+
+    /**
+     * Clears the address book in {@code model}.
+     *
+     * @param model model.
+     */
+    public static void clear(Model model) {
+        model.setAddressBook(new AddressBook());
+        model.saveAddressBookState();
+    }
 }

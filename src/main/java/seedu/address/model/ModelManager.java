@@ -192,6 +192,12 @@ public class ModelManager implements Model {
         stateAddressBook.saveState();
     };
 
+    /**
+     * Checks if two {@code ModelManager} is equal.
+     *
+     * @param obj the other {@code ModelManager} object.
+     * @return true if equal; otherwise false.
+     */
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

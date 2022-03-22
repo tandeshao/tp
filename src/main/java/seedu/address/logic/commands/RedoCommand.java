@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.StateAddressBook;
 
 /**
- * Restores the {@code Model}'s address book to its previous state.
+ * Restores the {@code Model}'s address book to its previous undid state.
  */
 public class RedoCommand extends Command {
 
@@ -24,7 +24,7 @@ public class RedoCommand extends Command {
 
     /**
      * Executes the redo command and returns the result message.
-     * Restores the {@code Model}'s address book to its previous state.
+     * Restores the {@code Model}'s address book to its previous undid state.
      *
      * @param model {@code Model} which the redo command should operate on.
      * @return feedback message of the redo operation result for display.

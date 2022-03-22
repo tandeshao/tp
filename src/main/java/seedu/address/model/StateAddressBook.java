@@ -33,7 +33,7 @@ public class StateAddressBook extends AddressBook {
     }
 
     /**
-     * Restores state address book to its previous state.
+     * Restores address book state to its previous state.
      *
      * @throws InvalidUndoException If {@code stateHistory} is not undoable.
      */
@@ -46,7 +46,7 @@ public class StateAddressBook extends AddressBook {
     }
 
     /**
-     * Restores state address book to its previous undid state.
+     * Restores address book state to its previous undid state.
      *
      * @throws InvalidRedoException If {@code stateHistory} is not redoable.
      */
@@ -97,14 +97,21 @@ public class StateAddressBook extends AddressBook {
     }
 
     /**
-     * Returns true if {@code stateHistory} is full, i.e. equal to UNDO_CAPACITY; otherwise returns false.
+     * Returns true if {@code stateHistory} is full, i.e. equal to UNDO_REDO_CAPACITY + 1 to account for initial state,
+     * otherwise returns false.
      *
      * @return true if full; otherwise false.
      */
     private boolean isFull() {
-        return stateHistory.size() == UNDO_REDO_CAPACITY;
+        return stateHistory.size() == UNDO_REDO_CAPACITY + 1;
     }
 
+    /**
+     * Checks if two {@code StateAddressBook} is equal.
+     *
+     * @param other the other {@code StateAddressBook} object.
+     * @return true if equal; otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
