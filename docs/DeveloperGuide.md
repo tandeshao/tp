@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](images/ModelClassDiagram.png)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -154,9 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[In Development\] Undo/redo feature
-
-#### Implementation
+### Undo/redo feature
 
 The address book undo and redo mechanism is managed by `StateAddressBook`, which extends `AddressBook`. It keeps track of the address book state history, stored internally as a `stateHistory` and `currentStateIndex`. `currentStateIndex` points to the current state of the address book. The number of undoable and redoable actions is capped by `UNDO_REDO_CAPACITY`, currently set to 20. Additionally, it implements the following operations:
 
@@ -225,7 +223,8 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
 
 </div>
 
@@ -259,6 +258,62 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+
+### Find feature
+The address book find command allow users to search contacts based on any of the attributes that extends from the ``PersonAttribute`` class. When the user keys in a find command, the user input is parsed through a ``FindCommandParser`` and if a valid input is given, the ``FindCommand#execute(Model)`` method will be invoked. Doing this will effectively filter the person list in the ``Addressbook`` and this filtered list will be returned to the Ui for display.
+
+Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
+
+<img src="images/FindSequenceDiagram.png"/>
+<br/>
+<br/>
+<img src="images/GetPersonContainsKeywordsPredicate.png"/>
+
+Step 1. When a user invokes a find command from the Ui, ``LogicManager`` will be called, which parses the user input into ``AddressbookParser#parseCommand(String)``.
+
+Step 2. ``FindCommandParser`` will then be instantiated and ``FindCommandParser#parse(String)`` is invoked. If a valid input is provided, ``FindCommandParser#createArgumentMultimap(String)``is called.
+
+Below is a class diagram that shows the attributes that extends from ``PersonAttribute``:
+
+<img src="images/PersonAttributeClassDiagram.png" height="250px"/>
+
+A person have numerous attributes namely: 
+1. Name
+2. Phone
+3. Tag
+4. Email
+5. Address
+6. Memo
+
+Since all of these attributes are valid parameters a user can use to find a person by, we will need a way to identify different parts of the user input and match the input to their corresponding attributes. This can be achieved with the ``ArgumentTokenizer#Tokenize(String, Prefix...)`` method where it will return an ``ArgumentMultimap`` object that serves our purpose.  
+
+
+ :information_source: **Note:**  ``ArgumentTokenizer#Tokenize(String, Prefix...)`` is reused by other commands like ``EditCommand`` and in those situations, a specific entry in the ``ArgumentMultimap`` object is reserved for the preamble. For our purpose, the entry reserved for the preamble is not needed (as users will not be passing any index into the find command). Hence, ``ArgumentMultimap#removePreamble()`` is executed to remove the preamble from the ``ArgumentMultimap`` object. 
+
+Step 3. The ``ArgumentMultimap`` object is passed as an argument into the  ``PersonContainsKeywordsPredicate`` constructor and the object created is returned to ``FindCommandParser``.
+
+
+Step 4. ``FindCommandParser`` will then use the predicate object to create the ``FindCommand`` object and this object is returned to ``LogicManager``.
+
+Step 5. ``LogicManager`` will then call the ``FindCommand#execute(Model)`` method and this method will invoke 
+``Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)`` where it will update the filter for the person list in the address book.
+
+
+Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
+
+
+**Design Considerations:** 
+
+**Aspect: Whether to include memo as part of the parameter for the Find feature:**
+* **Current implementation:** Include memo as part of the parameter for the Find feature.
+    * Pros: Easy to implement as memo is already a ``PersonAttribute``.
+    * Cons: The search condition can become less stringent especially when users pair the search parameter with other attributes, potentially leading to a lower quality search.
+
+
+* **Alternative 1:** Exclude memo as a parameter for the Find feature
+    * Pros: Limits the scope of the search, allowing for a more stringent check as compared to the current implementation.
+    * Cons: Excluding memo from the scope of search might be too restrictive to some users as it is possible that some users might want to search for a person contact based on the memo they have written.
+    
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -311,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add my new contacts                                       | store my contacts in the app                                                  |
 | `* * *`  | user                                       | list all my contacts                                      | see all my contacts in the app                                                |
 | `* * *`  | user                                       | edit a contact                                            | correct mistakes I’ve made when adding in the contacts                        |
-| `* * *`  | user                                       | find my contacts by name                                  | access my desired contact without having to sieve through my entire phonebook |
+| `* * *`  | user                                       | find my contacts                                          | access my desired contact without having to sieve through my entire phonebook |
 | `* * *`  | user                                       | save my contacts in the phonebook                         | whenever I re-launch the application, my contacts will still be in it         |
 | `* * *`  | user                                       | create tags and group the contacts using them             | separate my work and personal contacts                                        |
 | `* * *`  | user                                       | clear all my entries with a single command                | remove all my contacts without having to manually delete them one at a time   |
