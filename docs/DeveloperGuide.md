@@ -306,15 +306,15 @@ Step 6. After the filter has been updated, each person in the person list will b
 
 **Design Considerations:** 
 
-**Aspect: Whether to include memo as part of the parameter for the Find feature:**
-* **Current implementation:** Include memo as part of the parameter for the Find feature.
-    * Pros: Easy to implement as memo is already a ``PersonAttribute``.
-    * Cons: The search condition can become less stringent especially when users pair the search parameter with other attributes, potentially leading to a lower quality search.
-
-
-* **Alternative 1:** Exclude memo as a parameter for the Find feature
-    * Pros: Limits the scope of the search, allowing for a more stringent check as compared to the current implementation.
-    * Cons: Excluding memo from the scope of search might be too restrictive to some users as it is possible that some users might want to search for a person contact based on the memo they have written.
+**Aspect: How find feature executes:** 
+* **Current implementation:** Each invocation of the find feature filters the original person list. 
+    * Pros: It is easy to implement. 
+    * Cons: Users might want to filter the filtered person list even further after viewing it but with the current implementation, this is not possible.  
+    * Workaround: To simulate the chaining of multiple find commands, users will have to remember their search condition(s) for the first find and add on/modify the search condition(s) in subsequent find commands. A history feature is developed to assist users to achieve that as it returns the most recent command that is parsed into the application. By invoking the history command, the search condition of the previous find command can be retrieved and all the user have to do is to add on to the returned search condition(s).  
+    
+* **Alternative 1:** Allow chaining of the find command so that filtering of the filtered person list can be performed.  
+    * Pros: It is a useful feature to have. 
+    * Cons: It is costly in terms of time and effort to develop as the current implementation can already achieve a similar functionality. To allow chaining of the find command, we will have to change the data structure that stores the filtered person list and since there are multiple classes in the application that relies on this list, changing it might require us to change certain components in other classes as well.
     
 ### \[Proposed\] Data archiving
 
