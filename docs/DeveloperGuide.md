@@ -382,6 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | intermediate user                          | add memo to a contact                                     | keep track of miscellaneous information about a person                        |
 | `* *`    | intermediate user                          | edit memo of a contact                                    | modify or delete memo of a contact                                            |
 | `*`      | user with many persons in the address book | sort persons by name                                      | locate a person easily                                                        |
+
 *{More to be added}*
 
 ### Use cases
