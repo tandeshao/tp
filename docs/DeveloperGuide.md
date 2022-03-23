@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](images/ModelClassDiagram.png)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -288,7 +288,9 @@ A person have numerous attributes namely:
 Since all of these attributes are valid parameters a user can use to find a person by, we will need a way to identify different parts of the user input and match the input to their corresponding attributes. This can be achieved with the ``ArgumentTokenizer#Tokenize(String, Prefix...)`` method where it will return an ``ArgumentMultimap`` object that serves our purpose.  
 
 
- :information_source: **Note:**  ``ArgumentTokenizer#Tokenize(String, Prefix...)`` is reused by other commands like ``EditCommand`` and in those situations, a specific entry in the ``ArgumentMultimap`` object is reserved for the preamble. For our purpose, the entry reserved for the preamble is not needed (as users will not be passing any index into the find command). Hence, ``ArgumentMultimap#removePreamble()`` is executed to remove the preamble from the ``ArgumentMultimap`` object. 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** ``ArgumentTokenizer#Tokenize(String, Prefix...)`` is reused by other commands like ``EditCommand`` and in those situations, a specific entry in the ``ArgumentMultimap`` object is reserved for the preamble. For our purpose, the entry reserved for the preamble is not needed (as users will not be passing any index into the find command). Hence, ``ArgumentMultimap#removePreamble()`` is executed to remove the preamble from the ``ArgumentMultimap`` object. 
+</div>
 
 Step 3. The ``ArgumentMultimap`` object is passed as an argument into the  ``PersonContainsKeywordsPredicate`` constructor and the object created is returned to ``FindCommandParser``.
 
