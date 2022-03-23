@@ -32,15 +32,6 @@ class ArgumentMultimapTest {
         assertTrue(validMultiMap.getValue(validPrefix).isPresent());
     }
 
-    @Test
-    void removePreamble() {
-        ArgumentMultimap mapWithEmptyKeys = new ArgumentMultimap();
-        String dummyString = "This string won't be used.";
-        mapWithEmptyKeys.put(emptyPrefix, dummyString);
-        assertTrue(mapWithEmptyKeys.getValue(emptyPrefix).isPresent());
-        mapWithEmptyKeys.removePreamble();
-        assertFalse(mapWithEmptyKeys.getValue(emptyPrefix).isPresent());
-    }
 
     @Test
     void getValueOrEmpty_validArguments() {
@@ -68,17 +59,6 @@ class ArgumentMultimapTest {
         assertEquals(testMap.getAllValues(validPrefix), listOfTestStrings);
     }
 
-    @Test
-    void getAllKeys() {
-        ArgumentMultimap testMap = new ArgumentMultimap();
-        List<Prefix> listOfKeys = new LinkedList<>();
-        listOfKeys.add(emptyPrefix);
-        listOfKeys.add(validPrefix);
-
-        testMap.put(emptyPrefix, "");
-        testMap.put(validPrefix, "");
-        assertEquals(testMap.getAllKeys(), listOfKeys);
-    }
 
     @Test
     void isEmpty() {

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's memo in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMemo(String)}
  */
-public class Memo extends PersonAttribute {
+public class Memo {
 
     /** Maximum characters allowed. */
     public static final int MAXIMUM_CHARACTERS = 1000;

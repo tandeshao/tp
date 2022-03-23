@@ -1,18 +1,12 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -108,30 +102,6 @@ public class Person {
 
         return otherPerson != null
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
-    }
-
-    /**
-     * Retrieves the corresponding person attribute that matches with the prefix.
-     *
-     * @param prefix The prefix that is used for
-     * @return Returns an immutable set that contains the person attribute.
-     */
-    public Set<PersonAttribute> getCorrespondingAttribute(Prefix prefix) {
-        Set<PersonAttribute> resultSet = new HashSet<>();
-        if (PREFIX_NAME.equals(prefix)) {
-            resultSet.add(getName());
-        } else if (PREFIX_ADDRESS.equals(prefix)) {
-            resultSet.add(getAddress());
-        } else if (PREFIX_EMAIL.equals(prefix)) {
-            resultSet.add(getEmail());
-        } else if (PREFIX_MEMO.equals(prefix)) {
-            resultSet.add(getMemo());
-        } else if (PREFIX_PHONE.equals((prefix))) {
-            resultSet.add(getPhone());
-        } else {
-            resultSet.addAll(getTags());
-        }
-        return Collections.unmodifiableSet(resultSet);
     }
 
     /**
