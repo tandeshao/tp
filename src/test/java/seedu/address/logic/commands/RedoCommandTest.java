@@ -61,7 +61,8 @@ public class RedoCommandTest {
     }
 
     /**
-     * Restores the {@code Model}'s {@code StateAddressBook} to its first state.
+     * Restores the {@code Model}'s {@code StateAddressBook} to its first state,
+     * i.e., the state at index 0 of {@code stateAddressBook}.
      *
      * @param model model.
      */

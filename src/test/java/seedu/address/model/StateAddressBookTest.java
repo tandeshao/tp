@@ -53,14 +53,14 @@ public class StateAddressBookTest {
     @Test
     public void isUndoable_threeAddressBookStatesPointerAtMiddle_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
-        undoCount(stateAddressBook, 1);
+        undoStates(stateAddressBook, 1);
         assertTrue(stateAddressBook.isUndoable());
     }
 
     @Test
     public void isUndoable_threeAddressBookStatesPointerAtStart_returnsFalse() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
-        undoCount(stateAddressBook, 2);
+        undoStates(stateAddressBook, 2);
         assertFalse(stateAddressBook.isUndoable());
     }
 
@@ -70,21 +70,21 @@ public class StateAddressBookTest {
                 setAddressBookMaxCapacity(threeStates);
         stateAddressBook.resetData(carlAddressBook);
         stateAddressBook.saveState();
-        undoCount(stateAddressBook, StateAddressBook.UNDO_REDO_CAPACITY);
+        undoStates(stateAddressBook, StateAddressBook.UNDO_REDO_CAPACITY);
         assertFalse(stateAddressBook.isUndoable());
     }
 
     @Test
     public void isRedoable_threeAddressBookStatesPointerAtStart_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
-        undoCount(stateAddressBook, 2);
+        undoStates(stateAddressBook, 2);
         assertTrue(stateAddressBook.isRedoable());
     }
 
     @Test
     public void isRedoable_threeAddressBookStatesPointerAtMiddle_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
-        undoCount(stateAddressBook, 1);
+        undoStates(stateAddressBook, 1);
         assertTrue(stateAddressBook.isRedoable());
     }
 
@@ -112,7 +112,7 @@ public class StateAddressBookTest {
     @Test
     public void undo_threeAddressBookPointerStatesAtStart_throwsInvalidUndoException() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
-        undoCount(stateAddressBook, 2);
+        undoStates(stateAddressBook, 2);
         assertThrows(InvalidUndoException.class, stateAddressBook::undo);
     }
 
@@ -122,7 +122,7 @@ public class StateAddressBookTest {
                 setAddressBookMaxCapacity(threeStates);
         stateAddressBook.resetData(carlAddressBook);
         stateAddressBook.saveState();
-        undoCount(stateAddressBook, StateAddressBook.UNDO_REDO_CAPACITY);
+        undoStates(stateAddressBook, StateAddressBook.UNDO_REDO_CAPACITY);
         assertThrows(InvalidUndoException.class, stateAddressBook::undo);
     }
 
@@ -162,7 +162,7 @@ public class StateAddressBookTest {
 
         assertEquals(new AddressBook(stateAddressBook), bensonAddressBook);
 
-        undoToOldest(stateAddressBook);
+        undoToFirst(stateAddressBook);
 
         for (int i = 0; i < threeStates.size(); i++) {
             assertEquals(threeStates.get(i), new AddressBook(stateAddressBook));
@@ -180,7 +180,7 @@ public class StateAddressBookTest {
 
         assertEquals(new AddressBook(stateAddressBook), bensonAddressBook);
 
-        undoCount(stateAddressBook, 1);
+        undoStates(stateAddressBook, 1);
 
         for (int i = 1; i < threeStates.size(); i++) {
             assertEquals(threeStates.get(i), new AddressBook(stateAddressBook));
@@ -198,7 +198,7 @@ public class StateAddressBookTest {
 
         assertEquals(new AddressBook(stateAddressBook), bensonAddressBook);
 
-        undoToOldest(stateAddressBook);
+        undoStates(stateAddressBook, 2);
 
         stateAddressBook.resetData(carlAddressBook);
         stateAddressBook.saveState();
@@ -206,7 +206,7 @@ public class StateAddressBookTest {
         assertEquals(new AddressBook(stateAddressBook), carlAddressBook);
         assertFalse(stateAddressBook.isRedoable());
 
-        undoCount(stateAddressBook, 1);
+        undoStates(stateAddressBook, 1);
 
         assertEquals(new AddressBook(stateAddressBook), threeStates.get(0));
         assertFalse(stateAddressBook.isUndoable());
@@ -234,14 +234,14 @@ public class StateAddressBookTest {
 
         // same states and different pointer index -> returns false.
         StateAddressBook sameStatesDifferentPointer = setAddressBook(threeStates);
-        undoCount(sameStatesDifferentPointer, 1);
+        undoStates(sameStatesDifferentPointer, 1);
         assertNotEquals(stateAddressBook, sameStatesDifferentPointer);
 
         // different states and same pointer index -> returns false.
         StateAddressBook differentStatesSamePointer = setAddressBook(threeStates);
         differentStatesSamePointer.resetData(carlAddressBook);
         differentStatesSamePointer.saveState();
-        undoCount(differentStatesSamePointer, 1);
+        undoStates(differentStatesSamePointer, 1);
         assertNotEquals(stateAddressBook, differentStatesSamePointer);
 
         // different states and different pointer index -> returns false.
@@ -288,23 +288,24 @@ public class StateAddressBookTest {
     }
 
     /**
-     * Restores previous states of the address book by invoking undo count times.
+     * Restores previous states of the address book by invoking undo repeatedly, specified by undoAmount.
      *
      * @param stateAddressBook state address book.
-     * @param count number of times to undo.
+     * @param undoAmount number of times to undo.
      */
-    private void undoCount(StateAddressBook stateAddressBook, int count) {
-        for (; count > 0; count--) {
+    private void undoStates(StateAddressBook stateAddressBook, int undoAmount) {
+        for (; undoAmount > 0; undoAmount--) {
             stateAddressBook.undo();
         }
     }
 
     /**
-     * Restores the address book to its oldest state.
+     * Restores the address book to its first state,
+     * i.e., the state at index 0 of {@code stateAddressBook}.
      *
      * @param stateAddressBook state address book.
      */
-    private void undoToOldest(StateAddressBook stateAddressBook) {
+    private void undoToFirst(StateAddressBook stateAddressBook) {
         while (stateAddressBook.isUndoable()) {
             stateAddressBook.undo();
         }
