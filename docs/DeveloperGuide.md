@@ -154,7 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Undo/redo feature
+### Undo and redo feature
 
 The address book undo and redo mechanism is managed by `StateAddressBook`, which extends `AddressBook`. It keeps track of the address book state history, stored internally as a `stateHistory` and `currentStateIndex`. `currentStateIndex` points to the current state of the address book. The number of undoable and redoable actions is capped by `UNDO_REDO_CAPACITY`, currently set to 20. Additionally, it implements the following operations:
 
@@ -247,17 +247,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Current implementation:** Saves the entire address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
-    * Temporary workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20.
+    * Workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20.
 
-* **Current implementation:** `stateHistory` is an `ArrayList`
+
+* **Current implementation:** `stateHistory` is an `ArrayList`.
     * Pros: Easy to implement and less prone to bugs.
-    * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which is an O(n) operation.
-    * Solution: Use a doubly linked list with next and previous pointers to achieve O(1) for all `StateAddressBook` methods. Java in-built lists do not support next and previous pointers. Hence, we need to carefully implement a doubly linked list and ensure that it is bug free.
+    * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which has a time complexity of O(n).
+    * Solution: Use a doubly linked list with next and previous pointers to achieve O(1) time complexity for all `StateAddressBook` methods. However, Java in-built lists do not support next and previous pointers. Hence, we will need to carefully implement a doubly linked list and ensure that it is bug free.
+
 
 * **Alternative 1:** Individual command knows how to undo and redo by itself.
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
     * Cons: We must ensure that the implementation of each individual command are correct.
-
 
 ### Find feature
 The address book find command allow users to search contacts based on any of the attributes that extends from the ``PersonAttribute`` class. When the user keys in a find command, the user input is parsed through a ``FindCommandParser`` and if a valid input is given, the ``FindCommand#execute(Model)`` method will be invoked. Doing this will effectively filter the person list in the ``Addressbook`` and this filtered list will be returned to the Ui for display.
@@ -285,8 +286,7 @@ A person have numerous attributes namely:
 5. Address
 6. Memo
 
-Since all of these attributes are valid parameters a user can use to find a person by, we will need a way to identify different parts of the user input and match the input to their corresponding attributes. This can be achieved with the ``ArgumentTokenizer#Tokenize(String, Prefix...)`` method where it will return an ``ArgumentMultimap`` object that serves our purpose.  
-
+Since all of these attributes are valid parameters a user can use to find a person by, we will need a way to identify different parts of the user input and match the input to their corresponding attributes. This can be achieved with the ``ArgumentTokenizer#Tokenize(String, Prefix...)`` method where it will return an ``ArgumentMultimap`` object that serves our purpose.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** ``ArgumentTokenizer#Tokenize(String, Prefix...)`` is reused by other commands like ``EditCommand`` and in those situations, a specific entry in the ``ArgumentMultimap`` object is reserved for the preamble. For our purpose, the entry reserved for the preamble is not needed (as users will not be passing any index into the find command). Hence, ``ArgumentMultimap#removePreamble()`` is executed to remove the preamble from the ``ArgumentMultimap`` object. 
@@ -294,15 +294,12 @@ Since all of these attributes are valid parameters a user can use to find a pers
 
 Step 3. The ``ArgumentMultimap`` object is passed as an argument into the  ``PersonContainsKeywordsPredicate`` constructor and the object created is returned to ``FindCommandParser``.
 
-
 Step 4. ``FindCommandParser`` will then use the predicate object to create the ``FindCommand`` object and this object is returned to ``LogicManager``.
 
 Step 5. ``LogicManager`` will then call the ``FindCommand#execute(Model)`` method and this method will invoke 
 ``Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)`` where it will update the filter for the person list in the address book.
 
-
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
-
 
 **Design Considerations:** 
 
