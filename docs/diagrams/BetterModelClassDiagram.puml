@@ -4,6 +4,8 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+Class "{abstract}\nPersonAttribute" as PersonAttribute
+
 StateAddressBook *-right-> "1" UniquePersonList
 StateAddressBook *-right-> "1" UniqueTagList
 
@@ -16,5 +18,13 @@ Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
-Person *--> "1" Memo
+Person *--> "0..1" Memo
+
+
+Name -down-|> PersonAttribute
+Phone -down-|> PersonAttribute
+Email -down-|> PersonAttribute
+Address -down-|> PersonAttribute
+Memo -down-|> PersonAttribute
+Tag -down-|> PersonAttribute
 @enduml
