@@ -9,11 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Memo extends PersonAttribute {
 
-    /** String message that represents invalid input. */
-    public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of 1000 characters";
+    /** Maximum characters allowed. */
+    public static final int MAXIMUM_CHARACTERS = 1000;
 
-    /** Every character is allowed except /. */
-    public static final String VALIDATION_REGEX = ".{0,1000}";
+    /** String message that represents invalid input. */
+    public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of "
+            + MAXIMUM_CHARACTERS + " characters";
+
+    /** Every character is allowed, up to a maximum of MAXIMUM_CHARACTERS. */
+    public static final String VALIDATION_REGEX = ".{0," + MAXIMUM_CHARACTERS + "}";
 
     /** String representation of Memo. */
     public final String memo;
