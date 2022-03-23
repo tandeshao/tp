@@ -5,15 +5,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's memo in the address book.
- * Guarantees: immutable; is always valid
+ * Guarantees: immutable; is valid as declared in {@link #isValidMemo(String)}
  */
 public class Memo extends PersonAttribute {
 
-    /** String message that represents invalid input. */
-    public static final String MESSAGE_CONSTRAINTS = "Memo should not contain /";
+    /** Maximum characters allowed. */
+    public static final int MAXIMUM_CHARACTERS = 1000;
 
-    /** Every character is allowed except /. */
-    public static final String VALIDATION_REGEX = "[^/]*";
+    /** String message that represents invalid input. */
+    public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of "
+            + MAXIMUM_CHARACTERS + " characters";
+
+    /** Every character is allowed, up to a maximum of MAXIMUM_CHARACTERS. */
+    public static final String VALIDATION_REGEX = ".{0," + MAXIMUM_CHARACTERS + "}";
 
     /** String representation of Memo. */
     public final String memo;
