@@ -29,7 +29,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(POPULATED_TEST_USER_INPUT_WITH_NAME);
+        PersonDescriptor descriptor = new PersonDescriptor(POPULATED_TEST_USER_INPUT_WITH_NAME);
         FindCommand expectedFindCommand = new FindCommand(new PersonPredicate(descriptor));
         assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
 

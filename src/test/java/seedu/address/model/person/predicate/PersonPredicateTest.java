@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.FindPersonDescriptor;
+import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.testutil.PersonBuilder;
 
 class PersonPredicateTest {
 
     @Test
     void test_validPerson_returnsTrue() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" n/alex t/colleague p/9040");
+        PersonDescriptor descriptor = new PersonDescriptor(" n/alex t/colleague p/9040");
         PersonPredicate predicate = new PersonPredicate(descriptor);
         assertTrue(predicate.test(new PersonBuilder().withName("a").withPhone("90400204").build()));
         assertTrue(predicate.test(new PersonBuilder().withName("Alex Yeoh").withPhone("123").build()));
@@ -21,7 +21,7 @@ class PersonPredicateTest {
 
     @Test
     void test_invalidCases_returnsFalse() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" a/st t/colleague p/9040");
+        PersonDescriptor descriptor = new PersonDescriptor(" a/st t/colleague p/9040");
         PersonPredicate predicate = new PersonPredicate(descriptor);
         assertFalse(predicate.test(new PersonBuilder().withAddress("street").withPhone("904").build()));
         assertFalse(predicate.test(new PersonBuilder().withName("a").withPhone("123").withTags("colle").build()));
@@ -29,8 +29,8 @@ class PersonPredicateTest {
 
     @Test
     void testEquals() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" n/ test");
-        FindPersonDescriptor duplicatedDescriptor = new FindPersonDescriptor(" n/ test");
+        PersonDescriptor descriptor = new PersonDescriptor(" n/ test");
+        PersonDescriptor duplicatedDescriptor = new PersonDescriptor(" n/ test");
         PersonPredicate predicate = new PersonPredicate(descriptor);
         assertEquals(predicate, new PersonPredicate(duplicatedDescriptor));
     }

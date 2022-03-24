@@ -274,9 +274,9 @@ Step 1. When a user invokes a find command from the Ui, `LogicManager` will be c
 
 Step 2. `FindCommandParser` will then be instantiated and `FindCommandParser#parse(String)` is invoked. If a valid input is provided, `FindCommandParser#getDescriptor(String)`is called.
 
-Since a user can key in multiple valid parameters to increase the scope of a search (i.e. search by name and tags), we will need a way to identify different parts of the user input and match the input to their corresponding prefix. This can be achieved with the `FindPersonDescriptor` class where it will store the descriptions to search a person by.
+Since a user can key in multiple valid parameters to increase the scope of a search (i.e. search by name and tags), we will need a way to identify different parts of the user input and match the input to their corresponding prefix. This can be achieved with the `PersonDescriptor` class where it will store the descriptions to search a person by.
 
-Step 3. The `FindPersonDescriptor` object is passed as an argument into the  `PersonPredicate` constructor and the object created is returned to `FindCommandParser`.
+Step 3. The `PersonDescriptor` object is passed as an argument into the  `PersonPredicate` constructor and the object created is returned to `FindCommandParser`.
 
 <div markdown="span" class="alert alert-info">  
 :information_source: **Note:** Two note-worthy classes that are created in `PersonPredicate` but not shown in the sequence diagram is the `ExactWordMatchPredicate` and `PartialWordMatchPredicate` which encapsulate the logic of conducting exact word match and partial word match on a person's attribute respectively. They are used in the `PersonPredicate#test(Person)` method during the filter process and to conduct exact word match/partial word match depending on the person's attribute. More information will be given in the design consideration. 
@@ -301,7 +301,7 @@ Step 6. After the filter has been updated, each person in the person list will b
     * Pros: It is a useful feature to have. 
     * Cons: It is costly in terms of time and effort to develop as the current implementation can already achieve a similar functionality. To allow chaining of the find command, we will have to change the data structure that stores the filtered person list and since there are multiple classes in the application that relies on this list, changing it might require us to change certain components in other classes as well.
 
-**Aspect: How the find feature matches words**
+**Aspect: How the find feature match words**
 * **Current implementation:** Different search criteria for different search parameters. For example, address, memo and tags follows an exact word match criteria while name, phone and email follows a partial word match criteria. 
   * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
     * Tags was chosen to follow the exact word match criteria because users are likely to remember the full word of a tag and search for them.
@@ -314,7 +314,6 @@ Step 6. After the filter has been updated, each person in the person list will b
 * **Alternative 1:** Same search criteria for all the search parameters. 
   * Pros: Easy to implement.
   * Cons: It might lead to nonsensical search results especially when partial word match is used for the memo and address attribute.
-
 
 <div markdown="span" class="alert alert-info">  
 :information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.

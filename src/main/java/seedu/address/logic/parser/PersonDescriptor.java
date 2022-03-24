@@ -1,14 +1,8 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.LIST_OF_PREFIX;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -16,22 +10,19 @@ import java.util.List;
 import javafx.util.Pair;
 
 /**
- *  A class that stores the description to search a person by.
+ *  A class that stores the description of a person.
  */
-public class FindPersonDescriptor {
+public class PersonDescriptor {
     private final HashMap<Prefix, String> descriptor;
-    private final List<Prefix> listOfPrefix;
     private final String userInput;
 
     /**
-     * Constructor for FindPersonDescriptor.
+     * Constructor for PersonDescriptor.
      * @param input user supplied argument that contains both the prefix and their corresponding description.
      */
-    public FindPersonDescriptor(String input) {
+    public PersonDescriptor(String input) {
         userInput = input;
         descriptor = new HashMap<>();
-        listOfPrefix = Arrays.asList(PREFIX_PHONE,
-                PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO, PREFIX_EMAIL);
         populateDescriptor();
     }
 
@@ -101,7 +92,7 @@ public class FindPersonDescriptor {
      */
     private List<Pair<Prefix, Integer>> getPrefixPositions() {
         List<Pair<Prefix, Integer>> result = new ArrayList<>();
-        for (Prefix prefix : listOfPrefix) {
+        for (Prefix prefix : LIST_OF_PREFIX) {
             String searchString = " " + prefix.getPrefix();
             int indexOfString = userInput.indexOf(searchString);
             if (indexOfString != -1) {
@@ -125,15 +116,15 @@ public class FindPersonDescriptor {
     }
 
     /**
-     * Equal method to check if two {@link FindPersonDescriptor} are equal.
+     * Equal method to check if two {@link PersonDescriptor} are equal.
      *
-     * @param other other FindPersonDescriptor object.
-     * @return true if both {@link FindPersonDescriptor} object are the same, false otherwise.
+     * @param other other PersonDescriptor object.
+     * @return true if both {@link PersonDescriptor} object are the same, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindPersonDescriptor // instanceof handles nulls
-                && descriptor.equals(((FindPersonDescriptor) other).descriptor)); // state check
+                || (other instanceof PersonDescriptor // instanceof handles nulls
+                && descriptor.equals(((PersonDescriptor) other).descriptor)); // state check
     }
 }

@@ -13,7 +13,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.FindPersonDescriptor;
+import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,11 +30,11 @@ public class FindCommandTest {
     public void equals_sameFindCommand() {
         String withAll = " n/Alex" + " p/90100102" + " e/tester@mail.com" + " a/QueensTown blk 200 singapore 123123"
                 + " t/friends colleagues" + " m/Close contract today";
-        FindPersonDescriptor withAllDescriptor = new FindPersonDescriptor(withAll);
+        PersonDescriptor withAllDescriptor = new PersonDescriptor(withAll);
         FindCommand withAllFindCommand = new FindCommand(new PersonPredicate(withAllDescriptor));
 
         String withName = " n/Alex bob";
-        FindPersonDescriptor withNameDescriptor = new FindPersonDescriptor(withName);
+        PersonDescriptor withNameDescriptor = new PersonDescriptor(withName);
         FindCommand withNameFindCommand = new FindCommand(new PersonPredicate(withNameDescriptor));
 
         // same object -> returns true
@@ -46,7 +46,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         String emptyInput = "n/ ";
-        FindPersonDescriptor emptyDescriptor = new FindPersonDescriptor(emptyInput);
+        PersonDescriptor emptyDescriptor = new PersonDescriptor(emptyInput);
         FindCommand command = new FindCommand(new PersonPredicate(emptyDescriptor));
         expectedModel.updateFilteredPersonList(new PersonPredicate(emptyDescriptor));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +69,7 @@ public class FindCommandTest {
      * Prepares a PersonPredicate for testing.
      */
     private PersonPredicate preparePredicate() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" n/ Kurz Elle Kunz");
+        PersonDescriptor descriptor = new PersonDescriptor(" n/ Kurz Elle Kunz");
         return new PersonPredicate(descriptor);
     }
 }

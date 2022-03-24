@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.FindPersonDescriptor;
+import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -21,14 +21,14 @@ public class PersonPredicate implements Predicate<Person> {
     /**
      * Descriptor from {@link FindCommandParser}.
      */
-    private final FindPersonDescriptor descriptor;
+    private final PersonDescriptor descriptor;
 
     /**
      * Constructor of Predicate function.
      *
      * @param descriptor description to search a person by.
      */
-    public PersonPredicate(FindPersonDescriptor descriptor) {
+    public PersonPredicate(PersonDescriptor descriptor) {
         this.descriptor = descriptor;
     }
 

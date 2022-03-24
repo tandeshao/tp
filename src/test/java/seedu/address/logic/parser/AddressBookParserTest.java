@@ -74,7 +74,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String args = " n/" + String.join(" ", keywords);
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(args);
+        PersonDescriptor descriptor = new PersonDescriptor(args);
         String constructedArgs = FindCommand.COMMAND_WORD + " n/" + String.join(" ", keywords);
         FindCommand command = (FindCommand) parser.parseCommand(constructedArgs);
         assertEquals(new FindCommand(new PersonPredicate(descriptor)), command);

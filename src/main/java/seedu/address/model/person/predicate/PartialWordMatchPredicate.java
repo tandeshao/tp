@@ -9,6 +9,10 @@ import java.util.function.Predicate;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
+/**
+ * A class that encapsulates the logic of partial word match between a Person's attribute and the
+ * description for that attribute (supplied by the user).
+ */
 public class PartialWordMatchPredicate implements Predicate<Person> {
     private final String description;
     private final Prefix prefix;

@@ -9,7 +9,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
-
+/**
+ * A class that encapsulates the logic of exact word match between a person's attribute
+ * and the description for that attribute (supplied by the user).
+ */
 public class ExactWordMatchPredicate implements Predicate<Person> {
     private final String description;
     private final Prefix prefix;

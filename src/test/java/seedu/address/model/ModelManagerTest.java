@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.FindPersonDescriptor;
+import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.model.person.predicate.PersonPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -120,7 +120,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String keywords = ALICE.getName().fullName;
         String args = " n/ " + keywords;
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(args);
+        PersonDescriptor descriptor = new PersonDescriptor(args);
         modelManager.updateFilteredPersonList(new PersonPredicate(descriptor));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 
