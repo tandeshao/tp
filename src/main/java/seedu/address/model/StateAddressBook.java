@@ -27,6 +27,9 @@ public class StateAddressBook extends AddressBook {
      */
     public StateAddressBook(ReadOnlyAddressBook initialState) {
         super(initialState);
+
+        assert initialState != null : "initialState should not be null";
+
         stateHistory = new ArrayList<>();
         stateHistory.add(new AddressBook(initialState));
         currentStateIndex = 0;
