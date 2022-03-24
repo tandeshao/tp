@@ -16,7 +16,7 @@ import java.util.List;
 import javafx.util.Pair;
 
 /**
- * Static class that stores the description to search a person by.
+ *  A class that stores the description to search a person by.
  */
 public class FindPersonDescriptor {
     private final HashMap<Prefix, String> descriptor;

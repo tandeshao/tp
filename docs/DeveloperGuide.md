@@ -261,43 +261,31 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Find feature
-The address book find command allow users to search contacts based on any of the attributes that extends from the ``PersonAttribute`` class. When the user keys in a find command, the user input is parsed through a ``FindCommandParser`` and if a valid input is given, the ``FindCommand#execute(Model)`` method will be invoked. Doing this will effectively filter the person list in the ``Addressbook`` and this filtered list will be returned to the Ui for display.
+The address book find command allow users to search contacts based on their name, email, phone, address, tags, and memo. When the user keys in a find command, the user input is parsed through a `FindCommandParser` and if a valid input is given, the `FindCommand#execute(Model)` method will be invoked. Doing this will effectively filter the person list in the `Addressbook` and this filtered list will be returned to the Ui for display.
 
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
 
 <img src="images/FindSequenceDiagram.png"/>
 <br/>
 <br/>
-<img src="images/GetPersonContainsKeywordsPredicate.png"/>
+<img src="images/PersonPredicate.png"/>
 
-Step 1. When a user invokes a find command from the Ui, ``LogicManager`` will be called, which parses the user input into ``AddressbookParser#parseCommand(String)``.
+Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 
-Step 2. ``FindCommandParser`` will then be instantiated and ``FindCommandParser#parse(String)`` is invoked. If a valid input is provided, ``FindCommandParser#createArgumentMultimap(String)``is called.
+Step 2. `FindCommandParser` will then be instantiated and `FindCommandParser#parse(String)` is invoked. If a valid input is provided, `FindCommandParser#getDescriptor(String)`is called.
 
-Below is a class diagram that shows the attributes that extends from ``PersonAttribute``:
+Since a user can key in multiple valid parameters to increase the scope of a search (i.e. search by name and tags), we will need a way to identify different parts of the user input and match the input to their corresponding prefix. This can be achieved with the `FindPersonDescriptor` class where it will store the descriptions to search a person by.
 
-<img src="images/PersonAttributeClassDiagram.png" height="250px"/>
+Step 3. The `FindPersonDescriptor` object is passed as an argument into the  `PersonPredicate` constructor and the object created is returned to `FindCommandParser`.
 
-A person have numerous attributes namely: 
-1. Name
-2. Phone
-3. Tag
-4. Email
-5. Address
-6. Memo
-
-Since all of these attributes are valid parameters a user can use to find a person by, we will need a way to identify different parts of the user input and match the input to their corresponding attributes. This can be achieved with the ``ArgumentTokenizer#Tokenize(String, Prefix...)`` method where it will return an ``ArgumentMultimap`` object that serves our purpose.
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** ``ArgumentTokenizer#Tokenize(String, Prefix...)`` is reused by other commands like ``EditCommand`` and in those situations, a specific entry in the ``ArgumentMultimap`` object is reserved for the preamble. For our purpose, the entry reserved for the preamble is not needed (as users will not be passing any index into the find command). Hence, ``ArgumentMultimap#removePreamble()`` is executed to remove the preamble from the ``ArgumentMultimap`` object. 
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** Two note-worthy classes that are created in `PersonPredicate` but not shown in the sequence diagram is the `ExactWordMatchPredicate` and `PartialWordMatchPredicate` which encapsulate the logic of conducting exact word match and partial word match on a person's attribute respectively. They are used in the `PersonPredicate#test(Person)` method during the filter process and to conduct exact word match/partial word match depending on the person's attribute. More information will be given in the design consideration. 
 </div>
 
-Step 3. The ``ArgumentMultimap`` object is passed as an argument into the  ``PersonContainsKeywordsPredicate`` constructor and the object created is returned to ``FindCommandParser``.
+Step 4. `FindCommandParser` will then use the predicate object to create the `FindCommand` object and this object is returned to `LogicManager`.
 
-Step 4. ``FindCommandParser`` will then use the predicate object to create the ``FindCommand`` object and this object is returned to ``LogicManager``.
-
-Step 5. ``LogicManager`` will then call the ``FindCommand#execute(Model)`` method and this method will invoke 
-``Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)`` where it will update the filter for the person list in the address book.
+Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and this method will invoke 
+`Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)` where it will update the filter for the person list in the address book.
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
@@ -312,7 +300,27 @@ Step 6. After the filter has been updated, each person in the person list will b
 * **Alternative 1:** Allow chaining of the find command so that filtering of the filtered person list can be performed.  
     * Pros: It is a useful feature to have. 
     * Cons: It is costly in terms of time and effort to develop as the current implementation can already achieve a similar functionality. To allow chaining of the find command, we will have to change the data structure that stores the filtered person list and since there are multiple classes in the application that relies on this list, changing it might require us to change certain components in other classes as well.
-    
+
+**Aspect: How the find feature matches words**
+* **Current implementation:** Different search criteria for different search parameters. For example, address, memo and tags follows an exact word match criteria while name, phone and email follows a partial word match criteria. 
+  * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
+    * Tags was chosen to follow the exact word match criteria because users are likely to remember the full word of a tag and search for them.
+    * As for address and memo, since those attributes can be stored as sentences, allowing a partial word match would increase the average hit rate per search query and as a result, lead to a search result that may not show any meaningful information. For instance, the word "a" often appears in many sentences in the English language thus, allowing for this partial search of the word "a" in a sentence may produce many result the user might not want. Hence, an exact word match criteria was chosen for address and memo. 
+    * Phone number, name and email follows a partial word match criteria where users are able to search for contacts based on the keywords they provide. For example, if John has a phone number 90400202, then `find p/9040` would return John. 
+  * Cons: Edge cases that may cause the search to be ineffective are present and one such test case would be: `find e/gmail` where the intended effect the user might want is to search for all contacts that have the email address that has the domain name set to "gmail". However, the email "redherringmail@yahoo" will be matched with the user query and this search result does not meet the intended effect the user might want.  
+  * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would want to find all contacts that have the domain name set as "gmail".  
+  
+
+* **Alternative 1:** Same search criteria for all the search parameters. 
+  * Pros: Easy to implement.
+  * Cons: It might lead to nonsensical search results especially when partial word match is used for the memo and address attribute.
+
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.
+e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
+</div>
+  
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
