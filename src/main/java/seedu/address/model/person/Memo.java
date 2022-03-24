@@ -19,6 +19,9 @@ public class Memo {
     /** Every character is allowed, up to a maximum of MAXIMUM_CHARACTERS. */
     public static final String VALIDATION_REGEX = ".{0," + MAXIMUM_CHARACTERS + "}";
 
+    /** A empty memo object. */
+    public static final Memo EMPTY_MEMO = new Memo("");
+
     /** String representation of Memo. */
     public final String memo;
 
@@ -49,7 +52,7 @@ public class Memo {
      * @return If {@code memo} is empty true; otherwise false.
      */
     public boolean isEmpty() {
-        return memo.isEmpty();
+        return this.equals(EMPTY_MEMO);
     }
 
     /**

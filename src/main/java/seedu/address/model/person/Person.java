@@ -92,6 +92,15 @@ public class Person {
     }
 
     /**
+     * Returns if memo is empty.
+     *
+     * @return If memo is empty true; otherwise false.
+     */
+    public boolean isMemoEmpty() {
+        return memo.isEmpty();
+    }
+
+    /**
      * Returns true if both persons have same phone number or email.
      * This defines a weaker notion of equality between two persons.
      */
@@ -125,6 +134,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getMemo().equals(getMemo())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -136,7 +146,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, memo, tags);
     }
 
     /**

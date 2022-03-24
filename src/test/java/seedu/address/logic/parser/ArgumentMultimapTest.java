@@ -32,18 +32,6 @@ class ArgumentMultimapTest {
         assertTrue(validMultiMap.getValue(validPrefix).isPresent());
     }
 
-
-    @Test
-    void getValueOrEmpty_validArguments() {
-        // When value is null -> should return ""
-        ArgumentMultimap testMap = new ArgumentMultimap();
-        assertEquals(testMap.getValueOrEmpty(validPrefix), "");
-        assertEquals(testMap.getValueOrEmpty(emptyPrefix), "");
-        String testString = "This is a test";
-        testMap.put(validPrefix, testString);
-        assertEquals(testMap.getValueOrEmpty(validPrefix), testString);
-    }
-
     @Test
     void getAllValues_validInputs() {
         ArgumentMultimap testMap = new ArgumentMultimap();
@@ -58,7 +46,6 @@ class ArgumentMultimapTest {
         testMap.put(validPrefix, secondTestString);
         assertEquals(testMap.getAllValues(validPrefix), listOfTestStrings);
     }
-
 
     @Test
     void isEmpty() {
