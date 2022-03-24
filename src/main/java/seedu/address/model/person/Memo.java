@@ -12,7 +12,7 @@ public class Memo extends PersonAttribute {
     /** Maximum characters allowed. */
     public static final int MAXIMUM_CHARACTERS = 1000;
 
-    /** String message that represents invalid input. */
+    /** String message that represents message constraints. */
     public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of "
             + MAXIMUM_CHARACTERS + " characters";
 
@@ -25,7 +25,7 @@ public class Memo extends PersonAttribute {
     /**
      * Constructs a {@code Memo}.
      *
-     * @param memo A memo.
+     * @param memo a memo.
      */
     public Memo(String memo) {
         requireNonNull(memo);
@@ -35,6 +35,9 @@ public class Memo extends PersonAttribute {
 
     /**
      * Returns true if a given string is a valid memo.
+     *
+     * @param memo memo.
+     * @return true if valid; otherwise false.
      */
     public static boolean isValidMemo(String memo) {
         return memo.matches(VALIDATION_REGEX);
@@ -50,9 +53,9 @@ public class Memo extends PersonAttribute {
     }
 
     /**
-     * Returns string representation of Memo.
+     * Returns string representation of {@code Memo}.
      *
-     * @return string representation of Memo.
+     * @return string representation of {@code Memo}.
      */
     @Override
     public String toString() {
@@ -60,9 +63,9 @@ public class Memo extends PersonAttribute {
     }
 
     /**
-     * Checks if two Memo object is equal.
+     * Checks if two {@code Memo} object is equal.
      *
-     * @param other The other Memo object.
+     * @param other the other {@code Memo} object.
      * @return true if equal; otherwise false.
      */
     @Override
@@ -73,9 +76,9 @@ public class Memo extends PersonAttribute {
     }
 
     /**
-     * Returns hashcode of Memo.
+     * Returns hashcode of {@code Memo}.
      *
-     * @return hashcode of Memo.
+     * @return hashcode of {@code Memo}.
      */
     @Override
     public int hashCode() {
