@@ -10,7 +10,6 @@ Package Model <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class "{abstract}\nPersonAttribute" as PersonAttribute
 Class AddressBook
 Class StateAddressBook
 Class ModelManager
@@ -48,12 +47,6 @@ Person *--> "1" Address
 Person *--> "1"Memo
 Person *--> "*" Tag
 
-Name -down-|> PersonAttribute
-Phone -down-|> PersonAttribute
-Email -down-|> PersonAttribute
-Address -down-|> PersonAttribute
-Memo -down-|> PersonAttribute
-Tag -down-|> PersonAttribute
 
 
 ModelManager -->"~* filtered" Person

@@ -28,13 +28,13 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("find n/alice")
+AddressBookParser -> FindCommandParser : parse(" n/alice")
 activate FindCommandParser
 
-ref over FindCommandParser : get PersonContainsKeywordsPredicate
+ref over FindCommandParser : get PersonPredicate
 
 create FindCommand
-FindCommandParser --> FindCommand : FindCommand(predicate)
+FindCommandParser -> FindCommand : FindCommand(predicate)
 activate FindCommand
 
 FindCommand --> FindCommandParser: command
