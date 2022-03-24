@@ -92,7 +92,7 @@ public class Person {
     }
 
     /**
-     * Returns if memo is empty.
+     * Returns true if memo is empty, false otherwise.
      *
      * @return If memo is empty true; otherwise false.
      */
