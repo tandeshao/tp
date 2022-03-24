@@ -37,7 +37,7 @@ public class Memo extends PersonAttribute {
      * Returns true if a given string is a valid memo.
      *
      * @param memo A memo to be checked for validity.
-     * @return true if valid; otherwise false.
+     * @return If valid true; otherwise false.
      */
     public static boolean isValidMemo(String memo) {
         return memo.matches(VALIDATION_REGEX);
@@ -46,7 +46,7 @@ public class Memo extends PersonAttribute {
     /**
      * Returns true if {@code memo} is empty. False otherwise.
      *
-     * @return true if {@code memo} is empty; otherwise false.
+     * @return If {@code memo} is empty true; otherwise false.
      */
     public boolean isEmpty() {
         return memo.isEmpty();
@@ -55,7 +55,7 @@ public class Memo extends PersonAttribute {
     /**
      * Returns string representation of {@code Memo}.
      *
-     * @return string representation of {@code Memo}.
+     * @return String representation of {@code Memo}.
      */
     @Override
     public String toString() {
@@ -65,8 +65,8 @@ public class Memo extends PersonAttribute {
     /**
      * Checks if two {@code Memo} object is equal.
      *
-     * @param other the other {@code Memo} object.
-     * @return true if equal; otherwise false.
+     * @param other The other {@code Memo} object.
+     * @return If equal true; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
@@ -78,7 +78,7 @@ public class Memo extends PersonAttribute {
     /**
      * Returns hashcode of {@code Memo}.
      *
-     * @return hashcode of {@code Memo}.
+     * @return Hashcode of {@code Memo}.
      */
     @Override
     public int hashCode() {
