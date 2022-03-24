@@ -25,7 +25,7 @@ public class Memo extends PersonAttribute {
     /**
      * Constructs a {@code Memo}.
      *
-     * @param memo a memo.
+     * @param memo A valid memo.
      */
     public Memo(String memo) {
         requireNonNull(memo);
@@ -36,7 +36,7 @@ public class Memo extends PersonAttribute {
     /**
      * Returns true if a given string is a valid memo.
      *
-     * @param memo memo.
+     * @param memo A memo to be checked for validity.
      * @return true if valid; otherwise false.
      */
     public static boolean isValidMemo(String memo) {
