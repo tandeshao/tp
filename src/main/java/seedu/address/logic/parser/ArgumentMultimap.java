@@ -34,14 +34,6 @@ public class ArgumentMultimap {
     }
 
     /**
-     * For tokenized inputs that don't have a start index, {@link #argMultimap} would always
-     * have "" as the first key. We can trim it by calling this function.
-     */
-    public void removePreamble() {
-        argMultimap.remove(new Prefix(""));
-    }
-
-    /**
      * Returns the last value of {@code prefix}.
      */
     public Optional<String> getValue(Prefix prefix) {
@@ -67,19 +59,6 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.get(prefix));
-    }
-
-    /**
-     * If there is no key in {@link #argMultimap} this will return an empty list.
-     * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
-     *
-     * @return Returns all Prefix keys that exist in the tokenized input.
-     */
-    public List<Prefix> getAllKeys() {
-        if (argMultimap.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(argMultimap.keySet());
     }
 
     /**

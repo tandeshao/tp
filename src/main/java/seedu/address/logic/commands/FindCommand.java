@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PersonPredicate;
 
 /**
  * Finds and lists all persons in address book whose {@link seedu.address.model.person.PersonAttribute Attribute}
@@ -23,9 +23,9 @@ public class FindCommand extends Command {
             + "e/ [EMAIL_PARAMETER]...\n" + "a/ [ADDRESS_PARAMETER]...\n" + "t/ [TAG_PARAMETER]...\n"
             + "m/ [MEMO_PARAMETER]...\n" + "Example: " + COMMAND_WORD + " n/ alice bob charlie" + " e/ alice@gmail.com";
     public static final String NO_PREFIX_MESSAGE = "At least one field to find must be provided.";
-    private final PersonContainsKeywordsPredicate predicate;
+    private final PersonPredicate predicate;
 
-    public FindCommand(PersonContainsKeywordsPredicate predicate) {
+    public FindCommand(PersonPredicate predicate) {
         this.predicate = predicate;
     }
 
