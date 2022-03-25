@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -102,6 +103,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes all person from the {@code AddressBook}.
+     * @param personsToRemove List of person to remove from the {@code AddressBook}
+     */
+    public void removePersons(Person... personsToRemove) {
+        persons.removeAll(personsToRemove);
     }
 
     //// util methods

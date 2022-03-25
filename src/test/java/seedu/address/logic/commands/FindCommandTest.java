@@ -17,7 +17,7 @@ import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,11 +31,11 @@ public class FindCommandTest {
         String withAll = " n/Alex" + " p/90100102" + " e/tester@mail.com" + " a/QueensTown blk 200 singapore 123123"
                 + " t/friends colleagues" + " m/Close contract today";
         PersonDescriptor withAllDescriptor = new PersonDescriptor(withAll);
-        FindCommand withAllFindCommand = new FindCommand(new PersonPredicate(withAllDescriptor));
+        FindCommand withAllFindCommand = new FindCommand(new FindPersonPredicate(withAllDescriptor));
 
         String withName = " n/Alex bob";
         PersonDescriptor withNameDescriptor = new PersonDescriptor(withName);
-        FindCommand withNameFindCommand = new FindCommand(new PersonPredicate(withNameDescriptor));
+        FindCommand withNameFindCommand = new FindCommand(new FindPersonPredicate(withNameDescriptor));
 
         // same object -> returns true
         assertEquals(withAllFindCommand, withAllFindCommand);
@@ -47,8 +47,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         String emptyInput = "n/ ";
         PersonDescriptor emptyDescriptor = new PersonDescriptor(emptyInput);
-        FindCommand command = new FindCommand(new PersonPredicate(emptyDescriptor));
-        expectedModel.updateFilteredPersonList(new PersonPredicate(emptyDescriptor));
+        FindCommand command = new FindCommand(new FindPersonPredicate(emptyDescriptor));
+        expectedModel.updateFilteredPersonList(new FindPersonPredicate(emptyDescriptor));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         // Since it is an empty predicate, it should return 0 person found
@@ -58,7 +58,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonPredicate predicate = preparePredicate();
+        FindPersonPredicate predicate = preparePredicate();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -68,8 +68,8 @@ public class FindCommandTest {
     /**
      * Prepares a PersonPredicate for testing.
      */
-    private PersonPredicate preparePredicate() {
+    private FindPersonPredicate preparePredicate() {
         PersonDescriptor descriptor = new PersonDescriptor(" n/ Kurz Elle Kunz");
-        return new PersonPredicate(descriptor);
+        return new FindPersonPredicate(descriptor);
     }
 }

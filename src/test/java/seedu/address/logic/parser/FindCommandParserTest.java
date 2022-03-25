@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 
 public class FindCommandParserTest {
 
@@ -30,7 +30,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         PersonDescriptor descriptor = new PersonDescriptor(POPULATED_TEST_USER_INPUT_WITH_NAME);
-        FindCommand expectedFindCommand = new FindCommand(new PersonPredicate(descriptor));
+        FindCommand expectedFindCommand = new FindCommand(new FindPersonPredicate(descriptor));
         assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

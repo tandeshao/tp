@@ -93,11 +93,11 @@ public class PersonDescriptor {
     private List<Pair<Prefix, Integer>> getPrefixPositions() {
         List<Pair<Prefix, Integer>> result = new ArrayList<>();
         for (Prefix prefix : LIST_OF_PREFIX) {
-            String searchString = " " + prefix.getPrefix();
+            String searchString = prefix.getPrefix();
             int indexOfString = userInput.indexOf(searchString);
             if (indexOfString != -1) {
                 // +1 as an offset for whitespace
-                Pair<Prefix, Integer> pair = new Pair<>(prefix, indexOfString + 1);
+                Pair<Prefix, Integer> pair = new Pair<>(prefix, indexOfString);
                 result.add(pair);
             }
         }

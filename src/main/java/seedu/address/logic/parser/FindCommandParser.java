@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -26,8 +26,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
         String modifiedString = modifyUserInput(args);
-        PersonDescriptor descriptor = getDescriptor(modifiedString);
-        PersonPredicate predicate = new PersonPredicate(descriptor);
+        PersonDescriptor descriptor = createDescriptor(modifiedString);
+        FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
         return new FindCommand(predicate);
     }
 
@@ -58,7 +58,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return descriptor that stores the description to search a person by.
      * @throws ParseException if there are no valid prefix in the user input.
      */
-    private PersonDescriptor getDescriptor(String modifiedString) throws ParseException {
+    private PersonDescriptor createDescriptor(String modifiedString) throws ParseException {
         PersonDescriptor descriptor = new PersonDescriptor(modifiedString);
         if (descriptor.isEmpty()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");

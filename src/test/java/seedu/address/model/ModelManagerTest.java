@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.PersonDescriptor;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -121,7 +121,7 @@ public class ModelManagerTest {
         String keywords = ALICE.getName().fullName;
         String args = " n/ " + keywords;
         PersonDescriptor descriptor = new PersonDescriptor(args);
-        modelManager.updateFilteredPersonList(new PersonPredicate(descriptor));
+        modelManager.updateFilteredPersonList(new FindPersonPredicate(descriptor));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests

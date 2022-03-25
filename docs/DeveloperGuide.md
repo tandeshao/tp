@@ -268,7 +268,7 @@ Given below is a sequence diagram to show the execution flow of the find command
 <img src="images/FindSequenceDiagram.png"/>
 <br/>
 <br/>
-<img src="images/PersonPredicate.png"/>
+<img src="images/FindPersonPredicate.png"/>
 
 Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 
@@ -276,10 +276,10 @@ Step 2. `FindCommandParser` will then be instantiated and `FindCommandParser#par
 
 Since a user can key in multiple valid parameters to increase the scope of a search (i.e. search by name and tags), we will need a way to identify different parts of the user input and match the input to their corresponding prefix. This can be achieved with the `PersonDescriptor` class where it will store the descriptions to search a person by.
 
-Step 3. The `PersonDescriptor` object is passed as an argument into the  `PersonPredicate` constructor and the object created is returned to `FindCommandParser`.
+Step 3. The `PersonDescriptor` object is passed as an argument into the  `FindPersonPredicate` constructor and the object created is returned to `FindCommandParser`.
 
 <div markdown="span" class="alert alert-info">  
-:information_source: **Note:** Two note-worthy classes that are created in `PersonPredicate` but not shown in the sequence diagram is the `ExactWordMatchPredicate` and `PartialWordMatchPredicate` which encapsulate the logic of conducting exact word match and partial word match on a person's attribute respectively. They are used in the `PersonPredicate#test(Person)` method during the filter process and to conduct exact word match/partial word match depending on the person's attribute. More information will be given in the design consideration. 
+:information_source: **Note:** Two note-worthy classes that are created in `FindPersonPredicate` but not shown in the sequence diagram is the `ExactWordMatchPredicate` and `PartialWordMatchPredicate` which encapsulate the logic of conducting exact word match and partial word match on a person's attribute respectively. They are used in the `FindPersonPredicate#test(Person)` method during the filter process and to conduct exact word match/partial word match depending on the person's attribute. More information will be given in the design consideration. 
 </div>
 
 Step 4. `FindCommandParser` will then use the predicate object to create the `FindCommand` object and this object is returned to `LogicManager`.

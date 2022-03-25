@@ -25,7 +25,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -77,7 +77,7 @@ public class AddressBookParserTest {
         PersonDescriptor descriptor = new PersonDescriptor(args);
         String constructedArgs = FindCommand.COMMAND_WORD + " n/" + String.join(" ", keywords);
         FindCommand command = (FindCommand) parser.parseCommand(constructedArgs);
-        assertEquals(new FindCommand(new PersonPredicate(descriptor)), command);
+        assertEquals(new FindCommand(new FindPersonPredicate(descriptor)), command);
     }
 
     @Test

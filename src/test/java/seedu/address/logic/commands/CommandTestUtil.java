@@ -20,7 +20,7 @@ import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -130,7 +130,7 @@ public class CommandTestUtil {
         final String[] splitName = person.getName().fullName.split("\\s+");
         String args = " n/" + splitName[0];
         PersonDescriptor descriptor = new PersonDescriptor(args);
-        model.updateFilteredPersonList(new PersonPredicate(descriptor));
+        model.updateFilteredPersonList(new FindPersonPredicate(descriptor));
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
