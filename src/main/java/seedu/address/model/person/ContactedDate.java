@@ -1,0 +1,140 @@
+package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Represents a Person's contacted status in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidContactedDate(String)}
+ */
+public class ContactedDate {
+
+    /** String message that represents the prefix last contacted on. */
+    public static final String MESSAGE_CONTACTED_PREFIX = "Last contacted on ";
+
+    /** String message that represents not contacted. */
+    public static final String MESSAGE_NOT_CONTACTED = "Not contacted";
+
+    /** String that represents the date format following the dd-mm-yyyy convention. */
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
+
+    /** A DateTimeFormatter of {@code DATE_FORMAT}. */
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+
+    /** String message that represents message constraints. */
+    public static final String MESSAGE_CONSTRAINTS = "ContactedDate can be empty or "
+            + "a date following the " + DATE_FORMAT.toLowerCase() + " format that is not in the future.";
+
+    /** A static {@code contactedDate} object that represents an empty contacted date. */
+    public static final ContactedDate EMPTY_CONTACTED_DATE = new ContactedDate("");
+
+    /** String representation of {@code ContactedDate}. */
+    public final String contactedDate;
+
+    /**
+     * Constructs a {@code ContactedDate}.
+     *
+     * @param contactedDate A valid contacted date.
+     */
+    public ContactedDate(String contactedDate) {
+        requireNonNull(contactedDate);
+        checkArgument(isValidContactedDate(contactedDate), MESSAGE_CONSTRAINTS);
+        this.contactedDate = contactedDate;
+    }
+
+    /**
+     * Returns true if a given string is a valid contacted date.
+     *
+     * @param contactedDate A contacted date to be checked for validity.
+     * @return If valid true; otherwise false.
+     */
+    public static boolean isValidContactedDate(String contactedDate) {
+        if (contactedDate == null) {
+            return false;
+        }
+        return contactedDate.isEmpty() || isValidDate(contactedDate);
+    }
+
+    /**
+     * Returns true if a given string is a valid date that follows the {@code DATE_FORMAT} and is not in the future,
+     * otherwise false.
+     *
+     * @param contactedDate A contacted date to be checked for validity.
+     * @return If valid {@code DATE_FORMAT} and not in the future, true; otherwise false.
+     */
+    private static boolean isValidDate(String contactedDate) {
+        try {
+            LocalDate contactedDateFormatted = LocalDate.parse(contactedDate, DATE_FORMATTER);
+
+            LocalDate today = LocalDate.now();
+
+            // Checks if the given contactedDate is in the future.
+            if (contactedDateFormatted.compareTo(today) > 0) {
+                return false;
+            }
+        } catch (DateTimeParseException e) {
+            // Invalid date format.
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if {@code ContactedDate} is equal to {@code EMPTY_CONTACTED_DATE}, false otherwise.
+     *
+     * @return If {@code ContactedDate} is equal to {@code EMPTY_CONTACTED_DATE}, true; otherwise false.
+     */
+    public boolean isEmpty() {
+        return this.equals(EMPTY_CONTACTED_DATE);
+    }
+
+    /**
+     * Returns string representation of {@code ContactedDate}.
+     *
+     * @return string representation of {@code ContactedDate}.
+     */
+    @Override
+    public String toString() {
+        return prepareToString();
+    }
+
+    /**
+     * Prepares string representation of {@code ContactedDate}.
+     *
+     * @return string representation of {@code ContactedDate}.
+     */
+    private String prepareToString() {
+        if (isEmpty()) {
+            return MESSAGE_NOT_CONTACTED;
+        }
+
+        return MESSAGE_CONTACTED_PREFIX + this.contactedDate;
+    }
+
+    /**
+     * Checks if two {@code ContactedDate} object is equal.
+     *
+     * @param other the other {@code ContactedDate} object.
+     * @return If equal true; otherwise false.
+     */
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ContactedDate // instanceof handles nulls
+                && contactedDate.equals(((ContactedDate) other).contactedDate)); // state check
+    }
+
+    /**
+     * Returns hashcode of {@code ContactedDate}.
+     *
+     * @return hashcode of {@code ContactedDate}.
+     */
+    @Override
+    public int hashCode() {
+        return contactedDate.hashCode();
+    }
+}

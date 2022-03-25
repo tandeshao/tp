@@ -11,10 +11,10 @@ public class MemoUtil {
     public static final String SHORT_LENGTH_STRING = "hello world";
 
     /** A long string that is equal to the maximum allowed characters of {@code Memo}. */
-    public static final String MAXIMUM_LENGTH_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS);
+    public static final String MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS);
 
     /** A long string that is more than the maximum allowed characters of {@code Memo}. */
-    public static final String LONGER_THAN_MAXIMUM_LENGTH_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS + 1);
+    public static final String LONGER_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS + 1);
 
     /**
      * Returns a string for that of a specified length.

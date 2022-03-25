@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label contactedDate;
+    @FXML
     private HBox memoBox;
     @FXML
     private FlowPane tags;
@@ -50,19 +52,19 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-
+        name.setText(person.getName().toString());
+        phone.setText(person.getPhone().toString());
+        address.setText(person.getAddress().toString());
+        email.setText(person.getEmail().toString());
+        contactedDate.setText(person.getContactedDate().toString());
         if (!person.isMemoEmpty()) {
-            Label memo = new Label(person.getMemo().memo);
+            Label memo = new Label(person.getMemo().toString());
             memoBox.getChildren().add(memo);
         }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactedDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Memo;
 import seedu.address.model.person.Name;
@@ -42,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEMO);
+                        PREFIX_ADDRESS, PREFIX_CONTACTED_DATE, PREFIX_MEMO, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -56,12 +58,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        ContactedDate contactedDate = ContactedDate.EMPTY_CONTACTED_DATE;
+        if (argMultimap.getValue(PREFIX_CONTACTED_DATE).isPresent()) {
+            contactedDate = ParserUtil.parseContactedDate(argMultimap.getValue(PREFIX_CONTACTED_DATE).get());
+        }
+
         Memo memo = Memo.EMPTY_MEMO;
         if (argMultimap.getValue(PREFIX_MEMO).isPresent()) {
             memo = ParserUtil.parseMemo(argMultimap.getValue(PREFIX_MEMO).get());
         }
 
-        Person person = new Person(name, phone, email, address, memo, tagList);
+        Person person = new Person(name, phone, email, address, contactedDate, memo, tagList);
 
         LOGGER.log(Level.INFO, "AddCommandParser#parse(String) success");
         return new AddCommand(person);

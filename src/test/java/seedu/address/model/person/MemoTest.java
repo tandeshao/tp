@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.MemoUtil.LONGER_THAN_MAXIMUM_LENGTH_STRING;
-import static seedu.address.testutil.MemoUtil.MAXIMUM_LENGTH_STRING;
+import static seedu.address.testutil.MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
+import static seedu.address.testutil.MemoUtil.MAXIMUM_MEMO_STRING;
 import static seedu.address.testutil.MemoUtil.SHORT_LENGTH_STRING;
 
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 public class MemoTest {
 
     private final String memoStringShort = SHORT_LENGTH_STRING;
-    private final String memoStringMaximum = MAXIMUM_LENGTH_STRING;
-    private final String memoStringLongerThanMaximum = LONGER_THAN_MAXIMUM_LENGTH_STRING;
+    private final String memoStringMaximum = MAXIMUM_MEMO_STRING;
+    private final String memoStringLongerThanMaximum = LONGER_THAN_MAXIMUM_MEMO_STRING;
 
     private final Memo validShortMemo = new Memo(memoStringShort);
 
