@@ -19,6 +19,7 @@ public class ScrubPersonPredicate implements Predicate<Person> {
 
     /**
      * Constructor for ScrubPersonPredicate.
+     *
      * @param descriptor Description to scrub a person by.
      */
     public ScrubPersonPredicate(PersonDescriptor descriptor) {
