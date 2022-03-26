@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.PersonDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,28 +21,28 @@ class ScrubCommandTest {
     @Test
     void execute_partialEmail() {
         String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 7);
-        String partialEmailDescription = "e/@example";
-        PersonDescriptor partialEmailDescriptor = new PersonDescriptor(partialEmailDescription);
+        String partialEmailDescription = " e/@example";
+        ArgumentMultimap partialEmailDescriptor = ArgumentTokenizer.tokenize(partialEmailDescription, ARRAY_OF_PREFIX);
         testExecuteMethod(partialEmailDescriptor, expectedMessage);
     }
 
     @Test
     void execute_fullEmail() {
         String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 7);
-        String fullEmailDescription = "e/@example.com";
-        PersonDescriptor fullEmailDescriptor = new PersonDescriptor(fullEmailDescription);
+        String fullEmailDescription = " e/@example.com";
+        ArgumentMultimap fullEmailDescriptor = ArgumentTokenizer.tokenize(fullEmailDescription, ARRAY_OF_PREFIX);
         testExecuteMethod(fullEmailDescriptor, expectedMessage);
     }
 
     @Test
     void execute_singlePhone() {
         String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 1);
-        String phoneDescription = "p/94351253";
-        PersonDescriptor phoneDescriptor = new PersonDescriptor(phoneDescription);
+        String phoneDescription = " p/94351253";
+        ArgumentMultimap phoneDescriptor = ArgumentTokenizer.tokenize(phoneDescription, ARRAY_OF_PREFIX);
         testExecuteMethod(phoneDescriptor, expectedMessage);
     }
 
-    private void testExecuteMethod(PersonDescriptor phoneDescriptor, String expectedMessage) {
+    private void testExecuteMethod(ArgumentMultimap phoneDescriptor, String expectedMessage) {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ScrubCommand command = new ScrubCommand(phoneDescriptor);
@@ -60,23 +62,24 @@ class ScrubCommandTest {
     @Test
     void execute_multiplePhone() {
         String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 2);
-        String multiplePhoneDescription = "p/94351253 98765432";
-        PersonDescriptor multiplePhoneDescriptor = new PersonDescriptor(multiplePhoneDescription);
+        String multiplePhoneDescription = " p/94351253 p/98765432";
+        ArgumentMultimap multiplePhoneDescriptor = ArgumentTokenizer
+                .tokenize(multiplePhoneDescription, ARRAY_OF_PREFIX);
         testExecuteMethod(multiplePhoneDescriptor, expectedMessage);
     }
 
     @Test
     void execute_partialPhone_noDeletion() {
         String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 0);
-        String partialPhone = "p/9435";
-        PersonDescriptor partialPhoneDescriptor = new PersonDescriptor(partialPhone);
+        String partialPhone = " p/9435";
+        ArgumentMultimap partialPhoneDescriptor = ArgumentTokenizer.tokenize(partialPhone, ARRAY_OF_PREFIX);
         testExecuteMethod(partialPhoneDescriptor, expectedMessage);
     }
 
     @Test
     void testEquals() {
-        String description = "e/@example";
-        PersonDescriptor descriptor = new PersonDescriptor(description);
+        String description = " e/@example";
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(description, ARRAY_OF_PREFIX);
         ScrubCommand scrubCommand = new ScrubCommand(descriptor);
         assertEquals(scrubCommand, new ScrubCommand(descriptor));
     }

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.FindCommand.NO_PREFIX_MESSAGE;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +27,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
         String modifiedString = modifyUserInput(args);
-        PersonDescriptor descriptor = createDescriptor(modifiedString);
-        FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
+        ArgumentMultimap findPersonDescriptor = createDescriptor(modifiedString);
+        FindPersonPredicate predicate = new FindPersonPredicate(findPersonDescriptor);
         return new FindCommand(predicate);
     }
 
@@ -39,8 +40,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException thrown when the user argument is empty.
      */
     private String modifyUserInput(String args) throws ParseException {
-        // Removes leading and trailing whitespace from the user input
-        String trimmedArgs = args.trim();
+        // Removes trailing whitespace from the user input
+        String trimmedArgs = args.stripTrailing();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words
         String modifiedString = trimmedArgs.replaceAll("\\s{2,}", " ");
         if (modifiedString.isEmpty()) {
@@ -59,14 +60,13 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return descriptor that stores the description to search a person by.
      * @throws ParseException if there are no valid prefix in the user input.
      */
-    private PersonDescriptor createDescriptor(String modifiedString) throws ParseException {
-        PersonDescriptor descriptor = new PersonDescriptor(modifiedString);
-        if (descriptor.isEmpty()) {
+    private ArgumentMultimap createDescriptor(String modifiedString) throws ParseException {
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(modifiedString, ARRAY_OF_PREFIX);
+        if (descriptor.hasNoValidPrefix()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
             throw new ParseException(NO_PREFIX_MESSAGE);
         }
         return descriptor;
     }
-
 
 }

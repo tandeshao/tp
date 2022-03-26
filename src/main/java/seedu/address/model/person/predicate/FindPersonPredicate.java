@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -21,14 +21,14 @@ public class FindPersonPredicate implements Predicate<Person> {
     /**
      * Descriptor from {@link FindCommandParser}.
      */
-    private final PersonDescriptor descriptor;
+    private final ArgumentMultimap descriptor;
 
     /**
      * Constructs Predicate function.
      *
      * @param descriptor description to search a person by.
      */
-    public FindPersonPredicate(PersonDescriptor descriptor) {
+    public FindPersonPredicate(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
     }
 
@@ -46,7 +46,7 @@ public class FindPersonPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         List<Prefix> prefixes = descriptor.getAllAvailablePrefix();
         for (Prefix prefix : prefixes) {
-            if (testPerson(person, prefix)) {
+            if (testPersonAttribute(person, prefix)) {
                 return true;
             }
         }
@@ -54,20 +54,20 @@ public class FindPersonPredicate implements Predicate<Person> {
     }
 
     /**
-     * Checks if the attribute that corresponds with the prefix matches with the predicate.
+     * Checks if the attribute that corresponds with the attribute matches with the predicate.
      * @param person person to be tested.
-     * @param prefix the single prefix that identifies which attribute of the person should the predicate be
+     * @param attribute the prefix that identifies which attribute of the person should the predicate be
      *               testing against.
      * @return true if the person's attribute passes the test, false otherwise.
      */
-    private boolean testPerson(Person person, Prefix prefix) {
-        if (prefix.equals(PREFIX_NAME) || prefix.equals(PREFIX_PHONE) || prefix.equals(PREFIX_EMAIL)) {
-            PartialWordMatchPredicate predicate = new PartialWordMatchPredicate(prefix,
-                    descriptor.getDescription(prefix));
+    private boolean testPersonAttribute(Person person, Prefix attribute) {
+        if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
+            PartialWordMatchPredicate predicate = new PartialWordMatchPredicate(attribute,
+                    descriptor.getAllValues(attribute));
             return predicate.test(person);
         } else {
-            ExactWordMatchPredicate predicate = new ExactWordMatchPredicate(prefix,
-                    descriptor.getDescription(prefix));
+            ExactWordMatchPredicate predicate = new ExactWordMatchPredicate(attribute,
+                    descriptor.getAllValues(attribute));
             return predicate.test(person);
         }
     }

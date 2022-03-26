@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.FindCommand.NO_PREFIX_MESSAGE;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -29,7 +30,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        PersonDescriptor descriptor = new PersonDescriptor(POPULATED_TEST_USER_INPUT_WITH_NAME);
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(POPULATED_TEST_USER_INPUT_WITH_NAME, ARRAY_OF_PREFIX);
         FindCommand expectedFindCommand = new FindCommand(new FindPersonPredicate(descriptor));
         assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
 
