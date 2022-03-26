@@ -20,7 +20,7 @@ public class ContactedDate {
     /** String message that represents not contacted. */
     public static final String MESSAGE_NOT_CONTACTED = "Not contacted";
 
-    /** String that represents the date format following the dd-mm-yyyy convention. */
+    /** String that represents the dd-mm-yyyy date format. */
     public static final String DATE_FORMAT = "dd-MM-uuuu";
 
     /**

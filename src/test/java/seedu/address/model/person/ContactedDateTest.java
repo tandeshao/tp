@@ -65,7 +65,7 @@ public class ContactedDateTest {
         assertFalse(ContactedDate.isValidContactedDate("/")); // special character '/'
         assertFalse(ContactedDate.isValidContactedDate("~")); // special character '~'
 
-        // invalid dates that do not adhere to the dd-MM-yyyy format
+        // invalid dates that do not adhere to the dd-mm-yyyy format
         assertFalse(ContactedDate.isValidContactedDate("01012020")); // no hyphen
         assertFalse(ContactedDate.isValidContactedDate("01 01 2020")); // spaces instead of hyphen
         assertFalse(ContactedDate.isValidContactedDate("01/01/2020")); // '/' instead of hyphen
@@ -76,7 +76,7 @@ public class ContactedDateTest {
         assertFalse(ContactedDate.isValidContactedDate("01-01-20")); // year two digit
         assertFalse(ContactedDate.isValidContactedDate("1-1-20")); // day and month single digit, year two digit
 
-        // invalid dd-MM-yyyy dates that do not exist
+        // invalid dd-mm-yyyy dates that do not exist
         assertFalse(ContactedDate.isValidContactedDate("01-13-2020")); // 13th month
         assertFalse(ContactedDate.isValidContactedDate("01-14-2020")); // 14th month
         assertFalse(ContactedDate.isValidContactedDate("01-30-2020")); // 30th month
