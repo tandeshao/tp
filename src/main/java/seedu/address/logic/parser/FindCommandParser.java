@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,16 +25,30 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
+        String modifiedString = modifyUserInput(args);
+        PersonDescriptor descriptor = createDescriptor(modifiedString);
+        FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
+        return new FindCommand(predicate);
+    }
+
+    /**
+     * Cleans up user input and make it appropriate to be parsed into a descriptor class.
+     *
+     * @param args unmodified user input.
+     * @return valid input that can be used for the PersonDescriptor class.
+     * @throws ParseException thrown when the user argument is empty.
+     */
+    private String modifyUserInput(String args) throws ParseException {
+        // Removes leading and trailing whitespace from the user input
         String trimmedArgs = args.trim();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words
-        String modifiedString = " " + trimmedArgs.replaceAll("\\s{2,}", " ");
-        if (trimmedArgs.isEmpty()) {
+        String modifiedString = trimmedArgs.replaceAll("\\s{2,}", " ");
+        if (modifiedString.isEmpty()) {
             LOGGER.log(Level.INFO, "Input is empty");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        FindPersonDescriptor descriptor = getDescriptor(modifiedString);
-        PersonPredicate predicate = new PersonPredicate(descriptor);
-        return new FindCommand(predicate);
+
+        return modifiedString;
     }
 
     /**
@@ -45,8 +59,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return descriptor that stores the description to search a person by.
      * @throws ParseException if there are no valid prefix in the user input.
      */
-    private FindPersonDescriptor getDescriptor(String modifiedString) throws ParseException {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(modifiedString);
+    private PersonDescriptor createDescriptor(String modifiedString) throws ParseException {
+        PersonDescriptor descriptor = new PersonDescriptor(modifiedString);
         if (descriptor.isEmpty()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
             throw new ParseException(NO_PREFIX_MESSAGE);

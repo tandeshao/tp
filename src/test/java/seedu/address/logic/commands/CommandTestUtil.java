@@ -17,11 +17,11 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.FindPersonDescriptor;
+import seedu.address.logic.parser.PersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.PersonPredicate;
+import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.MemoUtil;
 import seedu.address.testutil.PersonBuilder;
@@ -151,8 +151,8 @@ public class CommandTestUtil {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
         String args = " n/" + splitName[0];
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(args);
-        model.updateFilteredPersonList(new PersonPredicate(descriptor));
+        PersonDescriptor descriptor = new PersonDescriptor(args);
+        model.updateFilteredPersonList(new FindPersonPredicate(descriptor));
         assertEquals(1, model.getFilteredPersonList().size());
     }
 

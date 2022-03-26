@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ScrubCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -65,14 +66,17 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to DeleteCommandParser");
             return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            LOGGER.log(Level.INFO, "Parsed to ClearCommand");
-            return new ClearCommand();
+        case ScrubCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to ScrubCommandParser");
+            return new ScrubCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to FindCommandParser");
             return new FindCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to ClearCommand");
+            return new ClearCommand();
 
         case ListCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to ListCommand");

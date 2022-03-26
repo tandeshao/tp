@@ -13,34 +13,34 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-class FindPersonDescriptorTest {
+class PersonDescriptorTest {
 
     @Test
     void getAllAvailablePrefix() {
         List<Prefix> expectedPrefixList = Arrays.asList(PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" e/test1 n/test2 p/test3");
+        PersonDescriptor descriptor = new PersonDescriptor(" e/test1 n/test2 p/test3");
         assertEquals(expectedPrefixList, descriptor.getAllAvailablePrefix());
     }
 
     @Test
     void isEmpty() {
-        FindPersonDescriptor emptyDescriptor = new FindPersonDescriptor(" ");
-        FindPersonDescriptor populatedDescriptor = new FindPersonDescriptor(" n/ test1 ");
+        PersonDescriptor emptyDescriptor = new PersonDescriptor(" ");
+        PersonDescriptor populatedDescriptor = new PersonDescriptor(" n/ test1 ");
         assertTrue(emptyDescriptor.isEmpty());
         assertFalse(populatedDescriptor.isEmpty());
     }
 
     @Test
     void getDescription() {
-        FindPersonDescriptor dummyDescriptor = new FindPersonDescriptor(" n/ test statement ");
+        PersonDescriptor dummyDescriptor = new PersonDescriptor(" n/ test statement ");
         assertEquals("test statement", dummyDescriptor.getDescription(PREFIX_NAME));
     }
 
     @Test
     void testEquals() {
-        FindPersonDescriptor descriptor = new FindPersonDescriptor(" n/ test statement ");
-        FindPersonDescriptor duplicatedDescriptor = new FindPersonDescriptor(" n/ test statement ");
-        FindPersonDescriptor differentDescriptor = new FindPersonDescriptor(" n/ test statement 1");
+        PersonDescriptor descriptor = new PersonDescriptor(" n/ test statement ");
+        PersonDescriptor duplicatedDescriptor = new PersonDescriptor(" n/ test statement ");
+        PersonDescriptor differentDescriptor = new PersonDescriptor(" n/ test statement 1");
         assertEquals(descriptor, duplicatedDescriptor);
         assertNotEquals(descriptor, differentDescriptor);
     }
