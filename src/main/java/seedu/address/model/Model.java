@@ -91,9 +91,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Record the most recent user input except "history". */
-    void recordCommand(String userInput);
-
     /**
      * Restores address book to its previous state.
      */

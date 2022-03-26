@@ -24,6 +24,9 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, CommandRemark commandRemark) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.commandRemark = commandRemark;
+        if (commandRemark != CommandRemark.HISTORY) {
+            CommandList.getList().resetPointer();
+        }
     }
 
     /**
@@ -32,6 +35,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, CommandRemark.UI_IRRELEVANT);
+        CommandList.getList().resetPointer();
     }
 
     public String getFeedbackToUser() {
@@ -46,12 +50,17 @@ public class CommandResult {
         return commandRemark == CommandRemark.EXIT;
     }
 
-    public boolean isHistory() {
+    public boolean isHisotry() {
         return commandRemark == CommandRemark.HISTORY;
     }
 
+
     public String getNewCommandTextField() {
-        return isHistory() ? CommandList.getLastCommand() : "";
+        String text = "";
+        if (isHisotry()) {
+            text = CommandList.getList().getLastCommand();
+        }
+        return text;
     }
 
     @Override

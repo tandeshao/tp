@@ -12,43 +12,43 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 
-public class HistoryCommandTest {
+public class PreviousCommandTest {
 
     private final Model model = new ModelManager();
 
     @Test
     public void execute_historyForFourCommands_success() {
-        CommandList.clearAllCommand();
-        CommandList.record("find n/ John1");
-        CommandList.record("find n/ John2");
-        CommandList.record("find n/ John3");
-        CommandList.record("find n/ John4");
+        CommandList.getList().clearAllCommand();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
 
         Model expectedModel = new ModelManager();
 
-        CommandResult expectedCommandResult = new CommandResult(HistoryCommand.MESSAGE_ON_HISTORY_SUCCESS
+        CommandResult expectedCommandResult = new CommandResult(PreviousCommand.MESSAGE_ON_HISTORY_SUCCESS
                 + "find n/ John4\nfind n/ John3\nfind n/ John2", CommandRemark.HISTORY);
-        assertCommandSuccess(new HistoryCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new PreviousCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_historyForOneCommands_success() {
-        CommandList.clearAllCommand();
-        CommandList.record("find n/ John1");
+        CommandList.getList().clearAllCommand();
+        CommandList.getList().record("find n/ John1");
 
         Model expectedModel = new ModelManager();
 
         CommandResult expectedCommandResult =
-                new CommandResult(HistoryCommand.MESSAGE_ON_HISTORY_SUCCESS
+                new CommandResult(PreviousCommand.MESSAGE_ON_HISTORY_SUCCESS
                 + "find n/ John1", CommandRemark.HISTORY);
-        assertCommandSuccess(new HistoryCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new PreviousCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_historyForNoCommands_fail() {
-        CommandList.clearAllCommand();
-        assertThrows(CommandException.class, HistoryCommand.MESSAGE_ON_EMPTY_HISTORY, () ->
-                new HistoryCommand().execute(model));
+        CommandList.getList().clearAllCommand();
+        assertThrows(CommandException.class, PreviousCommand.MESSAGE_ON_NO_PREVIOUS, () ->
+                new PreviousCommand().execute(model));
     }
 
 }
