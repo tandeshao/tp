@@ -25,7 +25,7 @@ public class ScrubCommand extends Command {
 
     public static final String MESSAGE_SCRUB_SUCCESS = "Successfully scrubbed %s person";
     public static final String MESSAGE_WRONG_DOMAIN_FORMAT = "Email scrubbing allows only domain name as a parameter."
-            + "\nFor example: @domainName";
+            + "\nFor example: @domain or @domain.com";
     private final PersonDescriptor descriptor;
 
     public ScrubCommand(PersonDescriptor descriptor) {

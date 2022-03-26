@@ -206,6 +206,11 @@ public class AddCommandTest {
         public void saveAddressBookState() {
             throw new AssertionError("This method should not be called.");
         };
+
+        @Override
+        public void deleteAllPerson(ObservableList<Person> list) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

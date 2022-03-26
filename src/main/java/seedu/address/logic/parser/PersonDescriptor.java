@@ -35,6 +35,15 @@ public class PersonDescriptor {
     }
 
     /**
+     * Checks if there is a description for the specified prefix.
+     * @param prefix Prefix to be checked against.
+     * @return True if there is a description for that prefix, false otherwise.
+     */
+    public boolean contains(Prefix prefix) {
+        return descriptor.containsKey(prefix);
+    }
+
+    /**
      * Finds out if the descriptor is empty. Only way for descriptor to be empty
      * is when there are no valid prefix in the user input.
      * @return true if descriptor is empty, false otherwise.

@@ -34,6 +34,9 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
         LOGGER.log(Level.INFO, "Parsing user input");
         String modifiedArguments = processArguments(args);
         PersonDescriptor descriptor = new PersonDescriptor(modifiedArguments);
+        if (descriptor.contains(PREFIX_EMAIL)) {
+            checkCorrectEmailFormat(descriptor);
+        }
         return new ScrubCommand(descriptor);
     }
 
@@ -57,7 +60,6 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
             LOGGER.log(Level.INFO, "Input is invalid");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScrubCommand.MESSAGE_USAGE));
         }
-        checkCorrectEmailFormat(processedArgs);
         return processedArgs;
     }
 
@@ -84,62 +86,16 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
     }
 
     /**
-     * Checks if the email argument is in a valid format. Email argument in the scrub command has to only contain the
-     * domain name and it has to start with "@".
-     * @param args Email argument that is tested.
-     * @throws ParseException Thrown when the email argument is not in a valid format.
+     * Checks if the email description provided by the user is in a correct format. Email argument in the scrub command
+     * has to only contain the domain name, and it has to start with "@". Note that there can be multiple emails in a
+     * single scrub query. E.g. "scrub e/ @mail.com @gmail.com".
+     * @param descriptor Email description to be checked.
+     * @throws ParseException Thrown when the email description is not in a valid format.
      */
-    private void checkCorrectEmailFormat(String args) throws ParseException {
-        String emailPrefix = PREFIX_EMAIL.toString();
-        if (args.contains(emailPrefix)) {
-            parseDomain(retrieveEmailArg(args, args.indexOf(emailPrefix)));
+    private void checkCorrectEmailFormat(PersonDescriptor descriptor) throws ParseException {
+        String[] emailArgs = descriptor.getDescription(PREFIX_EMAIL).split(" ");
+        for (String emailArg : emailArgs) {
+            parseDomain(emailArg);
         }
-    }
-
-    /**
-     * Helper method for {@link #checkCorrectEmailFormat(String)} that retrieves the email argument from a given user
-     * argument during the invocation of the ScrubCommand on the Ui.
-     * @param arg User argument that is supplied into the parser.
-     * @param prefixIndex Index position of the email prefix in the user argument.
-     * @return The email argument that is within the user supplied argument.
-     */
-    private String retrieveEmailArg(String arg, int prefixIndex) {
-        int startIndex = findStartIndex(arg, prefixIndex);
-        int endIndex = findEndIndex(arg, startIndex);
-        return arg.substring(startIndex, endIndex);
-    }
-
-    /**
-     * Finds the starting index of the email argument.
-     * @param arg  User argument during the invocation of the ScrubCommand in Ui.
-     * @param prefixIndex Index position of the email prefix in the user argument.
-     * @return 0-based starting index of the email argument.
-     */
-    private int findStartIndex(String arg, int prefixIndex) {
-        // + 2 to offset email prefix.
-        int startIndex = prefixIndex + 2;
-        while (arg.charAt(startIndex) == ' ') {
-            startIndex++;
-        }
-        return startIndex;
-    }
-
-    /**
-     * Returns the ending index of the email argument.
-     * @param arg User argument during the invocation of the ScrubCommand in Ui.
-     * @param startIndex Starting index of the email argument.
-     * @return 0-based ending index of the email argument.
-     */
-    private int findEndIndex(String arg, int startIndex) {
-        int endIndex = startIndex;
-        int arraySize = arg.length();
-        while (endIndex < arraySize) {
-            if (arg.charAt(endIndex) == ' ' || endIndex == arraySize - 1) {
-                break;
-            } else {
-                endIndex++;
-            }
-        }
-        return endIndex;
     }
 }

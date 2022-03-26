@@ -49,12 +49,12 @@ public class ScrubPersonPredicate implements Predicate<Person> {
      * {@link #test(Person)} for more information).
      */
     private Predicate<Person> createPredicate(Prefix prefix) {
-        Predicate<Person> predicateToTestPerson;
+        Predicate<Person> predicateToTestPersonAgainst;
         if (prefix.equals(PREFIX_EMAIL)) {
-            predicateToTestPerson = new DomainMatchPredicate(descriptor.getDescription(prefix));
+            predicateToTestPersonAgainst = new DomainMatchPredicate(descriptor.getDescription(prefix));
         } else {
-             predicateToTestPerson = new ExactWordMatchPredicate(prefix, descriptor.getDescription(prefix));
+            predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, descriptor.getDescription(prefix));
         }
-        return predicateToTestPerson;
+        return predicateToTestPersonAgainst;
     }
 }

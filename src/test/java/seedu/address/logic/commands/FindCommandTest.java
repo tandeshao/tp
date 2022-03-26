@@ -45,7 +45,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        String emptyInput = "n/ ";
+        String emptyInput = "n/tester";
         PersonDescriptor emptyDescriptor = new PersonDescriptor(emptyInput);
         FindCommand command = new FindCommand(new FindPersonPredicate(emptyDescriptor));
         expectedModel.updateFilteredPersonList(new FindPersonPredicate(emptyDescriptor));
