@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.HistoryException;
  */
 public class CommandList {
     private static CommandList theList = null;
-    private static final int MAX_RECORD_NUMBER = 10;
+    private static final int MAX_RECORD_NUMBER = 20;
     private int pointer = -1;
     private final ArrayList<String> inputHistory = new ArrayList<>();
 
@@ -23,15 +23,13 @@ public class CommandList {
      * @param lastCommand the last user input.
      */
     public void record(String lastCommand) {
-        if (lastCommand.equalsIgnoreCase(PreviousCommand.COMMAND_WORD)) {
-            return;
-        }
-        if (lastCommand.equalsIgnoreCase(NextCommand.COMMAND_WORD)) {
+        if (lastCommand.equalsIgnoreCase(PreviousCommand.COMMAND_WORD)
+                || lastCommand.equalsIgnoreCase(NextCommand.COMMAND_WORD)) {
             return;
         }
         inputHistory.add(lastCommand);
         if (inputHistory.size() > MAX_RECORD_NUMBER) {
-            clearOldCommand();
+            clearOldCommands();
             return;
         }
         pointer++;
@@ -47,7 +45,7 @@ public class CommandList {
         return inputHistory.size() == 0;
     }
 
-    private void clearOldCommand() {
+    private void clearOldCommands() {
         inputHistory.remove(0);
     }
 

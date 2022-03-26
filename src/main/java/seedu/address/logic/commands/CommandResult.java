@@ -50,14 +50,14 @@ public class CommandResult {
         return commandRemark == CommandRemark.EXIT;
     }
 
-    public boolean isHisotry() {
+    public boolean isHistory() {
         return commandRemark == CommandRemark.HISTORY;
     }
 
 
     public String getNewCommandTextField() {
         String text = "";
-        if (isHisotry()) {
+        if (isHistory()) {
             text = CommandList.getList().getLastCommand();
         }
         return text;
