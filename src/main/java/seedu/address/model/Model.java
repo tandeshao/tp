@@ -125,6 +125,7 @@ public interface Model {
 
     /**
      * Deletes the list of person from model.
+     *
      * @param persons List of person to delete.
      */
     void deleteAllPerson(ObservableList<Person> persons);

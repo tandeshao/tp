@@ -106,6 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes all person from the {@code AddressBook}.
+     *
      * @param personsToRemove List of person to remove from the {@code AddressBook}
      */
     public void removePersons(Person... personsToRemove) {

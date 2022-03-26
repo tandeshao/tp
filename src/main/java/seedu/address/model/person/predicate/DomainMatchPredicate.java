@@ -15,7 +15,8 @@ public class DomainMatchPredicate implements Predicate<Person> {
     private final String emailArg;
 
     /**
-     * Constructor for DomainMatchPredicate
+     * Constructor for DomainMatchPredicate.
+     *
      * @param emailArg Email argument obtained from the user.
      */
     public DomainMatchPredicate(String emailArg) {
@@ -25,6 +26,7 @@ public class DomainMatchPredicate implements Predicate<Person> {
     /**
      * Tests if a person's email domain is identical to the domain (e.g. @gmail) or the entire domain name (e.g. @gmail
      * .com) of the user argument.
+     *
      * @param person Person to be checked against.
      * @return true if domain name is identical to the email argument, false otherwise.
      */
@@ -37,7 +39,8 @@ public class DomainMatchPredicate implements Predicate<Person> {
     }
 
     /**
-     * Retrieves the domain of the person. E.g. "@gmail"
+     * Retrieves the domain of the person. E.g. "@gmail".
+     *
      * @param email Email to retrieve the domain from.
      * @return String representation of the domain.
      */
@@ -50,6 +53,7 @@ public class DomainMatchPredicate implements Predicate<Person> {
 
     /**
      * Retrieves the entire domain name of the person including the domain name after ".". For e.g. "@gmail.com".
+     *
      * @param email Email to retrieve the entire domain name from.
      * @return String representation of the entire domain name.
      */
@@ -61,6 +65,7 @@ public class DomainMatchPredicate implements Predicate<Person> {
 
     /**
      * Gets the ending index of the entire domain name.
+     *
      * @param emailString String to retrieve the ending index from.
      * @param startIndex Starting index of the domain name.
      * @return Ending index of the entire domain name.
@@ -75,6 +80,7 @@ public class DomainMatchPredicate implements Predicate<Person> {
 
     /**
      * Gets the starting index of the domain name. This index is the index at which the '@' character is found.
+     *
      * @param emailString String to retrieve the starting index from.
      * @return Starting index of the domain name.
      */

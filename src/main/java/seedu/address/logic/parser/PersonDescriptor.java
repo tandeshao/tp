@@ -18,6 +18,7 @@ public class PersonDescriptor {
 
     /**
      * Constructor for PersonDescriptor.
+     *
      * @param input user supplied argument that contains both the prefix and their corresponding description.
      */
     public PersonDescriptor(String input) {
@@ -28,6 +29,7 @@ public class PersonDescriptor {
 
     /**
      * Returns the list of prefixes in the descriptor.
+     *
      * @return prefixes that are in the user input.
      */
     public List<Prefix> getAllAvailablePrefix() {
@@ -36,6 +38,7 @@ public class PersonDescriptor {
 
     /**
      * Checks if there is a description for the specified prefix.
+     *
      * @param prefix Prefix to be checked against.
      * @return True if there is a description for that prefix, false otherwise.
      */
@@ -54,6 +57,7 @@ public class PersonDescriptor {
 
     /**
      * Gets the corresponding description based on the prefix.
+     *
      * @param p prefix to matched with.
      * @return description of the prefix.
      */
@@ -75,6 +79,7 @@ public class PersonDescriptor {
 
     /**
      * Adds the prefix and its corresponding description into the descriptor.
+     *
      * @param prefixPositions list of prefix position(s) in the user input.
      * @param listIndex indicates which prefix position is looked at in this current iteration.
      */
@@ -97,6 +102,7 @@ public class PersonDescriptor {
     /**
      * Looks at the user supplied input and finds the index
      * of the possible prefixes that may be in the input string.
+     *
      * @return list of sorted prefix positions in ascending order.
      */
     private List<Pair<Prefix, Integer>> getPrefixPositions() {
@@ -117,6 +123,7 @@ public class PersonDescriptor {
     /**
      * Extractor that returns the user specified argument
      * based off the position of two prefixes.
+     *
      * @return argument of the prefix in the user input.
      */
     private String extractDescription(int prefixPos, int endIndex) {

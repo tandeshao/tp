@@ -44,6 +44,7 @@ public class ScrubPersonPredicate implements Predicate<Person> {
     /**
      * Creates predicate that allows partial matching for email attributes and exact matching for phone and tag
      * attributes.
+     *
      * @param prefix Prefix representing the attribute that is target for testing.
      * @return Appropriate predicate that meets the matching requirement of different attributes (see
      * {@link #test(Person)} for more information).

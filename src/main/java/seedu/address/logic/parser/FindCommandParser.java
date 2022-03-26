@@ -33,6 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Cleans up user input and make it appropriate to be parsed into a descriptor class.
+     *
      * @param args unmodified user input.
      * @return valid input that can be used for the PersonDescriptor class.
      * @throws ParseException thrown when the user argument is empty.

@@ -113,6 +113,7 @@ public class ModelManager implements Model {
 
     /**
      * Deletes all the persons from the model.
+     *
      * @param persons List of person to delete.
      */
     @Override

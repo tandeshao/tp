@@ -18,10 +18,11 @@ import seedu.address.model.person.predicate.ScrubPersonPredicate;
 public class ScrubCommand extends Command {
     public static final String COMMAND_WORD = "scrub";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person if that person contains the phone number specified by the user.\n"
+            + ": Deletes the person if that person contains the phone number/tag/email(domain) specified by the "
+            + "user.\n"
             + "Multiple phone numbers are separated by a whitespace. \n"
-            + "Parameters: Phone Number\n"
-            + "Example: " + COMMAND_WORD + " 90400201 90400202 90400203";
+            + "Parameters: [p/Phone Numbers] [t/tags] [e/Email domain]\n"
+            + "Examples: " + COMMAND_WORD + " p/90400201 90400202 90400203";
 
     public static final String MESSAGE_SCRUB_SUCCESS = "Successfully scrubbed %s person";
     public static final String MESSAGE_WRONG_DOMAIN_FORMAT = "Email scrubbing allows only domain name as a parameter."
@@ -33,6 +34,7 @@ public class ScrubCommand extends Command {
     }
 
     /**
+     * Executes the ScrubCommand and returns the result message.
      *
      * @param model {@code Model} which the command should operate on.
      * @return Result of the execution.
@@ -49,6 +51,7 @@ public class ScrubCommand extends Command {
 
     /**
      * Removes any person from the address book that matches the description described by the {@link #descriptor}.
+     *
      * @param model {@code Model} which the deletion should happen in.
      * @return Number of person that has been deleted from the address book.
      */
@@ -63,6 +66,7 @@ public class ScrubCommand extends Command {
 
     /**
      * Checks if two ScrubCommand are the same.
+     *
      * @param other ScrubCommand to be checked against.
      * @return True if both are the same ScrubCommand, false otherwise.
      */

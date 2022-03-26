@@ -129,8 +129,10 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
 * For both search criteria, order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * For both search criteria, as long as there is a word match (partial/exact), the contact would be in the filtered list. 
 
-**Note: A word is defined as consecutive characters that is bounded by whitespaces.**
-e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".
+<div markdown="block" class="alert alert-info">
+
+**:information_source: A word is defined as consecutive characters that is bounded by whitespaces.
+e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".** <br>
 
 Examples:
 * `find n/ John` returns john and John Doe

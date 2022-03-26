@@ -46,6 +46,7 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * and invalid prefix (address, memo, name) are not present in the argument. Email processing
      * is also done here where the email argument is checked if it follows the correct format (only domain name
      * allowed as argument).
+     *
      * @param args User input that is processed.
      * @return Processed string that is ready to be parsed into ScrubCommand.
      * @throws ParseException Thrown when the string does not follow a valid format.
@@ -66,6 +67,7 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
     /**
      * Helper method for {@link #processArguments(String)} to check if the given string argument contains any of the
      * prefixes.
+     *
      * @param args String argument to be checked.
      * @param prefixes Array of prefixes that are checked against.
      * @return true if any prefix in prefixes is within the args, false otherwise.
@@ -89,6 +91,7 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * Checks if the email description provided by the user is in a correct format. Email argument in the scrub command
      * has to only contain the domain name, and it has to start with "@". Note that there can be multiple emails in a
      * single scrub query. E.g. "scrub e/ @mail.com @gmail.com".
+     *
      * @param descriptor Email description to be checked.
      * @throws ParseException Thrown when the email description is not in a valid format.
      */
