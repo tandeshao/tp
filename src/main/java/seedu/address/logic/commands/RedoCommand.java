@@ -23,7 +23,7 @@ public class RedoCommand extends Command {
 
     public static final String MESSAGE_REDO_SUCCESS = "Redo success";
     public static final String MESSAGE_REDO_EMPTY = "There is nothing to redo (Max "
-            + StateAddressBook.UNDO_REDO_CAPACITY + " redoable actions)";;
+            + StateAddressBook.UNDO_REDO_CAPACITY + " redoable actions)";
 
     private static final Logger LOGGER = Logger.getLogger(RedoCommand.class.getName());
 
