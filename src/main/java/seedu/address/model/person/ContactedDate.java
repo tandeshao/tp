@@ -32,7 +32,7 @@ public class ContactedDate {
 
     /** String message that represents message constraints. */
     public static final String MESSAGE_CONSTRAINTS = "ContactedDate can be empty or "
-            + "a date following the dd-mm-yyyy format that is not in the future.";
+            + "a valid date following the dd-mm-yyyy format that is not in the future.";
 
     /** A static {@code contactedDate} object that represents an empty contacted date. */
     public static final ContactedDate EMPTY_CONTACTED_DATE = new ContactedDate("");
@@ -100,7 +100,7 @@ public class ContactedDate {
     /**
      * Returns string representation of {@code ContactedDate}.
      *
-     * @return string representation of {@code ContactedDate}.
+     * @return String representation of {@code ContactedDate}.
      */
     @Override
     public String toString() {
@@ -110,7 +110,7 @@ public class ContactedDate {
     /**
      * Prepares string representation of {@code ContactedDate}.
      *
-     * @return string representation of {@code ContactedDate}.
+     * @return String representation of {@code ContactedDate}.
      */
     private String prepareToString() {
         if (isEmpty()) {
@@ -123,7 +123,7 @@ public class ContactedDate {
     /**
      * Checks if two {@code ContactedDate} object is equal.
      *
-     * @param other the other {@code ContactedDate} object.
+     * @param other The other {@code ContactedDate} object.
      * @return If equal true; otherwise false.
      */
     @Override
@@ -136,7 +136,7 @@ public class ContactedDate {
     /**
      * Returns hashcode of {@code ContactedDate}.
      *
-     * @return hashcode of {@code ContactedDate}.
+     * @return Hashcode of {@code ContactedDate}.
      */
     @Override
     public int hashCode() {
