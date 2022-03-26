@@ -125,7 +125,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
 * Name, phone number, email, address, memo and tags are eligible parameters.
 * Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute.
 * Name, phone number and email follows a partial word match criteria where "Han" will match with "Hans" and "904" would match with "90400203".
-* Tag, address and email follows an exact word match criteria where "Hans" will match with "Hans" or "hans".
+* Tag, address and memo follows an exact word match criteria where "Hans" will match with "Hans" or "hans".
 * For both search criteria, order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * For both search criteria, as long as there is a word match (partial/exact), the contact would be in the filtered list. 
 
@@ -136,10 +136,11 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".*
 
 Examples:
 * `find n/ John` returns john and John Doe
-* `find n/alex david` returns Alex Yeoh and David Li and Alexa.
+* `find n/alex n/david` returns Alex Yeoh and David Li and Alexa.
 * If David Li has an email davidLi98@gmail.com, then `find e/gmail` would return David Li. 
 * If John has a phone number 90400202, then `find p/9040` would return John.
 * If John has a phone number 90400202, then `find p/202` would return John.
+* `find n/alex yeo` would only match with contacts that have "alex yeo" contained within their name. For example, "Alex Yeoh" would be a successful match.
 * If John has a tag family, then `find t/family` would return John.
 * If John has a tag family, then `find t/fam` would return no result.
 

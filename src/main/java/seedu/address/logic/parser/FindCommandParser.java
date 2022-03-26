@@ -26,8 +26,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
-        String modifiedString = modifyUserInput(args);
-        ArgumentMultimap findPersonDescriptor = createDescriptor(modifiedString);
+        String processedInput = processInput(args);
+        ArgumentMultimap findPersonDescriptor = createDescriptor(processedInput);
         FindPersonPredicate predicate = new FindPersonPredicate(findPersonDescriptor);
         return new FindCommand(predicate);
     }
@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return valid input that can be used for the PersonDescriptor class.
      * @throws ParseException thrown when the user argument is empty.
      */
-    private String modifyUserInput(String args) throws ParseException {
+    private String processInput(String args) throws ParseException {
         // Removes trailing whitespace from the user input
         String trimmedArgs = args.stripTrailing();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words

@@ -1,24 +1,23 @@
 @startuml
 !include style.puml
-mainframe sd get FindPersonPredicate
+mainframe sd get descriptor
 
 box Logic LOGIC_COLOR_T1
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant "descriptor:PersonDescriptor" as PersonDescriptor LOGIC_COLOR
+participant "descriptor:ArgumentMultimap" as ArgMultimap LOGIC_COLOR
 participant "predicate:FindPersonPredicate" as FindPersonPredicate LOGIC_COLOR
 end box
 
 
 activate FindCommandParser
-FindCommandParser -> FindCommandParser : getDescriptor("n/alice")
+FindCommandParser -> FindCommandParser : createDescriptor(" n/alice")
 activate FindCommandParser
+create ArgMultimap
+FindCommandParser -> ArgMultimap
+activate ArgMultimap
+ArgMultimap --> FindCommandParser : descriptor
+deactivate ArgMultimap
 
-create PersonDescriptor
-FindCommandParser -> PersonDescriptor : PersonDescriptor("n/alice")
-activate PersonDescriptor
-
-PersonDescriptor --> FindCommandParser : descriptor
-deactivate PersonDescriptor
 FindCommandParser --> FindCommandParser : descriptor
 deactivate FindCommandParser
 
