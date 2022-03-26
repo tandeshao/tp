@@ -8,6 +8,8 @@ import seedu.address.model.exceptions.InvalidUndoException;
 
 /**
  * Address book that contains the state history, inherits from {@code AddressBook}.
+ * Solution below adapted from
+ * https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature.
  */
 public class StateAddressBook extends AddressBook {
 

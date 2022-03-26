@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Person's contacted status in the address book.
@@ -20,14 +21,18 @@ public class ContactedDate {
     public static final String MESSAGE_NOT_CONTACTED = "Not contacted";
 
     /** String that represents the date format following the dd-mm-yyyy convention. */
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
+    public static final String DATE_FORMAT = "dd-MM-uuuu";
 
-    /** A DateTimeFormatter of {@code DATE_FORMAT}. */
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    /**
+     * A strict {@code DateTimeFormatter} of {@code DATE_FORMAT}, strict enforces and prevents invalid leap dates
+     * and invalid dates such as February 30.
+     */
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT)
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /** String message that represents message constraints. */
     public static final String MESSAGE_CONSTRAINTS = "ContactedDate can be empty or "
-            + "a date following the " + DATE_FORMAT.toLowerCase() + " format that is not in the future.";
+            + "a date following the dd-mm-yyyy format that is not in the future.";
 
     /** A static {@code contactedDate} object that represents an empty contacted date. */
     public static final ContactedDate EMPTY_CONTACTED_DATE = new ContactedDate("");
