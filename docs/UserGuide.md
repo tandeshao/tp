@@ -143,6 +143,25 @@ Examples:
 * If John has a tag family, then `find t/family` would return John.
 * If John has a tag family, then `find t/fam` would return no result.
 
+### Undoing commands :
+
+Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear`.
+
+Format: `undo`
+
+Examples:
+* `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
+* `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
+
+### Redoing commands :
+
+Redo previous undid states.
+
+Format: `redo`
+
+Examples:
+* `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
+
 ### Invoking recent command : `history`
 
 Invokes the most recent command being used.
@@ -204,27 +223,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### No duplicate entries (phone and email) :
 
 Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
-
-## Features coming in v1.3
-
-### Undoing commands :
-
-Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear`.
-
-Format: `undo`
-
-Examples:
-* `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
-* `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
-
-### Redoing commands :
-
-Redo previous undid states.
-
-Format: `redo`
-
-Examples:
-* `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
 
 --------------------------------------------------------------------------------------------------------------------
 

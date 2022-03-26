@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -51,24 +54,36 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePhone_throwsCommandException() {
+    public void execute_differentNameDuplicatePhone_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         // Duplicate phone number.
-        Person invalidPerson = new PersonBuilder().withName("Alice").withEmail("bob@gmail.com").build();
+        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
         AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_duplicateEmail_throwsCommandException() {
+    public void execute_differentNameDuplicateEmail_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         // Duplicate email.
-        Person invalidPerson = new PersonBuilder().withName("Alice").withPhone("98765432").build();
+        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentNameDuplicatePhoneAndEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Duplicate email.
+        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).build();
         AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));

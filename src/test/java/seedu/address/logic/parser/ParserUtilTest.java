@@ -15,22 +15,31 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactedDate;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Memo;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.MemoUtil;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_CONTACTED_DATE = "01/01/2022";
+    private static final String INVALID_MEMO = MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_CONTACTED_DATE = "01-01-2022";
+    private static final String VALID_EMPTY_CONTACTED_DATE = "";
+    private static final String VALID_MEMO = "Avid hiker";
+    private static final String VALID_EMPTY_MEMO = "";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +155,68 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseContactedDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseContactedDate((String) null));
+    }
+
+    @Test
+    public void parseContactedDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactedDate(INVALID_CONTACTED_DATE));
+    }
+
+    @Test
+    public void parseContactedDate_validValueWithoutWhitespace_returnsContactedDate() throws Exception {
+        ContactedDate expectedContactedDate = new ContactedDate(VALID_CONTACTED_DATE);
+        assertEquals(expectedContactedDate, ParserUtil.parseContactedDate(VALID_CONTACTED_DATE));
+    }
+
+    @Test
+    public void parseContactedDate_validValueWithWhitespace_returnsTrimmedContactedDate() throws Exception {
+        String contactedDateWithWhitespace = WHITESPACE + VALID_CONTACTED_DATE + WHITESPACE;
+        ContactedDate expectedContactedDate = new ContactedDate(VALID_CONTACTED_DATE);
+        assertEquals(expectedContactedDate, ParserUtil.parseContactedDate(contactedDateWithWhitespace));
+    }
+
+    @Test
+    public void parseContactedDate_validEmptyString_returnsEmptyContactedDate() throws Exception {
+        ContactedDate expectedEmptyContactedDate = new ContactedDate(VALID_EMPTY_CONTACTED_DATE);
+        ContactedDate parsedContactedDate = ParserUtil.parseContactedDate(VALID_EMPTY_CONTACTED_DATE);
+        assertEquals(parsedContactedDate, expectedEmptyContactedDate);
+        assertEquals(parsedContactedDate, ContactedDate.EMPTY_CONTACTED_DATE);
+    }
+
+    @Test
+    public void parseMemo_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMemo((String) null));
+    }
+
+    @Test
+    public void parseMemo_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMemo(INVALID_MEMO));
+    }
+
+    @Test
+    public void parseMemo_validValueWithoutWhitespace_returnsMemo() throws Exception {
+        Memo expectedMemo = new Memo(VALID_MEMO);
+        assertEquals(expectedMemo, ParserUtil.parseMemo(VALID_MEMO));
+    }
+
+    @Test
+    public void parseMemo_validValueWithWhitespace_returnsTrimmedMemo() throws Exception {
+        String memoWithWhitespace = WHITESPACE + VALID_MEMO + WHITESPACE;
+        Memo expectedMemo = new Memo(VALID_MEMO);
+        assertEquals(expectedMemo, ParserUtil.parseMemo(memoWithWhitespace));
+    }
+
+    @Test
+    public void parseMemo_validEmptyString_returnsEmptyMemo() throws Exception {
+        Memo expectedEmptyMemo = new Memo(VALID_EMPTY_MEMO);
+        Memo parsedMemo = ParserUtil.parseMemo(VALID_EMPTY_MEMO);
+        assertEquals(parsedMemo, expectedEmptyMemo);
+        assertEquals(parsedMemo, Memo.EMPTY_MEMO);
     }
 
     @Test
