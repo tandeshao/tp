@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.CommandList;
 import seedu.address.logic.CommandRemark;
-import seedu.address.logic.commands.exceptions.HistoryException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
@@ -35,7 +34,7 @@ public class PreviousCommandTest {
     @Test
     public void execute_historyForNoCommands_fail() {
         CommandList.getList().clearAllCommand();
-        assertThrows(HistoryException.class, PreviousCommand.MESSAGE_ON_NO_PREVIOUS, () ->
+        assertThrows(CommandException.class, PreviousCommand.MESSAGE_ON_NO_PREVIOUS, () ->
                 new PreviousCommand().execute(model));
     }
 

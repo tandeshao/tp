@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.PreviousCommand;
-import seedu.address.logic.commands.exceptions.HistoryException;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 
 /**
@@ -12,7 +12,7 @@ import seedu.address.logic.commands.exceptions.HistoryException;
  * Only the latest MAX_RECORD_NUMBER inputs will be recorded.
  */
 public class CommandList {
-    private static CommandList theList = null;
+    private static CommandList commandList = null;
     private static final int MAX_RECORD_NUMBER = 20;
     private int pointer = -1;
     private final ArrayList<String> inputHistory = new ArrayList<>();
@@ -50,24 +50,24 @@ public class CommandList {
     }
 
     public static CommandList getList() {
-        if (theList == null) {
-            theList = new CommandList();
+        if (commandList == null) {
+            commandList = new CommandList();
         }
-        return theList;
+        return commandList;
     }
 
     /** Increase the pointer value by 1. */
-    public void increasePointer() throws HistoryException {
+    public void increasePointer() throws CommandException {
         if (pointer >= inputHistory.size() - 1) {
-            throw new HistoryException(NextCommand.MESSAGE_ON_NO_NEXT);
+            throw new CommandException(NextCommand.MESSAGE_ON_NO_NEXT);
         }
         pointer++;
     }
 
     /** Decreases the pointer value by 1. */
-    public void decreasePointer() throws HistoryException {
+    public void decreasePointer() throws CommandException {
         if (pointer <= 0) {
-            throw new HistoryException(PreviousCommand.MESSAGE_ON_NO_PREVIOUS);
+            throw new CommandException(PreviousCommand.MESSAGE_ON_NO_PREVIOUS);
         }
         pointer--;
     }

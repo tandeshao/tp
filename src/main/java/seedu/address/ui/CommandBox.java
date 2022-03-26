@@ -5,12 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import seedu.address.logic.CommandList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.exceptions.HistoryException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -36,12 +34,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                handleHistory(PreviousCommand.COMMAND_WORD);
+                handleXingChen(PreviousCommand.COMMAND_WORD);
             }
         });
         commandTextField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DOWN) {
-                handleHistory(NextCommand.COMMAND_WORD);
+                handleXingChen(NextCommand.COMMAND_WORD);
             }
         });
     }
@@ -63,12 +61,10 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    private void handleHistory(String commandText) {
+    private void handleXingChen(String commandText) {
         try {
             CommandResult commandResult = commandExecutor.execute(commandText);
             commandTextField.setText(commandResult.getNewCommandTextField());
-        } catch (HistoryException e) {
-            CommandList.getList().getLastCommand();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

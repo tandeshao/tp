@@ -35,7 +35,6 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, CommandRemark.UI_IRRELEVANT);
-        CommandList.getList().resetPointer();
     }
 
     public String getFeedbackToUser() {
@@ -55,6 +54,10 @@ public class CommandResult {
     }
 
 
+    /**
+     * Gets what need to be filled in.
+     * @return text.
+     */
     public String getNewCommandTextField() {
         String text = "";
         if (isHistory()) {
