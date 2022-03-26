@@ -12,12 +12,15 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -134,4 +137,21 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs));
     }
+
+    private static class PredicateStub implements Predicate<Person> {
+        @Override
+        public boolean test(Person person) {
+            return true;
+        }
+    }
+
+    @Test
+    void deleteAllPerson_deleteAllPerson_returnZero() {
+        PredicateStub predicate = new PredicateStub();
+        modelManager.updateFilteredPersonList(predicate);
+        ObservableList<Person> personQueuedForDeletion = modelManager.getFilteredPersonList();
+        modelManager.deleteAllPerson(personQueuedForDeletion);
+        assertEquals(modelManager.getFilteredPersonList().size(), 0);
+    }
+
 }
