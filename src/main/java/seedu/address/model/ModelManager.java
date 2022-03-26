@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -109,6 +110,20 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         stateAddressBook.removePerson(target);
     }
+
+    /**
+     * Deletes all the persons from the model.
+     *
+     * @param persons List of person to delete.
+     */
+    @Override
+    public void deleteAllPerson(ObservableList<Person> persons) {
+        requireAllNonNull(persons);
+        Person[] personsToDelete = Arrays.stream(persons.toArray())
+                .map(o -> (Person) o).toArray(Person[]::new);
+        stateAddressBook.removePersons(personsToDelete);
+    }
+
 
     @Override
     public void addPerson(Person person) {
