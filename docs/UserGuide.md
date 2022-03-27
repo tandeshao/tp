@@ -10,31 +10,29 @@ AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing 
 <div style="page-break-after: always;"></div>
 
 ##Table of Content
-
 [1. Introduction](#1-introduction) <br/>
- [1.1. Conventions](#11-conventions)  
+&nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
 [2. Quick Start](#2-quick-start) <br/>
- [2.1. Installation](#21-installation) <br/>
- [2.2 System Requirements](#22-system-requirements) <br/>
+&nbsp;&nbsp;[2.1. Installation](#21-installation) <br/>
+&nbsp;&nbsp;[2.2 System Requirements](#22-system-requirements) <br/>
 [3. About](#3-about) <br/>
 [4. Features](#4-features) <br/>
- [4.1. Viewing help](#41-viewing-help--help) <br/> 
- [4.2. Listing all persons](#42-listing-all-persons--list) <br/>
- [4.3. Adding a person](#43-adding-a-person-add) <br/>
- [4.4. Editing a person](#44-editing-a-person--edit) <br/>
- [4.5. Find person by their attributes](#45-find-person-by-their-attributesfind) <br/>
- [4.6. Undoing commands](#46-undoing-commands-) <br/>
- [4.7. Redoing commands](#47-redoing-commands-) <br/>
- [4.8. Invoking recent command](#48-invoking-recent-command--history) <br/>
- [4.9. Copying Emails](#49-copying-emails--copyemails) <br/>
- [4.10. Deleting a person](#410-deleting-a-person--delete) <br/>
- [4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
- [4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
- [4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
-    [4.13.1. Saving the data](#4131-saving-the-data) <br/>
-    [4.13.2. Editing the data file](#4132-editing-the-data-file) <br/>
-    [4.13.3. No duplicate entries](#4133-no-duplicate-entries-phone-and-email-) <br/>
-
+&nbsp;&nbsp;[4.1. Viewing help](#41-viewing-help--help) <br/>
+&nbsp;&nbsp;[4.2. Listing all persons](#42-listing-all-persons--list) <br/>
+&nbsp;&nbsp;[4.3. Adding a person](#43-adding-a-person-add) <br/>
+&nbsp;&nbsp;[4.4. Editing a person](#44-editing-a-person--edit) <br/>
+&nbsp;&nbsp;[4.5. Find person by their attributes](#45-find-person-by-their-attributesfind) <br/>
+&nbsp;&nbsp;[4.6. Undoing commands](#46-undoing-commands-) <br/>
+&nbsp;&nbsp;[4.7. Redoing commands](#47-redoing-commands-) <br/>
+&nbsp;&nbsp;[4.8. Invoking recent command](#48-invoking-recent-command--history) <br/>
+&nbsp;&nbsp;[4.9. Copying Emails](#49-copying-emails--copyemails) <br/>
+&nbsp;&nbsp;[4.10. Deleting a person](#410-deleting-a-person--delete) <br/>
+&nbsp;&nbsp;[4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
+&nbsp;&nbsp;[4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
+&nbsp;&nbsp;[4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.13.1. Saving the data](#4131-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.13.2. Editing the data file](#4132-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.13.3. No duplicate entries](#4133-no-duplicate-entries-phone-and-email-) <br/>
 [5. FAQ](#faq) <br/>
 [6. Command Summary](#command-summary) <br/>
 
@@ -142,24 +140,24 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in upper case are the parameters to be supplied by the user.<br>
+  - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  - e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  - e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  - e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
   This is to protect from accidental invocations of the wrong command. <br>
-  e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
+  - e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
 
 </div>
 
