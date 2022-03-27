@@ -276,15 +276,14 @@ Examples:
 
 <br>
 
-### 4.8. Easy navigation among recent commands 
-#### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
-* navigate among the recent inputs and autofill it in the textbox.
+### 4.8. Retrieving recent commands:`UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+By press the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
 
 Examples:
-* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`
-* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
-* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob"
-* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
+* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
+* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
+* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
+* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
 
 <br>
 
@@ -333,7 +332,7 @@ Format: `exit`
 <br>
 
 ### 4.13. Extra information regarding the features
-#### Preventing duplicate entries (phone and email) :
+#### Preventing duplicate entries (phone and email) 
 Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
 
 #### Saving the data
