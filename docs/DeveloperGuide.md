@@ -152,7 +152,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
 
 ### Undo and redo feature
 
@@ -326,6 +325,17 @@ Step 6. After the filter has been updated, each person in the person list will b
 :information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
+
+###  easy navigation among recent commands
+
+Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs. 
+To implement this feature, a "Recorder" class is firstly needed to be added.
+Thus, a `CommandList` Class was created to record the recent commands. Either, 
+typing `history` or press the up arrow key will invoke `history command`. 
+It auto-fills the textbox with the last command being executed and shows the 
+most recent 3 commands in the message box.
+
+### \[Proposed\] Data archiving
 
 ### Memo and ContactedDate data fields
 

@@ -22,6 +22,10 @@ public class CopyEmailsCommand extends Command {
     public static final String MESSAGE_EMPTY_EMAIL_LIST = "There are no emails to copy!";
     public static final String MESSAGE_COPY_EMAILS_FAILURE = "Unable to copy to clipboard.";
     public static final String MESSAGE_COPY_EMAILS_SUCCESS = "Successfully copied \"%s\" to clipboard!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Copies a comma-separated list of all displayed emails to clipboard.\n"
+            + "Example: " + COMMAND_WORD;
+
     private static final Logger LOGGER = Logger.getLogger(CopyEmailsCommand.class.getName());
 
     @Override

@@ -157,8 +157,9 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
+  This is to protect from accidental invocations of the wrong command. <br>
+  e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
 
 </div>
 
@@ -266,15 +267,16 @@ Format: `redo`
 Examples:
 * `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
 
-### 4.8. Invoking recent command : `history`
+### 4.8. Easy navigation among recent commands: 
+#### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
 
-Invokes the most recent command being used.
-
-Format: `history`
-* Invokes the most recent command and autofill it in the textbox.
+* navigate among the recent inputs and autofill it in the textbox.
 
 Examples:
-* If the last command is `delete 1`, `invoke` autofills the textbox with `delete 1`.
+* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`
+* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
+* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob"
+* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
 
 ### 4.9. Copying Emails : `copyemails`
 
@@ -284,7 +286,7 @@ Format: `copyemails`
 
 Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
-* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com, betsycrowe@example.com")
+* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
 
 ### 4.10. Deleting a person : `delete`
 
@@ -316,11 +318,11 @@ Format: `exit`
 ### 4.13. Extra information regarding the features
 #### 4.13.1. Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### 4.13.2. Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
@@ -330,12 +332,25 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**How do I save in Abπ?**<br>
+There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
+
+**Where does Abπ store its data?**<br>
+Abπ data is stored in data folder located at Abπ's home directory, the data file name is `addressbook.json`. Specifically `[Abπ location]/data/addressbook.json`.
+
+**How do I transfer my data to another computer?**<br>
+Simply overwrite the `addressbook.json` data file with your previous `addressbook.json` data file.
+
+**What happens if I executed a command unintentionally?**<br>
+Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
+
+**Why is my data gone?**<br>
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing one.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -352,4 +367,5 @@ Action | Format, Examples
 **Redo** | `redo`
 **List** | `list`
 **Help** | `help`
-**History**| `history`
+**Previous**| Pressing `UP_ARROW_KEY`
+**Next**| Pressing `down_ARROW_KEY`

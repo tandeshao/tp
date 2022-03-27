@@ -1,20 +1,18 @@
-package seedu.address.logic;
+package seedu.address.logic.commands;
 
 import java.util.ArrayList;
 
-import seedu.address.logic.commands.NextCommand;
-import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 
 /**
- * Records the latest user inputs.
+ * Records the recent user inputs.
  * Only the latest MAX_RECORD_NUMBER inputs will be recorded.
  */
 public class CommandList {
     private static CommandList commandList = null;
     private static final int MAX_RECORD_NUMBER = 20;
-    private int pointer = -1;
+    private int pointer = 0;
     private final ArrayList<String> inputHistory = new ArrayList<>();
 
     private CommandList() {}
@@ -35,14 +33,9 @@ public class CommandList {
         pointer++;
     }
 
-    /** Gets the latest user input. */
+    /** Gets the history pointed by pointer. */
     public String getCurrentCommand() {
         return inputHistory.get(pointer);
-    }
-
-    /** Checks whether there is any command history or not. */
-    public boolean isEmpty() {
-        return inputHistory.size() == 0;
     }
 
     private void clearOldCommands() {
@@ -71,15 +64,17 @@ public class CommandList {
         }
         pointer--;
     }
-
+    /** Reset the pointer to point to the place for next command. */
     public void resetPointer() {
         pointer = inputHistory.size();
     }
-
-    /**
-     * Only used in test currently.
-     */
-    public void clearAllCommand() {
+    /** Clears all history in CommandList. Only used in test currently. */
+    public void clearAllCommands() {
+        pointer = 0;
         inputHistory.clear();
+    }
+    /** return the pointer value. This method is used only in test. */
+    public int getPointer() {
+        return pointer;
     }
 }
