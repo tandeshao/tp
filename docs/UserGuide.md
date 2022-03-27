@@ -170,15 +170,16 @@ Format: `redo`
 Examples:
 * `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
 
-### Invoking recent command : `history`
+### Easy navigation among recent commands: 
+#### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
 
-Invokes the most recent command being used.
-
-Format: `history`
-* Invokes the most recent command and autofill it in the textbox.
+* navigate among the recent inputs and autofill it in the textbox.
 
 Examples:
-* If the last command is `delete 1`, `invoke` autofills the textbox with `delete 1`.
+* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`
+* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
+* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob"
+* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
 
 ### Copying emails : `copyemails`
 
@@ -266,4 +267,5 @@ Action | Format, Examples
 **Redo** | `redo`
 **List** | `list`
 **Help** | `help`
-**History**| `history`
+**Previous**| Pressing `UP_ARROW_KEY`
+**Next**| Pressing `down_ARROW_KEY`
