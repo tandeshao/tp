@@ -2,40 +2,108 @@
 layout: page
 title: User Guide
 ---
-
+## Overview
 AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with modern features. Its key features include efficient filtering of contacts based on various attributes (name, email, tags, etc), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ got you covered. So what are you waiting for? Download and try out Abπ today!
 
-* Table of Contents
-{:toc}
-
 --------------------------------------------------------------------------------------------------------------------
+##Table of Content
+[1. Introduction] <br/> 
+ [1.1 Conventions] <br/> 
+[2. Quick Start](#quick-start) <br/>
+ [2.1 Installation] <br/>
+ [2.2 System Requirements] <br/>
+[3. About]
+[4. Features](#features) <br/>
+    [4.1.  
+    [4.2. 
 
-## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+[4. FAQ](#faq) <br/>
+[5. Command Summary](#command-summary) <br/>
 
-1. Download the latest `abpie.jar` from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
+----
+## 1. Introduction
+This document is the user guide for AddressBook Level 3.14 (Abπ), an all-rounded desktop app for managing contacts. It is primarily targeted towards fast-typers and individuals who prefer working on a Command-Line Interface (CLI). 
+
+*If you're unfamiliar with Command-Line Interfaces (CLIs), you can find out more about them [here](https://en.wikipedia.org/wiki/Command-line_interface)!*
+
+**Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
+
+
+ Word | What it means                                                                   |
+------|---------------------------------------------------------------------------------|
+Command box| Text box in the Abπ that allows user to type in texts.                          |
+Command| A sentence that causes Abπ to do something when typed into the command box.     |
+Command word | The first word of every command.                                                |
+Parameters | Information that is supplied by the user.                                       |
+Execute | The process by which Abπ reads the instructions written by user and acts on it. |
+
+
+### 1.1. Conventions
+When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
+
+Symbol | What it means |
+--------|-------------------|
+`add` | Words/sentences that have this format of display are commands that can be typed into the command box.
+*Italics* | Sentences that are in italics represent additional information.
+:exclamation: | Warning/cautionary statement that should be read. 
+:bulb: | Extra tip that may be useful to the reader.
+:information_source: | Important information to take note.          
+[here](") |Words that are in this format are clickable links that directs you to a certain webpage.
+
+------------
+## 2. Quick start
+### 2.1. Installation
+1. Ensure you have Java 11 or above installed in your Computer.
+
+2. Download the latest Abπ.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
+
+3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * `list`*: Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+   * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
+### 2.2. System Requirements
+Ideally, the machine you are running on should be able to run Java.
+_For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+
+Below is a list of system specifications that supports Abπ.
+###Windows
+* Windows 10 (8u51 and above)
+* Windows 8.x (Desktop)
+* Windows 7 SP1
+* Windows Vista SP2
+* Windows Server 2008 R2 SP1 (64-bit)
+* Windows Server 2012 and 2012 R2 (64-bit)
+* RAM: 128 MB
+* Disk space: 124 MB for JRE; 2 MB for Java Update
+* Processor: Minimum Pentium 2 266 MHz processor
+* Browsers: Internet Explorer 9 and above, Firefox
+<br/>
+### Mac OS X
+* Intel-based Mac running Mac OS X 10.8.3+, 10.9+
+* Administrator privileges for installation
+* 64-bit browser
+* A 64-bit browser (Safari, for example) is required to run Oracle Java on Mac.
+* Browsers: Firefox
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -97,7 +165,6 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
 ### Editing a person : `edit`
-
 Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
