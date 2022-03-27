@@ -36,7 +36,6 @@ public class CommandListTest {
         CommandList.getList().decreasePointer();
         assertEquals("find n/ John4", CommandList.getList().getCurrentCommand());
     }
-
     @Test
     public void getCurrentCommand_fail() throws CommandException {
         CommandList.getList().clearAllCommands();
@@ -47,5 +46,19 @@ public class CommandListTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
     }
-
+    @Test
+    public void getCurrentCommand_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
+    }
+    @Test
+    public void decreasePointer_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(CommandException.class, () -> CommandList.getList().decreasePointer());
+    }
+    @Test
+    public void increasePointer_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(CommandException.class, () -> CommandList.getList().increasePointer());
+    }
 }
