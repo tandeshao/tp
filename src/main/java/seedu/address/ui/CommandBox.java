@@ -34,12 +34,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                handleXingChen(PreviousCommand.COMMAND_WORD);
+                handleCommandHistory(PreviousCommand.COMMAND_WORD);
             }
         });
         commandTextField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DOWN) {
-                handleXingChen(NextCommand.COMMAND_WORD);
+                handleCommandHistory(NextCommand.COMMAND_WORD);
             }
         });
     }
@@ -61,7 +61,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    private void handleXingChen(String commandText) {
+    private void handleCommandHistory(String commandText) {
         try {
             CommandResult commandResult = commandExecutor.execute(commandText);
             commandTextField.setText(commandResult.getNewCommandTextField());
