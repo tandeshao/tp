@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,16 @@ public class CommandListTest {
         assertEquals(0, CommandList.getList().getPointer());
     }
     @Test
+    public void resetPointer_success() throws CommandException {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
+        CommandList.getList().resetPointer();
+        assertEquals(4, CommandList.getList().getPointer());
+    }
+    @Test
     public void getCurrentCommand_success() throws CommandException {
         CommandList.getList().clearAllCommands();
         CommandList.getList().record("find n/ John1");
@@ -24,6 +35,17 @@ public class CommandListTest {
         CommandList.getList().record("find n/ John4");
         CommandList.getList().decreasePointer();
         assertEquals("find n/ John4", CommandList.getList().getCurrentCommand());
+    }
+
+    @Test
+    public void getCurrentCommand_fail() throws CommandException {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
+
+        assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
     }
 
 }
