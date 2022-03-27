@@ -26,8 +26,8 @@ public class PreviousCommandTest {
 
         Model expectedModel = new ModelManager();
 
-        CommandResult expectedCommandResult = new CommandResult(PreviousCommand.MESSAGE_ON_HISTORY_SUCCESS
-                , CommandRemark.HISTORY);
+        CommandResult expectedCommandResult = new CommandResult(PreviousCommand.MESSAGE_ON_HISTORY_SUCCESS,
+                CommandRemark.HISTORY);
         assertCommandSuccess(new PreviousCommand(), model, expectedCommandResult, expectedModel);
     }
 
