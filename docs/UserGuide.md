@@ -83,7 +83,7 @@ Symbol | What it means |
 
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
@@ -102,10 +102,10 @@ Symbol | What it means |
 6. Refer to the [features](#4-features) below for details of each command.
 
 ### 2.2. System Requirements
-Ideally, the machine you are running on should be able to run Java.
-_For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
 
-Below is a list of system specifications that supports Abπ.
+For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+
 <br />
 ### Windows
 * Windows 10 (8u51 and above)
@@ -135,7 +135,7 @@ Below is a list of system specifications that supports Abπ.
 <div style="page-break-after: always;"></div>
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-
+![UiGuide](images/UiGuide.png)
 --- 
 
 <div style="page-break-after: always;"></div>
