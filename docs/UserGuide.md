@@ -104,9 +104,8 @@ Symbol | What it means |
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
 
-For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+_For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
 
-<br />
 ### Windows
 * Windows 10 (8u51 and above)
 * Windows 8.x (Desktop)
