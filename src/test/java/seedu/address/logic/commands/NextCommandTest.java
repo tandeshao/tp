@@ -11,12 +11,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 
-public class PreviousCommandTest {
+public class NextCommandTest {
 
     private final Model model = new ModelManager();
 
     @Test
-    public void execute_previousForFourCommands_success() {
+    public void execute_nextCommand_success() throws CommandException {
         CommandList.getList().clearAllCommands();
         CommandList.getList().resetPointer();
         CommandList.getList().record("find n/ John1");
@@ -26,6 +26,7 @@ public class PreviousCommandTest {
 
         Model expectedModel = new ModelManager();
 
+        CommandList.getList().decreasePointer();
         CommandResult expectedCommandResult = new CommandResult(PreviousCommand.MESSAGE_ON_HISTORY_SUCCESS,
                 CommandRemark.HISTORY);
         assertCommandSuccess(new PreviousCommand(), model, expectedCommandResult, expectedModel);
@@ -33,10 +34,11 @@ public class PreviousCommandTest {
 
 
     @Test
-    public void execute_noPreviousCommand_fail() {
+    public void execute_noNextCommand_fail() {
         CommandList.getList().clearAllCommands();
         CommandList.getList().resetPointer();
-        assertThrows(CommandException.class, PreviousCommand.MESSAGE_ON_NO_PREVIOUS, () ->
-                new PreviousCommand().execute(model));
+        assertThrows(CommandException.class, NextCommand.MESSAGE_ON_NO_NEXT, () ->
+                new NextCommand().execute(model));
     }
+
 }
