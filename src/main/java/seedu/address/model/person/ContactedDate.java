@@ -72,20 +72,19 @@ public class ContactedDate {
      * @return If valid {@code DATE_FORMAT} and not in the future, true; otherwise false.
      */
     private static boolean isValidDate(String contactedDate) {
+        LocalDate contactedDateFormatted;
+
         try {
-            LocalDate contactedDateFormatted = LocalDate.parse(contactedDate, DATE_FORMATTER);
-
-            LocalDate today = LocalDate.now();
-
-            // Checks if the given contactedDate is in the future.
-            if (contactedDateFormatted.compareTo(today) > 0) {
-                return false;
-            }
+            contactedDateFormatted = LocalDate.parse(contactedDate, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
             // Invalid date format.
             return false;
         }
-        return true;
+
+        LocalDate today = LocalDate.now();
+
+        // contactedDateFormatted will be instantiated in the try block
+        return contactedDateFormatted.compareTo(today) <= 0;
     }
 
     /**
@@ -104,15 +103,6 @@ public class ContactedDate {
      */
     @Override
     public String toString() {
-        return prepareToString();
-    }
-
-    /**
-     * Prepares string representation of {@code ContactedDate}.
-     *
-     * @return String representation of {@code ContactedDate}.
-     */
-    private String prepareToString() {
         if (isEmpty()) {
             return MESSAGE_NOT_CONTACTED;
         }

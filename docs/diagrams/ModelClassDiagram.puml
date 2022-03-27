@@ -21,6 +21,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class ContactedDate
 Class Memo
 Class Tag
 }
@@ -34,16 +35,18 @@ StateAddressBook .up.|> AddressBook
 ModelManager .up.|> Model
 Model .left.> ReadOnlyUserPrefs
 Model .right.> ReadOnlyAddressBook
-ModelManager -left-> "1" StateAddressBook
-ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" StateAddressBook
+ModelManager -left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-StateAddressBook *--> "1" UniquePersonList
+
+StateAddressBook *-right-> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
+Person *--> "1" ContactedDate
 Person *--> "1"Memo
 Person *--> "*" Tag
 
