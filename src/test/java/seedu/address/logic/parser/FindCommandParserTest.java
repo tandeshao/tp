@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.FindCommand.NO_PREFIX_MESSAGE;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -11,8 +12,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 
 public class FindCommandParserTest {
-
-    private static final String POPULATED_TEST_USER_INPUT_WITH_NAME = " n/Alex bob";
     private final FindCommandParser parser = new FindCommandParser();
 
     @Test
@@ -25,15 +24,55 @@ public class FindCommandParserTest {
 
         // Stand-alone command -> should result in pare failure
         assertParseFailure(parser, "find ", NO_PREFIX_MESSAGE);
+
+        // Special characters for ContactedDate -> should result in pare failure
+        assertParseFailure(parser, "find c/@", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+
+        // Negative integer values for ContactedDate -> should result in pare failure
+        assertParseFailure(parser, "find c/-1", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+
+        // Positive value above 2147483647 is invalid.
+        assertParseFailure(parser, "find c/2147483648", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        PersonDescriptor descriptor = new PersonDescriptor(POPULATED_TEST_USER_INPUT_WITH_NAME);
-        FindCommand expectedFindCommand = new FindCommand(new FindPersonPredicate(descriptor));
-        assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alex bob", prepareFindCommand(" n/Alex bob"));
+        assertParseSuccess(parser, " c/1", prepareFindCommand(" c/1"));
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/\n Alex \n \t bob \t", expectedFindCommand);
+        String argToBeTested = " n/ Alex bob";
+        assertParseSuccess(parser, " n/\n Alex \n \t bob \t", prepareFindCommand(argToBeTested));
+
+        // Max positive integer values -> parse successful.
+        String argWithMaxPositiveInteger = " c/2147483647";
+        assertParseSuccess(parser, argWithMaxPositiveInteger, prepareFindCommand(argWithMaxPositiveInteger));
+
+        // Blank argument -> parse successful.
+        String contactedDateArgWithNoArgument = " n/";
+        assertParseSuccess(parser, contactedDateArgWithNoArgument, prepareFindCommand(contactedDateArgWithNoArgument));
+
+        // Multiple blank argument -> parse successful.
+        String multipleBlankArg = "n/ e/ p/ a/ t/ m/ c/";
+        assertParseSuccess(parser, multipleBlankArg, prepareFindCommand(multipleBlankArg));
+
+        // Special characters in Find -> parse successful.
+        String specialCharactersArg = " n/! e/@ p/`";
+        assertParseSuccess(parser, specialCharactersArg, prepareFindCommand(specialCharactersArg));
+
+    }
+
+    /**
+     * Prepares the FindCommand for testing.
+     *
+     * @param userFindCommandArgs  User argument that is passed into the FindCommandParser.
+     * @return A valid FindCommand that is derived from the user argument.
+     */
+    private FindCommand prepareFindCommand(String userFindCommandArgs) {
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(userFindCommandArgs, ARRAY_OF_PREFIX);
+        FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
+        return new FindCommand(predicate);
     }
 }
+

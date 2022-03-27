@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -74,7 +75,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String args = " n/" + String.join(" ", keywords);
-        PersonDescriptor descriptor = new PersonDescriptor(args);
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(args, ARRAY_OF_PREFIX);
         String constructedArgs = FindCommand.COMMAND_WORD + " n/" + String.join(" ", keywords);
         FindCommand command = (FindCommand) parser.parseCommand(constructedArgs);
         assertEquals(new FindCommand(new FindPersonPredicate(descriptor)), command);

@@ -1,6 +1,6 @@
 package seedu.address.model.person.predicate;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.person.Email;
@@ -12,14 +12,14 @@ import seedu.address.model.person.Person;
  * user argument or if his entire domain name (e.g. @gmail.com) matches the user argument.
  */
 public class DomainMatchPredicate implements Predicate<Person> {
-    private final String emailArg;
+    private final List<String> emailArg;
 
     /**
      * Constructor for DomainMatchPredicate.
      *
      * @param emailArg Email argument obtained from the user.
      */
-    public DomainMatchPredicate(String emailArg) {
+    public DomainMatchPredicate(List<String> emailArg) {
         this.emailArg = emailArg;
     }
 
@@ -32,10 +32,9 @@ public class DomainMatchPredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        String[] domainNames = emailArg.split(" ");
         String domain = retrieveDomain(person.getEmail());
         String entireDomainName = retrieveEntireDomainName(person.getEmail());
-        return Arrays.stream(domainNames).anyMatch(email -> domain.equals(email) || entireDomainName.equals(email));
+        return emailArg.stream().anyMatch(email -> domain.equals(email) || entireDomainName.equals(email));
     }
 
     /**

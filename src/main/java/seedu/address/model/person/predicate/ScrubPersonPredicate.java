@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.logic.parser.PersonDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -15,14 +15,14 @@ import seedu.address.model.person.Person;
  * matches any of the description given for scrubbing.
  */
 public class ScrubPersonPredicate implements Predicate<Person> {
-    private final PersonDescriptor descriptor;
+    private final ArgumentMultimap descriptor;
 
     /**
      * Constructor for ScrubPersonPredicate.
      *
      * @param descriptor Description to scrub a person by.
      */
-    public ScrubPersonPredicate(PersonDescriptor descriptor) {
+    public ScrubPersonPredicate(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
     }
 
@@ -53,9 +53,9 @@ public class ScrubPersonPredicate implements Predicate<Person> {
     private Predicate<Person> createPredicate(Prefix prefix) {
         Predicate<Person> predicateToTestPersonAgainst;
         if (prefix.equals(PREFIX_EMAIL)) {
-            predicateToTestPersonAgainst = new DomainMatchPredicate(descriptor.getDescription(prefix));
+            predicateToTestPersonAgainst = new DomainMatchPredicate(descriptor.getAllValues(prefix));
         } else {
-            predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, descriptor.getDescription(prefix));
+            predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, descriptor.getAllValues(prefix));
         }
         return predicateToTestPersonAgainst;
     }

@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -14,8 +16,8 @@ class ExactWordMatchPredicateTest {
 
     @Test
     void test_exactMatchBetweenWords_returnsTrue() {
-        ExactWordMatchPredicate tagPredicate = new ExactWordMatchPredicate(PREFIX_TAG, "colleagues");
-        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, "hello");
+        ExactWordMatchPredicate tagPredicate = new ExactWordMatchPredicate(PREFIX_TAG, List.of("colleagues"));
+        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, List.of("hello"));
 
         // case-insensitive search -> returns true
         assertTrue(tagPredicate.test(new PersonBuilder().withTags("Colleagues").build()));
@@ -28,9 +30,10 @@ class ExactWordMatchPredicateTest {
 
     @Test
     void test_exactWordMatchBetweenTwoSentences_returnsTrue() {
-        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, "QueensTown street 10");
-        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, "hello my memo");
-
+        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, List.of("QueensTown",
+                "street", "10"));
+        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, List.of("hello", "my",
+                "memo"));
         // case-insensitive search -> returns true
         assertTrue(addressPredicate.test(new PersonBuilder().withAddress("Brisbane Street").build()));
         assertTrue(memoPredicate.test(new PersonBuilder().withMemo("Hello world").build()));
@@ -42,8 +45,9 @@ class ExactWordMatchPredicateTest {
 
     @Test
     void test_partialWordMatch_returnsFalse() {
-        ExactWordMatchPredicate tagPredicate = new ExactWordMatchPredicate(PREFIX_TAG, "fam");
-        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, "Covington LA");
+        ExactWordMatchPredicate tagPredicate = new ExactWordMatchPredicate(PREFIX_TAG, List.of("fam"));
+        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, List.of("Covington",
+                "LA"));
 
         // Partial word match -> returns false
         assertFalse(tagPredicate.test(new PersonBuilder().withTags("family").build()));
@@ -54,7 +58,8 @@ class ExactWordMatchPredicateTest {
 
     @Test
     void test_emptyWhiteSpaceAttribute_returnsFalse() {
-        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, "Some test value");
+        ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, List.of("Some", "test",
+                "value"));
         assertFalse(addressPredicate.test(new PersonBuilder().withAddress("address").build()));
     }
 }

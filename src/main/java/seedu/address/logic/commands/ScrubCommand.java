@@ -5,7 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.PersonDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.ScrubPersonPredicate;
@@ -27,9 +27,11 @@ public class ScrubCommand extends Command {
     public static final String MESSAGE_SCRUB_SUCCESS = "Successfully scrubbed %s person";
     public static final String MESSAGE_WRONG_DOMAIN_FORMAT = "Email scrubbing allows only domain name as a parameter."
             + "\nFor example: @domain or @domain.com";
-    private final PersonDescriptor descriptor;
+    public static final String NO_VALID_PREFIX = "At least 1 valid prefix must be provided!";
 
-    public ScrubCommand(PersonDescriptor descriptor) {
+    private final ArgumentMultimap descriptor;
+
+    public ScrubCommand(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
     }
 

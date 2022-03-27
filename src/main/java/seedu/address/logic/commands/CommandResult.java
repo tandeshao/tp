@@ -24,6 +24,9 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, CommandRemark commandRemark) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.commandRemark = commandRemark;
+        if (commandRemark != CommandRemark.HISTORY) {
+            CommandList.getList().resetPointer();
+        }
     }
 
     /**
@@ -50,8 +53,17 @@ public class CommandResult {
         return commandRemark == CommandRemark.HISTORY;
     }
 
+
+    /**
+     * Gets what need to be filled in.
+     * @return text.
+     */
     public String getNewCommandTextField() {
-        return isHistory() ? CommandList.getLastCommand() : "";
+        String text = "";
+        if (isHistory()) {
+            text = CommandList.getList().getCurrentCommand();
+        }
+        return text;
     }
 
     @Override

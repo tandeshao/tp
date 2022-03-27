@@ -31,7 +31,7 @@ deactivate FindCommandParser
 AddressBookParser -> FindCommandParser : parse(" n/alice")
 activate FindCommandParser
 
-ref over FindCommandParser : get FindPersonPredicate
+ref over FindCommandParser : get descriptor
 
 create FindCommand
 FindCommandParser -> FindCommand : FindCommand(predicate)

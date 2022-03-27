@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 
 /**
- * Finds and lists all persons in address book whose {@link seedu.address.model.person.PersonAttribute Attribute}
+ * Finds and lists all persons in address book whose attribute
  * contains any of the tokenized argument. Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {

@@ -17,8 +17,9 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextCommand;
+import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScrubCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -94,9 +95,13 @@ public class AddressBookParser {
             LOGGER.log(Level.INFO, "Parsed to CopyEmailsCommand");
             return new CopyEmailsCommand();
 
-        case HistoryCommand.COMMAND_WORD:
-            LOGGER.log(Level.INFO, "Parsed to HistoryCommand");
-            return new HistoryCommand();
+        case PreviousCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to PreviousCommand");
+            return new PreviousCommand();
+
+        case NextCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to NextCommand");
+            return new NextCommand();
 
         case UndoCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to UndoCommand");
