@@ -122,12 +122,8 @@ Finds persons whose names contain any of the given keywords.
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​`
 * The search is case-insensitive. E.g. hans will match Hans
 * At least 1 parameter must be present.
-<<<<<<< HEAD
-* More than 2 whitespace between words are treated as 1 whitespace. So "Alex_ _ _Yeoh" would be treated as "Alex_Yeoh" where "_" represents a single whitespace. 
-* Name, phone number, email, address, memo and tags are eligible parameters.
-=======
+* More than 2 whitespace between words are treated as 1 whitespace. So "Alex_ _ _Yeoh" would be treated as "Alex_Yeoh" where "_" represents a single whitespace.
 * Name, phone number, email, address, memo, tags and contacted status are eligible parameters.
->>>>>>> master
 * Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute.
 * Name, phone number and email follows a partial word match criteria where "Han" will match with "Hans" and "904" would match with "90400203".
 * For contacted status, the matching depends on the "days" argument given by the user and suppose the number of days specified is n, the find method searches for contacts that were contacted at least n day days ago. 
