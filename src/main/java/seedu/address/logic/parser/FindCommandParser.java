@@ -16,7 +16,8 @@ import seedu.address.model.person.predicate.FindPersonPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    public static final String MESSAGE_INCORRECT_FORMAT = "Only positive integer argument is allowed.";
+    public static final String MESSAGE_INCORRECT_FORMAT = "Only non-negative integer argument is allowed "
+            + "for ContactedDate. (Non-negative value is within the range of 0 to 2147483647)";
     private static final Logger LOGGER = Logger.getLogger(FindCommandParser.class.getName());
 
     /**
@@ -74,8 +75,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Checks if a valid ContactedDate argument is given for the FindCommand. Only positive integer values are
-     * allowed as argument.
+     * Checks if a valid ContactedDate argument is given for the FindCommand. Only non-negative integer values are
+     * allowed as argument.Non-negative value is within the range of 0 to 2147483647.
      *
      * @param descriptor Stores description to search a person by.
      * @throws ParseException Thrown when an invalid ContactedDate argument is received by the FindCommandParser.
