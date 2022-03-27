@@ -1,5 +1,6 @@
 package seedu.address.model.person.predicate;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -61,15 +62,17 @@ public class FindPersonPredicate implements Predicate<Person> {
      * @return true if the person's attribute passes the test, false otherwise.
      */
     private boolean testPersonAttribute(Person person, Prefix attribute) {
-        if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
-            PartialWordMatchPredicate predicate = new PartialWordMatchPredicate(attribute,
+        Predicate<Person> predicateToTestAgainst;
+        if (attribute.equals(PREFIX_CONTACTED_DATE)) {
+            predicateToTestAgainst = new ContactedDateMatchPredicate(descriptor);
+        } else if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
+            predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
-            return predicate.test(person);
         } else {
-            ExactWordMatchPredicate predicate = new ExactWordMatchPredicate(attribute,
+            predicateToTestAgainst = new ExactWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
-            return predicate.test(person);
         }
+        return predicateToTestAgainst.test(person);
     }
 
     /**
