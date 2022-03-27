@@ -1,10 +1,14 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -42,6 +46,28 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the list of prefixes in the {@link #argMultimap}.
+     *
+     * @return Prefixes that are in the user input.
+     */
+    public List<Prefix> getAllAvailablePrefix() {
+        Set<Prefix> setOfKeys = argMultimap.keySet();
+        setOfKeys.remove(new Prefix("")); //removes preamble
+        return new ArrayList<>(setOfKeys);
+    }
+
+    /**
+     * Checks if there is an argument for the specified prefix.
+     *
+     * @param prefix Prefix to be checked against.
+     * @return True if there is an argument for that prefix, false otherwise.
+     */
+    public boolean contains(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
@@ -59,6 +85,15 @@ public class ArgumentMultimap {
      */
     public boolean isEmpty() {
         return argMultimap.isEmpty();
+    }
+
+    /**
+     * Checks if {@link #argMultimap} contains no valid prefix.
+     *
+     * @return True if no valid prefix is in the argument map. False otherwise.
+     */
+    public boolean hasNoValidPrefix() {
+        return Arrays.stream(ARRAY_OF_PREFIX).noneMatch(argMultimap::containsKey);
     }
 
     /**

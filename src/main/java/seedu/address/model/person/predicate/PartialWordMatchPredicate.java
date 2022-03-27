@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.Prefix;
@@ -17,16 +17,16 @@ import seedu.address.model.person.Person;
  * description for that attribute (supplied by the user).
  */
 public class PartialWordMatchPredicate implements Predicate<Person> {
-    private final String description;
+    private final List<String> descriptions;
     private final Prefix prefix;
 
     /**
      * Constructor for PartialWordMatchPredicate
      * @param prefix use to retrieve the corresponding {@link Person} attribute.
-     * @param description description that is tested against.
+     * @param descriptions descriptions that are tested against.
      */
-    public PartialWordMatchPredicate(Prefix prefix, String description) {
-        this.description = description;
+    public PartialWordMatchPredicate(Prefix prefix, List<String> descriptions) {
+        this.descriptions = descriptions;
         this.prefix = prefix;
     }
 
@@ -34,11 +34,12 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
      * Conducts a case-insensitive partial match on both the attribute and description.
      * For example: "This is a memo" would match with "this".
      * @param attribute person attribute that is tested.
-     * @param description description that is supplied by the user.
+     * @param descriptions description that is supplied by the user.
      * @return true if there is a partial match between attribute and description, false otherwise.
      */
-    private boolean caseInsensitivePartialMatch(String attribute, String description) {
-        return Arrays.stream(description.toLowerCase().split(" ")).anyMatch(attribute.toLowerCase()::contains);
+    private boolean caseInsensitivePartialMatch(String attribute, List<String> descriptions) {
+        return descriptions.stream().anyMatch(description ->
+            attribute.toLowerCase().contains(description.toLowerCase()));
     }
 
     /**
@@ -52,17 +53,17 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         if (PREFIX_EMAIL.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getEmail().toString(), description);
+            return caseInsensitivePartialMatch(person.getEmail().toString(), descriptions);
         } else if (PREFIX_NAME.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getName().toString(), description);
+            return caseInsensitivePartialMatch(person.getName().toString(), descriptions);
         } else if (PREFIX_PHONE.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getPhone().toString(), description);
+            return caseInsensitivePartialMatch(person.getPhone().toString(), descriptions);
         } else if (PREFIX_MEMO.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getMemo().toString(), description);
+            return caseInsensitivePartialMatch(person.getMemo().toString(), descriptions);
         } else if (PREFIX_TAG.equals(prefix)) {
-            return person.getTags().stream().anyMatch(tag -> caseInsensitivePartialMatch(tag.toString(), description));
+            return person.getTags().stream().anyMatch(tag -> caseInsensitivePartialMatch(tag.toString(), descriptions));
         } else {
-            return caseInsensitivePartialMatch(person.getAddress().toString(), description);
+            return caseInsensitivePartialMatch(person.getAddress().toString(), descriptions);
         }
     }
 }

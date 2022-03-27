@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -15,7 +16,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.PersonDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -120,7 +122,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String keywords = ALICE.getName().fullName;
         String args = " n/ " + keywords;
-        PersonDescriptor descriptor = new PersonDescriptor(args);
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(args, ARRAY_OF_PREFIX);
         modelManager.updateFilteredPersonList(new FindPersonPredicate(descriptor));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 

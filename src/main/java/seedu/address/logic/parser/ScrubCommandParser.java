@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.ScrubCommand.NO_VALID_PREFIX;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
@@ -9,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -33,7 +36,12 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
     public ScrubCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
         String modifiedArguments = processArguments(args);
-        PersonDescriptor descriptor = new PersonDescriptor(modifiedArguments);
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(modifiedArguments, ARRAY_OF_PREFIX);
+        if (descriptor.hasNoValidPrefix()) {
+            LOGGER.log(Level.INFO, "Input has no valid prefix");
+            throw new ParseException(NO_VALID_PREFIX);
+        }
+
         if (descriptor.contains(PREFIX_EMAIL)) {
             checkCorrectEmailFormat(descriptor);
         }
@@ -52,7 +60,8 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * @throws ParseException Thrown when the string does not follow a valid format.
      */
     private String processArguments(String args) throws ParseException {
-        String trimmedArgs = args.trim();
+        // Removes trailing whitespace
+        String trimmedArgs = args.stripTrailing();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words
         String processedArgs = trimmedArgs.replaceAll("\\s{2,}", " ");
         boolean containsValidPrefix = containsPrefix(processedArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
@@ -95,8 +104,8 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * @param descriptor Email description to be checked.
      * @throws ParseException Thrown when the email description is not in a valid format.
      */
-    private void checkCorrectEmailFormat(PersonDescriptor descriptor) throws ParseException {
-        String[] emailArgs = descriptor.getDescription(PREFIX_EMAIL).split(" ");
+    private void checkCorrectEmailFormat(ArgumentMultimap descriptor) throws ParseException {
+        List<String> emailArgs = descriptor.getAllValues(PREFIX_EMAIL);
         for (String emailArg : emailArgs) {
             parseDomain(emailArg);
         }

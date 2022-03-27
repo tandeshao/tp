@@ -115,17 +115,19 @@ Examples:
 * `edit 2 m/Avid free climber` edits the memo of the 2nd person to be “Avid free climber”.
 * `edit 2 m/` edits the memo of the 2nd person to be empty.
 
-### Locate persons by name, phone number, tags and email :`find`
+### Locate persons by name, phone number, tags, email, address, memo and last contacted date:`find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`
-* The search is case-insensitive. e.g hans will match Hans
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​`
+* The search is case-insensitive. E.g. hans will match Hans
 * At least 1 parameter must be present.
-* Name, phone number, email, address, memo and tags are eligible parameters.
+* Name, phone number, email, address, memo, tags and contacted status are eligible parameters.
 * Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute.
 * Name, phone number and email follows a partial word match criteria where "Han" will match with "Hans" and "904" would match with "90400203".
-* Tag, address and email follows an exact word match criteria where "Hans" will match with "Hans" or "hans".
+* For contacted status, the matching depends on the "days" argument given by the user and suppose the number of days specified is n, the find method searches for contacts that were contacted at least n day days ago. 
+* For contacted status, if no integer value is given as an argument, the find command would just return contacts that had not been contacted.
+* Tag, address and memo follows an exact word match criteria where "Hans" will match with "Hans" or "hans".
 * For both search criteria, order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * For both search criteria, as long as there is a word match (partial/exact), the contact would be in the filtered list. 
 
@@ -136,12 +138,15 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".*
 
 Examples:
 * `find n/ John` returns john and John Doe
-* `find n/alex david` returns Alex Yeoh and David Li and Alexa.
+* `find n/alex n/david` returns Alex Yeoh and David Li and Alexa.
 * If David Li has an email davidLi98@gmail.com, then `find e/gmail` would return David Li. 
 * If John has a phone number 90400202, then `find p/9040` would return John.
 * If John has a phone number 90400202, then `find p/202` would return John.
+* `find n/alex yeo` would only match with contacts that have "alex yeo" contained within their name. For example, "Alex Yeoh" would be a successful match.
 * If John has a tag family, then `find t/family` would return John.
 * If John has a tag family, then `find t/fam` would return no result.
+* `find c/1` would find contacts that were contacted 1 or more days ago.
+* `find c/` would find contacts that had not been contacted.
 
 ### Undoing commands :
 
@@ -241,7 +246,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG]…​` <br> e.g., `find n/James Jake`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **Undo** | `undo`
 **Redo** | `redo`
 **List** | `list`

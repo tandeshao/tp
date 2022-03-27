@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -13,7 +14,8 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.PersonDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,11 +32,11 @@ public class FindCommandTest {
     public void equals_sameFindCommand() {
         String withAll = " n/Alex" + " p/90100102" + " e/tester@mail.com" + " a/QueensTown blk 200 singapore 123123"
                 + " t/friends colleagues" + " m/Close contract today";
-        PersonDescriptor withAllDescriptor = new PersonDescriptor(withAll);
+        ArgumentMultimap withAllDescriptor = ArgumentTokenizer.tokenize(withAll, ARRAY_OF_PREFIX);
         FindCommand withAllFindCommand = new FindCommand(new FindPersonPredicate(withAllDescriptor));
 
         String withName = " n/Alex bob";
-        PersonDescriptor withNameDescriptor = new PersonDescriptor(withName);
+        ArgumentMultimap withNameDescriptor = ArgumentTokenizer.tokenize(withName, ARRAY_OF_PREFIX);
         FindCommand withNameFindCommand = new FindCommand(new FindPersonPredicate(withNameDescriptor));
 
         // same object -> returns true
@@ -46,7 +48,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         String emptyInput = "n/tester";
-        PersonDescriptor emptyDescriptor = new PersonDescriptor(emptyInput);
+        ArgumentMultimap emptyDescriptor = ArgumentTokenizer.tokenize(emptyInput, ARRAY_OF_PREFIX);
         FindCommand command = new FindCommand(new FindPersonPredicate(emptyDescriptor));
         expectedModel.updateFilteredPersonList(new FindPersonPredicate(emptyDescriptor));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +71,7 @@ public class FindCommandTest {
      * Prepares a PersonPredicate for testing.
      */
     private FindPersonPredicate preparePredicate() {
-        PersonDescriptor descriptor = new PersonDescriptor(" n/ Kurz Elle Kunz");
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(" n/ Kurz n/Elle n/Kunz", ARRAY_OF_PREFIX);
         return new FindPersonPredicate(descriptor);
     }
 }
