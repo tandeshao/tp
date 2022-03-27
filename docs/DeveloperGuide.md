@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -170,7 +170,7 @@ These operations are exposed in the `Model` interface respectively as
 * `Model#canUndoAddressBook()`
 * `Model#canRedoAddressBook()`
 
-Commands that do not modify the address book states will not call `Model#saveAddressBookState()`. The address book undo and redo mechanism only tracks commands that modify the address book state, the commands that are undoable and redoable are `add`, `edit`, `delete` and `clear`.
+Commands that do not modify the address book states will not call `Model#saveAddressBookState()`. The address book undo and redo mechanism only tracks commands that modify the address book state, the commands that are undoable and redoable are `add`, `edit`, `delete`, `clear` and `scrub`.
 
 Given below is an example usage scenario and how undo and redo mechanism behaves at each step. For demonstration, `UNDO_REDO_CAPACITY` is set to 3.
 
@@ -248,16 +248,23 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: May have performance issues in terms of memory usage.
     * Workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20.
 
+* **Alternative:** Individual command knows how to undo and redo by itself.
+    * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
+    * Cons: It will take a considerable amount of effort to implement and maintain. Commands that are developed in the future, if applicable, must also support this, which adds to the complexity. It must be done meticulously to ensure that the implementation of each individual command is correct.
+    
+**Aspect: stateHistory data structure:**
 
 * **Current implementation:** `stateHistory` is an `ArrayList`.
     * Pros: Easy to implement and less prone to bugs.
     * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which has a time complexity of O(n).
-    * Solution: Use a doubly linked list with next and previous pointers to achieve O(1) time complexity for all `StateAddressBook` methods. However, Java in-built lists do not support next and previous pointers. Hence, we will need to carefully implement a doubly linked list and ensure that it is bug free.
 
+* **Alternative 1:** Use a doubly linked list with next and previous pointers. 
+    * Pros: O(1) time complexity for all `StateAddressBook` methods.
+    * Cons: Java in-built lists do not support next and previous pointers. We will need to carefully implement a doubly linked list and ensure that it is bug free.
+* **Alternative 2:** Use a `Deque` to store previous states and a `Stack` to store undid states.
+    * Pros: O(1) time complexity for all `StateAddressBook` methods.
+    * Cons: It can be tricky to implement the interactions between undo and redo. For example `undo`, followed by `redo`, and then `undo` again. The interaction between undo and redo needs to be managed carefully.
 
-* **Alternative 1:** Individual command knows how to undo and redo by itself.
-    * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
-    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Find feature
 The address book find command allow users to search contacts based on their name, email, phone, address, tags, and memo. When the user keys in a find command, the user input is parsed through a `FindCommandParser` and if a valid input is given, the `FindCommand#execute(Model)` method will be invoked. Doing this will effectively filter the person list in the `Addressbook` and this filtered list will be returned to the Ui for display.
@@ -288,7 +295,7 @@ Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and thi
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
-**Design Considerations:** 
+#### Design Considerations:
 
 **Aspect: How find feature executes:** 
 * **Current implementation:** Each invocation of the find feature filters the original person list. 
@@ -379,8 +386,39 @@ The following activity diagram summarizes what happens when a user executes hist
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+### Memo and ContactedDate data fields
 
+The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. If `Memo` is empty, it will not be displayed. Whereas for `ContactedDate`, if it is empty, it will be displayed as `Not contacted`. All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively. 
+
+A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited by the `edit` command.
+
+Given below is an example usage scenario and how `Memo` can be edited by the `edit` command.
+
+Step 1. The user wants to edit the `Memo` of the first person in the address book and executes `edit 1 m/Avid hiker`.
+
+The following sequence diagram shows how the `edit 1 m/Avid hiker` operation works:
+
+![EditMemoSequenceDiagram](images/EditMemoSequenceDiagram.png)
+
+Editing of ContactedDate via the `edit` command works similarly, the only difference is the `c/` prefix.
+
+The `Memo` and `ContactedDate` can also be added during the `add` command. The sequence is similar to the `edit 1 m/Avid hiker` diagram and for brevity, it will be omitted. The following are the differences of the sequence diagram: 
+- `AddCommandParser` instead of `EditCommandParser`
+- `AddCommand` instead of `EditCommand` 
+- `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`
+- `Model#updateFilteredPersonList(Predicate)` will not be called.
+
+#### Design considerations:
+
+**Aspect: Command to modify `Memo` and `ContactedDate`:**
+
+* **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into `add` and `edit` command.
+    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. Adheres to the DRY principle and the Single Responsibility Principle.
+    * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
+
+* **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
+    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be edited by its respective command.   
+    * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -422,27 +460,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                              | So that I can…​                                                               |
-|----------|--------------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                                    | refer to instructions when I forget how to use the App                        |
-| `* * *`  | user                                       | see the app already populated with sample contacts        | see how the app will look when it’s running                                   |
-| `* * *`  | user                                       | add my new contacts                                       | store my contacts in the app                                                  |
-| `* * *`  | user                                       | list all my contacts                                      | see all my contacts in the app                                                |
-| `* * *`  | user                                       | edit a contact                                            | correct mistakes I’ve made when adding in the contacts                        |
-| `* * *`  | user                                       | find my contacts                                          | access my desired contact without having to sieve through my entire phonebook |
-| `* * *`  | user                                       | save my contacts in the phonebook                         | whenever I re-launch the application, my contacts will still be in it         |
-| `* * *`  | user                                       | create tags and group the contacts using them             | separate my work and personal contacts                                        |
-| `* * *`  | user                                       | clear all my entries with a single command                | remove all my contacts without having to manually delete them one at a time   |
-| `* * *`  | user                                       | delete a person                                           | remove entries that I no longer need                                          |
-| `* * *`  | user                                       | find a person by name                                     | locate details of persons without having to go through the entire list        |
-| `* * *`  | user                                       | undo my actions                                           | restore previous address book states                                          |
-| `* * *`  | user                                       | redo my actions                                           | restore previous undid address book states                                    |
-| `* *`    | intermediate user                          | not have duplicated phone number or email                 | add and edit contacts without keeping track of duplicates                     |
-| `* *`    | intermediate user                          | invoke my most recently used command                      | add/modify/delete multiple contacts in a more efficient manner                |
-| `* *`    | intermediate user                          | find contacts by their name, phone number, tags and email | find the contacts I want quickly                                              |
-| `* *`    | intermediate user                          | add memo to a contact                                     | keep track of miscellaneous information about a person                        |
-| `* *`    | intermediate user                          | edit memo of a contact                                    | modify or delete memo of a contact                                            |
-| `*`      | user with many persons in the address book | sort persons by name                                      | locate a person easily                                                        |
+| Priority | As a …​  | I want to …​                                              | So that I can…​                                                               |
+|----------|----------|-----------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | new user | see usage instructions                                    | refer to instructions when I forget how to use the App                        |
+| `* * *`  | new user | see the app already populated with sample contacts        | see how the app will look when it’s running                                   |
+| `* * *`  | user     | add my new contacts                                       | store my contacts in the app                                                  |
+| `* * *`  | user     | list all my contacts                                      | see all my contacts in the app                                                |
+| `* * *`  | user     | edit a contact                                            | correct mistakes I’ve made when adding in the contacts                        |
+| `* * *`  | user     | find my contacts                                          | access my desired contact without having to sieve through my entire phonebook |
+| `* * *`  | user     | save my contacts in the phonebook                         | whenever I re-launch the application, my contacts will still be in it         |
+| `* * *`  | user     | create tags and group the contacts using them             | separate my work and personal contacts                                        |
+| `* * *`  | user     | clear all my entries with a single command                | remove all my contacts without having to manually delete them one at a time   |
+| `* * *`  | user     | delete a person                                           | remove entries that I no longer need                                          |
+| `* * *`  | user     | find a person by name                                     | locate details of persons without having to go through the entire list        |
+| `* * *`  | user     | undo my actions                                           | restore previous address book states                                          |
+| `* * *`  | user     | redo my actions                                           | restore previous undid address book states                                    |
+| `* *`    | user     | not have duplicated phone number or email                 | add and edit contacts without keeping track of duplicates                     |
+| `* *`    | user     | invoke my most recently used command                      | add/modify/delete multiple contacts in a more efficient manner                |
+| `* *`    | user     | find contacts by their name, phone number, tags and email | find the contacts I want quickly                                              |
+| `* *`    | user     | have a memo for each contact                              | keep track of miscellaneous information about a person                        |
+| `* *`    | user     | keep track of the last contacted date of a person         | identify how long it has been since I last contacted a person                 |
 
 *{More to be added}*
 
