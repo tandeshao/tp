@@ -107,7 +107,7 @@ _For more information on Java 8, click [here](https://www.oracle.com/java/techno
 
 Below is a list of system specifications that supports Abπ.
 <br />
-###Windows
+### Windows
 * Windows 10 (8u51 and above)
 * Windows 8.x (Desktop)
 * Windows 7 SP1
@@ -134,7 +134,7 @@ Below is a list of system specifications that supports Abπ.
 
 <div style="page-break-after: always;"></div>
 
-This section will bring you through the Graphical User Interface (GUI) of Abπ
+This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 --- 
 
@@ -218,11 +218,11 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
 
-### 4.5. Find person by their attributes:`find`
+### 4.5. Find person by their attributes: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 * The search is case-insensitive. E.g. hans will match Hans
 * At least 1 parameter must be present.
 * More than 2 whitespace between words are treated as 1 whitespace. So "Alex_ _ _Yeoh" would be treated as "Alex_Yeoh" where "_" represents a single whitespace.
@@ -252,8 +252,7 @@ Examples:
 * `find c/1` would find contacts that were contacted 1 or more days ago.
 * `find c/` would find contacts that had not been contacted.
 
-### 4.6. Undoing commands :
-
+### 4.6. Undoing commands 
 Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
 
 Format: `undo`
@@ -262,8 +261,7 @@ Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
 * `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
 
-### 4.7. Redoing commands :
-
+### 4.7. Redoing commands
 Redo previous undid states.
 
 Format: `redo`
@@ -271,9 +269,8 @@ Format: `redo`
 Examples:
 * `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
 
-### 4.8. Easy navigation among recent commands: 
+### 4.8. Easy navigation among recent commands 
 #### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
-
 * navigate among the recent inputs and autofill it in the textbox.
 
 Examples:
