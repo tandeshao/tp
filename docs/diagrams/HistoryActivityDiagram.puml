@@ -1,17 +1,16 @@
 @startuml
 
 start
-:CommandList.getCurrentCommand();
-:user pressed UP/DOWN arrow-key;
+:CommandList.getLastCommand();
 
-if (No previous/next command available) then (yes)
+if (CommandList.isEmpty()) then (yes)
   :throw exception;
   :console show error message;
 else ([else])
   :return CommandResult to LogicManager;
   :console show successful message;
   :UI auto-fill the textbox
-  with the previous/next command;
+  with the most recent command;
 endif
 
 stop
