@@ -18,7 +18,6 @@ public class PreviousCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Invoke previously used command "
-            + "Parameters: none\n"
             + "Example: " + COMMAND_WORD;
 
     public PreviousCommand() {}
