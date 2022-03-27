@@ -31,9 +31,6 @@ AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing 
 &nbsp;&nbsp;[4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
 &nbsp;&nbsp;[4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
 &nbsp;&nbsp;[4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.13.1. Saving the data](#4131-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.13.2. Editing the data file](#4132-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.13.3. No duplicate entries](#4133-no-duplicate-entries-phone-and-email-) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -145,26 +142,22 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in upper case are the parameters to be supplied by the user.<br>
-  - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in upper case are the parameters to be supplied by the user. e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  - e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times including zero times. e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  - e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order. e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  - e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
-  This is to protect from accidental invocations of the wrong command. <br>
-  - e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
+  This is to protect from accidental invocations of the wrong command. e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
 
 </div>
+
+<br>
 
 ### 4.1. Viewing help : `help`
 
@@ -174,11 +167,15 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<br>
+
 ### 4.2. Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<br>
 
 ### 4.3. Adding a person: `add`
 
@@ -198,6 +195,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
+<br>
+
 ### 4.4. Editing a person : `edit`
 Edits an existing person in the address book.
 
@@ -216,6 +215,8 @@ Examples:
 * `edit 2 m/Avid free climber` edits the memo of the 2nd person to be `Avid free climber`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
+
+<br>
 
 ### 4.5. Find person by their attributes: `find`
 
@@ -252,6 +253,8 @@ Examples:
 * `find c/1` would find contacts that were contacted 1 or more days ago.
 * `find c/` would find contacts that had not been contacted.
 
+<br>
+
 ### 4.6. Undoing commands 
 Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
 
@@ -261,6 +264,8 @@ Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
 * `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
 
+<br>
+
 ### 4.7. Redoing commands
 Redo previous undid states.
 
@@ -268,6 +273,8 @@ Format: `redo`
 
 Examples:
 * `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
+
+<br>
 
 ### 4.8. Easy navigation among recent commands 
 #### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
@@ -279,6 +286,8 @@ Examples:
 * Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob"
 * Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
 
+<br>
+
 ### 4.9. Copying Emails : `copyemails`
 
 Copies a comma-separated list of all displayed emails to clipboard.
@@ -288,6 +297,8 @@ Format: `copyemails`
 Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
 * When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
+
+<br>
 
 ### 4.10. Deleting a person : `delete`
 
@@ -303,11 +314,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<br>
+
 ### 4.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+<br>
 
 ### 4.12. Exiting the program : `exit`
 
@@ -315,15 +330,16 @@ Exits the program.
 
 Format: `exit`
 
+<br>
 
 ### 4.13. Extra information regarding the features
-#### 4.13.1. Preventing duplicate entries (phone and email) :
+#### Preventing duplicate entries (phone and email) :
 Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
 
-#### 4.13.2. Saving the data
+#### Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.13.3. Editing the data file
+#### Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
