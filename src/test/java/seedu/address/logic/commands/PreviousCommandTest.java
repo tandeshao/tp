@@ -35,6 +35,7 @@ public class PreviousCommandTest {
     @Test
     public void execute_historyForNoCommands_fail() {
         CommandList.getList().clearAllCommand();
+        CommandList.getList().resetPointer();
         assertThrows(CommandException.class, PreviousCommand.MESSAGE_ON_NO_PREVIOUS, () ->
                 new PreviousCommand().execute(model));
     }
