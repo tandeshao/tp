@@ -319,52 +319,59 @@ Step 6. After the filter has been updated, each person in the person list will b
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
 
-###  easy navigation among recent commands
+###  Easy navigation among recent commands using arrow keys
 
 Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs. 
-To implement this feature, a "Recorder" class is firstly needed to be added.
-Thus, a `CommandList` Class was created to record the recent commands. Either, 
-typing `history` or press the up arrow key will invoke `history command`. 
-It auto-fills the textbox with the last command being executed and shows the 
-most recent 3 commands in the message box.
+To implement this feature, a "Recorder" class to record the recent user inputs is firstly 
+needed to be added. Thus, a `CommandList` Class was created to record the recent commands. 
+Either, typing `previous` or press the up arrow key will invoke `previous command`. 
+It auto-fills the textbox with the previous command.
+For example, after successfully executed "find n/a", "find n/b", "find n/c", pressing the up-arrow
+key will automatically fill-in the textbox with "find n/c", pressing up-arrow key again will 
+fill-in the textbox with "find n/b", now pressing up-arrow key again will fill-in the textbox 
+with "find n/a", and then pressing down-arrow key will fill-in textbox with "find n/b" again.
 
+State 0, no use input yet:
+![CommandListState0](images/CommandListState0.png)
 
-* `ModelManager#record()` — Record the recent commands into `CommandList`.
-* `HistoryCommand#execute()` — Load the most recent command from `CommandList`.
+State 1, User executed "find n/Anny":
+![CommandListState1](images/CommandListState1.png)
 
-Class Diagram of CommandList class:
+State 2, User executed "find n/Bob":
+![CommandListState2](images/CommandListState2.png)
 
-<img src="images/CommandListClassDiagram.png" width="250"/>
+State 3, User executed "find n/Cathy":
+![CommandListState3](images/CommandListState3.png)
+
+State 4, User pressed up-arrow key:
+"find n/Cathy" is auto-filled in textbox
+![CommandListState4](images/CommandListState4.png)
+
+State 5, User pressed up-arrow key again:
+"find n/Bob" is auto-filled in textbox
+![CommandListState5](images/CommandListState5.png)
+
+State 6, User pressed down-arrow key:
+"find n/Cathy" is auto-filled in textbox
+![CommandListState6](images/CommandListState6.png)
+
 
 CommandList class is using an ArrayList to record the most recent user inputs
 (the number of inputs recorded is determined by MAX_RECORD_NUMBER). When the ArrayList size reaches
 MAX_RECORD_NUMBER, CommandList static class will remove the oldest command in the list in order to
 record the most recent command.
 
-**Aspect: When and how CommandList records a command:**
+Class Diagram of CommandList class:
 
-When `LogicManager` received the command, which is before the 
-executing of the command, and even before
-it was passed to `AddressBookParser` class.
-This means that even if user input a **_faulty command_**,
-which cannot be recognized by `AddressBookParser`,
-the command will still be recorded into history.
+<img src="images/CommandListClassDiagram.png" width="250"/>
 
-`LogicManager` object will call `record()` from `Model` object, and `Model` object will call static
-method `record()` from static class `CommandList` to record the last executed command into CommandList
-in the form of String.
 
-The following sequence diagram shows the process of recording user command before
-executing the user command.
+**Aspect: The execution of PreviousCommand/NextCommand:**
 
-<img src="images/Record-before-executing.png" width="600"/>
-
-**Aspect: The execution of HistoryCommand:**
-
-When a `HistoryCommand` is being executed, if it is executed successfully, 
+When a `PreviousCommand` or `NextCommand` is being executed, if it is executed successfully, 
 it will return a special `CommandResult` to inform `UI` and ask `UI` to auto-fill the textbox 
-with the most recent Command. If it is not executed successfully(i.e. there is no history yet, history command
-is executed as the first command), it will throw `CommandException` and show the error message on the console.
+with the most recent Command. If it is not executed successfully(i.e. there is no previous 
+or next command available), it will throw `CommandException` and show the error message on the console.
 
 The following activity diagram summarizes what happens when a user executes history command:
 
