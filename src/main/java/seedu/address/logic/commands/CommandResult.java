@@ -61,7 +61,7 @@ public class CommandResult {
     public String getNewCommandTextField() {
         String text = "";
         if (isHistory()) {
-            text = CommandList.getList().getLastCommand();
+            text = CommandList.getList().getCurrentCommand();
         }
         return text;
     }

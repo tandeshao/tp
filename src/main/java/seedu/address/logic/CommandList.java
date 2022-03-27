@@ -36,7 +36,7 @@ public class CommandList {
     }
 
     /** Gets the latest user input. */
-    public String getLastCommand() {
+    public String getCurrentCommand() {
         return inputHistory.get(pointer);
     }
 
