@@ -49,7 +49,7 @@ public class CommandListTest {
         CommandList.getList().record("find n/ John3");
         CommandList.getList().record("find n/ John4");
 
-        assertThrows(CommandException.class, () -> CommandList.getList().getCurrentCommand());
+        assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
     }
 
     @Test
