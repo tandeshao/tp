@@ -14,14 +14,14 @@ import seedu.address.model.person.Person;
 /**
  * A class that encapsulates the logic of contacted status check for a {@link Person}.
  */
-public class ContactStatusMatchPredicate implements Predicate<Person> {
+public class ContactedDateMatchPredicate implements Predicate<Person> {
     private final ArgumentMultimap descriptor;
 
     /**
      * Constructs ContactStatusMatchPredicate for the {@link FindCommand}.
      * @param descriptor Description of the user query that was passed into the FindCommand.
      */
-    public ContactStatusMatchPredicate(ArgumentMultimap descriptor) {
+    public ContactedDateMatchPredicate(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
     }
 
@@ -39,14 +39,14 @@ public class ContactStatusMatchPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String userArg = descriptor.getValue(PREFIX_CONTACTED_DATE).orElse("");
-        if (userArg.equals("")) {
+        if (userArg.isEmpty()) {
             String personContactedDate = person.getContactedDate().toString();
             return personContactedDate.equals(ContactedDate.MESSAGE_NOT_CONTACTED);
         } else {
             int expectedDaysBetweenDates = Integer.parseInt(userArg);
             LocalDate today = LocalDate.now();
             String personContactedStatus = person.getContactedDate().contactedDate;
-            if (personContactedStatus.equals("")) {
+            if (personContactedStatus.isEmpty()) {
                 return false;
             } else {
                 LocalDate lastContactedDate = LocalDate.parse(personContactedStatus, ContactedDate.DATE_FORMATTER);

@@ -64,7 +64,7 @@ public class FindPersonPredicate implements Predicate<Person> {
     private boolean testPersonAttribute(Person person, Prefix attribute) {
         Predicate<Person> predicateToTestAgainst;
         if (attribute.equals(PREFIX_CONTACTED_DATE)) {
-            predicateToTestAgainst = new ContactStatusMatchPredicate(descriptor);
+            predicateToTestAgainst = new ContactedDateMatchPredicate(descriptor);
         } else if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
             predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
