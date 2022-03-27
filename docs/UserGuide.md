@@ -34,8 +34,8 @@ AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing 
 &nbsp;&nbsp;&nbsp;&nbsp;[4.13.1. Saving the data](#4131-saving-the-data) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.13.2. Editing the data file](#4132-editing-the-data-file) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.13.3. No duplicate entries](#4133-no-duplicate-entries-phone-and-email-) <br/>
-[5. FAQ](#faq) <br/>
-[6. Command Summary](#command-summary) <br/>
+[5. FAQ](#5-faq) <br/>
+[6. Command Summary](#6-command-summary) <br/>
 
 
 ----
@@ -88,7 +88,7 @@ Symbol | What it means |
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
 
-   * `list`*: Lists all contacts.
+   * `list`: Lists all contacts.
 
    * `addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -98,13 +98,14 @@ Symbol | What it means |
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [features](#4-features) below for details of each command.
 
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java.
 _For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
 
 Below is a list of system specifications that supports Abπ.
+<br />
 ###Windows
 * Windows 10 (8u51 and above)
 * Windows 8.x (Desktop)
@@ -116,7 +117,8 @@ Below is a list of system specifications that supports Abπ.
 * Disk space: 124 MB for JRE; 2 MB for Java Update
 * Processor: Minimum Pentium 2 266 MHz processor
 * Browsers: Internet Explorer 9 and above, Firefox
-<br/>
+<br />
+
 ### Mac OS X
 * Intel-based Mac running Mac OS X 10.8.3+, 10.9+
 * Administrator privileges for installation
@@ -128,6 +130,8 @@ Below is a list of system specifications that supports Abπ.
 <div style="page-break-after: always;"></div>
 
 ## 3. About  
+
+<div style="page-break-after: always;"></div>
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ
 
@@ -315,11 +319,13 @@ Format: `exit`
 
 
 ### 4.13. Extra information regarding the features
-#### 4.13.1. Saving the data
+#### 4.13.1. Preventing duplicate entries (phone and email) :
+Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
 
+#### 4.13.2. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.13.2. Editing the data file
+#### 4.13.3. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -327,14 +333,11 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.13.3. No duplicate entries (phone and email) :
-
-Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
+
+<div style="page-break-after: always;"></div>
 
 **How do I save in Abπ?**<br>
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
@@ -354,6 +357,8 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Command summary
+
+<div style="page-break-after: always;"></div>
 
 Action | Format, Examples
 --------|------------------
