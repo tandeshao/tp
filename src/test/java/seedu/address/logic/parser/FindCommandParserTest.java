@@ -12,8 +12,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 
 public class FindCommandParserTest {
-
-    private static final String POPULATED_TEST_USER_INPUT_WITH_NAME = " n/Alex bob";
     private final FindCommandParser parser = new FindCommandParser();
 
     @Test
@@ -35,25 +33,46 @@ public class FindCommandParserTest {
 
         // Positive value above 2147483647 is invalid.
         assertParseFailure(parser, "find c/2147483648", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(POPULATED_TEST_USER_INPUT_WITH_NAME, ARRAY_OF_PREFIX);
-        FindCommand expectedFindCommand = new FindCommand(new FindPersonPredicate(descriptor));
-        assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
-
-        ArgumentMultimap contactedDateDescriptor = ArgumentTokenizer.tokenize(" c/1", ARRAY_OF_PREFIX);
-        FindCommand expectedContactedDate = new FindCommand(new FindPersonPredicate(contactedDateDescriptor));
-        assertParseSuccess(parser, " c/1", expectedContactedDate);
+        assertParseSuccess(parser, " n/Alex bob", prepareFindCommand(" n/Alex bob"));
+        assertParseSuccess(parser, " c/1", prepareFindCommand(" c/1"));
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/\n Alex \n \t bob \t", expectedFindCommand);
+        String argToBeTested = " n/ Alex bob";
+        assertParseSuccess(parser, " n/\n Alex \n \t bob \t", prepareFindCommand(argToBeTested));
 
-        // Max positive integer values -> return true.
-        ArgumentMultimap maxDateOffsetDescriptor = ArgumentTokenizer.tokenize(" c/2147483647", ARRAY_OF_PREFIX);
-        FindCommand expectedMaxDateOffset = new FindCommand(new FindPersonPredicate(maxDateOffsetDescriptor));
-        assertParseSuccess(parser, " c/2147483647", expectedMaxDateOffset);
+        // Max positive integer values -> parse successful.
+        String argWithMaxPositiveInteger = " c/2147483647";
+        assertParseSuccess(parser, argWithMaxPositiveInteger, prepareFindCommand(argWithMaxPositiveInteger));
+
+        // Blank argument -> parse successful.
+        String contactedDateArgWithNoArgument = " n/";
+        assertParseSuccess(parser, contactedDateArgWithNoArgument, prepareFindCommand(contactedDateArgWithNoArgument));
+
+        // Multiple blank argument -> parse successful.
+        String multipleBlankArg = "n/ e/ p/ a/ t/ m/ c/";
+        assertParseSuccess(parser, multipleBlankArg, prepareFindCommand(multipleBlankArg));
+
+        // Special characters in Find -> parse successful.
+        String specialCharactersArg = " n/! e/@ p/`";
+        assertParseSuccess(parser, specialCharactersArg, prepareFindCommand(specialCharactersArg));
+
+    }
+
+    /**
+     * Prepares the FindCommand for testing.
+     *
+     * @param userFindCommandArgs  User argument that is passed into the FindCommandParser.
+     * @return A valid FindCommand that is derived from the user argument.
+     */
+    private FindCommand prepareFindCommand(String userFindCommandArgs) {
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(userFindCommandArgs, ARRAY_OF_PREFIX);
+        FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
+        return new FindCommand(predicate);
     }
 }
 

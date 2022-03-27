@@ -76,20 +76,25 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Checks if a valid ContactedDate argument is given for the FindCommand. Only non-negative integer values are
-     * allowed as argument.Non-negative value is within the range of 0 to 2147483647.
+     * allowed as argument.Non-negative value is within the range of 0 to 2147483647. If the ContactedDate argument is
+     * empty, it would be of the form " c/" and that is a valid user argument for the ContactedDate prefix. See
+     * ContactedDateMatchPredicate for more details.
      *
      * @param descriptor Stores description to search a person by.
      * @throws ParseException Thrown when an invalid ContactedDate argument is received by the FindCommandParser.
      */
     private void checkValidContacted(ArgumentMultimap descriptor) throws ParseException {
         String contactedDateArg = descriptor.getValue(PREFIX_CONTACTED_DATE).orElse("");
-        try {
-            int parsedIntArg = Integer.parseInt(contactedDateArg);
-            if (parsedIntArg < 0) {
+        // If contactedDateArg is empty, it is a valid argument.
+        if (!contactedDateArg.isEmpty()) {
+            try {
+                int parsedIntArg = Integer.parseInt(contactedDateArg);
+                if (parsedIntArg < 0) {
+                    throw new ParseException(MESSAGE_INCORRECT_FORMAT);
+                }
+            } catch (NumberFormatException formatException) {
                 throw new ParseException(MESSAGE_INCORRECT_FORMAT);
             }
-        } catch (NumberFormatException formatException) {
-            throw new ParseException(MESSAGE_INCORRECT_FORMAT);
         }
     }
 }
