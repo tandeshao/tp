@@ -26,6 +26,12 @@ public class FindCommandParserTest {
 
         // Stand-alone command -> should result in pare failure
         assertParseFailure(parser, "find ", NO_PREFIX_MESSAGE);
+
+        // Special characters for ContactedDate -> should result in pare failure
+        assertParseFailure(parser, "find c/@", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+
+        // Negative integer values for ContactedDate -> should result in pare failure
+        assertParseFailure(parser, "find c/-1", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
     }
 
     @Test
@@ -34,7 +40,12 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand = new FindCommand(new FindPersonPredicate(descriptor));
         assertParseSuccess(parser, " n/Alex bob", expectedFindCommand);
 
+        ArgumentMultimap contactedDateDescriptor = ArgumentTokenizer.tokenize(" c/1", ARRAY_OF_PREFIX);
+        FindCommand expectedContactedDate = new FindCommand(new FindPersonPredicate(contactedDateDescriptor));
+        assertParseSuccess(parser, " c/1", expectedContactedDate);
+
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " n/\n Alex \n \t bob \t", expectedFindCommand);
     }
 }
+
