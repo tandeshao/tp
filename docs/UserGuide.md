@@ -59,8 +59,9 @@ AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
+  This is to protect from accidental invocations of the wrong command. <br>
+  e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
 
 </div>
 
@@ -179,7 +180,7 @@ Format: `history`
 Examples:
 * If the last command is `delete 1`, `invoke` autofills the textbox with `delete 1`.
 
-### Copying Emails : `copyemails`
+### Copying emails : `copyemails`
 
 Copies a comma-separated list of all displayed emails to clipboard.
 
@@ -187,7 +188,7 @@ Format: `copyemails`
 
 Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
-* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com, betsycrowe@example.com")
+* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
 
 ### Deleting a person : `delete`
 
@@ -215,28 +216,40 @@ Exits the program.
 
 Format: `exit`
 
+### Preventing duplicate entries (phone and email) :
+
+Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### No duplicate entries (phone and email) :
-
-Prevents duplicate entries of phone number and email in Abπ when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**How do I save in Abπ?**<br>
+There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
+
+**Where does Abπ store its data?**<br>
+Abπ data is stored in data folder located at Abπ's home directory, the data file name is `addressbook.json`. Specifically `[Abπ location]/data/addressbook.json`.
+
+**How do I transfer my data to another computer?**<br>
+Simply overwrite the `addressbook.json` data file with your previous `addressbook.json` data file.
+
+**What happens if I executed a command unintentionally?**<br>
+Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
+
+**Why is my data gone?**<br>
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing one.
 
 --------------------------------------------------------------------------------------------------------------------
 
