@@ -64,12 +64,13 @@ When this document is read, certain words or sentences are represented in differ
 
 Symbol | What it means |
 --------|-------------------|
-`add` | Words/sentences that have this format of display are commands that can be typed into the command box.
+`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause an action in Abπ
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 
 :bulb: | Extra tip that may be useful to the reader.
 :information_source: | Important information to take note.          
 [here](") |Words that are in this format are clickable links that directs you to a certain webpage.
+
 
 ------------
 <div style="page-break-after: always;"></div>
