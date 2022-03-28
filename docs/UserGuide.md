@@ -119,7 +119,7 @@ _For more information on Java 8, click [here](https://www.oracle.com/java/techno
 ### Mac OS X
 * Intel-based Mac running Mac OS X 10.8.3+, 10.9+
 * Administrator privileges for installation
----
+
 
 <div style="page-break-after: always;"></div>
 
@@ -127,7 +127,7 @@ _For more information on Java 8, click [here](https://www.oracle.com/java/techno
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
 ![UiGuide](images/UiGuide.png)
---- 
+
 
 <div style="page-break-after: always;"></div>
 
@@ -275,6 +275,8 @@ Examples:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.8. Retrieving recent commands:`UP_ARROW_KEY` or `DOWN_ARROW_KEY`
 By press the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
 
@@ -314,6 +316,8 @@ Examples:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -351,8 +355,6 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 ## 5. FAQ
 
-<div style="page-break-after: always;"></div>
-
 **How do I save in Abπ?**<br>
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
 
@@ -373,8 +375,6 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 <div style="page-break-after: always;"></div>
 
 ## 6. Command summary
-
-<div style="page-break-after: always;"></div>
 
 Action | Format, Examples
 --------|------------------
