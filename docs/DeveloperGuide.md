@@ -4,14 +4,14 @@ title: Developer Guide
 ---
 ## Table of Content <br/>
 [1. Acknowledgements](#1-acknowledgements) <br/>
-[2. Setting up, getting started](#2-setting-up,-getting-started) <br/>
+[2. Setting up, getting started](#2-setting-up-getting-started) <br/>
 [3. Design](#3-design) <br/>
 &nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br/>
 &nbsp;&nbsp;[3.2. UI component](#32-ui-component) <br/>
 &nbsp;&nbsp;[3.3. Logic component](#33-logic-component) <br/>
-&nbsp;&nbsp;[3.4. Logic component](#34-model-component) <br/>
-&nbsp;&nbsp;[3.5. Storage component](#34-storage-component) <br/>
-&nbsp;&nbsp;[3.6. Common classes](#34-common-classes) <br/>
+&nbsp;&nbsp;[3.4. Model component](#34-model-component) <br/>
+&nbsp;&nbsp;[3.5. Storage component](#35-storage-component) <br/>
+&nbsp;&nbsp;[3.6. Common classes](#36-common-classes) <br/>
 [4. Implementation](#4-implementation) <br/>
 &nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
@@ -26,7 +26,7 @@ title: Developer Guide
 &nbsp;&nbsp;[6.2. User stories](#62-user-stories) <br/>
 &nbsp;&nbsp;[6.3. Use cases](#63-use-cases) <br/>
 &nbsp;&nbsp;[6.4. Non-Functional Requirements](#64-non-functional-requirements) <br/>
-&nbsp;&nbsp;[6.5. glossary](#65-glossary) <br/>
+&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
 [7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
 &nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
 &nbsp;&nbsp;[7.2. Deleting a person](#72-deleting-a-person) <br/>
