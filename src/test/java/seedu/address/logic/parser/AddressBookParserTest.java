@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CopyEmailsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -22,6 +23,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextCommand;
+import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -134,6 +137,39 @@ public class AddressBookParserTest {
     public void parseCommand_redoWithTrailingCharacters_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RedoCommand.MESSAGE_USAGE), () -> parser.parseCommand(RedoCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_copyEmails() throws Exception {
+        assertTrue(parser.parseCommand(CopyEmailsCommand.COMMAND_WORD) instanceof CopyEmailsCommand);
+    }
+
+    @Test
+    public void parseCommand_copyEmailsWithTrailingCharacters_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CopyEmailsCommand.MESSAGE_USAGE), () -> parser.parseCommand(CopyEmailsCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_previous() throws Exception {
+        assertTrue(parser.parseCommand(PreviousCommand.COMMAND_WORD) instanceof PreviousCommand);
+    }
+
+    @Test
+    public void parseCommand_previousWithTrailingCharacters_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                PreviousCommand.MESSAGE_USAGE), () -> parser.parseCommand(PreviousCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_next() throws Exception {
+        assertTrue(parser.parseCommand(NextCommand.COMMAND_WORD) instanceof NextCommand);
+    }
+
+    @Test
+    public void parseCommand_nextWithTrailingCharacters_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                NextCommand.MESSAGE_USAGE), () -> parser.parseCommand(NextCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
