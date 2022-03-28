@@ -9,15 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank, "
-            + "and it has no more than 400 characters";
-
     private static final int MAXIMUM_LENGTH = 400;
+    public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank, "
+            + "and it has no more than" + MAXIMUM_LENGTH + "characters(excluding blank space at front)";
+
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = ".{0," + MAXIMUM_LENGTH + "}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0," + MAXIMUM_LENGTH + "}";
 
     public final String address;
 
