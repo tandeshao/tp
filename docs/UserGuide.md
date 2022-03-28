@@ -300,6 +300,8 @@ Examples:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.10. Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -316,8 +318,6 @@ Examples:
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### 4.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -333,6 +333,8 @@ Exits the program.
 Format: `exit`
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### 4.13. Extra information regarding the features
 #### Preventing duplicate entries (phone and email) 
