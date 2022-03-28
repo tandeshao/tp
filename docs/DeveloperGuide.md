@@ -2,31 +2,59 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+## Table of Content <br/>
+[1. Acknowledgements](#1-acknowledgements) <br/>
+[2. Setting up, getting started](#2-setting-up-getting-started) <br/>
+[3. Design](#3-design) <br/>
+&nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br/>
+&nbsp;&nbsp;[3.2. UI component](#32-ui-component) <br/>
+&nbsp;&nbsp;[3.3. Logic component](#33-logic-component) <br/>
+&nbsp;&nbsp;[3.4. Model component](#34-model-component) <br/>
+&nbsp;&nbsp;[3.5. Storage component](#35-storage-component) <br/>
+&nbsp;&nbsp;[3.6. Common classes](#36-common-classes) <br/>
+[4. Implementation](#4-implementation) <br/>
+&nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
+&nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Design considerations](#421-design-considerations) <br/>
+&nbsp;&nbsp;[4.3. Memo and ContactedDate data fields](#43-memo-and-contacteddate-data-fields) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
+&nbsp;&nbsp;[4.4. Previous and next feature](#44-previous-and-next-feature) <br/>
+[5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
+[6. Appendix: Requirements](#6-appendix-requirements) <br/>
+&nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
+&nbsp;&nbsp;[6.2. User stories](#62-user-stories) <br/>
+&nbsp;&nbsp;[6.3. Use cases](#63-use-cases) <br/>
+&nbsp;&nbsp;[6.4. Non-Functional Requirements](#64-non-functional-requirements) <br/>
+&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
+[7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
+&nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
+&nbsp;&nbsp;[7.2. Deleting a person](#72-deleting-a-person) <br/>
+&nbsp;&nbsp;[7.3. Editing a person's memo](#73-editing-a-persons-memo) <br/>
+&nbsp;&nbsp;[7.4. Saving data](#74-saving-data) <br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## 1. Acknowledgements
 
 * https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## 2. Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 3. Design
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 3.1. Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -67,7 +95,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2. UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +112,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### 3.3. Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,7 +141,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 3.4. Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -133,7 +161,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### 3.5. Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,16 +172,17 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 4. Implementation
 
+This section describes some noteworthy details on how certain features are implemented.
 
-### Undo and redo feature
+### 4.1. Undo and redo feature
 
 The address book undo and redo mechanism is managed by `StateAddressBook`, which extends `AddressBook`. It keeps track of the address book state history, stored internally as a `stateHistory` and `currentStateIndex`. `currentStateIndex` points to the current state of the address book. The number of undoable and redoable actions is capped by `UNDO_REDO_CAPACITY`, currently set to 20. Additionally, it implements the following operations:
 
@@ -239,7 +268,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/SaveStateActivityDiagram.png" width="224" />
 
-#### Design considerations:
+#### 4.1.1. Design considerations:
 
 **Aspect: How undo & redo executes:**
 
@@ -266,7 +295,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: It can be tricky to implement the interactions between undo and redo. For example `undo`, followed by `redo`, and then `undo` again. The interaction between undo and redo needs to be managed carefully.
 
 
-### Find feature
+### 4.2. Find feature
 The address book find command allow users to search contacts based on their name, email, phone, address, tags, and memo. When the user keys in a find command, the user input is parsed through a `FindCommandParser` and if a valid input is given, the `FindCommand#execute(Model)` method will be invoked. Doing this will effectively filter the person list in the `Addressbook` and this filtered list will be returned to the Ui for display.
 
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
@@ -295,7 +324,7 @@ Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and thi
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
-#### Design Considerations:
+#### 4.2.1. Design Considerations:
 
 **Aspect: How find feature executes:** 
 * **Current implementation:** Each invocation of the find feature filters the original person list. 
@@ -326,20 +355,10 @@ Step 6. After the filter has been updated, each person in the person list will b
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
 
-###  easy navigation among recent commands
 
-Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs. 
-To implement this feature, a "Recorder" class is firstly needed to be added.
-Thus, a `CommandList` Class was created to record the recent commands. Either, 
-typing `history` or press the up arrow key will invoke `history command`. 
-It auto-fills the textbox with the last command being executed and shows the 
-most recent 3 commands in the message box.
+### 4.3. Memo and ContactedDate data fields
 
-### \[Proposed\] Data archiving
-
-### Memo and ContactedDate data fields
-
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. If `Memo` is empty, it will not be displayed. Whereas for `ContactedDate`, if it is empty, it will be displayed as `Not contacted`. All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively. 
+The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. If `Memo` is empty, it will not be displayed. Whereas for `ContactedDate`, if it is empty, it will be displayed as `Not contacted`. All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
 
 A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited by the `edit` command.
 
@@ -353,13 +372,13 @@ The following sequence diagram shows how the `edit 1 m/Avid hiker` operation wor
 
 Editing of ContactedDate via the `edit` command works similarly, the only difference is the `c/` prefix.
 
-The `Memo` and `ContactedDate` can also be added during the `add` command. The sequence is similar to the `edit 1 m/Avid hiker` diagram and for brevity, it will be omitted. The following are the differences of the sequence diagram: 
+The `Memo` and `ContactedDate` can also be added during the `add` command. The sequence is similar to the `edit 1 m/Avid hiker` diagram and for brevity, it will be omitted. The following are the differences of the sequence diagram:
 - `AddCommandParser` instead of `EditCommandParser`
-- `AddCommand` instead of `EditCommand` 
+- `AddCommand` instead of `EditCommand`
 - `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`
 - `Model#updateFilteredPersonList(Predicate)` will not be called.
 
-#### Design considerations:
+#### 4.3.1. Design considerations:
 
 **Aspect: Command to modify `Memo` and `ContactedDate`:**
 
@@ -368,12 +387,16 @@ The `Memo` and `ContactedDate` can also be added during the `add` command. The s
     * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
-    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be edited by its respective command.   
+    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be edited by its respective command.
     * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
+
+
+### 4.4. Previous and next feature
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 5. Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -383,9 +406,9 @@ The `Memo` and `ContactedDate` can also be added during the `add` command. The s
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 6. Appendix: Requirements
 
-### Product scope
+### 6.1. Product scope
 
 **Target user profile**:
 
@@ -407,7 +430,7 @@ The `Memo` and `ContactedDate` can also be added during the `add` command. The s
 
 
 
-### User stories
+### 6.2. User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -432,9 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | have a memo for each contact                              | keep track of miscellaneous information about a person                        |
 | `* *`    | user     | keep track of the last contacted date of a person         | identify how long it has been since I last contacted a person                 |
 
-*{More to be added}*
-
-### Use cases
+### 6.3. Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -537,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### 6.4. Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -546,16 +567,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+### 6.5. Glossary
 
+* **OS**: Operating System
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **ABπ**: Name of this AddressBook
-* **Memo**: Remark or note for a specific person
+* **Abπ**: AddressBook pi
+* **DRY**: Don't repeat yourself
+* **JSON**: JavaScript Object Notation
+* **OOP**: Object-oriented programming
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -564,7 +588,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1. Launch and shutdown
 
 1. Initial launch
 
@@ -581,7 +605,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### 7.2. Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -598,7 +622,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Editing a person's memo
+### 7.3. Editing a person's memo
 
 1. Editing a person's memo while all persons are being shown
 
@@ -613,7 +637,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect edit commands to try: `edit`, `edit 1 bob`, `edit x m/VP`, `...` (where x is larger than the list size or smaller than 1)<br>
        Expected: Invalid command message displaying the format for proper command usage.
 
-### Saving data
+### 7.4. Saving data
 
 1. Dealing with missing/corrupted data files
 
