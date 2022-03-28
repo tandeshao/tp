@@ -55,6 +55,7 @@ Command word | The first word of every command.                                 
 Parameters | Information that is supplied by the user.                                       |
 Execute | The process by which Abπ reads the instructions written by user and acts on it. |
 
+<div style="page-break-after: always;"></div>
 
 ### 1.1. Conventions
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
@@ -113,22 +114,16 @@ _For more information on Java 8, click [here](https://www.oracle.com/java/techno
 * RAM: 128 MB
 * Disk space: 124 MB for JRE; 2 MB for Java Update
 * Processor: Minimum Pentium 2 266 MHz processor
-* Browsers: Internet Explorer 9 and above, Firefox
 <br />
 
 ### Mac OS X
 * Intel-based Mac running Mac OS X 10.8.3+, 10.9+
 * Administrator privileges for installation
-* 64-bit browser
-* A 64-bit browser (Safari, for example) is required to run Oracle Java on Mac.
-* Browsers: Firefox
 ---
 
 <div style="page-break-after: always;"></div>
 
-## 3. About  
-
-<div style="page-break-after: always;"></div>
+## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
 ![UiGuide](images/UiGuide.png)
@@ -197,6 +192,8 @@ Examples:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4. Editing a person : `edit`
 Edits an existing person in the address book.
 
@@ -217,6 +214,8 @@ Examples:
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5. Find person by their attributes: `find`
 
@@ -348,6 +347,8 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 5. FAQ
 
 <div style="page-break-after: always;"></div>
@@ -365,9 +366,11 @@ Simply overwrite the `addressbook.json` data file with your previous `addressboo
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing one.
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing data file.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 6. Command summary
 
@@ -375,14 +378,17 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
+**List** | `list`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **Undo** | `undo`
 **Redo** | `redo`
-**List** | `list`
-**Help** | `help`
 **Previous**| Pressing `UP_ARROW_KEY`
 **Next**| Pressing `down_ARROW_KEY`
+**CopyEmails**| `copyemails`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
+**Exit** | `exit`
+
