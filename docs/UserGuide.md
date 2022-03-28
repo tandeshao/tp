@@ -2,70 +2,164 @@
 layout: page
 title: User Guide
 ---
-
+## Overview
 AddressBook Level 3.14 (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with modern features. Its key features include efficient filtering of contacts based on various attributes (name, email, tags, etc), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ got you covered. So what are you waiting for? Download and try out Abπ today!
 
-* Table of Contents
-{:toc}
+---
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## Quick start
+## Table of Content <br/>
 
-1. Ensure you have Java `11` or above installed in your Computer.
+[1. Introduction](#1-introduction) <br/>
+&nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
+[2. Quick Start](#2-quick-start) <br/>
+&nbsp;&nbsp;[2.1. Installation](#21-installation) <br/>
+&nbsp;&nbsp;[2.2 System Requirements](#22-system-requirements) <br/>
+[3. About](#3-about) <br/>
+[4. Features](#4-features) <br/>
+&nbsp;&nbsp;[4.1. Viewing help](#41-viewing-help--help) <br/>
+&nbsp;&nbsp;[4.2. Listing all persons](#42-listing-all-persons--list) <br/>
+&nbsp;&nbsp;[4.3. Adding a person](#43-adding-a-person-add) <br/>
+&nbsp;&nbsp;[4.4. Editing a person](#44-editing-a-person--edit) <br/>
+&nbsp;&nbsp;[4.5. Find person by their attributes](#45-find-person-by-their-attributesfind) <br/>
+&nbsp;&nbsp;[4.6. Undoing commands](#46-undoing-commands-) <br/>
+&nbsp;&nbsp;[4.7. Redoing commands](#47-redoing-commands-) <br/>
+&nbsp;&nbsp;[4.8. Invoking recent command](#48-invoking-recent-command--history) <br/>
+&nbsp;&nbsp;[4.9. Copying Emails](#49-copying-emails--copyemails) <br/>
+&nbsp;&nbsp;[4.10. Deleting a person](#410-deleting-a-person--delete) <br/>
+&nbsp;&nbsp;[4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
+&nbsp;&nbsp;[4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
+&nbsp;&nbsp;[4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
+[5. FAQ](#5-faq) <br/>
+[6. Command Summary](#6-command-summary) <br/>
 
-1. Download the latest `abpie.jar` from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+----
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+<div style="page-break-after: always;"></div>
+
+## 1. Introduction
+This document is the user guide for AddressBook Level 3.14 (Abπ), an all-rounded desktop app for managing contacts. It is primarily targeted towards fast-typers and individuals who prefer working on a Command-Line Interface (CLI). 
+
+*If you're unfamiliar with Command-Line Interfaces (CLIs), you can find out more about them [here](https://en.wikipedia.org/wiki/Command-line_interface)!*
+
+**Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
+
+
+ Word | What it means                                                                   |
+------|---------------------------------------------------------------------------------|
+Command box| Text box in the Abπ that allows user to type in texts.                          |
+Command| A sentence that causes Abπ to do something when typed into the command box.     |
+Command word | The first word of every command.                                                |
+Parameters | Information that is supplied by the user.                                       |
+Execute | The process by which Abπ reads the instructions written by user and acts on it. |
+
+
+### 1.1. Conventions
+When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
+
+Symbol | What it means |
+--------|-------------------|
+`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause an action in Abπ
+*Italics* | Sentences that are in italics represent additional information.
+:exclamation: | Warning/cautionary statement that should be read. 
+:bulb: | Extra tip that may be useful to the reader.
+:information_source: | Important information to take note.          
+[here](") |Words that are in this format are clickable links that directs you to a certain webpage.
+
+
+------------
+<div style="page-break-after: always;"></div>
+
+## 2. Quick start
+### 2.1. Installation
+1. Ensure you have Java 11 or above installed in your Computer.
+
+2. Download the latest Abπ.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
+
+3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+
+4. Double-click the file to start the app. The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * `list`: Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+   * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [features](#4-features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+### 2.2. System Requirements
+Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
 
-## Features
+_For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+
+### Windows
+* Windows 10 (8u51 and above)
+* Windows 8.x (Desktop)
+* Windows 7 SP1
+* Windows Vista SP2
+* Windows Server 2008 R2 SP1 (64-bit)
+* Windows Server 2012 and 2012 R2 (64-bit)
+* RAM: 128 MB
+* Disk space: 124 MB for JRE; 2 MB for Java Update
+* Processor: Minimum Pentium 2 266 MHz processor
+* Browsers: Internet Explorer 9 and above, Firefox
+<br />
+
+### Mac OS X
+* Intel-based Mac running Mac OS X 10.8.3+, 10.9+
+* Administrator privileges for installation
+* 64-bit browser
+* A 64-bit browser (Safari, for example) is required to run Oracle Java on Mac.
+* Browsers: Firefox
+---
+
+<div style="page-break-after: always;"></div>
+
+## 3. About  
+
+<div style="page-break-after: always;"></div>
+
+This section will bring you through the Graphical User Interface (GUI) of Abπ.
+![UiGuide](images/UiGuide.png)
+--- 
+
+<div style="page-break-after: always;"></div>
+
+## 4. Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in upper case are the parameters to be supplied by the user. e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times including zero times. e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order. e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
-  This is to protect from accidental invocations of the wrong command. <br>
-  e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
+  This is to protect from accidental invocations of the wrong command. e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
 
 </div>
 
-### Viewing help : `help`
+<br>
+
+### 4.1. Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -73,32 +167,37 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all persons : `list`
+<br>
+
+### 4.2. Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Adding a person: `add`
+<br>
+
+### 4.3. Adding a person: `add`
 
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Contacted Date and Memo is optional
+ Contacted Date and Memo is optional
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+ A person can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
-### Editing a person : `edit`
+<br>
 
+### 4.4. Editing a person : `edit`
 Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
@@ -117,11 +216,13 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
 
-### Locate persons by name, phone number, tags, email, address, memo and last contacted date:`find`
+<br>
+
+### 4.5. Find person by their attributes: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 * The search is case-insensitive. E.g. hans will match Hans
 * At least 1 parameter must be present.
 * More than 2 whitespace between words are treated as 1 whitespace. So "Alex_ _ _Yeoh" would be treated as "Alex_Yeoh" where "_" represents a single whitespace.
@@ -134,10 +235,11 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]
 * For both search criteria, order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * For both search criteria, as long as there is a word match (partial/exact), the contact would be in the filtered list. 
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info"> **:information_source: 
+A word is defined as consecutive characters that is bounded by whitespaces.
+e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".** 
+</div>
 
-**:information_source: A word is defined as consecutive characters that is bounded by whitespaces.
-e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".** <br>
 
 Examples:
 * `find n/ John` returns john and John Doe
@@ -151,8 +253,9 @@ Examples:
 * `find c/1` would find contacts that were contacted 1 or more days ago.
 * `find c/` would find contacts that had not been contacted.
 
-### Undoing commands :
+<br>
 
+### 4.6. Undoing commands 
 Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
 
 Format: `undo`
@@ -161,8 +264,9 @@ Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
 * `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
 
-### Redoing commands :
+<br>
 
+### 4.7. Redoing commands
 Redo previous undid states.
 
 Format: `redo`
@@ -170,18 +274,20 @@ Format: `redo`
 Examples:
 * `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
 
-### Easy navigation among recent commands: 
-#### Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+<br>
 
-* navigate among the recent inputs and autofill it in the textbox.
+### 4.8. Retrieving recent commands:`UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+By press the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
 
 Examples:
-* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`
-* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
-* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob"
-* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy"
+* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
+* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
+* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
+* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
 
-### Copying emails : `copyemails`
+<br>
+
+### 4.9. Copying Emails : `copyemails`
 
 Copies a comma-separated list of all displayed emails to clipboard.
 
@@ -191,7 +297,9 @@ Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
 * When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
 
-### Deleting a person : `delete`
+<br>
+
+### 4.10. Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -205,37 +313,44 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+<br>
+
+### 4.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+<br>
+
+### 4.12. Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Preventing duplicate entries (phone and email) :
+<br>
 
-Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the `add` and `edit` commands. All phone numbers and emails in Abπ will be unique.
+### 4.13. Extra information regarding the features
+#### Preventing duplicate entries (phone and email) 
+Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
 
-### Saving the data
-
+#### Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+ If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. FAQ
+
+<div style="page-break-after: always;"></div>
 
 **How do I save in Abπ?**<br>
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
@@ -254,7 +369,9 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 6. Command summary
+
+<div style="page-break-after: always;"></div>
 
 Action | Format, Examples
 --------|------------------
