@@ -57,7 +57,7 @@ public class CopyEmailsCommand extends Command {
      * Extracts the emails from a list of {@link seedu.address.model.person.Person Persons}
      *
      * @param lastShownList A list of {@link seedu.address.model.person.Person Person} objects.
-     * @return A comma separated list of emails.
+     * @return A {@code EMAIL_LIST_SEPARATOR}-separated list of emails.
      */
     private String getAllEmails(List<Person> lastShownList) {
         StringBuilder emailString = new StringBuilder();

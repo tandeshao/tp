@@ -132,15 +132,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-    protected void changePersonOnDisplay(Person target, Person updatedPerson) {
+    private void changePersonOnDisplay(Person target, Person updatedPerson) {
         updatePersonOnDisplay(updatedPerson);
     }
 
-    protected void removePersonOnDisplay() {
+    private void removePersonOnDisplay() {
         updatePersonOnDisplay(null);
     }
 
-    protected void updatePersonOnDisplay(Person p) {
+    private void updatePersonOnDisplay(Person p) {
         personOnDisplay.set(p);
     }
 

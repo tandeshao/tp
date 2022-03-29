@@ -15,7 +15,15 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the current Person object on display.
+     */
     Person getPersonOnDisplay();
 
+    /**
+     * Adds a listener for when the personOnDisplay changes.
+     *
+     * @param listener ChangeListener that reacts to the Person object changing.
+     */
     void addPersonOnDisplayListener(ChangeListener<? super Person> listener);
 }

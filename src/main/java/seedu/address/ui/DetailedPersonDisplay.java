@@ -10,6 +10,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
+/**
+ * A UI for the display of person details on the right.
+ */
 public class DetailedPersonDisplay extends UiPart<Region> {
     public static final String FXML = "DetailedPersonDisplay.fxml";
     public static final String DEFAULT_EMPTY_MESSAGE = "-";
@@ -42,6 +45,11 @@ public class DetailedPersonDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Returns a listener that updates the UI whenever the Person object on display is modified.
+     *
+     * @return Returns a ChangeListener that reacts to any edits of a Person object.
+     */
     public ChangeListener<? super Person> getListener() {
         return (ChangeListener<Person>) (observable, oldPerson, newPerson) -> {
             if (newPerson != null) {

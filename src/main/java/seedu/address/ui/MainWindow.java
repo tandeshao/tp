@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -131,6 +132,10 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Link the listener from {@code detailedPersonDisplay} to the personOnDisplay in the Address Book.
+     * @see seedu.address.model.ReadOnlyAddressBook#addPersonOnDisplayListener(ChangeListener)
+     */
     private void linkPersonOnDisplay() {
         logic.getAddressBook().addPersonOnDisplayListener(detailedPersonDisplay.getListener());
     }
