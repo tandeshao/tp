@@ -122,12 +122,17 @@ public class MainWindow extends UiPart<Stage> {
 
         detailedPersonDisplay = new DetailedPersonDisplay();
         detailedPersonDisplayPlaceholder.getChildren().add(detailedPersonDisplay.getRoot());
+        linkPersonOnDisplay();
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void linkPersonOnDisplay() {
+        logic.getAddressBook().addPersonOnDisplayListener(detailedPersonDisplay.getListener());
     }
 
     /**
