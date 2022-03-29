@@ -37,7 +37,6 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_APPEND_TAG_SUCCESS = "Appended tag: %1$s";
     public static final String MESSAGE_MISSING_PREFIX = "At least one " + PREFIX_TAG + " must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "%s is already present in the person.";
-    public static final String MESSAGE_NO_TAG_SPECIFIED = "Please specify a tag to be appended.";
 
     private final Index index;
     private final Set<Tag> tagsToAppend;
@@ -133,8 +132,26 @@ public class AddTagCommand extends Command {
      * @return A new tag set that contains all the tags from both the sets.
      */
     private Set<Tag> createUpdatedTags(Set<Tag> personTags, Set<Tag> tagsToAppend) {
-       Set<Tag> updatedTagSet = new HashSet<>(personTags);
-       updatedTagSet.addAll(tagsToAppend);
-       return updatedTagSet;
+        Set<Tag> updatedTagSet = new HashSet<>(personTags);
+        updatedTagSet.addAll(tagsToAppend);
+        return updatedTagSet;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddTagCommand)) {
+            return false;
+        }
+
+        AddTagCommand command = (AddTagCommand) other;
+        return index.equals(command.index)
+                && tagsToAppend.equals(command.tagsToAppend);
+    }
+
 }

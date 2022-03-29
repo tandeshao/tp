@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,13 +46,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             throw new ParseException(AddTagCommand.MESSAGE_MISSING_PREFIX);
         }
 
-        List<String> tagStringsToAppend = argMultimap.getAllValues(PREFIX_TAG);
-        if (tagStringsToAppend.isEmpty()) {
-            LOGGER.log(Level.INFO, "Tags to append is empty");
-            throw new ParseException(AddTagCommand.MESSAGE_NO_TAG_SPECIFIED);
-        }
-
-        Set<Tag> tagsToAppend = ParserUtil.parseTags(tagStringsToAppend);
+        Set<Tag> tagsToAppend = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         LOGGER.log(Level.INFO, "AddTagCommandParser#parse(String) success");
         return new AddTagCommand(index, tagsToAppend);
     }
