@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 ## Overview
-AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with modern features. Its key features include efficient filtering of contacts based on various attributes (name, email, tags, etc), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ got you covered. So what are you waiting for? Download and try out Abπ today!
+AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
 
 ---
 
@@ -62,7 +62,7 @@ When this document is read, certain words or sentences are represented in differ
 
 Symbol | What it means |
 --------|-------------------|
-`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause an action in Abπ
+`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause a response in Abπ
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 
 :bulb: | Extra tip that may be useful to the reader.
@@ -139,7 +139,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * Words in upper case are the parameters to be supplied by the user. e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional. e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times. e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -147,8 +147,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) will not be recognized if there are extraneous parameters.
-  This is to protect from accidental invocations of the wrong command. e.g. if the command specifies `clear 1`, it will be interpreted as an invalid command. The proper format is `clear`.
+* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format is to execute clear is just `clear`.
 
 </div>
 
@@ -187,6 +186,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO]
 </div>
 
 Examples:
+* `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
@@ -195,6 +195,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 ### 4.4. Editing a person : `edit`
+
 Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
@@ -255,6 +256,7 @@ Examples:
 <br>
 
 ### 4.6. Undoing commands 
+
 Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
 
 Format: `undo`
@@ -266,19 +268,20 @@ Examples:
 <br>
 
 ### 4.7. Redoing commands
-Redo previous undid states.
+
+Redo reverses the `undo` command.
 
 Format: `redo`
 
 Examples:
-* `redo` after calling `undo` restores the address book to its previous undid state prior to undo.
+* `redo` after calling `undo` restores the address book to its previous state prior to undo.
 
 <br>
 
 <div style="page-break-after: always;"></div>
 
 ### 4.8. Retrieving recent commands:`UP_ARROW_KEY` or `DOWN_ARROW_KEY`
-By press the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
+By pressing the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
 
 Examples:
 * If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
