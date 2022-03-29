@@ -56,7 +56,6 @@ public class AddressBookParserTest {
                 ClearCommand.MESSAGE_USAGE), () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
-
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(

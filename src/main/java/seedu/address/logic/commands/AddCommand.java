@@ -46,7 +46,9 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Person}.
+     *
+     * @param person Person to be added.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
@@ -77,7 +79,7 @@ public class AddCommand extends Command {
      * Checks if two {@code AddCommand} is equal.
      *
      * @param other the other {@code AddCommand} object.
-     * @return true if equal; otherwise false.
+     * @return If equal true; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
