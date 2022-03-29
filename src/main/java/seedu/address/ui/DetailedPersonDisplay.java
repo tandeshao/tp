@@ -21,6 +21,9 @@ public class DetailedPersonDisplay extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
+    private Label phoneLabel;
+
+    @FXML
     private Label emailLabel;
 
     @FXML
@@ -45,6 +48,9 @@ public class DetailedPersonDisplay extends UiPart<Region> {
                 String newName = newPerson.getName().toString();
                 nameLabel.setText(newName);
 
+                String newPhone = newPerson.getPhone().toString();
+                phoneLabel.setText(newPhone);
+
                 String newEmail = newPerson.getEmail().toString();
                 emailLabel.setText(newEmail);
 
@@ -66,6 +72,7 @@ public class DetailedPersonDisplay extends UiPart<Region> {
                         .forEach(tag -> tagsPane.getChildren().add(new Label(tag.toString())));
             } else {
                 nameLabel.setText(DEFAULT_EMPTY_MESSAGE);
+                phoneLabel.setText(DEFAULT_EMPTY_MESSAGE);
                 emailLabel.setText(DEFAULT_EMPTY_MESSAGE);
                 addressLabel.setText(DEFAULT_EMPTY_MESSAGE);
                 memoLabel.setText(DEFAULT_EMPTY_MESSAGE);
