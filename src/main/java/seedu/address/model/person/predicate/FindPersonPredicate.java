@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,10 +36,17 @@ public class FindPersonPredicate implements Predicate<Person> {
 
     /**
      * Conducts a case-insensitive check on the {@link seedu.address.model.person.Person Person}.
-     * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix})
-     * has any word that matches exactly to any word in the given description. Only three attributes
-     * are allowed to have exact word checks, and they are address, memo and tags. The other three attributes
-     * (name, phone and email) are only allowed to have partial word checks.
+     * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix}) matches any of
+     * the following criteria.
+     *
+     * Tag uses exact word check, where "find n/redherring" would only match with the name "redherring".
+     * Contacted date uses a special check where "find c/1" would result in choosing person that had not been
+     * contacted for more than 1 day ago.
+     * The other remaining attributes (phone, memo, address, email, name) uses a partial word match where "find
+     * n/kay" would result in a match with "kay", "kaylee", "kayla", "okay" and "pokaya".
+     * Note, using the same prefix more than once in a single query is the same as running the find command more than
+     * once on the filter list and combining the outcome of both filtered result into a single output list. For
+     * example, "find n/benedict" and "find n/alex" would match with both "alex" and "benedict".
      *
      * @param person person to be tested.
      * @return true if person contains the word, false otherwise.
@@ -65,11 +73,11 @@ public class FindPersonPredicate implements Predicate<Person> {
         Predicate<Person> predicateToTestAgainst;
         if (attribute.equals(PREFIX_CONTACTED_DATE)) {
             predicateToTestAgainst = new ContactedDateMatchPredicate(descriptor);
-        } else if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
-            predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
+        } else if (attribute.equals(PREFIX_TAG)) {
+            predicateToTestAgainst = new ExactWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
         } else {
-            predicateToTestAgainst = new ExactWordMatchPredicate(attribute,
+            predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
         }
         return predicateToTestAgainst.test(person);
