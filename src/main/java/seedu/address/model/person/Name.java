@@ -11,9 +11,9 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, "
-                    + "and its length should be between 1 and 30 (including spaces)";
+                    + "and its length should be between 1 and 800 (including spaces)";
 
-    public static final String NAME_CHARACTER_LIMIT = "{0,29}";
+    public static final String NAME_CHARACTER_LIMIT = "{0,799}";
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
