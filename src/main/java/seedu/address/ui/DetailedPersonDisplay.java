@@ -48,7 +48,7 @@ public class DetailedPersonDisplay extends UiPart<Region> {
     /**
      * Returns a listener that updates the UI whenever the Person object on display is modified.
      *
-     * @return Returns a ChangeListener that reacts to any edits of a Person object.
+     * @return a ChangeListener that reacts to any edits of a Person object.
      */
     public ChangeListener<? super Person> getListener() {
         return (ChangeListener<Person>) (observable, oldPerson, newPerson) -> {
