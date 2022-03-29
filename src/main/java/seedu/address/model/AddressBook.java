@@ -122,6 +122,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         updatePersonOnDisplayUponRemovals(personsToRemove);
     }
 
+    /**
+     * Checks if the current {@code personOnDisplay} needs to be removed, and if so, remove it.
+     *
+     * @param personsToRemove List of person to remove from the {@code AddressBook}
+     */
     private void updatePersonOnDisplayUponRemovals(Person... personsToRemove) {
         Person currentPerson = personOnDisplay.get();
         for (Person p : personsToRemove) {
@@ -132,16 +137,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    /**
+     * Changes the current {@code personOnDisplay} to the {@code updatedPerson}.
+     */
     private void changePersonOnDisplay(Person target, Person updatedPerson) {
         updatePersonOnDisplay(updatedPerson);
     }
 
+    /**
+     * Removes the current {@code personOnDisplay}.
+     */
     private void removePersonOnDisplay() {
         updatePersonOnDisplay(null);
     }
 
-    private void updatePersonOnDisplay(Person p) {
-        personOnDisplay.set(p);
+    /**
+     * Updates the current {@code personOnDisplay} to {@code person}.
+     *
+     * @param person The {@code Person} object to update {@code personOnDisplay} with.
+     */
+    private void updatePersonOnDisplay(Person person) {
+        personOnDisplay.set(person);
     }
 
     //// util methods
