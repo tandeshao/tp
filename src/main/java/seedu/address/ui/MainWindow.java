@@ -33,10 +33,14 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private DetailedPersonDisplay detailedPersonDisplay;
     private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane detailedPersonDisplayPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -115,6 +119,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        detailedPersonDisplay = new DetailedPersonDisplay();
+        detailedPersonDisplayPlaceholder.getChildren().add(detailedPersonDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="personDisplayPane" prefHeight="400.0" prefWidth="500.0" styleClass="detailed-person-display" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fitToWidth="true" styleClass="detailed-person-display">
+         <content>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <StackPane styleClass="detailed-name-display">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" minHeight="70.0" text="\$name" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <GridPane styleClass="detailed-detail-display">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="120.0" percentWidth="25.0" prefWidth="120.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="75.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" />
+                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Phone:" wrapText="true" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="\$phone" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Email:" wrapText="true" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="\$email" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Address:" wrapText="true" GridPane.rowIndex="5">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="\$address" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Tags:" GridPane.rowIndex="9">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Memo:" GridPane.rowIndex="11">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="\$memo" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <FlowPane GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Separator GridPane.rowIndex="2" />
+                        <Separator GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" />
+                        <Separator prefWidth="200.0" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Separator prefWidth="200.0" GridPane.rowIndex="4" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Separator prefWidth="200.0" GridPane.rowIndex="8" />
+                        <Separator prefWidth="200.0" GridPane.rowIndex="10" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Separator prefWidth="200.0" GridPane.rowIndex="6" />
+                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Last Contact:" GridPane.rowIndex="7">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="\$date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</StackPane>

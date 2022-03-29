@@ -157,6 +157,34 @@
     -fx-text-fill: black !important;
 }
 
+.detailed-name-display .label {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+}
+
+.detailed-person-display {
+    -fx-background: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-fit-to-width: true;
+}
+
+.detailed-detail-display {
+    -fx-pref-height: -1;
+}
+
+.detailed-detail-display .separator {
+    -fx-background: white;
+}
+
+.detailed-detail-display .label {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-wrap-text: true;
+}
+
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
