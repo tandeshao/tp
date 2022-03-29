@@ -1,31 +1,64 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandList;
+import seedu.address.logic.commands.exceptions.CommandException;
+
 
 public class CommandListTest {
 
     @Test
-    public void getRecentCommands_test() {
-        CommandList.clearAllCommand();
-        CommandList.record("find n/ John1");
-        CommandList.record("find n/ John2");
-        CommandList.record("find n/ John3");
-        CommandList.record("find n/ John4");
-
-        Assertions.assertEquals(CommandList.getRecentCommands(), "find n/ John4\nfind n/ John3\nfind n/ John2");
+    public void resetPointer_onEmptyList_success() {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().resetPointer();
+        assertEquals(0, CommandList.getList().getPointer());
     }
-
     @Test
-    public void getLastCommand_test() {
-        CommandList.clearAllCommand();
-        CommandList.record("find n/ John1");
-        CommandList.record("find n/ John2");
-        CommandList.record("find n/ John3");
-        CommandList.record("find n/ John4");
+    public void resetPointer_success() throws CommandException {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
+        CommandList.getList().resetPointer();
+        assertEquals(4, CommandList.getList().getPointer());
+    }
+    @Test
+    public void getCurrentCommand_success() throws CommandException {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
+        CommandList.getList().decreasePointer();
+        assertEquals("find n/ John4", CommandList.getList().getCurrentCommand());
+    }
+    @Test
+    public void getCurrentCommand_fail() throws CommandException {
+        CommandList.getList().clearAllCommands();
+        CommandList.getList().record("find n/ John1");
+        CommandList.getList().record("find n/ John2");
+        CommandList.getList().record("find n/ John3");
+        CommandList.getList().record("find n/ John4");
 
-        Assertions.assertEquals(CommandList.getLastCommand(), "find n/ John4");
+        assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
+    }
+    @Test
+    public void getCurrentCommand_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(IndexOutOfBoundsException.class, () -> CommandList.getList().getCurrentCommand());
+    }
+    @Test
+    public void decreasePointer_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(CommandException.class, () -> CommandList.getList().decreasePointer());
+    }
+    @Test
+    public void increasePointer_onEmptyList_fail() {
+        CommandList.getList().clearAllCommands();
+        assertThrows(CommandException.class, () -> CommandList.getList().increasePointer());
     }
 }

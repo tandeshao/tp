@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,13 +22,20 @@ public class CopyEmailsCommand extends Command {
     public static final String MESSAGE_EMPTY_EMAIL_LIST = "There are no emails to copy!";
     public static final String MESSAGE_COPY_EMAILS_FAILURE = "Unable to copy to clipboard.";
     public static final String MESSAGE_COPY_EMAILS_SUCCESS = "Successfully copied \"%s\" to clipboard!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Copies a comma-separated list of all displayed emails to clipboard.\n"
+            + "Example: " + COMMAND_WORD;
+
+    private static final Logger LOGGER = Logger.getLogger(CopyEmailsCommand.class.getName());
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.log(Level.INFO, "Executing CopyEmailsCommand#execute(Model)");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         String emailString = getAllEmails(lastShownList);
         if (emailString.length() == 0) {
+            LOGGER.log(Level.INFO, "Empty email list");
             throw new CommandException(MESSAGE_EMPTY_EMAIL_LIST);
         }
 
@@ -35,8 +44,11 @@ public class CopyEmailsCommand extends Command {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
             String message = String.format(MESSAGE_COPY_EMAILS_SUCCESS, emailString);
+
+            LOGGER.log(Level.INFO, "CopyEmailsCommand#execute(Model) success");
             return new CommandResult(message);
         } catch (IllegalStateException e) {
+            LOGGER.log(Level.INFO, "Failed to copy emails to clipboard");
             throw new CommandException(MESSAGE_COPY_EMAILS_FAILURE);
         }
     }

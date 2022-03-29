@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -21,6 +22,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactedDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Memo;
 import seedu.address.model.person.Name;
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_CONTACTED_DATE + "CONTACTED DATE] "
             + "[" + PREFIX_MEMO + "MEMO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -109,10 +112,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        ContactedDate updatedContactedDate =
+                editPersonDescriptor.getContactedDate().orElse(personToEdit.getContactedDate());
         Memo updatedMemo = editPersonDescriptor.getMemo().orElse(personToEdit.getMemo());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedMemo, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedContactedDate, updatedMemo, updatedTags);
     }
 
 
@@ -143,6 +149,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private ContactedDate contactedDate;
         private Memo memo;
         private Set<Tag> tags;
 
@@ -157,6 +164,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setContactedDate(toCopy.contactedDate);
             setMemo(toCopy.memo);
             setTags(toCopy.tags);
         }
@@ -165,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, memo, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, contactedDate, memo, tags);
         }
 
         public void setName(Name name) {
@@ -198,6 +206,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setContactedDate(ContactedDate contactedDate) {
+            this.contactedDate = contactedDate;
+        }
+
+        public Optional<ContactedDate> getContactedDate() {
+            return Optional.ofNullable(contactedDate);
         }
 
         public void setMemo(Memo memo) {
@@ -250,6 +266,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getContactedDate().equals(e.getContactedDate())
                     && getMemo().equals(e.getMemo())
                     && getTags().equals(e.getTags());
         }

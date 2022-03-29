@@ -22,18 +22,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final ContactedDate contactedDate;
     private final Memo memo;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Memo memo, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  ContactedDate contactedDate, Memo memo, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.contactedDate = contactedDate;
         this.memo = memo;
         this.tags.addAll(tags);
     }
@@ -50,7 +53,7 @@ public class Person {
     /**
      * Returns phone.
      *
-     * @return phone/
+     * @return phone.
      */
     public Phone getPhone() {
         return phone;
@@ -72,6 +75,15 @@ public class Person {
      */
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns contactedDate.
+     *
+     * @return contactedDate.
+     */
+    public ContactedDate getContactedDate() {
+        return contactedDate;
     }
 
     /**
@@ -101,8 +113,11 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have same phone number or email.
+     * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.
+     *
+     * @param otherPerson The other {@code Person}.
+     * @return true if both persons have the same phone or email; otherwise false.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -117,6 +132,7 @@ public class Person {
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      *
+     * @param other The other Object.
      * @return true if both persons have the same identity and data fields; otherwise false.
      */
     @Override
@@ -134,6 +150,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getContactedDate().equals(getContactedDate())
                 && otherPerson.getMemo().equals(getMemo())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -146,7 +163,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, memo, tags);
+        return Objects.hash(name, phone, email, address, contactedDate, memo, tags);
     }
 
     /**
@@ -163,7 +180,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Contacted Date: ")
+                .append(getContactedDate());
 
         if (!memo.isEmpty()) {
             builder.append(" Memo: ").append(getMemo());

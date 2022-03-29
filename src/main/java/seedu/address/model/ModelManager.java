@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.CommandList;
 import seedu.address.model.person.Person;
 
 /**
@@ -110,6 +110,20 @@ public class ModelManager implements Model {
         stateAddressBook.removePerson(target);
     }
 
+    /**
+     * Deletes all the persons from the model.
+     *
+     * @param persons List of person to delete.
+     */
+    @Override
+    public void deleteAllPerson(ObservableList<Person> persons) {
+        requireAllNonNull(persons);
+        Person[] personsToDelete = Arrays.stream(persons.toArray())
+                .map(o -> (Person) o).toArray(Person[]::new);
+        stateAddressBook.removePersons(personsToDelete);
+    }
+
+
     @Override
     public void addPerson(Person person) {
         stateAddressBook.addPerson(person);
@@ -138,12 +152,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    /** Records the command being executed. */
-    @Override
-    public void recordCommand(String userInput) {
-        CommandList.record(userInput);
     }
 
     //=========== Undo and redo ==============================================================================

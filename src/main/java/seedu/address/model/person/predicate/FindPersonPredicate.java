@@ -1,5 +1,6 @@
 package seedu.address.model.person.predicate;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -7,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.FindPersonDescriptor;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -16,19 +17,19 @@ import seedu.address.model.person.Person;
  * Tests if a {@link seedu.address.model.person.Person Person}
  * matches any of the description given.
  */
-public class PersonPredicate implements Predicate<Person> {
+public class FindPersonPredicate implements Predicate<Person> {
 
     /**
      * Descriptor from {@link FindCommandParser}.
      */
-    private final FindPersonDescriptor descriptor;
+    private final ArgumentMultimap descriptor;
 
     /**
-     * Constructor of Predicate function.
+     * Constructs Predicate function.
      *
      * @param descriptor description to search a person by.
      */
-    public PersonPredicate(FindPersonDescriptor descriptor) {
+    public FindPersonPredicate(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
     }
 
@@ -36,7 +37,8 @@ public class PersonPredicate implements Predicate<Person> {
      * Conducts a case-insensitive check on the {@link seedu.address.model.person.Person Person}.
      * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix})
      * has any word that matches exactly to any word in the given description. Only three attributes
-     * are allowed to have exact word checks, and they are address, memo and tags.
+     * are allowed to have exact word checks, and they are address, memo and tags. The other three attributes
+     * (name, phone and email) are only allowed to have partial word checks.
      *
      * @param person person to be tested.
      * @return true if person contains the word, false otherwise.
@@ -45,7 +47,7 @@ public class PersonPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         List<Prefix> prefixes = descriptor.getAllAvailablePrefix();
         for (Prefix prefix : prefixes) {
-            if (testPerson(person, prefix)) {
+            if (testPersonAttribute(person, prefix)) {
                 return true;
             }
         }
@@ -53,34 +55,36 @@ public class PersonPredicate implements Predicate<Person> {
     }
 
     /**
-     * Tester to check if the attribute that corresponds with the prefix matches with the predicate.
+     * Checks if the attribute that corresponds with the attribute matches with the predicate.
      * @param person person to be tested.
-     * @param prefix the single prefix that identifies which attribute of the person should the predicate be
+     * @param attribute the prefix that identifies which attribute of the person should the predicate be
      *               testing against.
      * @return true if the person's attribute passes the test, false otherwise.
      */
-    private boolean testPerson(Person person, Prefix prefix) {
-        if (prefix.equals(PREFIX_NAME) || prefix.equals(PREFIX_PHONE) || prefix.equals(PREFIX_EMAIL)) {
-            PartialWordMatchPredicate predicate = new PartialWordMatchPredicate(prefix,
-                    descriptor.getDescription(prefix));
-            return predicate.test(person);
+    private boolean testPersonAttribute(Person person, Prefix attribute) {
+        Predicate<Person> predicateToTestAgainst;
+        if (attribute.equals(PREFIX_CONTACTED_DATE)) {
+            predicateToTestAgainst = new ContactedDateMatchPredicate(descriptor);
+        } else if (attribute.equals(PREFIX_NAME) || attribute.equals(PREFIX_PHONE) || attribute.equals(PREFIX_EMAIL)) {
+            predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
+                    descriptor.getAllValues(attribute));
         } else {
-            ExactWordMatchPredicate predicate = new ExactWordMatchPredicate(prefix,
-                    descriptor.getDescription(prefix));
-            return predicate.test(person);
+            predicateToTestAgainst = new ExactWordMatchPredicate(attribute,
+                    descriptor.getAllValues(attribute));
         }
+        return predicateToTestAgainst.test(person);
     }
 
     /**
-     * Equal method to check if two {@link PersonPredicate} are equal.
+     * Equal method to check if two {@link FindPersonPredicate} are equal.
      *
      * @param other other PersonContainsKeywordsPredicate object.
-     * @return true if both {@link PersonPredicate} object are the same, false otherwise.
+     * @return true if both {@link FindPersonPredicate} object are the same, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonPredicate // instanceof handles nulls
-                && descriptor.equals(((PersonPredicate) other).descriptor)); // state check
+                || (other instanceof FindPersonPredicate // instanceof handles nulls
+                && descriptor.equals(((FindPersonPredicate) other).descriptor)); // state check
     }
 }

@@ -9,15 +9,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    private static final int MAXIMUM_LENGTH = 800;
+    public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank or start with a space, "
+            + "and it cannot exceed" + MAXIMUM_LENGTH + "characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[^\\s].{0," + (MAXIMUM_LENGTH - 1) + "}";
 
-    public final String value;
+    public final String address;
 
     /**
      * Constructs an {@code Address}.
@@ -27,7 +29,7 @@ public class Address {
     public Address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        this.address = address;
     }
 
     /**
@@ -39,19 +41,19 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return address;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && value.equals(((Address) other).value)); // state check
+                && address.equals(((Address) other).address)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return address.hashCode();
     }
 
 }

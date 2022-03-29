@@ -91,9 +91,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Record the most recent user input except "history". */
-    void recordCommand(String userInput);
-
     /**
      * Restores address book to its previous state.
      */
@@ -123,4 +120,10 @@ public interface Model {
      */
     void saveAddressBookState();
 
+    /**
+     * Deletes the list of person from model.
+     *
+     * @param persons List of person to delete.
+     */
+    void deleteAllPerson(ObservableList<Person> persons);
 }

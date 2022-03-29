@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
@@ -42,9 +43,10 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        model.recordCommand(commandText);
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        //If command is executed successfully, record the command.
+        CommandList.getList().record(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
