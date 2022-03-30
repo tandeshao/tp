@@ -63,7 +63,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    // '&' not allowed in names
+    // names cannot be empty
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "  ";
 
     // 'a' not allowed in phones
