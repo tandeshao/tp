@@ -363,15 +363,15 @@ Below is a table that shows the matching criteria that is used for each person's
 
 <br>
 
-| Attribute (prefix) | Prefix | Matching criteria       | Example                                                                                                         | 
-|--------------------|--------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| Name               | n/     | Partial string matching | find n/Alex would match with "alexa".                                                                           |  
-| Phone Number       | p/     | Partial string matching | find p/9040 would match with "90400204".                                                                        |
-| Email              | e/     | Partial string matching | find e/@gmail would match with anybody that has the @gmail domain.                                              | 
-| Address            | a/     | Partial string matching | find a/street would match with anybody that has the string "street" in their address.                           |
-| Memo               | m/     | Partial string matching | find m/Lover would match with anybody that has the string "lover" in their memo.                                |
-| Contacted Date     | c/     | Contacted Date Matching | find c/5 would match with anybody that had not been contacted for more than 5 days relative to the current day. |
-| Tags               | t/     | Exact string matching   | find t/Family would only match with anybody that has a tag that is equivalent to the string "family".           | 
+| Attribute      | Prefix | Matching criteria       | Example                                                                                                         | 
+|----------------|--------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Name           | n/     | Partial string matching | find n/Alex would match with "alexa".                                                                           |  
+| Phone Number   | p/     | Partial string matching | find p/9040 would match with "90400204".                                                                        |
+| Email          | e/     | Partial string matching | find e/@gmail would match with anybody that has the @gmail domain.                                              | 
+| Address        | a/     | Partial string matching | find a/street would match with anybody that has the string "street" in their address.                           |
+| Memo           | m/     | Partial string matching | find m/Lover would match with anybody that has the string "lover" in their memo.                                |
+| Contacted Date | c/     | Contacted Date Matching | find c/5 would match with anybody that had not been contacted for more than 5 days relative to the current day. |
+| Tags           | t/     | Exact string matching   | find t/Family would only match with anybody that has a tag that is equivalent to the string "family".           | 
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
