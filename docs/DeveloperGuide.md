@@ -382,9 +382,11 @@ Below is a table that shows the matching criteria that is used for each person's
 
   * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
     * Tags was chosen to follow the exact string match criteria because users are likely to remember the full word of a tag and search for them.
-    * As for the remaining attributes apart from contacted date (name, phone number, email, address and memo), a partial string match criteria was adopted because it allows for more flexibility in the search. 
+    * For contacted date, a special matching criteria is created specifically for this attribute because the semantics of finding a person by their last contacted date is different from the other attributes. 
+    * As for the remaining attributes (name, phone number, email, address and memo), a partial string match criteria was adopted because it allows for more flexibility in the search. 
       * For instance, if a user could only remember a certain part of the string for that specific attribute, this partial matching criteria is able to help the user filter out possible results that he/she might want. 
-      * On the other hand, if the user would like to perform a more restrictive search on the address book, he/she can simply type in more characters in the query string.         
+      * On the other hand, if the user would like to perform a more restrictive search on the address book, he/she can simply type in more characters in the query string.  
+    
   * Cons: Edge cases that may cause the search to be ineffective are present and one such test case would be: `find e/gmail` where the intended effect the user might want is to search for all contacts that have the domain name set as "gmail". However, the email "redherringmail@yahoo" will be matched with the user query and this search result does not meet the intended effect the user might want.  
   * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would like to find all contacts that have the domain name set as "gmail".  
   
