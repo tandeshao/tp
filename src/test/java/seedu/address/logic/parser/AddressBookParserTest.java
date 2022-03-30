@@ -4,19 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CopyEmailsCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -30,6 +36,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.FindPersonPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -56,7 +63,6 @@ public class AddressBookParserTest {
                 ClearCommand.MESSAGE_USAGE), () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
-
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
@@ -72,6 +78,28 @@ public class AddressBookParserTest {
                 EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addTag() throws Exception {
+        Set<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(new Tag(VALID_TAG_FRIEND));
+
+        AddTagCommand command = (AddTagCommand) parser.parseCommand(
+                AddTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_TAG + VALID_TAG_FRIEND);
+        assertEquals(new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd), command);
+    }
+
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        Set<Tag> tagsToDelete = new HashSet<>();
+        tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
+
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_TAG + VALID_TAG_FRIEND);
+        assertEquals(new DeleteTagCommand(INDEX_FIRST_PERSON, tagsToDelete), command);
     }
 
     @Test

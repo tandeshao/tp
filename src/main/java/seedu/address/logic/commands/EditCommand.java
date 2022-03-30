@@ -61,8 +61,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit.
-     * @param editPersonDescriptor details to edit the person with.
+     * Creates an EditCommand to edit the person at the specified index with editPersonDescriptor.
+     *
+     * @param index Index of the person in the filtered person list to edit.
+     * @param editPersonDescriptor Details to edit the person with.
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -76,7 +78,7 @@ public class EditCommand extends Command {
      * Executes the edit command and returns the result message.
      *
      * @param model {@code Model} which the edit command should operate on.
-     * @return feedback message of the edit operation result for display.
+     * @return Feedback message of the edit operation result for display.
      * @throws CommandException If an error occurs during edit command execution.
      */
     @Override
@@ -122,6 +124,12 @@ public class EditCommand extends Command {
     }
 
 
+    /**
+     * Checks if two {@code EditCommand} is equal.
+     *
+     * @param other the other {@code EditCommand} object.
+     * @return If equal true; otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

@@ -15,23 +15,35 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
 [2. Quick Start](#2-quick-start) <br/>
 &nbsp;&nbsp;[2.1. Installation](#21-installation) <br/>
-&nbsp;&nbsp;[2.2 System Requirements](#22-system-requirements) <br/>
+&nbsp;&nbsp;[2.2. System Requirements](#22-system-requirements) <br/>
 [3. About](#3-about) <br/>
 [4. Features](#4-features) <br/>
-&nbsp;&nbsp;[4.1. Viewing help](#41-viewing-help--help) <br/>
-&nbsp;&nbsp;[4.2. Listing all persons](#42-listing-all-persons--list) <br/>
-&nbsp;&nbsp;[4.3. Adding a person](#43-adding-a-person-add) <br/>
-&nbsp;&nbsp;[4.4. Editing a person](#44-editing-a-person--edit) <br/>
-&nbsp;&nbsp;[4.5. Find person by their attributes](#45-find-person-by-their-attributesfind) <br/>
-&nbsp;&nbsp;[4.6. Undoing commands](#46-undoing-commands-) <br/>
-&nbsp;&nbsp;[4.7. Redoing commands](#47-redoing-commands-) <br/>
-&nbsp;&nbsp;[4.8. Invoking recent command](#48-invoking-recent-command--history) <br/>
-&nbsp;&nbsp;[4.9. Copying Emails](#49-copying-emails--copyemails) <br/>
-&nbsp;&nbsp;[4.10. Deleting a person](#410-deleting-a-person--delete) <br/>
-&nbsp;&nbsp;[4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
-&nbsp;&nbsp;[4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
-&nbsp;&nbsp;[4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;[4.14. Scrubbing contacts](#414-scrubbing-address-book) <br/>
+&nbsp;&nbsp;[4.1. Adding and Editing a person](#41-adding-and-editing-a-person) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Adding a person](#411-adding-a-person-add) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Editing a person](#412-editing-a-person-edit) <br/>
+&nbsp;&nbsp;[4.2. Adding and Editing a person's tag](#42-adding-and-editing-a-persons-tag) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Adding tags to a person](#421-adding-tags-to-a-person-addtag) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.2.2. Deleting tags of a person](#422-deleting-tags-of-a-person-deletetag) <br/>
+&nbsp;&nbsp;[4.3. Removing persons](#43-removing-persons) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Deleting a person](#431-deleting-a-person-delete) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Scrubbing address book](#432-scrubbing-address-book-scrub) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Clearing all entries](#433-clearing-all-entries-clear) <br/>
+&nbsp;&nbsp;[4.4. Filtering the address book](#44-filtering-the-address-book) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Finding person by their attributes](#441-finding-person-by-their-attributes-find) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.2. Listing all persons](#442-listing-all-persons-list) <br/>
+&nbsp;&nbsp;[4.5. Getting all emails](#45-getting-all-emails) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1. Copying Emails](#451-copying-emails-copyemails) <br/>
+&nbsp;&nbsp;[4.6. Quality of Life](#46-quality-of-life) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Undoing commands](#461-undoing-commands-undo) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2. Redoing commands](#462-redoing-commands-redo) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.3. Retrieving recent commands](#463-retrieving-recent-commands-up_arrow_key-or-down_arrow_key) <br/>
+&nbsp;&nbsp;[4.7. Miscellaneous](#47-miscellaneous) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Viewing help](#471-viewing-help-help) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.2. Exiting the program](#472-exiting-the-program-exit) <br/>
+&nbsp;&nbsp;[4.8. Extra information regarding the features](#48-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Preventing duplicate entries (phone and email)](#481-preventing-duplicate-entries-phone-and-email) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Saving the data](#482-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.8.3. Editing the data file](#483-editing-the-data-file) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -156,25 +168,9 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 <br>
 
-### 4.1. Viewing help : `help`
+### 4.1. Adding and Editing a person
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-<br>
-
-### 4.2. Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-<br>
-
-### 4.3. Adding a person: `add`
+#### 4.1.1. Adding a person: `add`
 
 Adds a person to the address book.
 
@@ -195,9 +191,7 @@ Examples:
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
-### 4.4. Editing a person : `edit`
+#### 4.1.2. Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -219,99 +213,41 @@ Examples:
 
 <br>
 
-<div style="page-break-after: always;"></div>
+### 4.2. Adding and Editing a person's tag
 
-### 4.5. Find person by their attributes: `find`
+#### 4.2.1. Adding tags to a person: `addtag`
 
-Finds persons whose names contain any of the given keywords.
+Appends one or more tags to a specified person in the address book.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
+Format: `addtag INDEX t/TAG…`
 
-Below is a table that shows the different matching criteria that is present in the app:
-
-| Matching criteria                | Description                                                                                                                                                                                                                                                                                                        | 
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Partial string matching          | Does a case-insensitive partial match between two strings where it will check if the query string is contained within the compared string. Note that the order of character matters and this includes the whitespace character.                                      |  
-| Exact string matching            | Does a case-insensitive exact match between two strings where it will check if the query string is equivalent to the compared string.                                                                                                                                                                              |
-| Contacted Date matching criteria | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. |
-
-<br>
-
-<div markdown="span" class="alert alert-info">  
-:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
-</div>
-
-<br>
-
-| Attribute      | Prefix | Matching criteria       | Example                                                                                                         | 
-|----------------|--------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| Name           | n/     | Partial string matching | `find n/Alex` would match with "alexa".                                                                           |  
-| Phone Number   | p/     | Partial string matching | `find p/9040` would match with "90400204".                                                                        |
-| Email          | e/     | Partial string matching | `find e/@gmail` would match with anybody that has the "@gmail" domain.                                              | 
-| Address        | a/     | Partial string matching | `find a/street` would match with anybody that has the string "street" in their address.                           |
-| Memo           | m/     | Partial string matching | `find m/Lover` would match with anybody that has the string "lover" in their memo.                                |
-| Contacted Date | c/     | Contacted Date Matching | `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day. |
-| Tags           | t/     | Exact string matching   | `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".           |
-
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. For instance the result that is shown from `find n/alex n/yeoh` is the same as doing a union operation on the set of results from `find n/alex` and `find n/yeoh`. For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
-</div>
-
-
-<br>
-
-### 4.6. Undoing commands 
-
-Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
-
-Format: `undo`
+* Appends one or more tags to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* If any of the tag to be appended already exists in the person's tag list, the command will be rejected.
 
 Examples:
-* `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
-* `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
+* `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
+* `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
 
 <br>
 
-### 4.7. Redoing commands
+#### 4.2.2. Deleting tags of a person: `deletetag`
 
-Redo reverses the `undo` command.
+Deletes one or more tags of a specified person in the address book.
 
-Format: `redo`
+Format: `deletetag INDEX t/TAG…`
+
+* Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* If any of the tag to be deleted does not exist, the command will be rejected.
 
 Examples:
-* `redo` after calling `undo` restores the address book to its previous state prior to undo.
+* `deletetag 1 t/friends` deletes the tag "friends" of the 1st person if the tag exists.
+* `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person if both tags exist.
 
 <br>
 
-<div style="page-break-after: always;"></div>
+### 4.3. Removing persons
 
-### 4.8. Retrieving recent commands:`UP_ARROW_KEY` or `DOWN_ARROW_KEY`
-By pressing the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
-
-Examples:
-* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
-* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
-* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
-* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
-
-<br>
-
-### 4.9. Copying Emails : `copyemails`
-
-Copies a comma-separated list of all displayed emails to clipboard.
-
-Format: `copyemails`
-
-Examples:
-* `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
-* When you paste from clipboard, a comma-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-### 4.10. Deleting a person : `delete`
+#### 4.3.1. Deleting a person: `delete`
 
 Deletes the specified person from the address book.
 
@@ -327,41 +263,8 @@ Examples:
 
 <br>
 
-### 4.11. Clearing all entries : `clear`
+#### 4.3.2. Scrubbing address book: `scrub`
 
-Clears all entries from the address book.
-
-Format: `clear`
-
-<br>
-
-### 4.12. Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-### 4.13. Extra information regarding the features
-#### Preventing duplicate entries (phone and email) 
-Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
-
-#### Saving the data
-Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-#### Editing the data file
-
-Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
- If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-
-### 4.14. Scrubbing address book
 Cleans up the address book of unwanted contacts.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
@@ -371,11 +274,11 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * This match is case-insensitive.
 
 <div markdown="span" class="alert alert-info">  
-:information_source: **Note:** Email domain is the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their mail domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
+:information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. For instance the result that is shown from `scrub p/90400203 p/90400202` is the same as doing a union operation on the set of results from `scrub p/90400203` and `scrub p/90400202`.         
+ When there is at least two identical prefix specified in the scrub command, the result is equivalent to doing the scrub operation for the first specified parameter, followed by doing the scrub operation for the subsequent specified parameter. For instance the result that is shown from `scrub p/90400203 p/90400202` is the same as doing `scrub p/90400203` on the existing contact list followed by conducting `scrub p/90400202` on the resulted contact list from the first scrub command.  
 </div>
 
 Examples:
@@ -384,8 +287,151 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
-### 4.15. Appending tags to current person
-Appe
+<br>
+
+#### 4.3.3. Clearing all entries: `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+<br>
+
+### 4.4. Filtering the address book
+
+#### 4.4.1. Finding person by their attributes: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
+
+Below is a table that shows the different matching criteria that is present in the app:
+
+| Matching criteria                | Attributes that uses the criteria        | Description                                                                                                                                                                                                                                                                                                        | 
+|----------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Partial string matching          | Name, Phone number, Email, Address, Memo | Does a case-insensitive partial match between two strings where it will check if the query string is contained within the compared string. Note that the order of character matters and this includes the whitespace character.                                                                                    |  
+| Exact string matching            | Tags                                     | Does a case-insensitive exact match between two strings where it will check if the query string is equivalent to the compared string.                                                                                                                                                                              |
+| Contacted Date matching criteria | Contacted Date                           | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. |
+
+Examples:
+* `find n/Alex` would match with "alexa".
+* `find p/9040` would match with "90400204".
+* `find e/@gmail` would match with anybody that has the "@gmail" domain.
+* `find a/street` would match with anybody that has the string "street" in their address.
+* `find m/Lover` would match with anybody that has the string "lover" in their memo.
+* `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day.
+*  `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".
+
+
+<br>
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
+
+<br>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ Apart from the `c/` prefix,  when there is at least two identical prefix specified in the find command, the search result that is displayed to the user is equivalent to conducting a set union operation on the set of results from the first prefix and the set of results from the subsequent prefixes. For instance the result that is shown from `find n/alex n/yeoh` is the same as doing a union operation on the set of results from `find n/alex` and `find n/yeoh`. For `c/`, only the input parameters from the last `c/` prefix will be used in the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+</div>
+
+
+<br>
+
+#### 4.4.2. Listing all persons: `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+<br>
+
+
+### 4.5. Getting all emails
+
+#### 4.5.1. Copying Emails: `copyemails`
+
+Copies a semicolon-separated list of all displayed emails to clipboard.
+
+Format: `copyemails`
+
+Examples:
+* `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
+* When you paste from clipboard, a semicolon-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
+
+<br>
+
+### 4.6. Quality of Life
+
+#### 4.6.1. Undoing commands: `undo`
+
+Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
+
+Format: `undo`
+
+Examples:
+* `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
+* `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
+
+<br>
+
+#### 4.6.2. Redoing commands: `redo`
+
+Redo reverses the `undo` command.
+
+Format: `redo`
+
+Examples:
+* `redo` after calling `undo` restores the address book to its previous state prior to undo.
+
+<br>
+
+#### 4.6.3. Retrieving recent commands: `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+
+By pressing the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
+
+Examples:
+* If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
+* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
+* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
+* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
+
+<br>
+
+### 4.7. Miscellaneous
+
+#### 4.7.1. Viewing help: `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+<br>
+
+#### 4.7.2. Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+<br>
+
+### 4.8. Extra information regarding the features
+
+#### 4.8.1. Preventing duplicate entries (phone and email) 
+Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
+
+#### 4.8.2. Saving the data
+Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### 4.8.3. Editing the data file
+
+Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+ If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+</div>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -398,16 +444,16 @@ Appe
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
 
 **Where does Abπ store its data?**<br>
-Abπ data is stored in data folder located at Abπ's home directory, the data file name is `addressbook.json`. Specifically `[Abπ location]/data/addressbook.json`.
+Abπ data is stored in data folder located at Abπ's home directory, the data file name is "addressbook.json". Specifically "[_Abπ location_]/data/addressbook.json".
 
 **How do I transfer my data to another computer?**<br>
-Simply overwrite the `addressbook.json` data file with your previous `addressbook.json` data file.
+Simply overwrite the "addressbook.json" data file with your previous "addressbook.json" data file.
 
 **What happens if I executed a command unintentionally?**<br>
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing data file.
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup.json", located at "[_Abπ location_]/data/backup.json". Fix the "backup.json" into the proper json format, rename it as "addressbook.json" and overwrite the existing data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -417,17 +463,19 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
-**List** | `list`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**AddTag** | `addtag INDEX t/TAG…` e.g.,`addtag 1 t/friends`
+**DeleteTag** | `deletetag INDEX t/TAG…` e.g.,`deletetag 1 t/friends`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Scrub** | **TODO**
+**Clear** | `clear`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
+**List** | `list`
+**CopyEmails**| `copyemails`
 **Undo** | `undo`
 **Redo** | `redo`
-**Previous**| Pressing `UP_ARROW_KEY`
-**Next**| Pressing `down_ARROW_KEY`
-**CopyEmails**| `copyemails`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear** | `clear`
+**Recent commands**| Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+**Help** | `help`
 **Exit** | `exit`
 
