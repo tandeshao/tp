@@ -12,7 +12,6 @@ public class Tag {
     public static final int NAME_CHARACTER_LIMIT = 50;
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}{1," + (NAME_CHARACTER_LIMIT - 1) + "}";
-
     public final String tagName;
 
     /**

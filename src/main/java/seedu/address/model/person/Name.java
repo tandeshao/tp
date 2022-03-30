@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not start with space, "
+            "Names should not be blank, "
                     + "and its length should be between 1 and 800 (including spaces)";
 
     public static final int NAME_CHARACTER_LIMIT = 799;
