@@ -11,22 +11,23 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using its displayed index from the address book.
+ * Displays the details of a person identified using its displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class ViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Displays detailed information of the person identified by "
+            + "the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewed Person: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public ViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -39,16 +40,21 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.saveAddressBookState();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        model.updatePersonOnDisplay(personToView);
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView));
     }
 
+    /**
+     * Checks if two {@code ViewCommand} are equal.
+     *
+     * @param other the other {@code ViewCommand} object.
+     * @return true if equal; otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }

@@ -53,7 +53,7 @@ public class UndoCommand extends Command {
     }
 
     /**
-     * Checks if two {@code UndoCommand} is equal.
+     * Checks if two {@code UndoCommand} are equal.
      *
      * @param other the other {@code UndoCommand} object.
      * @return true if equal; otherwise false.

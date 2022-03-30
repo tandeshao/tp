@@ -25,6 +25,7 @@ import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScrubCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -127,6 +128,10 @@ public class AddressBookParser {
         case AddTagCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to AddTagCommand");
             return new AddTagCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to ViewCommand");
+            return new ViewCommandParser().parse(arguments);
 
         case DeleteTagCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to DeleteTagCommand");

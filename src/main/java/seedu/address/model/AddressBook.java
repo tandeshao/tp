@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -17,7 +15,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final SimpleObjectProperty<Person> personOnDisplay;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,7 +25,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        personOnDisplay = new SimpleObjectProperty<>();
     }
 
     public AddressBook() {
@@ -59,7 +55,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        updatePersonOnDisplay(newData.getPersonOnDisplay());
     }
 
     //// person-level operations
@@ -88,7 +83,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
-        updatePersonOnDisplay(p);
     }
 
     /**
@@ -100,7 +94,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
-        changePersonOnDisplay(target, editedPerson);
     }
 
     /**
@@ -109,7 +102,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-        updatePersonOnDisplayUponRemovals(key);
     }
 
     /**
@@ -119,45 +111,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePersons(Person... personsToRemove) {
         persons.removeAll(personsToRemove);
-        updatePersonOnDisplayUponRemovals(personsToRemove);
-    }
-
-    /**
-     * Checks if the current {@code personOnDisplay} needs to be removed, and if so, remove it.
-     *
-     * @param personsToRemove List of person to remove from the {@code AddressBook}
-     */
-    private void updatePersonOnDisplayUponRemovals(Person... personsToRemove) {
-        Person currentPerson = personOnDisplay.get();
-        for (Person p : personsToRemove) {
-            if (p.equals(currentPerson)) {
-                removePersonOnDisplay();
-                return;
-            }
-        }
-    }
-
-    /**
-     * Changes the current {@code personOnDisplay} to the {@code updatedPerson}.
-     */
-    private void changePersonOnDisplay(Person target, Person updatedPerson) {
-        updatePersonOnDisplay(updatedPerson);
-    }
-
-    /**
-     * Removes the current {@code personOnDisplay}.
-     */
-    private void removePersonOnDisplay() {
-        updatePersonOnDisplay(null);
-    }
-
-    /**
-     * Updates the current {@code personOnDisplay} to {@code person}.
-     *
-     * @param person The {@code Person} object to update {@code personOnDisplay} with.
-     */
-    private void updatePersonOnDisplay(Person person) {
-        personOnDisplay.set(person);
     }
 
     //// util methods
@@ -170,16 +123,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public Person getPersonOnDisplay() {
-        return personOnDisplay.get();
-    }
-
-    @Override
-    public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
-        personOnDisplay.addListener(listener);
     }
 
     @Override

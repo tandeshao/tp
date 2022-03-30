@@ -125,7 +125,7 @@ public class EditCommand extends Command {
 
 
     /**
-     * Checks if two {@code EditCommand} is equal.
+     * Checks if two {@code EditCommand} are equal.
      *
      * @param other the other {@code EditCommand} object.
      * @return If equal true; otherwise false.

@@ -53,7 +53,7 @@ public class RedoCommand extends Command {
     }
 
     /**
-     * Checks if two {@code RedoCommand} is equal.
+     * Checks if two {@code RedoCommand} are equal.
      *
      * @param other the other {@code RedoCommand} object.
      * @return true if equal; otherwise false.

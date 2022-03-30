@@ -29,7 +29,7 @@ public class NextCommand extends Command {
     }
 
     /**
-     * Checks if two NextCommand methods is equal.
+     * Checks if two NextCommand methods are equal.
      *
      * @param other The other NextCommand object.
      * @return Result of the check.

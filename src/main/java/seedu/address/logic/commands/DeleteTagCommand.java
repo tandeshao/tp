@@ -137,7 +137,7 @@ public class DeleteTagCommand extends Command {
     }
 
     /**
-     * Checks if two {@code DeleteTagCommand} is equal.
+     * Checks if two {@code DeleteTagCommand} are equal.
      *
      * @param other the other {@code DeleteTagCommand} object.
      * @return If equal true; otherwise false.

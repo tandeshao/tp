@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -114,16 +113,6 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
-        }
-
-        @Override
-        public Person getPersonOnDisplay() {
-            return null;
-        }
-
-        @Override
-        public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
-
         }
     }
 

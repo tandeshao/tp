@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -65,6 +67,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ReadOnlyProperty<Person> getPersonOnDisplay() {
+        return model.getPersonOnDisplay();
+    }
+
+    @Override
+    public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
+        model.addPersonOnDisplayListener(listener);
     }
 
     @Override
