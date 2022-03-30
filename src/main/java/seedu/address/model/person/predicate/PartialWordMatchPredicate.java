@@ -32,7 +32,8 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
 
     /**
      * Conducts a case-insensitive partial match on both the attribute and description.
-     * For example: "This is a memo" would match with "this".
+     * For example: "memo" would match with "This is a memo".
+     *
      * @param attribute person attribute that is tested.
      * @param descriptions description that is supplied by the user.
      * @return true if there is a partial match between attribute and description, false otherwise.

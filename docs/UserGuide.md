@@ -61,7 +61,6 @@ Execute | The process by which Abπ reads the instructions written by user and a
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
 
 Symbol | What it means |
---------|-------------------|
 `add` | Words/sentences that have this format of display are texts/keyboard commands that can cause a response in Abπ
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 

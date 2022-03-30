@@ -23,7 +23,7 @@ class FindPersonPredicateTest {
 
     @Test
     void test_invalidCases_returnsFalse() {
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(" a/st t/colleague p/9040", ARRAY_OF_PREFIX);
+        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(" a/streets t/colleague p/9040", ARRAY_OF_PREFIX);
         FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
         assertFalse(predicate.test(new PersonBuilder().withAddress("street").withPhone("904").build()));
         assertFalse(predicate.test(new PersonBuilder().withName("a").withPhone("123").withTags("colle").build()));

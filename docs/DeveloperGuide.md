@@ -296,7 +296,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 
 ### 4.2. Find feature
-The address book find command allow users to search contacts based on their name, email, phone, address, tags, and memo. When the user keys in a find command, the user input is parsed through a `FindCommandParser` and if a valid input is given, the `FindCommand#execute(Model)` method will be invoked. Doing this will effectively filter the person list in the `Addressbook` and this filtered list will be returned to the Ui for display.
+The address book find command allow users to search contacts based on their name, email, phone, address, tags, memo and contacted date. When the user keys in a find command, the user input is parsed through a `FindCommandParser` and if a valid input is given, the `FindCommand#execute(Model)` method will be invoked. Doing this will effectively filter the person list in the `Addressbook` and this filtered list will be returned to the Ui for display.
 
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
 
@@ -307,7 +307,7 @@ Given below is a sequence diagram to show the execution flow of the find command
 
 Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 
-Step 2. `FindCommandParser` will then be instantiated and `FindCommandParser#parse(String)` is invoked. If a valid input is provided, `FindCommandParser#getDescriptor(String)`is called.
+Step 2. `FindCommandParser` will then be instantiated and `FindCommandParser#parse(String)` is invoked. If a valid input is provided, `FindCommandParser#createArgMap(String)`is called.
 
 Since a user can key in multiple valid parameters to increase the scope of a search (i.e. search by name and tags), we will need a way to identify different parts of the user input and match the input to their corresponding prefix. This can be achieved with the `ArgumentMultimap` class where it will store the descriptions to search a person by.
 
@@ -317,38 +317,79 @@ Step 3. The `ArgumentMultimap` object is passed as an argument into the  `FindPe
 :information_source: **Note:** Two note-worthy classes that are created in `FindPersonPredicate` but not shown in the sequence diagram is the `ExactWordMatchPredicate` and `PartialWordMatchPredicate` which encapsulate the logic of conducting exact word match and partial word match on a person's attribute respectively. They are used in the `FindPersonPredicate#test(Person)` method during the filter process and to conduct exact word match/partial word match depending on the person's attribute. More information will be given in the design consideration. 
 </div>
 
-Step 4. `FindCommandParser` will then use the predicate object to create the `FindCommand` object and this object is returned to `LogicManager`.
+Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` object to create the `FindCommand` object and this object is returned to `LogicManager`.
 
 Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and this method will invoke 
 `Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)` where it will update the filter for the person list in the address book.
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
+<br>
+
 #### 4.2.1. Design Considerations:
 
-**Aspect: How find feature executes:** 
-* **Current implementation:** Each invocation of the find feature filters the original person list. 
+**Aspect: How the find feature executes:** 
+* **Current implementation:** Each invocation of the find command filters the original person list. 
     * Pros: It is easy to implement. 
     * Cons: Users might want to filter the filtered person list even further after viewing it but with the current implementation, this is not possible.  
-    * Workaround: To simulate the chaining of multiple find commands, users will have to remember their search condition(s) for the first find and add on/modify the search condition(s) in subsequent find commands. A history feature is developed to assist users to achieve that as it returns the most recent command that is parsed into the application. By invoking the history command, the search condition of the previous find command can be retrieved and all the user have to do is to add on to the returned search condition(s).  
+    * Workaround: To simulate the chaining of multiple find commands, users will have to remember their search condition(s) for the first find and add on/modify the search condition(s) in subsequent find commands. A history feature is developed to assist users to achieve that as it returns the most recent command that is parsed into the application. By invoking the history command (which can be done by pressing the up arrow key), the search condition of the previous find command can be retrieved and all the user have to do is to add on to the returned search condition(s).  
     
 * **Alternative 1:** Allow chaining of the find command so that filtering of the filtered person list can be performed.  
     * Pros: It is a useful feature to have. 
     * Cons: It is costly in terms of time and effort to develop as the current implementation can already achieve a similar functionality. To allow chaining of the find command, we will have to change the data structure that stores the filtered person list and since there are multiple classes in the application that relies on this list, changing it might require us to change certain components in other classes as well.
 
-**Aspect: How the find feature match words**
-* **Current implementation:** Different search criteria for different search parameters. For example, address, memo and tags follows an exact word match criteria while name, phone and email follows a partial word match criteria. 
-  * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
-    * Tags was chosen to follow the exact word match criteria because users are likely to remember the full word of a tag and search for them.
-    * As for address and memo, since those attributes can be stored as sentences, allowing a partial word match would increase the average hit rate per search query and as a result, lead to a search result that may not show any meaningful information. For instance, the word "a" often appears in many sentences in the English language thus, allowing for this partial search of the word "a" in a sentence may produce many result the user might not want. Hence, an exact word match criteria was chosen for address and memo. 
-    * Phone number, name and email follows a partial word match criteria where users are able to search for contacts based on the keywords they provide. For example, if John has a phone number 90400202, then `find p/9040` would return John. 
-  * Cons: Edge cases that may cause the search to be ineffective are present and one such test case would be: `find e/gmail` where the intended effect the user might want is to search for all contacts that have the email address that has the domain name set to "gmail". However, the email "redherringmail@yahoo" will be matched with the user query and this search result does not meet the intended effect the user might want.  
-  * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would want to find all contacts that have the domain name set as "gmail".  
-  
+<br>
 
-* **Alternative 1:** Same search criteria for all the search parameters. 
-  * Pros: Easy to implement.
-  * Cons: It might lead to nonsensical search results especially when partial word match is used for the memo and address attribute.
+**Aspect: Matching criteria of the find command:**
+* **Current implementation:** Different search criteria for different search parameters. <br /> 
+The following table shows the available matching criteria for Abπ and a description to explain the implementation details of the matching criteria:
+
+
+| Matching criteria                | Description                                                                                                                                                                                                                                                                                                        | 
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Partial string matching          | Does a case-insensitive partial match between two strings where it will check if the query string is contained within the compared string. Note that the order of character matters and this includes the whitespace character.                                      |  
+| Exact string matching            | Does a case-insensitive exact match between two strings where it will check if the query string is equivalent to the compared string.                                                                                                                                                                              |
+| Contacted Date matching criteria | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. | 
+
+<br>
+
+Below is a table that shows the matching criteria that is used for each person's attribute and each of the entry is followed with an example:
+
+<br>
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
+</div>
+
+<br>
+
+| Attribute      | Prefix | Matching criteria       | Example                                                                                                         | 
+|----------------|--------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Name           | n/     | Partial string matching | find n/Alex would match with "alexa".                                                                           |  
+| Phone Number   | p/     | Partial string matching | find p/9040 would match with "90400204".                                                                        |
+| Email          | e/     | Partial string matching | find e/@gmail would match with anybody that has the @gmail domain.                                              | 
+| Address        | a/     | Partial string matching | find a/street would match with anybody that has the string "street" in their address.                           |
+| Memo           | m/     | Partial string matching | find m/Lover would match with anybody that has the string "lover" in their memo.                                |
+| Contacted Date | c/     | Contacted Date Matching | find c/5 would match with anybody that had not been contacted for more than 5 days relative to the current day. |
+| Tags           | t/     | Exact string matching   | find t/Family would only match with anybody that has a tag that is equivalent to the string "family".           | 
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. For instance the result that is shown from `find n/alex n/yeoh` is the same as doing a union operation on the set of results from `find n/alex` and `find n/yeoh`. For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+</div>
+
+<br>
+
+  * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
+    * Tags was chosen to follow the exact string match criteria because users are likely to remember the full word of a tag and search for them.
+    * For contacted date, a special matching criteria is created specifically for this attribute because the semantics of finding a person by their last contacted date is different from the other attributes. 
+    * As for the remaining attributes (name, phone number, email, address and memo), a partial string match criteria was adopted because it allows for more flexibility in the search. 
+      * For instance, if a user could only remember a certain part of the string for that specific attribute, this partial matching criteria is able to help the user filter out possible results that he/she might want. 
+      * On the other hand, if the user would like to perform a more restrictive search on the address book, he/she can simply type in more characters in the query string.  
+    
+  * Cons: Edge cases that may cause the search to be ineffective are present and one such test case would be: `find e/gmail` where the intended effect the user might want is to search for all contacts that have the domain name set as "gmail". However, the email "redherringmail@yahoo" will be matched with the user query and this search result does not meet the intended effect the user might want.  
+  * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would like to find all contacts that have the domain name set as "gmail".  
+  
 
 <div markdown="span" class="alert alert-info">  
 :information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.

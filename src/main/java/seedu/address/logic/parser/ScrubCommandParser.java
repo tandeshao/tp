@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ScrubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.predicate.ScrubPersonPredicate;
 
 /**
  * Parser for the {@link ScrubCommand} class. Ensures that arguments that
@@ -36,16 +37,17 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
     public ScrubCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
         String modifiedArguments = processArguments(args);
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(modifiedArguments, ARRAY_OF_PREFIX);
-        if (descriptor.hasNoValidPrefix()) {
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(modifiedArguments, ARRAY_OF_PREFIX);
+        if (argumentMultimap.hasNoValidPrefix()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
             throw new ParseException(NO_VALID_PREFIX);
         }
 
-        if (descriptor.contains(PREFIX_EMAIL)) {
-            checkCorrectEmailFormat(descriptor);
+        if (argumentMultimap.contains(PREFIX_EMAIL)) {
+            checkCorrectEmailFormat(argumentMultimap);
         }
-        return new ScrubCommand(descriptor);
+        ScrubPersonPredicate predicate = new ScrubPersonPredicate(argumentMultimap);
+        return new ScrubCommand(predicate);
     }
 
     /**
@@ -101,11 +103,11 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * has to only contain the domain name, and it has to start with "@". Note that there can be multiple emails in a
      * single scrub query. E.g. "scrub e/ @mail.com @gmail.com".
      *
-     * @param descriptor Email description to be checked.
+     * @param argMultimap Email description to be checked.
      * @throws ParseException Thrown when the email description is not in a valid format.
      */
-    private void checkCorrectEmailFormat(ArgumentMultimap descriptor) throws ParseException {
-        List<String> emailArgs = descriptor.getAllValues(PREFIX_EMAIL);
+    private void checkCorrectEmailFormat(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> emailArgs = argMultimap.getAllValues(PREFIX_EMAIL);
         for (String emailArg : emailArgs) {
             parseDomain(emailArg);
         }
