@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -33,10 +34,14 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private DetailedPersonDisplay detailedPersonDisplay;
     private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane detailedPersonDisplayPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -116,11 +121,23 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        detailedPersonDisplay = new DetailedPersonDisplay();
+        detailedPersonDisplayPlaceholder.getChildren().add(detailedPersonDisplay.getRoot());
+        linkPersonOnDisplay();
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Link the listener from {@code detailedPersonDisplay} to the personOnDisplay in the Address Book.
+     * @see seedu.address.model.ReadOnlyAddressBook#addPersonOnDisplayListener(ChangeListener)
+     */
+    private void linkPersonOnDisplay() {
+        logic.getAddressBook().addPersonOnDisplayListener(detailedPersonDisplay.getListener());
     }
 
     /**
