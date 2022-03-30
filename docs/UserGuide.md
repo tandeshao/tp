@@ -468,7 +468,7 @@ Action | Format, Examples
 **AddTag** | `addtag INDEX t/TAG…` e.g.,`addtag 1 t/friends`
 **DeleteTag** | `deletetag INDEX t/TAG…` e.g.,`deletetag 1 t/friends`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Scrub** | **TODO**
+**Scrub** | `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​` <br> e.g., `scrub e/@gmail.com`
 **Clear** | `clear`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **List** | `list`
