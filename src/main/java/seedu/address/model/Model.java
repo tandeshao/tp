@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
@@ -90,6 +92,27 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the current {@code personOnDisplay} to {@code person}.
+     *
+     * @param person The {@code Person} object to update {@code personOnDisplay} with.
+     */
+    void updatePersonOnDisplay(Person person);
+
+    /**
+     * Returns a read only copy of the Person object on display.
+     *
+     * @return a read only copy of the Person object on display.
+     */
+    ReadOnlyProperty<Person> getPersonOnDisplay();
+
+    /**
+     * Adds a listener for when the personOnDisplay changes.
+     *
+     * @param listener ChangeListener that reacts to the Person object changing.
+     */
+    void addPersonOnDisplayListener(ChangeListener<? super Person> listener);
 
     /**
      * Restores address book to its previous state.
