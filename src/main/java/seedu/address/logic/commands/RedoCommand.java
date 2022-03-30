@@ -21,7 +21,7 @@ public class RedoCommand extends Command {
             + "(Up to " + StateAddressBook.UNDO_REDO_CAPACITY + " redo)\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_REDO_SUCCESS = "Redo success";
+    public static final String MESSAGE_REDO_SUCCESS = "Redo success!";
     public static final String MESSAGE_REDO_EMPTY = "There is nothing to redo (Max "
             + StateAddressBook.UNDO_REDO_CAPACITY + " redoable actions)";
 
