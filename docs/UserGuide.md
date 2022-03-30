@@ -15,7 +15,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
 [2. Quick Start](#2-quick-start) <br/>
 &nbsp;&nbsp;[2.1. Installation](#21-installation) <br/>
-&nbsp;&nbsp;[2.2 System Requirements](#22-system-requirements) <br/>
+&nbsp;&nbsp;[2.2. System Requirements](#22-system-requirements) <br/>
 [3. About](#3-about) <br/>
 [4. Features](#4-features) <br/>
 &nbsp;&nbsp;[4.1. Adding and Editing a person](#41-adding-and-editing-a-person) <br/>
@@ -410,16 +410,16 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
 
 **Where does Abπ store its data?**<br>
-Abπ data is stored in data folder located at Abπ's home directory, the data file name is `addressbook.json`. Specifically `[Abπ location]/data/addressbook.json`.
+Abπ data is stored in data folder located at Abπ's home directory, the data file name is "addressbook.json". Specifically "[_Abπ location_]/data/addressbook.json".
 
 **How do I transfer my data to another computer?**<br>
-Simply overwrite the `addressbook.json` data file with your previous `addressbook.json` data file.
+Simply overwrite the "addressbook.json" data file with your previous "addressbook.json" data file.
 
 **What happens if I executed a command unintentionally?**<br>
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as `backup.json`, located at `[Abπ location]/data/backup.json`. Fix the `backup.json` into the proper json format, rename it as `addressbook.json` and overwrite the existing data file.
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup.json", located at "[_Abπ location_]/data/backup.json". Fix the "backup.json" into the proper json format, rename it as "addressbook.json" and overwrite the existing data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
