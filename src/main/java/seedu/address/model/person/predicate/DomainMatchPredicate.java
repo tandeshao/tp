@@ -1,7 +1,6 @@
 package seedu.address.model.person.predicate;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Predicate;
 
 import seedu.address.model.person.Email;
@@ -35,7 +34,8 @@ public class DomainMatchPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         String domain = retrieveDomain(person.getEmail()).toLowerCase();
         String entireDomainName = retrieveEntireDomainName(person.getEmail()).toLowerCase();
-        return emailArg.stream().anyMatch(email -> domain.equals(email.toLowerCase()) || entireDomainName.equals(email.toLowerCase()));
+        return emailArg.stream().anyMatch(email -> domain.equals(email.toLowerCase())
+                || entireDomainName.equals(email.toLowerCase()));
     }
 
     /**
