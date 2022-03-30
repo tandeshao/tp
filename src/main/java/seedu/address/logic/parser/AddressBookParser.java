@@ -14,6 +14,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CopyEmailsCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -131,6 +132,10 @@ public class AddressBookParser {
         case ViewCommand.COMMAND_WORD:
             LOGGER.log(Level.INFO, "Parsed to ViewCommand");
             return new ViewCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            LOGGER.log(Level.INFO, "Parsed to DeleteTagCommand");
+            return new DeleteTagCommandParser().parse(arguments);
 
         default:
             LOGGER.log(Level.INFO, "Unknown command");

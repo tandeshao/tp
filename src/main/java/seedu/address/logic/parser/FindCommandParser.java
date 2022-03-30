@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicate.FindPersonPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
     public static final String MESSAGE_INCORRECT_FORMAT = "Only non-negative integer argument is allowed "
@@ -29,20 +29,20 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
         String processedInput = processInput(args);
-        ArgumentMultimap findPersonDescriptor = createDescriptor(processedInput);
-        if (findPersonDescriptor.contains(PREFIX_CONTACTED_DATE)) {
-            checkValidContacted(findPersonDescriptor);
+        ArgumentMultimap argMultimap = createArgMap(processedInput);
+        if (argMultimap.contains(PREFIX_CONTACTED_DATE)) {
+            checkValidContacted(argMultimap);
         }
-        FindPersonPredicate predicate = new FindPersonPredicate(findPersonDescriptor);
+        FindPersonPredicate predicate = new FindPersonPredicate(argMultimap);
         return new FindCommand(predicate);
     }
 
     /**
-     * Cleans up user input and make it appropriate to be parsed into a descriptor class.
+     * Cleans up user input and make it appropriate to be parsed into an ArgumentMultimap object.
      *
-     * @param args unmodified user input.
-     * @return valid input that can be used for the PersonDescriptor class.
-     * @throws ParseException thrown when the user argument is empty.
+     * @param args Unmodified user input.
+     * @return Valid input string that can be used for the ArgumentMultimap object.
+     * @throws ParseException Thrown when the user argument is empty.
      */
     private String processInput(String args) throws ParseException {
         // Removes trailing whitespace from the user input
@@ -59,19 +59,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given user argument and check if there is any valid prefix.
-     * If no valid prefix is found, a parse exception is thrown. Else, a new descriptor is created.
+     * If no valid prefix is found, a parse exception is thrown. Else, a new ArgumentMultimap is created.
      *
      * @param modifiedString user input that has its trailing and leading whitespaces removed.
-     * @return descriptor that stores the description to search a person by.
+     * @return ArgumentMultimap that stores the description to search a person by.
      * @throws ParseException if there are no valid prefix in the user input.
      */
-    private ArgumentMultimap createDescriptor(String modifiedString) throws ParseException {
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(modifiedString, ARRAY_OF_PREFIX);
-        if (descriptor.hasNoValidPrefix()) {
+    private ArgumentMultimap createArgMap(String modifiedString) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, ARRAY_OF_PREFIX);
+        if (argMultimap.hasNoValidPrefix()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
             throw new ParseException(NO_PREFIX_MESSAGE);
         }
-        return descriptor;
+        return argMultimap;
     }
 
     /**
@@ -80,11 +80,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      * empty, it would be of the form " c/" and that is a valid user argument for the ContactedDate prefix. See
      * ContactedDateMatchPredicate for more details.
      *
-     * @param descriptor Stores description to search a person by.
+     * @param argMultimap Stores description to search a person by.
      * @throws ParseException Thrown when an invalid ContactedDate argument is received by the FindCommandParser.
      */
-    private void checkValidContacted(ArgumentMultimap descriptor) throws ParseException {
-        String contactedDateArg = descriptor.getValue(PREFIX_CONTACTED_DATE).orElse("");
+    private void checkValidContacted(ArgumentMultimap argMultimap) throws ParseException {
+        String contactedDateArg = argMultimap.getValue(PREFIX_CONTACTED_DATE).orElse("");
         // If contactedDateArg is empty, it is a valid argument.
         if (!contactedDateArg.isEmpty()) {
             try {

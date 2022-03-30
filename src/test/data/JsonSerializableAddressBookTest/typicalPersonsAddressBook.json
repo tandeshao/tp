@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "contactedDate" : "20-03-2022",
     "memo": "She likes aardvarks.",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friend", "colleague", "wife" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

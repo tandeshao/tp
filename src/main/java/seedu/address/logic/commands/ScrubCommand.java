@@ -5,15 +5,14 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.ScrubPersonPredicate;
 
 
 /**
- * Command that encapsulates the logic of removing contacts that matches the description provided
- * by the descriptor.
+ * Command that encapsulates the logic of removing contacts that matches the conditions specified by the given
+ * predicate.
  */
 public class ScrubCommand extends Command {
     public static final String COMMAND_WORD = "scrub";
@@ -29,10 +28,10 @@ public class ScrubCommand extends Command {
             + "\nFor example: @domain or @domain.com";
     public static final String NO_VALID_PREFIX = "At least 1 valid prefix must be provided!";
 
-    private final ArgumentMultimap descriptor;
+    private final ScrubPersonPredicate predicate;
 
-    public ScrubCommand(ArgumentMultimap descriptor) {
-        this.descriptor = descriptor;
+    public ScrubCommand(ScrubPersonPredicate predicate) {
+        this.predicate = predicate;
     }
 
     /**
@@ -52,13 +51,12 @@ public class ScrubCommand extends Command {
     }
 
     /**
-     * Removes any person from the address book that matches the description described by the {@link #descriptor}.
+     * Removes any person from the address book that matches the description described by the {@link #predicate}.
      *
      * @param model {@code Model} which the deletion should happen in.
      * @return Number of person that has been deleted from the address book.
      */
     private int removePersonThatMatchesDescription(Model model) {
-        ScrubPersonPredicate predicate = new ScrubPersonPredicate(descriptor);
         model.updateFilteredPersonList(predicate);
         ObservableList<Person> personsToDelete = model.getFilteredPersonList();
         int numberOfDeletedPerson = personsToDelete.size();
@@ -76,6 +74,6 @@ public class ScrubCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ScrubCommand // instanceof handles nulls
-                && descriptor.equals(((ScrubCommand) other).descriptor)); // state check
+                && predicate.equals(((ScrubCommand) other).predicate)); // state check
     }
 }
