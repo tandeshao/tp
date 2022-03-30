@@ -46,7 +46,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if two {@code FindCommand} is equal.
+     * Checks if two {@code FindCommand} are equal.
      *
      * @param other the other {@code FindCommand} object.
      * @return true if equal; otherwise false.

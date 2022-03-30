@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Displays the details of a person identified using its displayed index from the address book.
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
@@ -40,5 +43,18 @@ public class ViewCommand extends Command {
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
         model.updatePersonOnDisplay(personToView);
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView));
+    }
+
+    /**
+     * Checks if two {@code ViewCommand} are equal.
+     *
+     * @param other the other {@code ViewCommand} object.
+     * @return true if equal; otherwise false.
+     */
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
