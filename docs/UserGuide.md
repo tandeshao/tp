@@ -28,22 +28,25 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Deleting a person](#431-deleting-a-person-delete) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Scrubbing address book](#432-scrubbing-address-book-scrub) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Clearing all entries](#433-clearing-all-entries-clear) <br/>
-&nbsp;&nbsp;[4.4. Filtering the address book](#44-filtering-the-address-book) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Finding person by their attributes](#441-finding-person-by-their-attributes-find) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.4.2. Listing all persons](#442-listing-all-persons-list) <br/>
-&nbsp;&nbsp;[4.5. Getting all emails](#45-getting-all-emails) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1. Copying Emails](#451-copying-emails-copyemails) <br/>
-&nbsp;&nbsp;[4.6. Quality of Life](#46-quality-of-life) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Undoing commands](#461-undoing-commands-undo) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2. Redoing commands](#462-redoing-commands-redo) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.3. Retrieving recent commands](#463-retrieving-recent-commands-up_arrow_key-or-down_arrow_key) <br/>
-&nbsp;&nbsp;[4.7. Miscellaneous](#47-miscellaneous) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Viewing help](#471-viewing-help-help) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.7.2. Exiting the program](#472-exiting-the-program-exit) <br/>
-&nbsp;&nbsp;[4.8. Extra information regarding the features](#48-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Preventing duplicate entries (phone and email)](#481-preventing-duplicate-entries-phone-and-email) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Saving the data](#482-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.8.3. Editing the data file](#483-editing-the-data-file) <br/>
+&nbsp;&nbsp;[4.4. Displaying person details](#44-displaying-person-details) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Viewing person details](#441-viewing-person-details-view) <br/>
+&nbsp;&nbsp;[4.5. Filtering the address book](#45-filtering-the-address-book) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1. Finding person by their attributes](#451-finding-person-by-their-attributes-find) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.5.2. Listing all persons](#452-listing-all-persons-list) <br/>
+&nbsp;&nbsp;[4.6. Getting all emails](#46-getting-all-emails) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Copying Emails](#461-copying-emails-copyemails) <br/>
+&nbsp;&nbsp;[4.7. Quality of Life](#47-quality-of-life) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Undoing commands](#471-undoing-commands-undo) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.2. Redoing commands](#472-redoing-commands-redo) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.3. Retrieving recent commands](#473-retrieving-recent-commands-up_arrow_key-or-down_arrow_key) <br/>
+&nbsp;&nbsp;[4.8. Miscellaneous](#48-miscellaneous) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
+&nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Preventing duplicate entries (phone and email)](#491-preventing-duplicate-entries-phone-and-email) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Saving the data](#492-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Editing the data file](#493-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Predictive viewing](#494-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -298,9 +301,31 @@ Format: `clear`
 
 <br>
 
-### 4.4. Filtering the address book
+### 4.4. Displaying person details
 
-#### 4.4.1. Finding person by their attributes: `find`
+#### 4.4.1. Viewing person details: `view`
+
+Displays the detailed description of the selected person on the right side of the User Interface.
+
+Format: `view INDEX`
+
+* Displays detailed information of person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view 2` displays the 2nd person in the address book.
+* `find n/John` followed by `view 1` displays the 1st person in the results of the `find` command.
+
+<div markdown="span" class="alert alert-info">  
+
+:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a view command. For more information on the predictive behavior, check out [4.9.4. Predictive viewing](#494-predictive-viewing).
+
+</div>
+
+### 4.5. Filtering the address book
+
+#### 4.5.1. Finding person by their attributes: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -338,7 +363,7 @@ Examples:
 
 <br>
 
-#### 4.4.2. Listing all persons: `list`
+#### 4.5.2. Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
@@ -347,9 +372,9 @@ Format: `list`
 <br>
 
 
-### 4.5. Getting all emails
+### 4.6. Getting all emails
 
-#### 4.5.1. Copying Emails: `copyemails`
+#### 4.6.1. Copying Emails: `copyemails`
 
 Copies a semicolon-separated list of all displayed emails to clipboard.
 
@@ -361,9 +386,9 @@ Examples:
 
 <br>
 
-### 4.6. Quality of Life
+### 4.7. Quality of Life
 
-#### 4.6.1. Undoing commands: `undo`
+#### 4.7.1. Undoing commands: `undo`
 
 Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
 
@@ -375,7 +400,7 @@ Examples:
 
 <br>
 
-#### 4.6.2. Redoing commands: `redo`
+#### 4.7.2. Redoing commands: `redo`
 
 Redo reverses the `undo` command.
 
@@ -386,7 +411,7 @@ Examples:
 
 <br>
 
-#### 4.6.3. Retrieving recent commands: `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+#### 4.7.3. Retrieving recent commands: `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
 
 By pressing the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your keyboard, you can easily retrieve your recent commands and the recent command would autofill into the text box.
 
@@ -398,9 +423,9 @@ Examples:
 
 <br>
 
-### 4.7. Miscellaneous
+### 4.8. Miscellaneous
 
-#### 4.7.1. Viewing help: `help`
+#### 4.8.1. Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -410,7 +435,7 @@ Format: `help`
 
 <br>
 
-#### 4.7.2. Exiting the program: `exit`
+#### 4.8.2. Exiting the program: `exit`
 
 Exits the program.
 
@@ -418,15 +443,15 @@ Format: `exit`
 
 <br>
 
-### 4.8. Extra information regarding the features
+### 4.9. Extra information regarding the features
 
-#### 4.8.1. Preventing duplicate entries (phone and email) 
+#### 4.9.1. Preventing duplicate entries (phone and email) 
 Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
 
-#### 4.8.2. Saving the data
+#### 4.9.2. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.8.3. Editing the data file
+#### 4.9.3. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -434,6 +459,20 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
+#### 4.9.4. Predictive viewing
+
+Abπ will pre-emptively update the display after various commands:
+
+* After an `add` command, the newly added person will be automatically displayed. This allows you to check if all the details of the person you just added are correct without needing to execute an additional `view` command.
+* Similarly, when you `redo` an `add` command, the newly added person will be automatically displayed.
+* After a deletion command (such as `delete` or `clear`), followed by an `undo` command, the deleted person(s) will be restored and automatically displayed. This allows you to check if the person you just deleted was the correct person without needing to execute an additional `view` command.
+
+In addition, Abπ aims to keep all displayed information updated:
+
+* If the person currently on display is removed from the address book, the display will be blank. 
+* If the person currently on display has their details changed, the display will contain the newly updated details.
+
+Hence, there is no need to worry about the display containing outdated information.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -471,6 +510,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Scrub** | `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​` <br> e.g., `scrub e/@gmail.com`
 **Clear** | `clear`
+**View** | `view INDEX`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **List** | `list`
 **CopyEmails**| `copyemails`
