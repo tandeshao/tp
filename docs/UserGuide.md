@@ -31,6 +31,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;[4.11. Clearing all entries](#411-clearing-all-entries--clear) <br/>
 &nbsp;&nbsp;[4.12. Exiting the program](#412-exiting-the-program--exit) <br/>
 &nbsp;&nbsp;[4.13. Extra information regarding the features](#413-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;[4.14. Scrubbing contacts](#414-scrubbing-address-book) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -54,13 +55,16 @@ Command| A sentence that causes Abπ to do something when typed into the command
 Command word | The first word of every command.                                                |
 Parameters | Information that is supplied by the user.                                       |
 Execute | The process by which Abπ reads the instructions written by user and acts on it. |
+String | A programming terminology that describes an ordered sequence of characters.      |
 
 <div style="page-break-after: always;"></div>
 
 ### 1.1. Conventions
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
 
+
 Symbol | What it means |
+-----|----------------|
 `add` | Words/sentences that have this format of display are texts/keyboard commands that can cause a response in Abπ
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 
@@ -101,7 +105,7 @@ Symbol | What it means |
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
 
-_For more information on Java 8, click [here](https://www.oracle.com/java/technologies/downloads/)_
+_For more information on Java, click [here](https://www.oracle.com/java/technologies/downloads/)_
 
 ### Windows
 * Windows 10 (8u51 and above)
@@ -222,35 +226,38 @@ Examples:
 Finds persons whose names contain any of the given keywords.
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
-* The search is case-insensitive. E.g. hans will match Hans
-* At least 1 parameter must be present.
-* More than 2 whitespace between words are treated as 1 whitespace. So "Alex_ _ _Yeoh" would be treated as "Alex_Yeoh" where "_" represents a single whitespace.
-* Name, phone number, email, address, memo, tags and contacted status are eligible parameters.
-* Specifying the parameter followed by the word to search for helps to scope the search to that specific attribute.
-* Name, phone number and email follows a partial word match criteria where "Han" will match with "Hans" and "904" would match with "90400203".
-* For contacted status, the matching depends on the "days" argument given by the user and suppose the number of days specified is n, the find method searches for contacts that were contacted at least n day days ago. 
-* For contacted status, if no integer value is given as an argument, the find command would just return contacts that had not been contacted.
-* Tag, address and memo follows an exact word match criteria where "Hans" will match with "Hans" or "hans".
-* For both search criteria, order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
-* For both search criteria, as long as there is a word match (partial/exact), the contact would be in the filtered list. 
 
-<div markdown="block" class="alert alert-info"> **:information_source: 
-A word is defined as consecutive characters that is bounded by whitespaces.
-e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!".** 
+Below is a table that shows the different matching criteria that is present in the app:
+
+| Matching criteria                | Description                                                                                                                                                                                                                                                                                                        | 
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Partial string matching          | Does a case-insensitive partial match between two strings where it will check if the query string is contained within the compared string. Note that the order of character matters and this includes the whitespace character.                                      |  
+| Exact string matching            | Does a case-insensitive exact match between two strings where it will check if the query string is equivalent to the compared string.                                                                                                                                                                              |
+| Contacted Date matching criteria | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. |
+
+<br>
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
 </div>
 
+<br>
 
-Examples:
-* `find n/ John` returns john and John Doe
-* `find n/alex n/david` returns Alex Yeoh and David Li and Alexa.
-* If David Li has an email davidLi98@gmail.com, then `find e/gmail` would return David Li. 
-* If John has a phone number 90400202, then `find p/9040` would return John.
-* If John has a phone number 90400202, then `find p/202` would return John.
-* `find n/alex yeo` would only match with contacts that have "alex yeo" contained within their name. For example, "Alex Yeoh" would be a successful match.
-* If John has a tag family, then `find t/family` would return John.
-* If John has a tag family, then `find t/fam` would return no result.
-* `find c/1` would find contacts that were contacted 1 or more days ago.
-* `find c/` would find contacts that had not been contacted.
+| Attribute      | Prefix | Matching criteria       | Example                                                                                                         | 
+|----------------|--------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Name           | n/     | Partial string matching | `find n/Alex` would match with "alexa".                                                                           |  
+| Phone Number   | p/     | Partial string matching | `find p/9040` would match with "90400204".                                                                        |
+| Email          | e/     | Partial string matching | `find e/@gmail` would match with anybody that has the "@gmail" domain.                                              | 
+| Address        | a/     | Partial string matching | `find a/street` would match with anybody that has the string "street" in their address.                           |
+| Memo           | m/     | Partial string matching | `find m/Lover` would match with anybody that has the string "lover" in their memo.                                |
+| Contacted Date | c/     | Contacted Date Matching | `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day. |
+| Tags           | t/     | Exact string matching   | `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".           |
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. For instance the result that is shown from `find n/alex n/yeoh` is the same as doing a union operation on the set of results from `find n/alex` and `find n/yeoh`. For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+</div>
+
 
 <br>
 
@@ -352,6 +359,34 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+
+
+### 4.14. Scrubbing address book
+Cleans up the address book of unwanted contacts.
+
+Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
+* Delete contacts that match any of the phone number, email domain or tag specified from the command.
+* At least one parameter must be present.
+* The scrub command only scrubs contacts that have an exact match with any of the specified parameters.
+* This match is case-insensitive.
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** Email domain is the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their mail domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ When multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. For instance the result that is shown from `scrub p/90400203 p/90400202` is the same as doing a union operation on the set of results from `scrub p/90400203` and `scrub p/90400202`.         
+</div>
+
+Examples:
+* `scrub e/@gmail.com` would scrub contacts that have the "@gmail.com" domain name for their email.
+* `scrub e/@gmail` would scrub contacts that have the "@gmail" domain name and this includes "@gmail.com" and "@gmail.sg".
+* `scrub p/90200402` would scrub contacts that have the number "90200402".
+* `scrub t/family` would scrub contacts that have the tag "family".
+
+### 4.15. Appending tags to current person
+Appe
+
 
 --------------------------------------------------------------------------------------------------------------------
 
