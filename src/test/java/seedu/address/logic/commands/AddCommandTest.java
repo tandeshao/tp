@@ -16,6 +16,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -193,6 +195,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updatePersonOnDisplay(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Person> getPersonOnDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,22 +217,22 @@ public class AddCommandTest {
         @Override
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public boolean canRedoAddressBook() {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public void saveAddressBookState() {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public void deleteAllPerson(ObservableList<Person> list) {
@@ -262,7 +279,7 @@ public class AddCommandTest {
         @Override
         public void saveAddressBookState() {
             // invoked by {@code AddCommand#execute()}
-        };
+        }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
