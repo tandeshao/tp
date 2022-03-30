@@ -111,7 +111,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lastContactLabel" text="\$date" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+            <Label fx:id="lastContactLabel" text="\$date" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
