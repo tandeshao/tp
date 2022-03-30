@@ -25,16 +25,17 @@ public class DomainMatchPredicate implements Predicate<Person> {
 
     /**
      * Tests if a person's email domain is identical to the domain (e.g. @gmail) or the entire domain name (e.g. @gmail
-     * .com) of the user argument.
+     * .com) of the user argument. This test is case-insensitive.
      *
      * @param person Person to be checked against.
      * @return true if domain name is identical to the email argument, false otherwise.
      */
     @Override
     public boolean test(Person person) {
-        String domain = retrieveDomain(person.getEmail());
-        String entireDomainName = retrieveEntireDomainName(person.getEmail());
-        return emailArg.stream().anyMatch(email -> domain.equals(email) || entireDomainName.equals(email));
+        String domain = retrieveDomain(person.getEmail()).toLowerCase();
+        String entireDomainName = retrieveEntireDomainName(person.getEmail()).toLowerCase();
+        return emailArg.stream().anyMatch(email -> domain.equals(email.toLowerCase())
+                || entireDomainName.equals(email.toLowerCase()));
     }
 
     /**
