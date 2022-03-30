@@ -21,7 +21,7 @@ public class UndoCommand extends Command {
             + "(Up to " + StateAddressBook.UNDO_REDO_CAPACITY + " undo)\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_UNDO_SUCCESS = "Undo success";
+    public static final String MESSAGE_UNDO_SUCCESS = "Undo success!";
     public static final String MESSAGE_UNDO_EMPTY = "There is nothing to undo (Max "
             + StateAddressBook.UNDO_REDO_CAPACITY + " undoable actions)";
 

@@ -48,6 +48,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains tests for {@code AddCommandParser}.
+ */
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 

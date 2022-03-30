@@ -15,7 +15,7 @@ import java.time.format.ResolverStyle;
 public class ContactedDate {
 
     /** String message that represents the prefix last contacted on. */
-    public static final String MESSAGE_CONTACTED_PREFIX = "Last contacted on ";
+    public static final String MESSAGE_CONTACTED_PREFIX = "Last contacted on %s";
 
     /** String message that represents not contacted. */
     public static final String MESSAGE_NOT_CONTACTED = "Not contacted";
@@ -107,7 +107,7 @@ public class ContactedDate {
             return MESSAGE_NOT_CONTACTED;
         }
 
-        return MESSAGE_CONTACTED_PREFIX + this.contactedDate;
+        return String.format(MESSAGE_CONTACTED_PREFIX, this.contactedDate);
     }
 
     /**
