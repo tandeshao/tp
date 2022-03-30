@@ -5,9 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -23,6 +28,7 @@ public class ModelManager implements Model {
     private final StateAddressBook stateAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SimpleObjectProperty<Person> personOnDisplay;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +41,8 @@ public class ModelManager implements Model {
         this.stateAddressBook = new StateAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.stateAddressBook.getPersonList());
+        personOnDisplay = new SimpleObjectProperty<>();
+        this.stateAddressBook.getPersonList().addListener(this::handleListChangeListener);
     }
 
     public ModelManager() {
@@ -154,6 +162,105 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Person on Display Accessors ================================================================
+
+    @Override
+    public ReadOnlyProperty<Person> getPersonOnDisplay() {
+        return personOnDisplay;
+    }
+
+    @Override
+    public void updatePersonOnDisplay(Person person) {
+        personOnDisplay.set(person);
+    }
+
+    /**
+     * Removes the current {@code personOnDisplay}.
+     */
+    private void removePersonOnDisplay() {
+        updatePersonOnDisplay(null);
+    }
+
+    /**
+     * Updates the {@code personOnDisplay} according to how the list changes.
+     * If a {@code Person} was added, change the {@code personOnDisplay} to the newly added {@code Person}.
+     * If a {@code Person} was modified, update the {@code Person}'s data
+     * If a {@code Person} was deleted, delete the {@code personOnDisplay} if it's the same as the Person deleted.
+     *
+     * @param change Contains all the modifications to the list.
+     */
+    private void handleListChangeListener(ListChangeListener.Change<? extends Person> change) {
+        change.next();
+        List<? extends Person> addedList = change.getAddedSubList();
+        List<? extends Person> removedList = change.getRemoved();
+
+        if (change.getAddedSize() > change.getRemovedSize()) {
+            updateDisplayUponAddition(addedList, removedList);
+            return;
+        }
+        // There's no point checking if the person on display needs to change or delete if it doesn't exist.
+        if (personOnDisplay.get() == null) {
+            return;
+        }
+        if (change.getAddedSize() == change.getRemovedSize()) {
+            updateDisplayUponModification(addedList, removedList);
+        } else if (change.getAddedSize() < change.getRemovedSize()) {
+            updateDisplayUponDeletion(addedList, removedList);
+        }
+    }
+
+    /**
+     * Updates {@code personOnDisplay} when {@code Person} are added to the {@code AddressBook}.
+     *
+     * @param addedList List of {@code Person} added.
+     * @param removedList List of {@code Person} removed.
+     */
+    private void updateDisplayUponAddition(
+            List<? extends Person> addedList, List<? extends Person> removedList) {
+        addedList.forEach(person -> {
+            if (!removedList.contains(person)) {
+                updatePersonOnDisplay(person);
+            }
+        });
+    }
+
+    /**
+     * Updates {@code personOnDisplay} when {@code Person} are modified in the {@code AddressBook}.
+     *
+     * @param addedList List of {@code Person} added.
+     * @param removedList List of {@code Person} removed.
+     */
+    private void updateDisplayUponModification(
+            List<? extends Person> addedList, List<? extends Person> removedList) {
+        assert addedList.size() == removedList.size();
+
+        Person curPerson = personOnDisplay.get();
+        for (int i = 0; i < removedList.size(); i++) {
+            if (curPerson.equals(removedList.get(i))) {
+                updatePersonOnDisplay(addedList.get(i));
+            }
+        }
+    }
+
+    /**
+     * Updates {@code personOnDisplay} when {@code Person} are deleted from the {@code AddressBook}.
+     *
+     * @param addedList List of {@code Person} added.
+     * @param removedList List of {@code Person} removed.
+     */
+    private void updateDisplayUponDeletion(
+            List<? extends Person> addedList, List<? extends Person> removedList) {
+        Person curPerson = personOnDisplay.get();
+        if (removedList.contains(curPerson) && !addedList.contains(curPerson)) {
+            removePersonOnDisplay();
+        }
+    }
+
+    @Override
+    public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
+        personOnDisplay.addListener(listener);
+    }
+
     //=========== Undo and redo ==============================================================================
 
     /**
@@ -170,7 +277,7 @@ public class ModelManager implements Model {
     @Override
     public void redoAddressBook() {
         stateAddressBook.redo();
-    };
+    }
 
     /**
      * Returns true if address book is undoable; otherwise returns false.
@@ -180,7 +287,7 @@ public class ModelManager implements Model {
     @Override
     public boolean canUndoAddressBook() {
         return stateAddressBook.isUndoable();
-    };
+    }
 
     /**
      * Returns true if address book is redoable; otherwise returns false.
@@ -190,7 +297,7 @@ public class ModelManager implements Model {
     @Override
     public boolean canRedoAddressBook() {
         return stateAddressBook.isRedoable();
-    };
+    }
 
     /**
      * Saves the current address book state.
@@ -198,7 +305,7 @@ public class ModelManager implements Model {
     @Override
     public void saveAddressBookState() {
         stateAddressBook.saveState();
-    };
+    }
 
     /**
      * Checks if two {@code ModelManager} is equal.

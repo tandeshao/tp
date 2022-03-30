@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
 
         detailedPersonDisplay = new DetailedPersonDisplay();
         detailedPersonDisplayPlaceholder.getChildren().add(detailedPersonDisplay.getRoot());
-        linkPersonOnDisplay();
+        initializeDetailedPersonDisplay();
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -133,11 +133,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Initializes the {@code DetailedPersonDisplay} by linking the listener to the AddressBook and
+     * setting the initial {@code personOnDisplay}.
+     */
+    private void initializeDetailedPersonDisplay() {
+        linkPersonOnDisplay();
+        detailedPersonDisplay.setPersonDisplay(logic.getPersonOnDisplay().getValue());
+    }
+
+    /**
      * Link the listener from {@code detailedPersonDisplay} to the personOnDisplay in the Address Book.
-     * @see seedu.address.model.ReadOnlyAddressBook#addPersonOnDisplayListener(ChangeListener)
+     * @see seedu.address.model.Model#addPersonOnDisplayListener(ChangeListener)
      */
     private void linkPersonOnDisplay() {
-        logic.getAddressBook().addPersonOnDisplayListener(detailedPersonDisplay.getListener());
+        logic.addPersonOnDisplayListener(detailedPersonDisplay.getListener());
     }
 
     /**

@@ -45,48 +45,50 @@ public class DetailedPersonDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    public void setPersonDisplay(Person person) {
+        if (person != null) {
+            String newName = person.getName().toString();
+            nameLabel.setText(newName);
+
+            String newPhone = person.getPhone().toString();
+            phoneLabel.setText(newPhone);
+
+            String newEmail = person.getEmail().toString();
+            emailLabel.setText(newEmail);
+
+            String newAddress = person.getAddress().toString();
+            addressLabel.setText(newAddress);
+
+            String newLastContact = person.getContactedDate().toString();
+            lastContactLabel.setText(newLastContact);
+
+            String newMemo = DEFAULT_EMPTY_MESSAGE;
+            if (!person.isMemoEmpty()) {
+                newMemo = person.getMemo().toString();
+            }
+            memoLabel.setText(newMemo);
+
+            tagsPane.getChildren().clear();
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tagsPane.getChildren().add(new Label(tag.toString())));
+        } else {
+            nameLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            phoneLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            emailLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            addressLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            memoLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            lastContactLabel.setText(DEFAULT_EMPTY_MESSAGE);
+            tagsPane.getChildren().clear();
+        }
+    }
+
     /**
      * Returns a listener that updates the UI whenever the Person object on display is modified.
      *
      * @return a ChangeListener that reacts to any edits of a Person object.
      */
     public ChangeListener<? super Person> getListener() {
-        return (ChangeListener<Person>) (observable, oldPerson, newPerson) -> {
-            if (newPerson != null) {
-                String newName = newPerson.getName().toString();
-                nameLabel.setText(newName);
-
-                String newPhone = newPerson.getPhone().toString();
-                phoneLabel.setText(newPhone);
-
-                String newEmail = newPerson.getEmail().toString();
-                emailLabel.setText(newEmail);
-
-                String newAddress = newPerson.getAddress().toString();
-                addressLabel.setText(newAddress);
-
-                String newLastContact = newPerson.getContactedDate().toString();
-                lastContactLabel.setText(newLastContact);
-
-                String newMemo = DEFAULT_EMPTY_MESSAGE;
-                if (!newPerson.isMemoEmpty()) {
-                    newMemo = newPerson.getMemo().toString();
-                }
-                memoLabel.setText(newMemo);
-
-                tagsPane.getChildren().clear();
-                newPerson.getTags().stream()
-                        .sorted(Comparator.comparing(tag -> tag.tagName))
-                        .forEach(tag -> tagsPane.getChildren().add(new Label(tag.toString())));
-            } else {
-                nameLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                phoneLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                emailLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                addressLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                memoLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                lastContactLabel.setText(DEFAULT_EMPTY_MESSAGE);
-                tagsPane.getChildren().clear();
-            }
-        };
+        return (ChangeListener<Person>) (observable, oldPerson, newPerson) -> setPersonDisplay(newPerson);
     }
 }
