@@ -53,12 +53,13 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 <div style="page-break-after: always;"></div>
 
 ## 1. Introduction
-This document is the user guide for AddressBook Level 3.14 (Abπ), an all-rounded desktop app for managing contacts. It is primarily targeted towards fast-typers and individuals who prefer working on a Command-Line Interface (CLI). 
+This document is the user guide for AddressBook Level 3.14 (Abπ), an all-rounded desktop app for managing contacts. It is primarily targeted towards fast-typers and individuals who prefer working on a Command-Line Interface (CLI).   
 
 *If you're unfamiliar with Command-Line Interfaces (CLIs), you can find out more about them [here](https://en.wikipedia.org/wiki/Command-line_interface)!*
 
-**Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
+For users who are interested in using Abπ, this guide is for you as it will help you find out about the different features Abπ offers and the different commands that are available for you to use it.  
 
+**Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
 
  Word | What it means                                                                   |
 ------|---------------------------------------------------------------------------------|
