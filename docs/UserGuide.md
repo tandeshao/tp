@@ -429,17 +429,19 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
-**List** | `list`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**AddTag** | `addtag INDEX t/TAG…` e.g.,`addtag 1 t/friends`
+**DeleteTag** | `deletetag INDEX t/TAG…` e.g.,`deletetag 1 t/friends`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Scrub** | **TODO**
+**Clear** | `clear`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
+**List** | `list`
+**CopyEmails**| `copyemails`
 **Undo** | `undo`
 **Redo** | `redo`
-**Previous**| Pressing `UP_ARROW_KEY`
-**Next**| Pressing `down_ARROW_KEY`
-**CopyEmails**| `copyemails`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear** | `clear`
+**Recent commands**| Pressing `UP_ARROW_KEY` or `DOWN_ARROW_KEY`
+**Help** | `help`
 **Exit** | `exit`
 
