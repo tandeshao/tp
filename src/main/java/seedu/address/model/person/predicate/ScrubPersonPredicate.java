@@ -15,30 +15,30 @@ import seedu.address.model.person.Person;
  * matches any of the description given for scrubbing.
  */
 public class ScrubPersonPredicate implements Predicate<Person> {
-    private final ArgumentMultimap descriptor;
+    private final ArgumentMultimap argMultimap;
 
     /**
      * Constructor for ScrubPersonPredicate.
      *
-     * @param descriptor Description to scrub a person by.
+     * @param argMultimap Description to scrub a person by.
      */
-    public ScrubPersonPredicate(ArgumentMultimap descriptor) {
-        this.descriptor = descriptor;
+    public ScrubPersonPredicate(ArgumentMultimap argMultimap) {
+        this.argMultimap = argMultimap;
     }
 
     /**
      * Conducts a case-insensitive check on the {@link seedu.address.model.person.Person Person}.
      * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix})
      * has any word that matches exactly to any word in the given description. Only three attributes
-     * are allowed for scrubbing, and they are phone, email and tags. For email, a partial match between
-     * the email description and person's email is used and for phone and tags, an exact match criteria is used.
+     * are allowed for scrubbing, and they are phone, email and tags. For email, a {@link DomainMatchPredicate} is
+     * used and for phone and tags, {@link ExactWordMatchPredicate} is used.
      *
      * @param person person to be tested.
      * @return true if person contains the word, false otherwise.
      */
     @Override
     public boolean test(Person person) {
-        List<Prefix> listOfPrefixes = descriptor.getAllAvailablePrefix();
+        List<Prefix> listOfPrefixes = argMultimap.getAllAvailablePrefix();
         return listOfPrefixes.stream().anyMatch(prefix -> createPredicate(prefix).test(person));
     }
 
@@ -53,10 +53,17 @@ public class ScrubPersonPredicate implements Predicate<Person> {
     private Predicate<Person> createPredicate(Prefix prefix) {
         Predicate<Person> predicateToTestPersonAgainst;
         if (prefix.equals(PREFIX_EMAIL)) {
-            predicateToTestPersonAgainst = new DomainMatchPredicate(descriptor.getAllValues(prefix));
+            predicateToTestPersonAgainst = new DomainMatchPredicate(argMultimap.getAllValues(prefix));
         } else {
-            predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, descriptor.getAllValues(prefix));
+            predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, argMultimap.getAllValues(prefix));
         }
         return predicateToTestPersonAgainst;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ScrubPersonPredicate // instanceof handles nulls
+                && argMultimap.equals(((ScrubPersonPredicate) other).argMultimap)); // state check
     }
 }

@@ -1,9 +1,6 @@
 package seedu.address.model.person.predicate;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;

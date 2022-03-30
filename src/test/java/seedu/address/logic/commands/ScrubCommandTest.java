@@ -45,8 +45,8 @@ class ScrubCommandTest {
     private void testExecuteMethod(ArgumentMultimap phoneDescriptor, String expectedMessage) {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ScrubCommand command = new ScrubCommand(phoneDescriptor);
         ScrubPersonPredicate predicate = new ScrubPersonPredicate(phoneDescriptor);
+        ScrubCommand command = new ScrubCommand(predicate);
         deletePersonProtocol(expectedModel, predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -79,8 +79,9 @@ class ScrubCommandTest {
     @Test
     void testEquals() {
         String description = " e/@example";
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(description, ARRAY_OF_PREFIX);
-        ScrubCommand scrubCommand = new ScrubCommand(descriptor);
-        assertEquals(scrubCommand, new ScrubCommand(descriptor));
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(description, ARRAY_OF_PREFIX);
+        ScrubPersonPredicate predicate = new ScrubPersonPredicate(argumentMultimap);
+        ScrubCommand scrubCommand = new ScrubCommand(predicate);
+        assertEquals(scrubCommand, new ScrubCommand(predicate));
     }
 }
