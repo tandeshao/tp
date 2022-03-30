@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -191,7 +192,9 @@ public class Person {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            tags.stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> builder.append(String.format("[%s]", tag)));
         }
         return builder.toString();
     }
