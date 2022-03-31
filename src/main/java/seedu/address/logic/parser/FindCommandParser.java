@@ -3,8 +3,15 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.FindCommand.NO_PREFIX_MESSAGE;
 import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,6 +78,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
             throw new ParseException(NO_PREFIX_MESSAGE);
         }
+        checkPrefixArgsInProperFormat(argMultimap);
         return argMultimap;
     }
 
@@ -94,6 +102,47 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }
             } catch (NumberFormatException formatException) {
                 throw new ParseException(MESSAGE_INCORRECT_FORMAT);
+            }
+        }
+    }
+
+    /**
+     * Checks if the argument specified by the user is in a proper format and meets the constraints specified by
+     * each individual attributes.
+     *
+     * @param multimap ArgumentMultimap object that contains the arguments specified by the user for the find command.
+     * @throws ParseException If any of the given arguments are invalid.
+     */
+    private void checkPrefixArgsInProperFormat(ArgumentMultimap multimap) throws ParseException {
+        List<Prefix> prefixes = multimap.getAllAvailablePrefix();
+        for (Prefix prefix : prefixes) {
+            checkPrefixArgs(multimap, prefix);
+        }
+    }
+
+    /**
+     * Helper method for @{@link #checkPrefixArgsInProperFormat(ArgumentMultimap)}. Checks if the values in an
+     * ArgumentMultimap object are in a proper format and meets the appropriate attribute constraints.
+     *
+     * @param multimap ArgumentMultimap object that contains the arguments specified by the user for the find command.
+     * @param prefix Prefix required to get the values from the ArgumentMultimap.
+     * @throws ParseException If any of the arguments specified by the user for that specific prefix is invalid.
+     */
+    private void checkPrefixArgs(ArgumentMultimap multimap, Prefix prefix) throws ParseException {
+        List<String> prefixValues = multimap.getAllValues(prefix);
+        for (String value : prefixValues) {
+            if (prefix.equals(PREFIX_NAME)) {
+                ParserUtil.parseName(value);
+            } else if (prefix.equals(PREFIX_EMAIL)) {
+                ParserUtil.parseEmail(value);
+            } else if (prefix.equals(PREFIX_PHONE)) {
+                ParserUtil.parsePhone(value);
+            } else if (prefix.equals(PREFIX_MEMO)) {
+                ParserUtil.parseMemo(value);
+            } else if (prefix.equals(PREFIX_TAG)) {
+                ParserUtil.parseTag(value);
+            } else if (prefix.equals(PREFIX_ADDRESS)) {
+                ParserUtil.parseAddress(value);
             }
         }
     }
