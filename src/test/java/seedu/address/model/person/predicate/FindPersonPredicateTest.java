@@ -15,15 +15,19 @@ class FindPersonPredicateTest {
 
     @Test
     void test_validPerson_returnsTrue() {
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(" n/alex t/colleague p/9040", ARRAY_OF_PREFIX);
+        ArgumentMultimap descriptor = ArgumentTokenizer
+                .tokenize(" n/alex t/colleague p/9040", ARRAY_OF_PREFIX);
         FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
-        assertTrue(predicate.test(new PersonBuilder().withName("a").withPhone("90400204").build()));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alex Yeoh").withPhone("123").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("alexa").withPhone("90400204")
+                .withTags("colleague").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alexa")
+                .withPhone("90402").withTags("colleague").build()));
     }
 
     @Test
-    void test_invalidCases_returnsFalse() {
-        ArgumentMultimap descriptor = ArgumentTokenizer.tokenize(" a/streets t/colleague p/9040", ARRAY_OF_PREFIX);
+    void test_negativeCases_returnsFalse() {
+        ArgumentMultimap descriptor = ArgumentTokenizer
+                .tokenize(" a/streets t/colleague p/9040", ARRAY_OF_PREFIX);
         FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
         assertFalse(predicate.test(new PersonBuilder().withAddress("street").withPhone("904").build()));
         assertFalse(predicate.test(new PersonBuilder().withName("a").withPhone("123").withTags("colle").build()));

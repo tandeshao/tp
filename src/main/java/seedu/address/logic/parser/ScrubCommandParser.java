@@ -46,6 +46,15 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
         if (argumentMultimap.contains(PREFIX_EMAIL)) {
             checkCorrectEmailFormat(argumentMultimap);
         }
+
+        if (argumentMultimap.contains(PREFIX_TAG)) {
+            checkPrefixArgsInProperFormat(argumentMultimap.getAllValues(PREFIX_TAG), PREFIX_TAG);
+        }
+
+        if (argumentMultimap.contains(PREFIX_PHONE)) {
+            checkPrefixArgsInProperFormat(argumentMultimap.getAllValues(PREFIX_PHONE), PREFIX_PHONE);
+        }
+
         ScrubPersonPredicate predicate = new ScrubPersonPredicate(argumentMultimap);
         return new ScrubCommand(predicate);
     }
@@ -110,6 +119,26 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
         List<String> emailArgs = argMultimap.getAllValues(PREFIX_EMAIL);
         for (String emailArg : emailArgs) {
             parseDomain(emailArg);
+        }
+    }
+
+    /**
+     * Checks if the argument specified by the user is in a proper format and meets the constraints specified by
+     * each individual attributes.
+     *
+     * @param args List of arguments that belong to the prefix when parsed into the scrub command parser.
+     * @param prefix Prefix that is parsed into the scrub command parser.
+     * @throws ParseException Thrown if any of the arguments of that prefix is in an invalid format.
+     */
+    private void checkPrefixArgsInProperFormat(List<String> args, Prefix prefix) throws ParseException {
+        if (prefix.equals(PREFIX_PHONE)) {
+            for (String phoneStr : args) {
+                ParserUtil.parsePhone(phoneStr);
+            }
+        } else {
+            for (String tagStr : args) {
+                ParserUtil.parseTag(tagStr);
+            }
         }
     }
 }

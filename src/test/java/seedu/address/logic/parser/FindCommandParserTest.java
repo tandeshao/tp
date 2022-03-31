@@ -48,19 +48,6 @@ public class FindCommandParserTest {
         // Max positive integer values -> parse successful.
         String argWithMaxPositiveInteger = " c/2147483647";
         assertParseSuccess(parser, argWithMaxPositiveInteger, prepareFindCommand(argWithMaxPositiveInteger));
-
-        // Blank argument -> parse successful.
-        String contactedDateArgWithNoArgument = " n/";
-        assertParseSuccess(parser, contactedDateArgWithNoArgument, prepareFindCommand(contactedDateArgWithNoArgument));
-
-        // Multiple blank argument -> parse successful.
-        String multipleBlankArg = "n/ e/ p/ a/ t/ m/ c/";
-        assertParseSuccess(parser, multipleBlankArg, prepareFindCommand(multipleBlankArg));
-
-        // Special characters in Find -> parse successful.
-        String specialCharactersArg = " n/! e/@ p/`";
-        assertParseSuccess(parser, specialCharactersArg, prepareFindCommand(specialCharactersArg));
-
     }
 
     /**
