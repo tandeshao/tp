@@ -282,8 +282,14 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When there is at least two identical prefix specified in the scrub command, the result is equivalent to doing the scrub operation for the first specified parameter, followed by doing the scrub operation for the subsequent specified parameter. For instance the result that is shown from `scrub p/90400203 p/90400202` is the same as doing `scrub p/90400203` on the existing contact list followed by conducting `scrub p/90400202` on the resulted contact list from the first scrub command.  
+ When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
 </div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ When multiple different prefixes are specified as arguments for the scrub command, the result is equivalent to deleting all common results between the different results generated from each individual prefix. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
+</div>
+
+<br>
 
 Examples:
 * `scrub e/@gmail.com` would scrub contacts that have the "@gmail.com" domain name for their email.
