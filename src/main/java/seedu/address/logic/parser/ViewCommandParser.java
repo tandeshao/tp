@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
-    private static final Logger LOGGER = Logger.getLogger(ScrubCommandParser.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewCommandParser.class.getName());
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

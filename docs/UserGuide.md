@@ -3,13 +3,13 @@ layout: page
 title: User Guide
 ---
 ## Overview
-AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
+AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
 
 ---
 
 <div style="page-break-after: always;"></div>
 
-## Table of Content <br/>
+## Table of Contents <br/>
 
 [1. Introduction](#1-introduction) <br/>
 &nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
@@ -101,7 +101,7 @@ Symbol | What it means |
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 
 4. Double-click the file to start the app. The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/ug/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
@@ -145,7 +145,7 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 ## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-![UiGuide](images/UiGuide.png)
+![UiGuide](images/ug/UiGuide.png)
 
 
 <div style="page-break-after: always;"></div>
@@ -178,20 +178,22 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED_DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Contacted Date and Memo is optional
+ Contacted Date, Memo, and Tag are optional.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- A person can have any number of tags (including 0)
+ A person can have any number of tags, including 0.
 </div>
 
 Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -204,7 +206,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
@@ -214,6 +216,8 @@ Examples:
 * `edit 2 m/Avid free climber` edits the memo of the 2nd person to be `Avid free climber`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -232,6 +236,8 @@ Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
 * `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 #### 4.2.2. Deleting tags of a person: `deletetag`
@@ -246,6 +252,8 @@ Format: `deletetag INDEX t/TAG…`
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person if both tags exist.
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -264,6 +272,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -297,6 +307,8 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 #### 4.3.3. Clearing all entries: `clear`
@@ -304,6 +316,8 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -328,6 +342,10 @@ Examples:
 :information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.9.4. Predictive viewing](#494-predictive-viewing).
 
 </div>
+
+[Back to Table of Contents](#table-of-contents-br)
+
+<br>
 
 ### 4.5. Filtering the address book
 
@@ -371,6 +389,8 @@ Examples:
  When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 #### 4.5.2. Listing all persons: `list`
@@ -378,6 +398,8 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -394,6 +416,8 @@ Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
 * When you paste from clipboard, a semicolon-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 ### 4.7. Quality of Life
@@ -408,6 +432,8 @@ Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
 * `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 #### 4.7.2. Redoing commands: `redo`
@@ -418,6 +444,8 @@ Format: `redo`
 
 Examples:
 * `redo` after calling `undo` restores the address book to its previous state prior to undo.
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -431,6 +459,8 @@ Examples:
 * Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
 * Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 ### 4.8. Miscellaneous
@@ -443,6 +473,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+[Back to Table of Contents](#table-of-contents-br)
+
 <br>
 
 #### 4.8.2. Exiting the program: `exit`
@@ -450,6 +482,8 @@ Format: `help`
 Exits the program.
 
 Format: `exit`
+
+[Back to Table of Contents](#table-of-contents-br)
 
 <br>
 
@@ -484,6 +518,8 @@ In addition, Abπ aims to keep all displayed information updated:
 
 Hence, there is no need to worry about the display containing outdated information.
 
+[Back to Table of Contents](#table-of-contents-br)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -504,6 +540,8 @@ Fret not, Abπ supports the `undo` and `redo` commands, which follows modern app
 
 **Why is my data gone?**<br>
 When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup.json", located at "[_Abπ location_]/data/backup.json". Fix the "backup.json" into the proper json format, rename it as "addressbook.json" and overwrite the existing data file.
+
+[Back to Table of Contents](#table-of-contents-br)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -530,3 +568,4 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
+[Back to Table of Contents](#table-of-contents-br)
