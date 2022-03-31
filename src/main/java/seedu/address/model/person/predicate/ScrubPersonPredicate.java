@@ -39,7 +39,7 @@ public class ScrubPersonPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         List<Prefix> listOfPrefixes = argMultimap.getAllAvailablePrefix();
-        return listOfPrefixes.stream().anyMatch(prefix -> createPredicate(prefix).test(person));
+        return listOfPrefixes.stream().allMatch(prefix -> createPredicate(prefix).test(person));
     }
 
     /**

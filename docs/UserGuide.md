@@ -294,8 +294,14 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When there is at least two identical prefix specified in the scrub command, the result is equivalent to doing the scrub operation for the first specified parameter, followed by doing the scrub operation for the subsequent specified parameter. For instance the result that is shown from `scrub p/90400203 p/90400202` is the same as doing `scrub p/90400203` on the existing contact list followed by conducting `scrub p/90400202` on the resulted contact list from the first scrub command.  
+ When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
 </div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ When multiple different prefixes are specified as arguments for the scrub command, the result is equivalent to deleting all common results between the different results generated from each individual prefix. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
+</div>
+
+<br>
 
 Examples:
 * `scrub e/@gmail.com` would scrub contacts that have the "@gmail.com" domain name for their email.
@@ -366,18 +372,23 @@ Examples:
 * `find a/street` would match with anybody that has the string "street" in their address.
 * `find m/Lover` would match with anybody that has the string "lover" in their memo.
 * `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day.
-*  `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".
+* `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".
+* `find t/family e/@example` would only match with anybody that has a tag "family" and an email domain "@example".
 
 
 <br>
 
 <div markdown="span" class="alert alert-info">  
-:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
+:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string. 
 
 <br>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Apart from the `c/` prefix,  when there is at least two identical prefix specified in the find command, the search result that is displayed to the user is equivalent to conducting a set union operation on the set of results from the first prefix and the set of results from the subsequent prefixes. For instance the result that is shown from `find n/alex n/yeoh` is the same as doing a union operation on the set of results from `find n/alex` and `find n/yeoh`. For `c/`, only the input parameters from the last `c/` prefix will be used in the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+ Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
 [Back to Table of Contents](#table-of-contents-br)
