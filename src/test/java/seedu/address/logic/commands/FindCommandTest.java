@@ -45,16 +45,13 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        String emptyInput = "n/tester";
+    public void execute_zeroKeywords_allPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        String emptyInput = " n/";
         ArgumentMultimap emptyDescriptor = ArgumentTokenizer.tokenize(emptyInput, ARRAY_OF_PREFIX);
         FindCommand command = new FindCommand(new FindPersonPredicate(emptyDescriptor));
         expectedModel.updateFilteredPersonList(new FindPersonPredicate(emptyDescriptor));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
-        // Since it is an empty predicate, it should return 0 person found
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test

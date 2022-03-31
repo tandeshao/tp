@@ -52,11 +52,11 @@ public class FindPersonPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         List<Prefix> prefixes = descriptor.getAllAvailablePrefix();
         for (Prefix prefix : prefixes) {
-            if (testPersonAttribute(person, prefix)) {
-                return true;
+            if (!testPersonAttribute(person, prefix)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
