@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,11 +48,12 @@ public class ArgumentMultimap {
 
     /**
      * Returns the list of prefixes in the {@link #argMultimap}.
+     * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      *
      * @return Prefixes that are in the user input.
      */
     public List<Prefix> getAllAvailablePrefix() {
-        Set<Prefix> setOfKeys = argMultimap.keySet();
+        Set<Prefix> setOfKeys = new HashSet<>(argMultimap.keySet());
         setOfKeys.remove(new Prefix("")); //removes preamble
         return new ArrayList<>(setOfKeys);
     }
