@@ -86,7 +86,8 @@ public class CommandTestUtil {
     public static final String INVALID_MEMO_DESC = " " + PREFIX_MEMO + MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
 
     // '*' not allowed in tags
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*";
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
