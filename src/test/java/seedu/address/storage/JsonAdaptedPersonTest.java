@@ -27,7 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CONTACTED_DATE = "11 Dec 2021";
     private static final String INVALID_MEMO = MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "  ";
 
     private static final String VALID_NAME = BENSON.getName().fullName;
     private static final String VALID_PHONE = BENSON.getPhone().phone;
