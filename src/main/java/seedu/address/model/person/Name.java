@@ -9,11 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int NAME_CHARACTER_LIMIT = 800;
     public static final String MESSAGE_CONSTRAINTS =
             "Names should not be blank, "
-                    + "and its length should be between 1 and 800 (including spaces)";
+                    + "and its length should be between 1 and " + NAME_CHARACTER_LIMIT
+                    + " (including spaces)";
 
-    public static final int NAME_CHARACTER_LIMIT = 799;
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
