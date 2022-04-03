@@ -86,7 +86,7 @@ Symbol | What it means |
 :exclamation: | Warning/cautionary statement that should be read. 
 :bulb: | Extra tip that may be useful to the reader.
 :information_source: | Important information to take note.          
-[here](") |Words that are in this format are clickable links that directs you to a certain webpage.
+[here](#11-conventions) |Words that are in this format are clickable links that directs you to a certain webpage.
 
 
 ------------
@@ -108,7 +108,7 @@ Symbol | What it means |
 
    * `list`: Lists all contacts.
 
-   * `addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
