@@ -424,9 +424,11 @@ Examples:
 
 #### 4.7.1. Undoing commands: `undo`
 
-Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
+Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
 
 Format: `undo`
+
+- The maximum number of undo is 10.
 
 Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
@@ -441,6 +443,8 @@ Examples:
 Redo reverses the `undo` command.
 
 Format: `redo`
+
+The maximum number of redo is 10.
 
 Examples:
 * `redo` after calling `undo` restores the address book to its previous state prior to undo.
