@@ -215,7 +215,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
+:information_source: **Note:** For name and phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
 For example, "John &#160;&#160;&#160; Doe" will be trimmed to "John Doe".
 </div>
 
