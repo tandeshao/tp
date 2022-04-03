@@ -182,7 +182,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO]
 
 <div markdown="span" class="alert alert-info">  
 
-:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. For example "John &nbsp&nbsp&nbsp Doe" will be trimmed to "John Doe".
+:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
+For example "John    Doe" will be trimmed to "John Doe".
 
 </div>
 
@@ -218,7 +219,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 
 <div markdown="span" class="alert alert-info">  
 
-:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. For example "John &nbsp&nbsp&nbsp Doe" will be trimmed to "John Doe".
+:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
+For example "John    Doe" will be trimmed to "John Doe".
 
 </div>
 
@@ -506,9 +508,9 @@ Abπ helps to manage duplicates by preventing duplicate entries of identical nam
 
 <div markdown="span" class="alert alert-info">  
 
-:information_source: **Note:** For phone numbers, it has to be identical to be considered equal. For example: 
-- "+65 98765432" is considered different from "65 98765432" (difference in "+").
-- "+65 98765432" is considered different from "+6598765432" (difference in whitespace).
+:information_source: **Note:** For phone numbers, it has to be identical to be considered equal. For example: <br>
+ "+65 98765432" is considered different from "65 98765432" (difference in "+") <br>
+ "+65 98765432" is considered different from "+6598765432" (difference in whitespace)
 
 </div>
 
