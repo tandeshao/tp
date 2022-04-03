@@ -181,8 +181,8 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, using “_” to represent a single whitespace, "John___Doe" will be trimmed to "John_Doe".
+:information_source: **Note:** For name and phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
+For example, using "_" to represent a single whitespace, "John_ _ _Doe" will be trimmed to "John_Doe".
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -217,7 +217,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 
 <pre markdown="span" class="alert alert-info">
 :information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, using “_” to represent a single whitespace, "John___Doe" will be trimmed to "John_Doe".
+For example, using "_" to represent a single whitespace, "John_ _ _Doe" will be trimmed to "John_Doe".
 </pre>
 
 Examples:
@@ -507,10 +507,10 @@ Abπ helps to manage duplicates by preventing duplicate entries of identical nam
 For name and phone, extra white spaces (2 or more) between words/numbers will be treated as a single white space. <br>
 <br>
 For all person attributes, if whitespace is allowed, a difference in white space is considered as different. For example: <br>
-    "John Doe" is different from "JohnDoe" <br>
+    "John Doe" is different from "JohnDoe". <br>
 <br>
- For phone numbers, it has to be identical to be considered equal. For example: <br>
- "+65 98765432" is considered different from "65 98765432" (difference in "+")
+ For phone, it has to be identical to be considered equal. For example: <br>
+ "+65 98765432" is considered different from "65 98765432" (difference in "+").
 </div>
 
 #### 4.9.2. Saving the data
