@@ -180,11 +180,9 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">  
-
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example <pre> "John    Doe" </pre> will be trimmed to "John Doe".
-
+For example, using “_” to represent a single whitespace, "John___Doe" will be trimmed to "John_Doe".
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -217,11 +215,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
-<pre markdown="span" class="alert alert-info">  
-
+<pre markdown="span" class="alert alert-info">
 :information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example "John    Doe" will be trimmed to "John Doe".
-
+For example, using “_” to represent a single whitespace, "John___Doe" will be trimmed to "John_Doe".
 </pre>
 
 Examples:
@@ -506,8 +502,7 @@ Format: `exit`
 #### 4.9.1. Preventing duplicate entries
 Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email. The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
 
-<div markdown="span" class="alert alert-info">  
-
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** <br> 
 For name and phone, extra white spaces (2 or more) between words/numbers will be treated as a single white space. <br>
 <br>
@@ -515,8 +510,7 @@ For all person attributes, if whitespace is allowed, a difference in white space
     "John Doe" is different from "JohnDoe" <br>
 <br>
  For phone numbers, it has to be identical to be considered equal. For example: <br>
- "+65 98765432" is considered different from "65 98765432" (difference in "+") 
-
+ "+65 98765432" is considered different from "65 98765432" (difference in "+")
 </div>
 
 #### 4.9.2. Saving the data
