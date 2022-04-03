@@ -249,9 +249,7 @@ Format: `deletetag INDEX t/TAG…`
 * Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- To overwrite all existing tags or remove all tags, refer to [4.1.2. Editing a person](#412-editing-a-person-edit)
-</div>
+:information_source: **Note:** To overwrite all existing tags or remove all tags, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person if the tag exists.
