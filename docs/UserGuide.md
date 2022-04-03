@@ -250,7 +250,7 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note:** To overwrite all existing tags or remove all tags, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+:information_source: **Note:** To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
 
 Examples:
