@@ -46,6 +46,10 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
+        // Replaces 2 or more consecutive whitespaces between words with a single whitespace.
+        trimmedName = trimmedName.replaceAll("\\s{2,}", " ");
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -61,6 +65,10 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+
+        // Replaces 2 or more consecutive whitespaces between numbers with a single whitespace.
+        trimmedPhone = trimmedPhone.replaceAll("\\s{2,}", " ");
+
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
