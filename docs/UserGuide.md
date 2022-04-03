@@ -182,7 +182,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO]
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** For name and phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, using "_" to represent a single whitespace, "John_ _ _Doe" will be trimmed to "John_Doe".
+For example, using '_' to represent a single whitespace, 'John_ _ _Doe' will be trimmed to 'John_Doe'.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -215,10 +215,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
-<pre markdown="span" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** For Name and Phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, using "_" to represent a single whitespace, "John_ _ _Doe" will be trimmed to "John_Doe".
-</pre>
+For example, using '_' to represent a single whitespace, 'John_ _ _Doe' will be trimmed to 'John_Doe'.
+</div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -507,10 +507,10 @@ Abπ helps to manage duplicates by preventing duplicate entries of identical nam
 For name and phone, extra white spaces (2 or more) between words/numbers will be treated as a single white space. <br>
 <br>
 For all person attributes, if whitespace is allowed, a difference in white space is considered as different. For example: <br>
-    "John Doe" is different from "JohnDoe". <br>
+    "John Doe" is different from "JohnDoe" <br>
 <br>
  For phone, it has to be identical to be considered equal. For example: <br>
- "+65 98765432" is considered different from "65 98765432" (difference in "+").
+ "+65 98765432" is considered different from "65 98765432" (difference in "+")
 </div>
 
 #### 4.9.2. Saving the data
