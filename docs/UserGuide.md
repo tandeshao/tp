@@ -490,7 +490,7 @@ Format: `exit`
 ### 4.9. Extra information regarding the features
 
 #### 4.9.1. Preventing duplicate entries
-Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email. The reason why duplicate is considered as such is to provide flexibility as individuals may share the same name, or phone, or even email.
+Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email. The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
 
 #### 4.9.2. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
