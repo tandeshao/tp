@@ -29,7 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CONTACTED_DATE = "01/01/2022";
-    private static final String INVALID_MEMO = MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
+    private static final String INVALID_MEMO = MemoUtil.ONE_MORE_THAN_MAXIMUM_MEMO_STRING;
     private static final String INVALID_TAG = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 

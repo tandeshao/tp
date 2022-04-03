@@ -4,9 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTED_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMO_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -59,36 +60,48 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_differentNameDuplicatePhone_throwsCommandException() {
+    public void execute_differentAddressDuplicateNamePhoneEmail_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        // Duplicate phone number.
-        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
+        // Different address, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withAddress(VALID_ADDRESS_BOB).build();
         AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_differentNameDuplicateEmail_throwsCommandException() {
+    public void execute_differentContactedDateDuplicateNamePhoneEmail_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        // Duplicate email.
-        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        // Different contacted date, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withContactedDate(VALID_CONTACTED_DATE_BOB).build();
         AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_differentNameDuplicatePhoneAndEmail_throwsCommandException() {
+    public void execute_differentMemoDuplicateNamePhoneEmail_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        // Duplicate email.
-        Person invalidPerson = new PersonBuilder().withName(VALID_NAME_BOB).build();
+        // Different memo, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withMemo(VALID_MEMO_BOB).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentTagsDuplicateNamePhoneEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Different tags, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withTags(VALID_TAG_FRIEND).build();
         AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -169,11 +182,6 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPersonExcept(Person person, Person except) {
             throw new AssertionError("This method should not be called.");
         }
 

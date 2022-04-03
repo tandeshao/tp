@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,24 @@ public class DeleteTagCommandTest {
 
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
+
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, tagsToDelete);
+        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.saveAddressBookState();
+
+        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_oneExistingTagDifferentCapitalizationSpecifiedUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_COLLEAGUE, VALID_TAG_WIFE).build();
+
+        Set<Tag> tagsToDelete = new HashSet<>();
+        tagsToDelete.add(new Tag(VALID_TAG_FRIEND.toUpperCase()));
 
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, tagsToDelete);
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete);
@@ -90,7 +109,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_oneMissingTagSpecifiedUnfilteredList_success() {
+    public void execute_oneMissingTagSpecifiedUnfilteredList_failure() {
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(new Tag(VALID_TAG_HUSBAND));
 
@@ -101,7 +120,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_twoMissingTagSpecifiedUnfilteredList_success() {
+    public void execute_twoMissingTagSpecifiedUnfilteredList_failure() {
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(new Tag(VALID_TAG_HUSBAND));
         tagsToDelete.add(new Tag(VALID_TAG_COMPANION));
@@ -113,7 +132,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_oneMissingTagFollowedByOneExistingTagSpecifiedUnfilteredList_success() {
+    public void execute_oneMissingTagFollowedByOneExistingTagSpecifiedUnfilteredList_failure() {
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(new Tag(VALID_TAG_HUSBAND));
         tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
@@ -128,7 +147,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_oneExistingTagFollowedByOneMissingTagSpecifiedUnfilteredList_success() {
+    public void execute_oneExistingTagFollowedByOneMissingTagSpecifiedUnfilteredList_failure() {
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
         tagsToDelete.add(new Tag(VALID_TAG_HUSBAND));

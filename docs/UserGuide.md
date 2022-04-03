@@ -43,7 +43,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
 &nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Preventing duplicate entries (phone and email)](#491-preventing-duplicate-entries-phone-and-email) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Preventing duplicate entries](#491-preventing-duplicate-entries) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Saving the data](#492-saving-the-data) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Editing the data file](#493-editing-the-data-file) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Predictive viewing](#494-predictive-viewing) <br/>
@@ -489,8 +489,8 @@ Format: `exit`
 
 ### 4.9. Extra information regarding the features
 
-#### 4.9.1. Preventing duplicate entries (phone and email) 
-Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
+#### 4.9.1. Preventing duplicate entries
+Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email. The reason why duplicate is considered as such is to provide flexibility as individuals may share the same name, or phone, or even email.
 
 #### 4.9.2. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
