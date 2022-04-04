@@ -2,6 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_SEARCH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -17,12 +24,16 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose contact details matches any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: \n "
-            + "KEYWORD" + "n/ [NAME_PARAMETER]...\n"
-            + "p/ [PHONE_PARAMETER]" + "...\n"
-            + "e/ [EMAIL_PARAMETER]...\n" + "a/ [ADDRESS_PARAMETER]...\n" + "t/ [TAG_PARAMETER]...\n"
-            + "m/ [MEMO_PARAMETER]...\n" + "Example: " + COMMAND_WORD + " n/ alice bob charlie" + " e/ alice@gmail.com";
+            + "the specified keywords (case-insensitive).\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_PHONE + "PHONE]... "
+            + "[" + PREFIX_EMAIL + "EMAIL]... "
+            + "[" + PREFIX_ADDRESS + "ADDRESS]... "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_MEMO + "MEMO]... "
+            + "[" + PREFIX_CONTACTED_DATE + "CONTACTED DATE]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob" + " e/alice@gmail.com";
     public static final String NO_PREFIX_MESSAGE = "At least one field to find must be provided.";
     private final FindPersonPredicate predicate;
 

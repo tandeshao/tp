@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.Model;
@@ -70,7 +71,7 @@ class ScrubCommandTest {
 
     @Test
     void execute_partialPhone_noDeletion() {
-        String expectedMessage = String.format(ScrubCommand.MESSAGE_SCRUB_SUCCESS, 0);
+        String expectedMessage = Messages.MESSAGE_EMPTY_SEARCH;
         String partialPhone = " p/9435";
         ArgumentMultimap partialPhoneDescriptor = ArgumentTokenizer.tokenize(partialPhone, ARRAY_OF_PREFIX);
         testExecuteMethod(partialPhoneDescriptor, expectedMessage);
