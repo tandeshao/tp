@@ -181,7 +181,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED_DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Contacted Date, Memo, and Tag are optional.
+ Contacted date, memo, and tag are optional.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -190,7 +190,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED_DATE] [m/MEMO]
 
 Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
 [Back to Table of Contents](#table-of-contents-br)
@@ -207,13 +207,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
-* You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
+* All the person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
+* A peron's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 m/Avid free climber` edits the memo of the 2nd person to be `Avid free climber`.
+* `edit 1 n/John Doe p/91234567 e/johndoe@example.com` edits the name, phone number and email address of the 1st person to be "John Doe", "91234567" and "johndoe@example.com" respectively.
+* `edit 2 t/` edits the 2nd person to clear all existing tags.
+* `edit 2 m/Avid hiker` edits the memo of the 2nd person to be `Avid hiker`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
 
@@ -424,11 +424,16 @@ Examples:
 
 #### 4.7.1. Undoing commands: `undo`
 
-Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
+Undo previous commands that modified data, which includes: <br> 
+`add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
 
 Format: `undo`
 
-- The maximum number of undo is 10.
+* The maximum number of undo is 10.
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** If `undo` is successful, Abπ will display "Undo success!". Currently, it does not display a message on what has been undone. This message will be implemented in a future version.
+</div>
 
 Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
@@ -444,7 +449,11 @@ Redo reverses the `undo` command.
 
 Format: `redo`
 
-The maximum number of redo is 10.
+* The maximum number of redo is 10.
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** If `redo` is successful, Abπ will display "Redo success!". Currently, it does not display a message on what has been redone. This message will be implemented in a future version.
+</div>
 
 Examples:
 * `redo` after calling `undo` restores the address book to its previous state prior to undo.
