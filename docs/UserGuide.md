@@ -496,7 +496,7 @@ Abπ helps to remove accidental extra white spaces between words to provide a cl
 
 Examples:
 * "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
-* "Likes &#160;&#160;&#160; to &#160;&#160;&#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
+* "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
 
 #### 4.9.2. Preventing duplicate entries
 Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. 
@@ -507,11 +507,11 @@ Abπ helps to manage duplicates by preventing duplicate entries of identical nam
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** <br>
 For all person attributes a difference in white space is considered as different. For example: <br>
-&#160; "John Doe" is different from "JohnDoe" <br>
-&#160; "65 98765432" is different from "6598765432" <br>
+"John Doe" is different from "JohnDoe" <br>
+"65 98765432" is different from "6598765432" <br>
 <br>
 For phone, a difference in "+" is also considered as different. For example: <br>
-&#160; "+65 98765432" is considered different from "65 98765432"
+"+65 98765432" is considered different from "65 98765432"
  
 </div>
 
