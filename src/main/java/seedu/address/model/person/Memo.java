@@ -75,7 +75,7 @@ public class Memo {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Memo // instanceof handles nulls
-                && memo.equals(((Memo) other).memo)); // state check
+                && memo.equalsIgnoreCase(((Memo) other).memo)); // state check
     }
 
     /**
@@ -85,6 +85,6 @@ public class Memo {
      */
     @Override
     public int hashCode() {
-        return memo.hashCode();
+        return memo.toLowerCase().hashCode();
     }
 }

@@ -43,10 +43,12 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
 &nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Preventing duplicate entries (phone and email)](#491-preventing-duplicate-entries-phone-and-email) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Saving the data](#492-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Editing the data file](#493-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Predictive viewing](#494-predictive-viewing) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Ignoring case difference](#491-ignoring-case-difference) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Trimming of extra white spaces](#492-trimming-of-extra-white-spaces) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate entries](#493-preventing-duplicate-entries) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Saving the data](#494-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Editing the data file](#495-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Predictive viewing](#496-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -139,7 +141,6 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 * Intel-based Mac running Mac OS X 10.8.3+, 10.9+
 * Administrator privileges for installation
 
-
 <div style="page-break-after: always;"></div>
 
 ## 3. About
@@ -166,7 +167,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format is to execute clear is just `clear`.
+* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
 </div>
 
@@ -178,7 +179,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED_DATE] [m/MEMO] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  Contacted Date, Memo, and Tag are optional.
@@ -211,11 +212,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 m/Avid free climber` edits the memo of the 2nd person to be `Avid free climber`.
-* `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
-* `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
+* `edit 1 n/John Doe p/91234567 e/johndoe@example.com` edits the name, phone number and email address of the 1st person to be "John Doe", "91234567" and "johndoe@example.com" respectively.
+* `edit 2 t/` edits the 2nd person to clear all existing tags.
+* `edit 2 t/friends t/colleagues` edits the 2nd person which overwrites all existing tags with the tags "friends" and "colleagues".
+* `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
+* `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
 [Back to Table of Contents](#table-of-contents-br)
 
@@ -248,14 +249,15 @@ Format: `deletetag INDEX t/TAG…`
 
 * Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * If any of the tag to be deleted does not exist, the command will be rejected.
+* If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
 <div markdown="block" class="alert alert-info">
 :information_source: **Note:** To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
 
 Examples:
-* `deletetag 1 t/friends` deletes the tag "friends" of the 1st person if the tag exists.
-* `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person if both tags exist.
+* `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
+* `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
 
 [Back to Table of Contents](#table-of-contents-br)
 
@@ -493,13 +495,45 @@ Format: `exit`
 
 ### 4.9. Extra information regarding the features
 
-#### 4.9.1. Preventing duplicate entries (phone and email) 
-Abπ helps to manage duplicates by preventing duplicate entries of phone number and email when using the add and edit commands. All phone numbers and emails in Abπ will be unique.
+#### 4.9.1. Ignoring case difference
+Abπ ignores case difference for the person attributes `Name`, `Email`, `Address`, `Memo` and `Tag` to provide a more seamless experience that matches the real world.
+* Attributes that only differs in case sensitivity is considered as identical.
 
-#### 4.9.2. Saving the data
+Examples:
+
+* "John Doe" and "john doe" is considered as the same name.
+* "LIKES TO DRINK" and "likes to drink" is considered as the same tag.
+
+#### 4.9.2. Trimming of extra white spaces
+Abπ helps to remove accidental extra white spaces between words to provide a cleaner experience. 
+
+* For name, phone, address, memo, and tag, extra white spaces (2 or more) between words will be replaced with a single white space. <br>
+
+Examples:
+* "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
+* "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
+
+#### 4.9.3. Preventing duplicate entries
+Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. 
+
+* Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email.
+* The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** <br>
+For all person attributes a difference in white space is considered as different. For example: <br>
+"John Doe" is different from "JohnDoe" <br>
+"65 98765432" is different from "6598765432" <br>
+<br>
+For phone, a difference in "+" is also considered as different. For example: <br>
+"+65 98765432" is considered different from "65 98765432"
+ 
+</div>
+
+#### 4.9.4. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.9.3. Editing the data file
+#### 4.9.5. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -507,7 +541,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.9.4. Predictive viewing
+#### 4.9.6. Predictive viewing
 
 Abπ will pre-emptively update the display after various commands:
 

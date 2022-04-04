@@ -102,17 +102,6 @@ public class ModelManager implements Model {
         return stateAddressBook.hasPerson(person);
     }
 
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book,
-     * excluding {@code except}.
-     */
-    @Override
-    public boolean hasPersonExcept(Person person, Person except) {
-        requireNonNull(person);
-        requireNonNull(except);
-        return stateAddressBook.hasPersonExcept(person, except);
-    }
-
     @Override
     public void deletePerson(Person target) {
         stateAddressBook.removePerson(target);
