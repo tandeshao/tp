@@ -83,7 +83,7 @@ public class CommandTestUtil {
             + PREFIX_CONTACTED_DATE + "11 Dec 2021";
 
     // exceeds the maximum number of characters allowed for memo
-    public static final String INVALID_MEMO_DESC = " " + PREFIX_MEMO + MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
+    public static final String INVALID_MEMO_DESC = " " + PREFIX_MEMO + MemoUtil.ONE_MORE_THAN_MAXIMUM_MEMO_STRING;
 
     // '*' not allowed in tags
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

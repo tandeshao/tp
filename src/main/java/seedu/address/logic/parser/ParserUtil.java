@@ -46,6 +46,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        trimmedName = trimExtraWhiteSpaces(trimmedName);
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -61,6 +62,7 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+        trimmedPhone = trimExtraWhiteSpaces(trimmedPhone);
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -76,6 +78,7 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+        trimmedAddress = trimExtraWhiteSpaces(trimmedAddress);
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -124,6 +127,7 @@ public class ParserUtil {
     public static Memo parseMemo(String memo) throws ParseException {
         requireNonNull(memo);
         String trimmedMemo = memo.trim();
+        trimmedMemo = trimExtraWhiteSpaces(trimmedMemo);
         if (!Memo.isValidMemo(trimmedMemo)) {
             throw new ParseException(Memo.MESSAGE_CONSTRAINTS);
         }
@@ -142,6 +146,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        trimmedTag = trimExtraWhiteSpaces(trimmedTag);
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -158,6 +163,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Replaces 2 or more consecutive whitespaces between words with a single whitespace.
+     *
+     * @param str String to be trimmed.
+     * @return Trimmed string with extra whitespaces removed.
+     */
+    private static String trimExtraWhiteSpaces(String str) {
+        return str.replaceAll("\\s{2,}", " ");
     }
 
 }

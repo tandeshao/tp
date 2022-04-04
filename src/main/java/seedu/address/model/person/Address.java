@@ -48,12 +48,12 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && address.equals(((Address) other).address)); // state check
+                && address.equalsIgnoreCase(((Address) other).address)); // state check
     }
 
     @Override
     public int hashCode() {
-        return address.hashCode();
+        return address.toLowerCase().hashCode();
     }
 
 }

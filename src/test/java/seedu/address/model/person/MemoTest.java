@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMO_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMO_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.MemoUtil.LONGER_THAN_MAXIMUM_MEMO_STRING;
 import static seedu.address.testutil.MemoUtil.MAXIMUM_MEMO_STRING;
-import static seedu.address.testutil.MemoUtil.SHORT_LENGTH_STRING;
+import static seedu.address.testutil.MemoUtil.ONE_LESS_THAN_MAXIMUM_MEMO_STRING;
+import static seedu.address.testutil.MemoUtil.ONE_MORE_THAN_MAXIMUM_MEMO_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 public class MemoTest {
 
-    private final Memo validShortMemo = new Memo(SHORT_LENGTH_STRING);
+    private final Memo validMemoAmy = new Memo(VALID_MEMO_AMY);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -23,12 +25,17 @@ public class MemoTest {
 
     @Test
     public void constructor_invalidMemo_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Memo(LONGER_THAN_MAXIMUM_MEMO_STRING));
+        assertThrows(IllegalArgumentException.class, () -> new Memo(ONE_MORE_THAN_MAXIMUM_MEMO_STRING));
     }
 
     @Test
     public void isValidMemo_validShortLengthMemo_returnsTrue() {
-        assertTrue(Memo.isValidMemo(SHORT_LENGTH_STRING));
+        assertTrue(Memo.isValidMemo(VALID_MEMO_AMY));
+    }
+
+    @Test
+    public void isValidMemo_validOneLessThanMaximumLengthMemo_returnsTrue() {
+        assertTrue(Memo.isValidMemo(ONE_LESS_THAN_MAXIMUM_MEMO_STRING));
     }
 
     @Test
@@ -37,13 +44,13 @@ public class MemoTest {
     }
 
     @Test
-    public void isValidMemo_invalidLongerThanMaximumLengthMemo_returnsFalse() {
-        assertFalse(Memo.isValidMemo(LONGER_THAN_MAXIMUM_MEMO_STRING));
+    public void isValidMemo_invalidOneMoreThanMaximumLengthMemo_returnsFalse() {
+        assertFalse(Memo.isValidMemo(ONE_MORE_THAN_MAXIMUM_MEMO_STRING));
     }
 
     @Test
     public void isEmpty_notEmptyValidMemo_returnsFalse() {
-        assertFalse(validShortMemo.isEmpty());
+        assertFalse(validMemoAmy.isEmpty());
     }
 
     @Test
@@ -54,20 +61,24 @@ public class MemoTest {
     @Test
     public void equals() {
         // same object -> returns true
-        assertTrue(validShortMemo.equals(validShortMemo));
+        assertTrue(validMemoAmy.equals(validMemoAmy));
 
         // same values -> returns true
-        Memo memoCopy = new Memo(validShortMemo.memo);
-        assertTrue(validShortMemo.equals(memoCopy));
+        Memo validMemoCopy = new Memo(validMemoAmy.memo);
+        assertTrue(validMemoAmy.equals(validMemoCopy));
+
+        // different capitalization -> returns true
+        Memo validMemoAmyAllCaps = new Memo(VALID_MEMO_AMY);
+        assertTrue(validMemoAmy.equals(validMemoAmyAllCaps));
 
         // different types -> returns false
-        assertFalse(validShortMemo.equals(1));
+        assertFalse(validMemoAmy.equals(1));
 
         // null -> returns false
-        assertFalse(validShortMemo.equals(null));
+        assertFalse(validMemoAmy.equals(null));
 
         // different memo -> returns false
-        Memo differentMemo = new Memo("Bye");
-        assertFalse(validShortMemo.equals(differentMemo));
+        Memo differentMemo = new Memo(VALID_MEMO_BOB);
+        assertFalse(validMemoAmy.equals(differentMemo));
     }
 }

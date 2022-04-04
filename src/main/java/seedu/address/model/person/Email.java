@@ -62,12 +62,12 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && email.equals(((Email) other).email)); // state check
+                && email.equalsIgnoreCase(((Email) other).email)); // state check
     }
 
     @Override
     public int hashCode() {
-        return email.hashCode();
+        return email.toLowerCase().hashCode();
     }
 
 }

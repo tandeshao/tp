@@ -177,22 +177,14 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePhoneUnfilteredList_failure() {
+    public void execute_duplicateNamePhoneEmailUnFilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(secondPerson)
-                .withPhone(firstPerson.getPhone().toString()).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
-    public void execute_duplicateEmailUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(secondPerson)
-                .withEmail(firstPerson.getEmail().toString()).build();
+                .withName(firstPerson.getName().toString())
+                .withPhone(firstPerson.getPhone().toString())
+                .withEmail(firstPerson.getEmail().toString())
+                .build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -271,7 +263,7 @@ public class EditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in address book.
+        // edit person in filtered list into a duplicate in the address book.
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(personInList).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
@@ -280,28 +272,17 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePhoneFilteredList_failure() {
+    public void execute_duplicateNamePhoneEmailFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate (phone) in address book.
+        // edit person in filtered list into a duplicate (name, phone and email) in the address book.
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder(firstPerson).withPhone(personInList.getPhone().toString()).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
-    public void execute_duplicateEmailFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        // edit person in filtered list into a duplicate (email) in address book.
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder(firstPerson).withEmail(personInList.getEmail().toString()).build();
+                new EditPersonDescriptorBuilder(firstPerson).withName(personInList.getName().toString())
+                        .withPhone(personInList.getPhone().toString())
+                        .withEmail(personInList.getEmail().toString())
+                        .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);

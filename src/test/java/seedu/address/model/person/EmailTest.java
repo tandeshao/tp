@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -76,4 +78,32 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
         assertTrue(Email.isValidEmail(edgeEmail)); // super long email
     }
+
+    @Test
+    public void equals() {
+
+        Email validEmailAmy = new Email(VALID_EMAIL_AMY);
+        Email validEmailBob = new Email(VALID_EMAIL_BOB);
+
+        // same object -> returns true
+        assertTrue(validEmailAmy.equals(validEmailAmy));
+
+        // same values -> returns true
+        Email validEmailAmyCopy = new Email(VALID_EMAIL_AMY);
+        assertTrue(validEmailAmy.equals(validEmailAmyCopy));
+
+        // different capitalization -> returns true
+        Email validEmailAmyAllCaps = new Email(VALID_EMAIL_AMY.toUpperCase());
+        assertTrue(validEmailAmy.equals(validEmailAmyAllCaps));
+
+        // different types -> returns false
+        assertFalse(validEmailAmy.equals(1));
+
+        // null -> returns false
+        assertFalse(validEmailAmy.equals(null));
+
+        // different email -> returns false
+        assertFalse(validEmailAmy.equals(validEmailBob));
+    }
+
 }

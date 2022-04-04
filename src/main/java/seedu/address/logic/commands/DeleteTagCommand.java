@@ -111,16 +111,15 @@ public class DeleteTagCommand extends Command {
         requireNonNull(personToEdit);
         requireNonNull(tagsToDelete);
 
-        Name personName = personToEdit.getName();
-        Phone personPhone = personToEdit.getPhone();
-        Email personEmail = personToEdit.getEmail();
-        Address personAddress = personToEdit.getAddress();
-        ContactedDate personContactedDate = personToEdit.getContactedDate();
-        Memo personMemo = personToEdit.getMemo();
-        Set<Tag> personTags = personToEdit.getTags();
-        Set<Tag> updatedTags = createUpdatedTagsWithTagsDeleted(personTags, tagsToDelete);
-        return new Person(personName, personPhone, personEmail, personAddress, personContactedDate, personMemo,
-                updatedTags);
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        ContactedDate contactedDate = personToEdit.getContactedDate();
+        Memo memo = personToEdit.getMemo();
+        Set<Tag> tags = personToEdit.getTags();
+        Set<Tag> updatedTags = createUpdatedTagsWithTagsDeleted(tags, tagsToDelete);
+        return new Person(name, phone, email, address, contactedDate, memo, updatedTags);
     }
 
     /**
