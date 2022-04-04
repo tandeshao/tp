@@ -181,14 +181,16 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
-* If contacted date is specified, it must follow the dd-mm-yyyy format, cannot be in the future and must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date. For both invalid date and incorrect format, the same error message will be shown to indicate that the date needs to be valid, following the proper format.
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  Contacted date, memo, and tag are optional.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  A person can have any number of tags, including 0.
+</div>
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
 </div>
 
 Examples:
@@ -212,6 +214,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * All the person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A peron's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
+</div>
 
 Examples:
 * `edit 1 n/John Doe p/91234567 e/johndoe@example.com` edits the name, phone number and email address of the 1st person to be "John Doe", "91234567" and "johndoe@example.com" respectively.
@@ -254,9 +260,10 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 * If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
-<div markdown="block" class="alert alert-info">
-:information_source: **Note:** To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
+
 
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
