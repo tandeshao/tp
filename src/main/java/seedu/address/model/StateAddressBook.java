@@ -14,7 +14,7 @@ import seedu.address.model.exceptions.InvalidUndoException;
 public class StateAddressBook extends AddressBook {
 
     /** Limits the number of undo and redo. */
-    public static final int UNDO_REDO_CAPACITY = 20;
+    public static final int UNDO_REDO_CAPACITY = 10;
 
     /** Lists that contains the address book state history. */
     private final List<ReadOnlyAddressBook> stateHistory;

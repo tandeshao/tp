@@ -182,16 +182,20 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Contacted Date, Memo, and Tag are optional.
+ Contacted date, memo, and tag are optional.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  A person can have any number of tags, including 0.
 </div>
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
+</div>
+
 Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid free climber`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
 [Back to Table of Contents](#table-of-contents-br)
@@ -208,13 +212,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
-* You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
+* All the person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
+* A peron's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
+</div>
 
 Examples:
 * `edit 1 n/John Doe p/91234567 e/johndoe@example.com` edits the name, phone number and email address of the 1st person to be "John Doe", "91234567" and "johndoe@example.com" respectively.
 * `edit 2 t/` edits the 2nd person to clear all existing tags.
 * `edit 2 t/friends t/colleagues` edits the 2nd person which overwrites all existing tags with the tags "friends" and "colleagues".
+* `edit 2 m/Avid hiker` edits the memo of the 2nd person to be `Avid hiker`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
@@ -251,9 +260,10 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 * If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
-<div markdown="block" class="alert alert-info">
-:information_source: **Note:** To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
+
 
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
@@ -430,9 +440,16 @@ Examples:
 
 #### 4.7.1. Undoing commands: `undo`
 
-Undo previous commands that modified data, which includes: `add`, `edit`, `delete`, `clear` and `scrub`.
+Undo previous commands that modified data, which includes: <br> 
+`add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
 
 Format: `undo`
+
+* The maximum number of undo is 10.
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** If `undo` is successful, Abπ will display "Undo success!". Currently, it does not display a message on what has been undone. This message will be implemented in a future version.
+</div>
 
 Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
@@ -447,6 +464,12 @@ Examples:
 Redo reverses the `undo` command.
 
 Format: `redo`
+
+* The maximum number of redo is 10.
+
+<div markdown="span" class="alert alert-info">  
+:information_source: **Note:** If `redo` is successful, Abπ will display "Redo success!". Currently, it does not display a message on what has been redone. This message will be implemented in a future version.
+</div>
 
 Examples:
 * `redo` after calling `undo` restores the address book to its previous state prior to undo.

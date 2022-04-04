@@ -184,7 +184,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 4.1. Undo and redo feature
 
-The address book undo and redo mechanism is managed by `StateAddressBook`, which extends `AddressBook`. It keeps track of the address book state history, stored internally as a `stateHistory` and `currentStateIndex`. `currentStateIndex` points to the current state of the address book. The number of undoable and redoable actions is capped by `UNDO_REDO_CAPACITY`, currently set to 20. Additionally, it implements the following operations:
+The address book undo and redo mechanism is managed by `StateAddressBook`, which extends `AddressBook`. It keeps track of the address book state history, stored internally as a `stateHistory` and `currentStateIndex`. `currentStateIndex` points to the current state of the address book. The number of undoable and redoable actions is capped by `UNDO_REDO_CAPACITY`, currently set to 10. Additionally, it implements the following operations:
 
 * `StateAddressBook#undo()` — Restores the address book to its previous state.
 * `StateAddressBook#redo()` — Restores the address book to a previously undid state.
@@ -199,7 +199,7 @@ These operations are exposed in the `Model` interface respectively as
 * `Model#canUndoAddressBook()`
 * `Model#canRedoAddressBook()`
 
-Commands that do not modify the address book states will not call `Model#saveAddressBookState()`. The address book undo and redo mechanism only tracks commands that modify the address book state, the commands that are undoable and redoable are `add`, `edit`, `delete`, `clear` and `scrub`.
+Commands that do not modify the address book states will not call `Model#saveAddressBookState()`. The address book undo and redo mechanism only tracks commands that modify the address book state, the commands that are undoable and redoable are `add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
 
 Given below is an example usage scenario and how undo and redo mechanism behaves at each step. For demonstration, `UNDO_REDO_CAPACITY` is set to 3.
 
@@ -275,7 +275,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Current implementation:** Saves the entire address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
-    * Workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 20.
+    * Workaround: Limit the number of undoable and redoable actions, using `UNDO_REDO_CAPACITY`. Currently, it is set to 10.
 
 * **Alternative:** Individual command knows how to undo and redo by itself.
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
