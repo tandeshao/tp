@@ -18,41 +18,61 @@ public class MemoTest {
 
     private final Memo validMemoAmy = new Memo(VALID_MEMO_AMY);
 
+    // EP: null
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Memo(null));
     }
 
+    // EP: invalid length string, 1 more than maximum length
     @Test
     public void constructor_invalidMemo_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Memo(ONE_MORE_THAN_MAXIMUM_MEMO_STRING));
     }
 
+    // EP: empty string
+    @Test
+    public void isValidMemo_validEmptyMemo_returnsTrue() {
+        assertTrue(Memo.isValidMemo("")); // Boundary value
+    }
+
+    // EP: white space string
+    @Test
+    public void isValidMemo_validWhiteSpaceMemo_returnsTrue() {
+        assertTrue(Memo.isValidMemo(" "));
+    }
+
+    // EP: valid length string
     @Test
     public void isValidMemo_validShortLengthMemo_returnsTrue() {
         assertTrue(Memo.isValidMemo(VALID_MEMO_AMY));
     }
 
+    // EP: valid length string
     @Test
     public void isValidMemo_validOneLessThanMaximumLengthMemo_returnsTrue() {
         assertTrue(Memo.isValidMemo(ONE_LESS_THAN_MAXIMUM_MEMO_STRING));
     }
 
+    // EP: valid length string
     @Test
     public void isValidMemo_validMaximumLengthMemo_returnsTrue() {
-        assertTrue(Memo.isValidMemo(MAXIMUM_MEMO_STRING));
+        assertTrue(Memo.isValidMemo(MAXIMUM_MEMO_STRING)); // Boundary value
     }
 
+    // EP: invalid length string, 1 more than maximum length
     @Test
     public void isValidMemo_invalidOneMoreThanMaximumLengthMemo_returnsFalse() {
         assertFalse(Memo.isValidMemo(ONE_MORE_THAN_MAXIMUM_MEMO_STRING));
     }
 
+    // EP: not empty memo
     @Test
     public void isEmpty_notEmptyValidMemo_returnsFalse() {
         assertFalse(validMemoAmy.isEmpty());
     }
 
+    // EP: empty memo
     @Test
     public void isEmpty_emptyValidMemo_returnsTrue() {
         assertTrue(Memo.EMPTY_MEMO.isEmpty());

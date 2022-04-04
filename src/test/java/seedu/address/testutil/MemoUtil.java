@@ -17,7 +17,7 @@ public class MemoUtil {
     public static final String ONE_MORE_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS + 1);
 
     /**
-     * Returns a string for that of a specified length.
+     * Returns a string of a specified length.
      *
      * @param length Length of the string to be created.
      * @return String of a specified length.

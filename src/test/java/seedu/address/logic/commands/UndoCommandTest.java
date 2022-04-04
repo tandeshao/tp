@@ -38,19 +38,19 @@ public class UndoCommandTest {
 
     @Test
     public void execute_fourUndoableStates_success() {
-        // four undoable states in model, undos clear.
+        // four undoable states in model, undoes clear.
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
 
-        // three undoable states in model, undos addDefaultPerson.
+        // three undoable states in model, undoes addDefaultPerson.
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
 
-        // two undoable states in model, undos deleteFirstPerson.
+        // two undoable states in model, undoes deleteFirstPerson.
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
 
-        // one undoable state in model, undos editFirstPerson.
+        // one undoable state in model, undoes editFirstPerson.
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
 
