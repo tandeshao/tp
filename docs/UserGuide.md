@@ -43,11 +43,12 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
 &nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Trimming of extra white spaces](#491-trimming-of-extra-white-spaces) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Preventing duplicate entries](#492-preventing-duplicate-entries) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Saving the data](#493-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Editing the data file](#494-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Predictive viewing](#495-predictive-viewing) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Ignoring case difference](#491-ignoring-case-difference) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Trimming of extra white spaces](#492-trimming-of-extra-white-spaces) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate entries](#493-preventing-duplicate-entries) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Saving the data](#494-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Editing the data file](#495-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Predictive viewing](#496-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -248,10 +249,11 @@ Format: `deletetag INDEX t/TAG…`
 
 * Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * If any of the tag to be deleted does not exist, the command will be rejected.
+* If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
 Examples:
-* `deletetag 1 t/friends` deletes the tag "friends" of the 1st person if the tag exists.
-* `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person if both tags exist.
+* `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
+* `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
 
 [Back to Table of Contents](#table-of-contents-br)
 
@@ -489,7 +491,16 @@ Format: `exit`
 
 ### 4.9. Extra information regarding the features
 
-#### 4.9.1. Trimming of extra white spaces
+#### 4.9.1. Ignoring case difference
+Abπ ignores case difference for the person attributes `Name`, `Email`, `Address`, `Memo` and `Tag` to provide a more seamless experience that matches the real world.
+* Attributes that only differs in case sensitivity is considered as identical.
+
+Examples:
+
+* "John Doe" and "john doe" is considered as the same name.
+* "LIKES TO DRINK" and "likes to drink" is considered as the same tag.
+
+#### 4.9.2. Trimming of extra white spaces
 Abπ helps to remove accidental extra white spaces between words to provide a cleaner experience. 
 
 * For name, phone, address, memo, and tag, extra white spaces (2 or more) between words will be replaced with a single white space. <br>
@@ -498,7 +509,7 @@ Examples:
 * "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
 * "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
 
-#### 4.9.2. Preventing duplicate entries
+#### 4.9.3. Preventing duplicate entries
 Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. 
 
 * Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email.
@@ -515,10 +526,10 @@ For phone, a difference in "+" is also considered as different. For example: <br
  
 </div>
 
-#### 4.9.3. Saving the data
+#### 4.9.4. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.9.4. Editing the data file
+#### 4.9.5. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -526,7 +537,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.9.5. Predictive viewing
+#### 4.9.6. Predictive viewing
 
 Abπ will pre-emptively update the display after various commands:
 
