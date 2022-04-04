@@ -251,6 +251,10 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 * If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
+<div markdown="block" class="alert alert-info">
+:information_source: **Note:** To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+</div>
+
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
