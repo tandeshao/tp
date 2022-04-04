@@ -212,11 +212,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 m/Avid free climber` edits the memo of the 2nd person to be `Avid free climber`.
-* `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be `Last contacted on 01-01-2020`.
-* `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be `Not contacted`.
+* `edit 1 n/John Doe p/91234567 e/johndoe@example.com` edits the name, phone number and email address of the 1st person to be "John Doe", "91234567" and "johndoe@example.com" respectively.
+* `edit 2 t/` edits the 2nd person to clear all existing tags.
+* `edit 2 t/friends t/colleagues` edits the 2nd person which overwrites all existing tags with the tags "friends" and "colleagues".
+* `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
+* `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
 [Back to Table of Contents](#table-of-contents-br)
 
