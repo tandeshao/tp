@@ -31,8 +31,8 @@ public class ContactedDate {
             .withResolverStyle(ResolverStyle.STRICT);
 
     /** String message that represents message constraints. */
-    public static final String MESSAGE_CONSTRAINTS = "Last contacted date can either be empty or "
-            + "a VALID date following the dd-mm-yyyy format that is not in the future.";
+    public static final String MESSAGE_CONSTRAINTS = "Last contacted date can only either be empty or "
+            + "a VALID AD date following the dd-mm-yyyy format that is not in the future.";
 
     /** A static {@code contactedDate} object that represents an empty contacted date. */
     public static final ContactedDate EMPTY_CONTACTED_DATE = new ContactedDate("");

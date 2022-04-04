@@ -180,6 +180,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED_DATE] [m/MEMO] [t/TAG]…​`
 
+* If contacted date is specified, it must follow the dd-mm-yyyy format, cannot be in the future and must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date. For both invalid date and incorrect format, the same error message will be shown to indicate that the date needs to be valid, following the proper format.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  Contacted date, memo, and tag are optional.
 </div>
