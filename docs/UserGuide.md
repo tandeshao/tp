@@ -43,10 +43,11 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
 &nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Preventing duplicate entries](#491-preventing-duplicate-entries) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Saving the data](#492-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Editing the data file](#493-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Predictive viewing](#494-predictive-viewing) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Trimming of extra white spaces](#491-trimming-of-extra-white-spaces) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Preventing duplicate entries](#492-preventing-duplicate-entries) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Saving the data](#493-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Editing the data file](#494-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Predictive viewing](#495-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -165,7 +166,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format is to execute clear is just `clear`.
+* Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
 </div>
 
@@ -178,11 +179,6 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** For name and phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, "John &#160;&#160;&#160; Doe" will be trimmed to "John Doe".
-</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  Contacted Date, Memo, and Tag are optional.
@@ -213,11 +209,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags or memo by typing `t/` or `m/` respectively without specifying text after it.
 * You can edit a peron's contacted date to "Not contacted" by typing `c/` without specifying a date after it.
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** For name and phone, extra white spaces (2 or more) between words/numbers will be replaced with a single white space. <br> 
-For example, "John &#160;&#160;&#160; Doe" will be trimmed to "John Doe".
-</div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -498,24 +489,36 @@ Format: `exit`
 
 ### 4.9. Extra information regarding the features
 
-#### 4.9.1. Preventing duplicate entries
-Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email. The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
+#### 4.9.1. Trimming of extra white spaces
+Abπ helps to remove accidental extra white spaces between words to provide a cleaner experience. 
+
+* For name, phone, address, memo, and tag, extra white spaces (2 or more) between words will be replaced with a single white space. <br>
+
+Examples:
+* "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
+* "Likes &#160;&#160;&#160; to &#160;&#160;&#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
+
+#### 4.9.2. Preventing duplicate entries
+Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. 
+
+* Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email.
+* The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** <br> 
-For name and phone, extra white spaces (2 or more) between words/numbers will be treated as a single white space. <br>
+:information_source: **Note:** <br>
+For all person attributes a difference in white space is considered as different. For example: <br>
+&#160; "John Doe" is different from "JohnDoe" <br>
+&#160; "65 98765432" is different from "6598765432" <br>
 <br>
-For all person attributes, if whitespace is allowed, a difference in white space is considered as different. For example: <br>
-    "John Doe" is different from "JohnDoe" <br>
-<br>
- For phone, it has to be identical to be considered equal. For example: <br>
- "+65 98765432" is considered different from "65 98765432" (difference in "+")
+For phone, a difference in "+" is also considered as different. For example: <br>
+&#160; "+65 98765432" is considered different from "65 98765432"
+ 
 </div>
 
-#### 4.9.2. Saving the data
+#### 4.9.3. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.9.3. Editing the data file
+#### 4.9.4. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -523,7 +526,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.9.4. Predictive viewing
+#### 4.9.5. Predictive viewing
 
 Abπ will pre-emptively update the display after various commands:
 
