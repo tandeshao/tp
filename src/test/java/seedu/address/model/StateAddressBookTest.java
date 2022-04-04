@@ -32,24 +32,28 @@ public class StateAddressBookTest {
     private final List<ReadOnlyAddressBook> threeStates =
             Arrays.asList(emptyAddressBook, aliceAddressBook, bensonAddressBook);
 
+    // EP: one address book state
     @Test
     public void isUndoable_oneAddressBookState_returnsFalse() {
         StateAddressBook stateAddressBook = setAddressBook(oneState);
         assertFalse(stateAddressBook.isUndoable());
     }
 
+    // EP: one address book state
     @Test
     public void isRedoable_oneAddressBookState_returnsFalse() {
         StateAddressBook stateAddressBook = setAddressBook(oneState);
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states, pointer at end
     @Test
     public void isUndoable_threeAddressBookStatesPointerAtEnd_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
         assertTrue(stateAddressBook.isUndoable());
     }
 
+    // EP: three address book states, pointer at middle
     @Test
     public void isUndoable_threeAddressBookStatesPointerAtMiddle_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -57,6 +61,7 @@ public class StateAddressBookTest {
         assertTrue(stateAddressBook.isUndoable());
     }
 
+    // EP: three address book states, pointer at start
     @Test
     public void isUndoable_threeAddressBookStatesPointerAtStart_returnsFalse() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -64,6 +69,7 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isUndoable());
     }
 
+    // EP: max address book states, pointer at start
     @Test
     public void isUndoable_maxCapacityAddressBookStatesPointerAtStart_returnsFalse() {
         StateAddressBook stateAddressBook =
@@ -74,6 +80,7 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isUndoable());
     }
 
+    // EP: three address book states, pointer at start
     @Test
     public void isRedoable_threeAddressBookStatesPointerAtStart_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -81,6 +88,7 @@ public class StateAddressBookTest {
         assertTrue(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states, pointer at middle
     @Test
     public void isRedoable_threeAddressBookStatesPointerAtMiddle_returnsTrue() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -88,12 +96,14 @@ public class StateAddressBookTest {
         assertTrue(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states, pointer at end
     @Test
     public void isRedoable_threeAddressBookStatesPointerAtEnd_returnsFalse() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: max address book states, pointer at end
     @Test
     public void isRedoable_maxCapacityAddressBookStatesPointerAtEnd_returnsFalse() {
         StateAddressBook stateAddressBook =
@@ -103,12 +113,14 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: one address book state
     @Test
     public void undo_oneAddressBookState_throwsInvalidUndoException() {
         StateAddressBook stateAddressBook = setAddressBook(oneState);
         assertThrows(InvalidUndoException.class, stateAddressBook::undo);
     }
 
+    // EP: three address book states, pointer at start
     @Test
     public void undo_threeAddressBookPointerStatesAtStart_throwsInvalidUndoException() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -116,6 +128,7 @@ public class StateAddressBookTest {
         assertThrows(InvalidUndoException.class, stateAddressBook::undo);
     }
 
+    // EP: max address book states, pointer at start
     @Test
     public void undo_maxCapacityAddressBookStatesPointerAtStart_throwsInvalidUndoException() {
         StateAddressBook stateAddressBook =
@@ -126,18 +139,21 @@ public class StateAddressBookTest {
         assertThrows(InvalidUndoException.class, stateAddressBook::undo);
     }
 
+    // EP: one address book state
     @Test
     public void redo_oneAddressBookState_throwsInvalidRedoException() {
         StateAddressBook stateAddressBook = setAddressBook(oneState);
         assertThrows(InvalidRedoException.class, stateAddressBook::redo);
     }
 
+    // EP: three address book states, pointer at end
     @Test
     public void redo_threeAddressBookStatesPointerAtEnd_throwsInvalidRedoException() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
         assertThrows(InvalidRedoException.class, stateAddressBook::redo);
     }
 
+    // EP: max address book states, pointer at end
     @Test
     public void redo_maxCapacityAddressBookStatesPointerAtEnd_throwsInvalidUndoException() {
         StateAddressBook stateAddressBook =
@@ -147,6 +163,7 @@ public class StateAddressBookTest {
         assertThrows(InvalidRedoException.class, stateAddressBook::redo);
     }
 
+    // EP: one address book state
     @Test
     public void saveState_oneAddressBook_success() {
         StateAddressBook stateAddressBook = setAddressBook(oneState);
@@ -156,6 +173,7 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states
     @Test
     public void saveState_threeAddressBook_success() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -174,6 +192,7 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states, undo, redo, undo
     @Test
     public void saveState_threeAddressBookUndoRedoUndo_success() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);
@@ -192,6 +211,7 @@ public class StateAddressBookTest {
         assertFalse(stateAddressBook.isRedoable());
     }
 
+    // EP: three address book states, undo, undo
     @Test
     public void saveState_threeAddressBookUndoUndoSaveState_success() {
         StateAddressBook stateAddressBook = setAddressBook(threeStates);

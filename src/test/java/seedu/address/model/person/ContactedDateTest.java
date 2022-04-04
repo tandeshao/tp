@@ -17,11 +17,13 @@ public class ContactedDateTest {
     private final String validFormatDateString = "01-01-2020";
     private final ContactedDate validContactedDate = new ContactedDate(validFormatDateString);
 
+    // EP: null
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ContactedDate(null));
     }
 
+    // EP: invalid format
     @Test
     public void constructor_invalidContactedDate_throwsIllegalArgumentException() {
         // Not a date
@@ -30,33 +32,29 @@ public class ContactedDateTest {
 
     @Test
     public void isValidContactedDate() {
-        // invalid null contacted date
+        // EP: null
         assertFalse(ContactedDate.isValidContactedDate(null));
 
-        // valid empty date
+        // EP: valid empty string
         assertTrue(ContactedDate.isValidContactedDate("")); // empty string
 
-        // invalid spaces only, such input will not occur as user input is trimmed
-        assertFalse(ContactedDate.isValidContactedDate(" ")); // spaces only
+        // EP: invalid whitespaces string
+        assertFalse(ContactedDate.isValidContactedDate(" ")); // whitespaces only
 
-        // valid dd-MM-yyyy date that is not in the future
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(0))); // today
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(-1))); // 1 day ago
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(-10))); // 10 days ago
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(-100))); // 100 days ago
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(-1000))); // 1000 days ago
-        assertTrue(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(-10000))); // 10000 days ago
+        // EP: valid dd-mm-yyyy strings
+        assertTrue(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(0))); // today, boundary value
+        assertTrue(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(-1))); // 1 day ago
+        assertTrue(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(-100))); // 100 days ago
+        assertTrue(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(-10000))); // 10000 days ago
         assertTrue(ContactedDate.isValidContactedDate(validFormatDateString)); // valid date string
         assertTrue(ContactedDate.isValidContactedDate("29-02-2020")); // 29th February 2020, leap year
 
-        // invalid dd-MM-yyyy future date
-        assertFalse(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(1))); // 1 day after
-        assertFalse(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(10))); // 10 days after
-        assertFalse(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(100))); // 100 days after
-        assertFalse(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(1000))); // 1000 days after
-        assertFalse(ContactedDate.isValidContactedDate(getValidCurrentDateWithDaysOffset(10000))); // 10000 days after
+        // EP: invalid dd-mm-yyyy future date
+        assertFalse(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(1))); // 1 day after, boundary value
+        assertFalse(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(100))); // 100 days after
+        assertFalse(ContactedDate.isValidContactedDate(getCurrentDateWithDaysOffset(10000))); // 10000 days after
 
-        // invalid inputs that are not dates
+        // EP: invalid strings that are not dates
         assertFalse(ContactedDate.isValidContactedDate("1")); // just a number
         assertFalse(ContactedDate.isValidContactedDate("111111")); // multiple numbers
         assertFalse(ContactedDate.isValidContactedDate("h")); // an alphabet
@@ -65,7 +63,7 @@ public class ContactedDateTest {
         assertFalse(ContactedDate.isValidContactedDate("/")); // special character '/'
         assertFalse(ContactedDate.isValidContactedDate("~")); // special character '~'
 
-        // invalid dates that do not adhere to the dd-mm-yyyy format
+        // EP: invalid format strings that do not adhere to the dd-mm-yyyy format
         assertFalse(ContactedDate.isValidContactedDate("01012020")); // no hyphen
         assertFalse(ContactedDate.isValidContactedDate("01 01 2020")); // spaces instead of hyphen
         assertFalse(ContactedDate.isValidContactedDate("01/01/2020")); // '/' instead of hyphen
@@ -76,7 +74,7 @@ public class ContactedDateTest {
         assertFalse(ContactedDate.isValidContactedDate("01-01-20")); // year two digit
         assertFalse(ContactedDate.isValidContactedDate("1-1-20")); // day and month single digit, year two digit
 
-        // invalid dd-mm-yyyy dates that do not exist
+        // EP: invalid dd-mm-yyyy dates that do not exist
         assertFalse(ContactedDate.isValidContactedDate("01-13-2020")); // 13th month
         assertFalse(ContactedDate.isValidContactedDate("01-14-2020")); // 14th month
         assertFalse(ContactedDate.isValidContactedDate("01-30-2020")); // 30th month
@@ -86,11 +84,13 @@ public class ContactedDateTest {
         assertFalse(ContactedDate.isValidContactedDate("29-02-2019")); // 29th February 2019, not a leap year
     }
 
+    // EP: not empty contacted date
     @Test
     public void isEmpty_notEmptyValidContactedDate_returnsFalse() {
         assertFalse(validContactedDate.isEmpty());
     }
 
+    // EP: empty contacted date
     @Test
     public void isEmpty_emptyValidContactedDate_returnsTrue() {
         assertTrue(ContactedDate.EMPTY_CONTACTED_DATE.isEmpty());
@@ -117,13 +117,13 @@ public class ContactedDateTest {
     }
 
     /**
-     * Returns a valid dd-MM-yyyy date which is the current date offset by a specified number of days.
+     * Returns a dd-mm-yyyy string which is the current date offset by a specified number of days.
      *
      * @param daysOffset Days offset from the current date.
      *
-     * @return Valid dd-MM-yyyy date that is the current date offset by a specified number of days.
+     * @return dd-mm-yyyy string that is the current date offset by a specified number of days.
      */
-    private String getValidCurrentDateWithDaysOffset(int daysOffset) {
+    private String getCurrentDateWithDaysOffset(int daysOffset) {
         LocalDate date = LocalDate.now();
 
         if (daysOffset >= 0) {

@@ -40,19 +40,19 @@ public class RedoCommandTest {
 
     @Test
     public void execute_fourRedoableStates_success() {
-        // four redoable states in model, redos editFirstPerson.
+        // four redoable states in model, redoes editFirstPerson.
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
 
-        // three redoable states in model, redos deleteFirstPerson.
+        // three redoable states in model, redoes deleteFirstPerson.
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
 
-        // two redoable states in model, redos addDefaultPerson.
+        // two redoable states in model, redoes addDefaultPerson.
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
 
-        // one redoable state in model, redos clear.
+        // one redoable state in model, redoes clear.
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
 
