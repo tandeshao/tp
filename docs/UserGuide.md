@@ -66,14 +66,16 @@ For users who are interested in using Abπ, this guide is for you as it will hel
 
 **Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
 
- Word | What it means                                                                   |
-------|---------------------------------------------------------------------------------|
-Command box| Text box in the Abπ that allows user to type in texts.                          |
-Command| A sentence that causes Abπ to do something when typed into the command box.     |
-Command word | The first word of every command.                                                |
-Parameters | Information that is supplied by the user.                                       |
-Execute | The process by which Abπ reads the instructions written by user and acts on it. |
-String | A programming terminology that describes an ordered sequence of characters.      |
+ Word | What it means                                                                                                                                              |
+------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+Command box| Text box in the Abπ that allows user to type in texts.                                                                                                     |
+Command| A sentence that causes Abπ to do something when typed into the command box.                                                                                |
+Command word | The first word of every command.                                                                                                                           |
+Parameters | Information that is supplied by the user.                                                                                                                  |
+Execute | The process by which Abπ reads the instructions written by user and acts on it.                                                                            |
+String | A programming terminology that describes an ordered sequence of characters.                                                                                | 
+Prefix | Part of the user input that allows the user to specify certain attributes of a person. <br > Type of prefix:  `n/`, `p/`, `a/`, `e/`, `m/`, `c/` and `t/`. 
+Prefix argument | The input specified by the user after the prefix in the command box.                                                            
 
 <div style="page-break-after: always;"></div>
 
@@ -295,12 +297,15 @@ Examples:
 
 #### 4.3.2. Scrubbing address book: `scrub`
 
-Cleans up the address book of unwanted contacts.
+* Similar to [delete](#431-deleting-a-person-delete) as it cleans up the address book of unwanted contacts. 
+* Allows multiple person to be deleted by specifying the criteria to delete a person by through the use of prefixes.
+* Abπ would use the specified criteria and scan through the person list and delete anybody that matches the criteria.
+* Duplicated prefix arguments are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * Delete contacts that match any of the phone number, email domain or tag specified from the command.
 * At least one parameter must be present.
-* The scrub command only scrubs contacts that have an exact match with any of the specified parameters.
+* The scrub command only scrubs contacts that match with any of the specified prefix arguments.
 * This match is case-insensitive.
 
 <div markdown="span" class="alert alert-info">  
@@ -312,7 +317,7 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple different prefixes are specified as arguments for the scrub command, the result is equivalent to deleting all common results between the different results generated from each individual prefix. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
+ When different prefixes are specified for the scrub command, the result is equivalent to deleting anybody that matches all the condition specified by the prefix arguments. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
 </div>
 
 <br>
@@ -367,7 +372,8 @@ Examples:
 
 #### 4.5.1. Finding person by their attributes: `find`
 
-Finds persons whose names contain any of the given keywords.
+* Finds persons whose names contain any of the given keywords.
+* Duplicated prefix arguments are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 
@@ -375,8 +381,8 @@ Below is a table that shows the different matching criteria that is present in t
 
 | Matching criteria                | Attributes that uses the criteria        | Description                                                                                                                                                                                                                                                                                                        | 
 |----------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Partial string matching          | Name, Phone number, Email, Address, Memo | Does a case-insensitive partial match between two strings where it will check if the query string is contained within the compared string. Note that the order of character matters and this includes the whitespace character.                                                                                    |  
-| Exact string matching            | Tags                                     | Does a case-insensitive exact match between two strings where it will check if the query string is equivalent to the compared string.                                                                                                                                                                              |
+| Partial string matching          | Name, Phone number, Email, Address, Memo | Does a case-insensitive partial match between two strings where it will check if the prefix argument partially matches with the compared string. Note that the order of character matters and this includes the whitespace character.                                                                              |  
+| Exact string matching            | Tags                                     | Does a case-insensitive exact match between two strings where it will check if the prefix argument is equivalent to the compared string.                                                                                                                                                                           |
 | Contacted Date matching criteria | Contacted Date                           | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. |
 
 Examples:
@@ -385,24 +391,22 @@ Examples:
 * `find e/@gmail` would match with anybody that has the "@gmail" domain.
 * `find a/street` would match with anybody that has the string "street" in their address.
 * `find m/Lover` would match with anybody that has the string "lover" in their memo.
+* `find m/` would match with everybody from the person list.
 * `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day.
+* `find c/` would match with anybody that had not been contacted.
 * `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".
+* `find t/colleague t/friends` would match with anybody that has the tag "colleague" or "friends".
 * `find t/family e/@example` would only match with anybody that has a tag "family" and an email domain "@example".
 
 
 <br>
 
-<div markdown="span" class="alert alert-info">  
-:information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string. 
-
-<br>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
  Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
+ When different prefixes are specified for the find command, the search result is equivalent to finding anybody that meets all the criteria specified by the prefix arguments. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
 [Back to Table of Contents](#table-of-contents-br)

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_SEARCH;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -41,8 +42,12 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int numberOfFilteredPerson = model.getFilteredPersonList().size();
+        if (numberOfFilteredPerson == 0) {
+            return new CommandResult(MESSAGE_EMPTY_SEARCH);
+        }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, numberOfFilteredPerson));
     }
 
     /**

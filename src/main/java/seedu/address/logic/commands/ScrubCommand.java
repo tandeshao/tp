@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_SEARCH;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import javafx.collections.ObservableList;
@@ -19,9 +20,8 @@ public class ScrubCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person if that person contains the phone number/tag/email(domain) specified by the "
             + "user.\n"
-            + "Multiple phone numbers are separated by a whitespace. \n"
             + "Parameters: [p/Phone Numbers] [t/tags] [e/Email domain]\n"
-            + "Examples: " + COMMAND_WORD + " p/90400201 90400202 90400203";
+            + "Examples: " + COMMAND_WORD + " p/90400201 p/90400202";
 
     public static final String MESSAGE_SCRUB_SUCCESS = "Successfully scrubbed %s person";
     public static final String MESSAGE_WRONG_DOMAIN_FORMAT = "Email scrubbing allows only domain name as a parameter."
@@ -47,6 +47,9 @@ public class ScrubCommand extends Command {
         int numberOfDeletedPerson = removePersonThatMatchesDescription(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // To show all currently available person
         model.saveAddressBookState();
+        if (numberOfDeletedPerson == 0) {
+            return new CommandResult(MESSAGE_EMPTY_SEARCH);
+        }
         return new CommandResult(String.format(MESSAGE_SCRUB_SUCCESS, numberOfDeletedPerson));
     }
 
