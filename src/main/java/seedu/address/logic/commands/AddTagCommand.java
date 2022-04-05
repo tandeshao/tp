@@ -27,8 +27,8 @@ import seedu.address.model.tag.Tag;
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends the specified tags identified"
-            + "by the index number used in the displayed person set. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends the specified tags (case-insensitive) of the "
+            + "person identified by the index number used in the displayed person list. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -36,7 +36,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_APPEND_TAG_SUCCESS = "Appended tag: %1$s";
     public static final String MESSAGE_MISSING_PREFIX = "At least one " + PREFIX_TAG + " must be provided.";
-    public static final String MESSAGE_DUPLICATE_TAG = "%s is already present in the person.";
+    public static final String MESSAGE_DUPLICATE_TAG = "%s (case-insensitive) is already present in the person.";
 
     private final Index index;
     private final Set<Tag> tagsToAppend;

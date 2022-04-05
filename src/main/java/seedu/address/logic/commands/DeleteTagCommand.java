@@ -27,16 +27,16 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified tags of the person identified "
-            + "by the index number used in the displayed person list. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified tags (case-insensitive) of the "
+            + "person identified by the index number used in the displayed person list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag: %1$s (case-insensitive)";
     public static final String MESSAGE_MISSING_PREFIX = "At least one " + PREFIX_TAG + " must be provided.";
-    public static final String MESSAGE_MISSING_TAG = "%s does not exist in the specified person.";
+    public static final String MESSAGE_MISSING_TAG = "%s (case-insensitive) does not exist in the specified person.";
 
     private final Index index;
     private final Set<Tag> tagsToDelete;

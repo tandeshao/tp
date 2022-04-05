@@ -260,7 +260,6 @@ Format: `deletetag INDEX t/TAG…`
 
 * Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * If any of the tag to be deleted does not exist, the command will be rejected.
-* If `deletetag` is successful, the success display message will be based on the user's input. That is, if `deletetag 1 t/FRIENDS` is executed successfully and the tag "friends" (different capitalization) is deleted, "Deleted tag: [FRIENDS]" will be displayed.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
  To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
