@@ -48,7 +48,8 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate entries](#493-preventing-duplicate-entries) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Saving the data](#494-saving-the-data) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Editing the data file](#495-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Predictive viewing](#496-predictive-viewing) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Backing up the data file](#496-backing-up-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.7. Predictive viewing](#497-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -572,7 +573,26 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.9.6. Predictive viewing
+#### 4.9.6. Backing up the data file
+
+* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[_Abπ location_]/data/" as "backup[_DD-MM-YY HH-MM-SS_].json". The backup file format will be similar to the backup file shown in the image below.
+
+![img_1.png](img_1.png)
+
+* To reload your data from the backup file into Abπ, fix the corrupted entries in the backup file to a proper json format, rename the file as "addressbook.json" and overwrite the existing "addressbook.json" file.
+* Backup files are generated when Abπ fails to read the data in the "addressbook.json" file.
+* There can be multiple backup files in the folder depending on how many times Abπ fails to read the original data file. 
+* Do note that in the current iteration of Abπ, a **limit on the number of backup files has not been implemented**. 
+
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Theoretically, a user is able to constantly create backup files using Abπ until the folder size becomes unusually huge. To reduce the folder size, users would need to constantly head over to the data folder and delete unused backup files. The team understands and acknowledges that this may prove to be an inconvenience for some users hence, in future iterations of Abπ, the team would impose a limit on the number of backup files for a better user experience.
+
+</div>
+
+
+
+#### 4.9.7. Predictive viewing
 
 Abπ will pre-emptively update the display after various commands:
 
@@ -608,15 +628,9 @@ Simply overwrite the "addressbook.json" data file with your previous "addressboo
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/backup.json". The backup file will be similar to the backup file shown in the image below.
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/". For more information on how to restore your backup data, take a look [here](#496-backing-up-the-data-file).
 
-![img.png](img.png)
 
-To reload your data from the backup file into Abπ, fix the corrupted entries in the backup file to a proper json format, rename the file as "addressbook.json" and overwrite the existing "addressbook.json" file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
- Backup files are generated when Abπ fails to read the data in the "addressbook.json" file. This means that there can be multiple backup files in the folder depending on how many times Abπ fails to read the original data file. Do note that in the current iteration of Abπ, a limit on the number of backup files has not been implemented. That is, theoretically, a user is able to constantly create backup files using Abπ until the folder size becomes unusually huge. To reduce the folder size, users would need to constantly head over to the data folder and delete unused backup files. The team understands and acknowledges that this may prove to be an inconvenience for some users hence, in future iterations of Abπ, the team would impose a limit on the number of backup files for a better user experience. 
-</div>
 
 [Back to Table of Contents](#table-of-contents-br)
 
