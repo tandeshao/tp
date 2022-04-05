@@ -162,7 +162,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 * Words in upper case are the parameters to be supplied by the user. e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional. e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
+ 
 * Items with `…`​ after them can be used multiple times including zero times. e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order. e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -608,7 +608,15 @@ Simply overwrite the "addressbook.json" data file with your previous "addressboo
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup.json", located at "[_Abπ location_]/data/backup.json". Fix the "backup.json" into the proper json format, rename it as "addressbook.json" and overwrite the existing data file.
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/backup.json". The backup file will be similar to the backup file shown in the image below.
+
+![img.png](img.png)
+
+To reload your data from the backup file into Abπ, fix the corrupted entries in the backup file to a proper json format, rename the file as "addressbook.json" and overwrite the existing "addressbook.json" file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+ Backup files are generated when Abπ fails to read the data in the "addressbook.json" file. This means that there can be multiple backup files in the folder depending on how many times Abπ fails to read the original data file. Do note that in the current iteration of Abπ, a limit on the number of backup files has not been implemented. That is, theoretically, a user is able to constantly create backup files using Abπ until the folder size becomes unusually huge. To reduce the folder size, users would need to constantly head over to the data folder and delete unused backup files. The team understands and acknowledges that this may prove to be an inconvenience for some users hence, in future iterations of Abπ, the team would impose a limit on the number of backup files for a better user experience. 
+</div>
 
 [Back to Table of Contents](#table-of-contents-br)
 
