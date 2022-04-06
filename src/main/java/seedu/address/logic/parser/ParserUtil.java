@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer. \n%1$s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -171,7 +171,7 @@ public class ParserUtil {
      * @param str String to be trimmed.
      * @return Trimmed string with extra whitespaces removed.
      */
-    private static String trimExtraWhiteSpaces(String str) {
+    public static String trimExtraWhiteSpaces(String str) {
         return str.replaceAll("\\s{2,}", " ");
     }
 
