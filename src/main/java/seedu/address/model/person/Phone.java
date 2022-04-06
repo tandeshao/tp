@@ -9,10 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
+    public static final int PHONE_NUMBER_MAXIMUM = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 3 to 31 digits long";
-    public static final int PHONE_NUMBER_MAXIMUM = 31;
-    public static final String VALIDATION_REGEX = "\\d{3," + PHONE_NUMBER_MAXIMUM + "}";
+            "Phone numbers can start with a + and should only contain numbers and space afterwards. It should be 3 to"
+                    + PHONE_NUMBER_MAXIMUM + " characters long";
+    public static final String VALIDATION_REGEX = "(?=^.{3,"
+            + PHONE_NUMBER_MAXIMUM + "}$)\\+?(\\s*\\d*)*(\\s*\\d+)+";
     public final String phone;
 
     /**
