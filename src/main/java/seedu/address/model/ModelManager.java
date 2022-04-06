@@ -186,14 +186,15 @@ public class ModelManager implements Model {
         if (change.getAddedSize() > change.getRemovedSize()) {
             updateDisplayUponAddition(addedList, removedList);
             return;
+        } else if (change.getAddedSize() == change.getRemovedSize()) {
+            updateDisplayUponModification(addedList, removedList);
         }
-        // There's no point checking if the person on display needs to change or delete if it doesn't exist.
+
+        // There's no point checking if the person on display needs to be deleted if it doesn't exist.
         if (personOnDisplay.get() == null) {
             return;
         }
-        if (change.getAddedSize() == change.getRemovedSize()) {
-            updateDisplayUponModification(addedList, removedList);
-        } else if (change.getAddedSize() < change.getRemovedSize()) {
+        if (change.getAddedSize() < change.getRemovedSize()) {
             updateDisplayUponDeletion(addedList, removedList);
         }
     }
@@ -223,10 +224,11 @@ public class ModelManager implements Model {
             List<? extends Person> addedList, List<? extends Person> removedList) {
         assert addedList.size() == removedList.size();
 
-        Person curPerson = personOnDisplay.get();
         for (int i = 0; i < removedList.size(); i++) {
-            if (curPerson.equals(removedList.get(i))) {
-                updatePersonOnDisplay(addedList.get(i));
+            Person oldPerson = removedList.get(i);
+            Person newPerson = addedList.get(i);
+            if (!oldPerson.equals(newPerson)) {
+                updatePersonOnDisplay(newPerson);
             }
         }
     }

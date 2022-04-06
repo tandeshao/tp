@@ -263,7 +263,9 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+
+To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+
 </div>
 
 
@@ -596,6 +598,7 @@ Abπ will pre-emptively update the display after various commands:
 
 * After an `add` command, the newly added person will be automatically displayed. This allows you to check if all the details of the person you just added are correct without needing to execute an additional `view` command.
 * Similarly, when you `redo` an `add` command, the newly added person will be automatically displayed.
+* If the details of a person is changed (such as from an `edit` command or via `undo` after an edit command), the display will automatically display the edited person.
 * After a deletion command (such as `delete` or `clear`), followed by an `undo` command, the deleted person(s) will be restored and automatically displayed. This allows you to check if the person you just deleted was the correct person without needing to execute an additional `view` command.
 
 In addition, Abπ aims to keep all displayed information updated:

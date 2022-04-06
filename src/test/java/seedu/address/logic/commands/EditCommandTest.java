@@ -76,16 +76,36 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.saveAddressBookState();
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    @Test
+    public void execute_allFieldsIdenticalUnfilteredList_failure() {
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
+
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_nameIdenticalUnfilteredList_failure() {
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String newName = editedPerson.getName().toString();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(newName).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
+
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
