@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -38,7 +37,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             LOGGER.log(Level.INFO, "Invalid command format");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(pe.getMessage(), DeleteTagCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {

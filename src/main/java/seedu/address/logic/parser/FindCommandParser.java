@@ -55,7 +55,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Removes trailing whitespace from the user input
         String trimmedArgs = args.stripTrailing();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words
-        String modifiedString = trimmedArgs.replaceAll("\\s{2,}", " ");
+        String modifiedString = ParserUtil.trimExtraWhiteSpaces(trimmedArgs);
         if (modifiedString.isEmpty()) {
             LOGGER.log(Level.INFO, "Input is empty");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
