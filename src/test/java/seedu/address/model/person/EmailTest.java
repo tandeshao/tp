@@ -60,7 +60,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.com.")); // domain name ends with a period
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
-        assertFalse(Email.isValidEmail("peterjack@example")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
         assertFalse(Email.isValidEmail(edgeEmail + "a")); // too long email
 
         // valid email
