@@ -9,7 +9,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents <br/>
+## Table of Contents
 
 [1. Introduction](#1-introduction) <br/>
 &nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
@@ -201,7 +201,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -230,7 +230,7 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -249,7 +249,7 @@ Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
 * `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -271,7 +271,7 @@ Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -291,7 +291,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -328,7 +328,7 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -338,7 +338,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -360,11 +360,11 @@ Examples:
 
 <div markdown="span" class="alert alert-info">  
 
-:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.9.4. Predictive viewing](#494-predictive-viewing).
+:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.9.7. Predictive viewing](#497-predictive-viewing).
 
 </div>
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -413,7 +413,7 @@ For the `c/` prefix, only the prefix argument from the last `c/` prefix will be 
  When different prefixes are specified for the find command, the search result is equivalent to finding anybody that meets all the criteria specified by the prefix arguments. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -423,7 +423,7 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -440,7 +440,7 @@ Examples:
 * `list` followed by `copyemails` will copy all emails currently displayed in the list to your clipboard.
 * When you paste from clipboard, a semicolon-separated list will appear. (E.g. "johndoe@example.com; betsycrowe@example.com")
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -463,7 +463,7 @@ Examples:
 * `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
 * `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -482,7 +482,7 @@ Format: `redo`
 Examples:
 * `redo` after calling `undo` restores the address book to its previous state prior to undo.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -496,7 +496,7 @@ Examples:
 * Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
 * Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -510,7 +510,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -520,7 +520,7 @@ Exits the program.
 
 Format: `exit`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -605,7 +605,7 @@ In addition, Abπ aims to keep all displayed information updated:
 
 Hence, there is no need to worry about the display containing outdated information.
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -630,7 +630,7 @@ When the data file is corrupted, an empty address book will be shown. Do not wor
 
 
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -657,4 +657,4 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
-[Back to Table of Contents](#table-of-contents-br)
+[Back to Table of Contents](#table-of-contents)
