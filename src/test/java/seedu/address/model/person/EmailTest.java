@@ -83,6 +83,30 @@ public class EmailTest {
     }
 
     @Test
+    public void exactEquals() {
+
+        Email validEmailAmy = new Email(VALID_EMAIL_AMY);
+
+        // same object -> returns true
+        assertTrue(validEmailAmy.exactEquals(validEmailAmy));
+
+        // same values -> returns true
+        Email validEmailAmyCopy = new Email(VALID_EMAIL_AMY);
+        assertTrue(validEmailAmy.exactEquals(validEmailAmyCopy));
+
+        // different capitalization -> returns false
+        Email validEmailAmyAllCaps = new Email(VALID_EMAIL_AMY.toUpperCase());
+        assertFalse(validEmailAmy.exactEquals(validEmailAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validEmailAmy.exactEquals(null));
+
+        // different email -> returns false
+        Email validEmailBob = new Email(VALID_EMAIL_BOB);
+        assertFalse(validEmailAmy.exactEquals(validEmailBob));
+    }
+
+    @Test
     public void equals() {
 
         Email validEmailAmy = new Email(VALID_EMAIL_AMY);
