@@ -7,7 +7,7 @@ title: Alvin Tay Ming Hwee's Project Portfolio Page
 
 AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. 
 
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 8k LoC.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9k LoC.
 
 **Summary of contributions**
 
@@ -48,12 +48,12 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * **Documentation** (to update):
   * User Guide:
-    * Added documentation for `Memo`, `ContactedDate`, `undo`, `redo`, `deletetag`, preventing duplicates, ignoring case sensitivity, trimming extra spaces, preventing extraneous parameters, `add` and `edit` (PR [\#25](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/25), [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94), [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133), [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144), [\#168](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/168), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [#\234](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/234), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#239](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/239), [\#240](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/240))
+    * Added documentation for `Memo`, `ContactedDate`, `undo`, `redo`, `deletetag`, preventing duplicates, ignoring case sensitivity, trimming extra spaces, preventing extraneous parameters, `add` and `edit` (PR [\#25](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/25), [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94), [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133), [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144), [\#168](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/168), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#234](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/234), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#239](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/239), [\#240](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/240))
     * Added FAQ (PR [\#152](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/152))
     * Improved UserGuide formatting (PR [\#157](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/157), [\#159](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/159), [\#161](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/161), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180))
   * Developer Guide:
     * Added implementation details of the `undo` and `redo` feature (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93))
-    * Added design consideration details of the `Memo` and `ContactedDate` feature (PR [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144)
+    * Added design consideration details of the `Memo` and `ContactedDate` feature (PR [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144))
     * Updated UML diagrams ModelClassDiagram and BetterModelClassDiagram (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93), [\#109](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/109))
     * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165))
     
@@ -63,10 +63,10 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * Update AboutUs with team details and roles.
   * Scheduling and tracking.
   * Maintaining the issue tracker.
-  * Managed milestones `v1.1` - `v1.4b` (7 milestones) on GitHub [link](https://github.com/AY2122S2-CS2103T-T17-4/tp/milestones?state=closed)
-  * Managed releases `v1.2` - `v1.4` (5 releases) on GitHub [link](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases)
+  * Managed milestones `v1.1` - `v1.4b` (7 milestones) on GitHub ([link](https://github.com/AY2122S2-CS2103T-T17-4/tp/milestones?state=closed))
+  * Managed releases `v1.2` - `v1.4` (5 releases) on GitHub ([link](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases))
   
 * **Community** (to update):
   * PRs reviewed (with non-trivial review comments): (PR [\#61](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/61), [\#73](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/73), [\#77](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/77), [\#103](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/103), [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#132](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/132), [\#166](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/166), [\#174](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/174), [\#247](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/247))
-  * All other PRs reviewed: [Link to the other 40+ PRs reviewed](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aatmh)
+  * All other PRs reviewed: [Link to 40+ PRs reviewed](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aatmh)
   * Reported bugs and suggestions for other teams in the class ([1](https://github.com/atmh/ped/issues/1), [2](https://github.com/atmh/ped/issues/2), [3](https://github.com/atmh/ped/issues/3), [4](https://github.com/atmh/ped/issues/4), [5](https://github.com/atmh/ped/issues/5), [6](https://github.com/atmh/ped/issues/6), [7](https://github.com/atmh/ped/issues/7), [8](https://github.com/atmh/ped/issues/8), [9](https://github.com/atmh/ped/issues/9), [10](https://github.com/atmh/ped/issues/10), [11](https://github.com/atmh/ped/issues/11), [12](https://github.com/atmh/ped/issues/12), [13](https://github.com/atmh/ped/issues/13), [14](https://github.com/atmh/ped/issues/14), [15](https://github.com/atmh/ped/issues/15), [16](https://github.com/atmh/ped/issues/16), [17](https://github.com/atmh/ped/issues/17), [18](https://github.com/atmh/ped/issues/18))
