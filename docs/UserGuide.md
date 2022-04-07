@@ -455,7 +455,7 @@ Format: `undo`
 
 * The maximum number of undo is 10.
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `undo` is successful, Abπ will display "Undo success!". Currently, it does not display a message on what has been undone. This message will be implemented in a future version.
 </div>
 
@@ -475,7 +475,7 @@ Format: `redo`
 
 * The maximum number of redo is 10.
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `redo` is successful, Abπ will display "Redo success!". Currently, it does not display a message on what has been redone. This message will be implemented in a future version.
 </div>
 
@@ -552,7 +552,7 @@ Abπ helps to manage duplicates by preventing duplicate entries of identical nam
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** <br>
-For all person attributes a difference in white space is considered as different. For example: <br>
+For all person attributes, after extra white spaces have been trimmed, a difference in white space is considered as different. For example: <br>
 "John Doe" is different from "JohnDoe" <br>
 "65 98765432" is different from "6598765432" <br>
 <br>
