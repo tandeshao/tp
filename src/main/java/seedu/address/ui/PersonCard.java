@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .sorted(Comparator.comparing(tag -> tag.tagName.toLowerCase()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
     }
 

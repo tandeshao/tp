@@ -11,6 +11,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 
 ## Table of Contents
 
+
 [1. Introduction](#1-introduction) <br/>
 &nbsp;&nbsp;[1.1. Conventions](#11-conventions)  
 [2. Quick Start](#2-quick-start) <br/>

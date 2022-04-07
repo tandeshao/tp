@@ -45,9 +45,19 @@ public class Phone {
                 && phone.equals(((Phone) other).phone)); // state check
     }
 
+    /**
+     * Returns true if both phone numbers are identical (case-sensitive).
+     *
+     * @param otherPhone The other phone number.
+     * @return true if both phone numbers are identical.
+     */
+    public boolean exactEquals(Phone otherPhone) {
+        return otherPhone != null
+                && phone.equals(otherPhone.phone);
+    }
+
     @Override
     public int hashCode() {
         return phone.hashCode();
     }
-
 }

@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -78,9 +79,8 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
+        String expectedMessage = MESSAGE_NO_CHANGE;
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }
@@ -91,21 +91,26 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
+        String expectedMessage = MESSAGE_NO_CHANGE;
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_nameIdenticalUnfilteredList_failure() {
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String newName = editedPerson.getName().toString();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(newName).build();
+    public void execute_nameFieldChangeCaseUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String newName = firstPerson.getName().toString().toUpperCase();
+        Person editedPerson = new PersonBuilder(firstPerson).withName(newName).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson)
+                .withName(newName).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = EditCommand.MESSAGE_NO_CHANGE;
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.saveAddressBookState();
 
-        assertCommandFailure(editCommand, model, expectedMessage);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

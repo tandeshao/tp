@@ -98,7 +98,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (personToEdit.equals(editedPerson)) {
+        if (personToEdit.exactEquals(editedPerson)) {
             throw new CommandException(MESSAGE_NO_CHANGE);
         }
 

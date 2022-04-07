@@ -160,6 +160,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updatePersonOnDisplay(Person person) {
+        personOnDisplay.set(null);
         personOnDisplay.set(person);
     }
 
@@ -227,7 +228,7 @@ public class ModelManager implements Model {
         for (int i = 0; i < removedList.size(); i++) {
             Person oldPerson = removedList.get(i);
             Person newPerson = addedList.get(i);
-            if (!oldPerson.equals(newPerson)) {
+            if (!oldPerson.exactEquals(newPerson)) {
                 updatePersonOnDisplay(newPerson);
             }
         }
