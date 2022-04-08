@@ -11,7 +11,7 @@ public class Address {
 
     public static final int CHARACTER_LIMIT = 800;
     public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank or start with a space, "
-            + "and it cannot exceed" + CHARACTER_LIMIT + "characters";
+            + "and it cannot exceed " + CHARACTER_LIMIT + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -51,9 +51,19 @@ public class Address {
                 && address.equalsIgnoreCase(((Address) other).address)); // state check
     }
 
+    /**
+     * Returns true if both addresses are identical (case-sensitive).
+     *
+     * @param otherAddress The other address.
+     * @return true if both addresses are identical.
+     */
+    public boolean exactEquals(Address otherAddress) {
+        return otherAddress != null
+                && address.equals(otherAddress.address);
+    }
+
     @Override
     public int hashCode() {
         return address.toLowerCase().hashCode();
     }
-
 }

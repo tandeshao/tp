@@ -79,6 +79,17 @@ public class Memo {
     }
 
     /**
+     * Returns true if both memos are identical (case-sensitive).
+     *
+     * @param otherMemo The other memo.
+     * @return true if both memos are identical.
+     */
+    public boolean exactEquals(Memo otherMemo) {
+        return otherMemo != null
+                && memo.equals(otherMemo.memo);
+    }
+
+    /**
      * Returns hashcode of {@code Memo}.
      *
      * @return Hashcode of {@code Memo}.

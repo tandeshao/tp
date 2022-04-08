@@ -45,6 +45,30 @@ public class NameTest {
     }
 
     @Test
+    public void exactEquals() {
+
+        Name validNameAmy = new Name(VALID_NAME_AMY);
+
+        // same object -> returns true
+        assertTrue(validNameAmy.exactEquals(validNameAmy));
+
+        // same values -> returns true
+        Name validNameAmyCopy = new Name(VALID_NAME_AMY);
+        assertTrue(validNameAmy.exactEquals(validNameAmyCopy));
+
+        // different capitalization -> returns false
+        Name validNameAmyAllCaps = new Name(VALID_NAME_AMY.toUpperCase());
+        assertFalse(validNameAmy.exactEquals(validNameAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validNameAmy.exactEquals(null));
+
+        // different name -> returns false
+        Name validNameBob = new Name(VALID_NAME_BOB);
+        assertFalse(validNameAmy.exactEquals(validNameBob));
+    }
+
+    @Test
     public void equals() {
 
         Name validNameAmy = new Name(VALID_NAME_AMY);

@@ -97,6 +97,23 @@ public class ContactedDateTest {
     }
 
     @Test
+    public void exactEquals() {
+        // same object -> returns true
+        assertTrue(validContactedDate.exactEquals(validContactedDate));
+
+        // same values -> returns true
+        ContactedDate validContactedDateCopy = new ContactedDate(validContactedDate.contactedDate);
+        assertTrue(validContactedDate.exactEquals(validContactedDateCopy));
+
+        // null -> returns false
+        assertFalse(validContactedDate.exactEquals(null));
+
+        // different contacted date -> returns false
+        ContactedDate differentValidContactedDate = new ContactedDate("01-02-2020");
+        assertFalse(validContactedDate.exactEquals(differentValidContactedDate));
+    }
+
+    @Test
     public void equals() {
         // same object -> returns true
         assertTrue(validContactedDate.equals(validContactedDate));
@@ -111,7 +128,7 @@ public class ContactedDateTest {
         // null -> returns false
         assertFalse(validContactedDate.equals(null));
 
-        // different memo -> returns false
+        // different contacted date -> returns false
         ContactedDate differentValidContactedDate = new ContactedDate("01-02-2020");
         assertFalse(validContactedDate.equals(differentValidContactedDate));
     }

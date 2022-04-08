@@ -11,7 +11,7 @@ public class Name {
 
     public static final int CHARACTER_LIMIT = 800;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank, "
+            "Name should not be blank, "
                     + "and its length should be between 1 and " + CHARACTER_LIMIT
                     + " (including spaces)";
 
@@ -54,9 +54,19 @@ public class Name {
                 && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
     }
 
+    /**
+     * Returns true if both names are identical (case-sensitive).
+     *
+     * @param otherName The other name.
+     * @return true if both names are identical.
+     */
+    public boolean exactEquals(Name otherName) {
+        return otherName != null
+                && fullName.equals(otherName.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.toLowerCase().hashCode();
     }
-
 }

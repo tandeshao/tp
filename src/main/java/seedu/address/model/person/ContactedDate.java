@@ -124,6 +124,17 @@ public class ContactedDate {
     }
 
     /**
+     * Returns true if both contacted dates are identical (case/formatting-sensitive).
+     *
+     * @param otherContactedDate The other contacted date.
+     * @return true if both contacted dates are identical.
+     */
+    public boolean exactEquals(ContactedDate otherContactedDate) {
+        return otherContactedDate != null
+                && contactedDate.equals(otherContactedDate.contactedDate);
+    }
+
+    /**
      * Returns hashcode of {@code ContactedDate}.
      *
      * @return Hashcode of {@code ContactedDate}.

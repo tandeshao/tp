@@ -9,10 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
+    public static final int PHONE_NUMBER_MAXIMUM = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 3 to 31 digits long";
-    public static final int CHARACTER_LIMIT = 31;
-    public static final String VALIDATION_REGEX = "\\d{3," + CHARACTER_LIMIT + "}";
+            "Phone numbers should only contain numbers or white spaces. "
+                    + "It may also contain '+' at the start, but must be followed by a number. "
+                    + "It should contain at least 3 numbers and cannot exceed " + PHONE_NUMBER_MAXIMUM
+                    + " characters";
+    public static final String VALIDATION_REGEX = "(?=^.{3,"
+            + PHONE_NUMBER_MAXIMUM + "}$)\\+?(\\d\\s*){3,}";
     public final String phone;
 
     /**
@@ -45,9 +49,19 @@ public class Phone {
                 && phone.equals(((Phone) other).phone)); // state check
     }
 
+    /**
+     * Returns true if both phone numbers are identical (case-sensitive).
+     *
+     * @param otherPhone The other phone number.
+     * @return true if both phone numbers are identical.
+     */
+    public boolean exactEquals(Phone otherPhone) {
+        return otherPhone != null
+                && phone.equals(otherPhone.phone);
+    }
+
     @Override
     public int hashCode() {
         return phone.hashCode();
     }
-
 }

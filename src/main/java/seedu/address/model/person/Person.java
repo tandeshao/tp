@@ -7,7 +7,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
+import seedu.address.model.tag.ExactTagComparator;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -156,6 +158,51 @@ public class Person {
                 && otherPerson.getContactedDate().equals(getContactedDate())
                 && otherPerson.getMemo().equals(getMemo())
                 && otherPerson.getTags().equals(getTags());
+    }
+
+    /**
+     * Returns true if both persons have the exact same identity and data fields.
+     * Unlike {@code equals(Object o)} which is ignores uppercase and lowercase, this method is case-sensitive.
+     *
+     * @param otherPerson The other person.
+     * @return true if both persons have the same identity and data fields; otherwise false.
+     */
+    public boolean exactEquals(Person otherPerson) {
+        if (otherPerson == null) { // Short-circuit if the other person is null
+            return false;
+        }
+        Set<Tag> otherTagList = otherPerson.getTags();
+        boolean areTagsEqual = compareTagList(otherTagList);
+
+        return otherPerson.getName().exactEquals(getName())
+                && otherPerson.getPhone().exactEquals(getPhone())
+                && otherPerson.getEmail().exactEquals(getEmail())
+                && otherPerson.getAddress().exactEquals(getAddress())
+                && otherPerson.getContactedDate().exactEquals(getContactedDate())
+                && otherPerson.getMemo().exactEquals(getMemo())
+                && areTagsEqual;
+    }
+
+    /**
+     * Returns true if the provided tag list is identical to the tag list of this person object.
+     * Unlike calling {@code tagList.equals()}, this method is case-sensitive.
+     *
+     * @param otherTagList the other tag list.
+     * @return Whether the tag lists are identical.
+     */
+    private boolean compareTagList(Set<Tag> otherTagList) {
+        Set<Tag> tagList = getTags();
+        if (otherTagList.size() != tagList.size()) {
+            return false;
+        }
+
+        ExactTagComparator<Tag> comparator = new ExactTagComparator<>();
+        TreeSet<Tag> tagTreeSet = new TreeSet<>(comparator);
+        TreeSet<Tag> otherTagTreeSet = new TreeSet<>(comparator);
+        tagTreeSet.addAll(tagList);
+        otherTagTreeSet.addAll(otherTagList);
+        tagTreeSet.retainAll(otherTagTreeSet);
+        return tagTreeSet.size() == tagList.size();
     }
 
     /**

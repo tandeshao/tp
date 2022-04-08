@@ -70,7 +70,7 @@ public class DetailedPersonDisplay extends UiPart<Region> {
 
             tagsPane.getChildren().clear();
             person.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .sorted(Comparator.comparing(tag -> tag.tagName.toLowerCase()))
                     .forEach(tag -> tagsPane.getChildren().add(new Label(tag.toString())));
         } else {
             nameLabel.setText(DEFAULT_EMPTY_MESSAGE);
