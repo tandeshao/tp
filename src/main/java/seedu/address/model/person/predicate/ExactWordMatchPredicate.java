@@ -2,7 +2,6 @@ package seedu.address.model.person.predicate;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -50,8 +49,10 @@ public class ExactWordMatchPredicate implements Predicate<Person> {
             return exactWordMatching(descriptions, person.getName().toString());
         } else if (PREFIX_EMAIL.equals(prefix)) {
             return exactWordMatching(descriptions, person.getEmail().toString());
-        } else { // for phone prefix
-            return exactWordMatching(descriptions, person.getPhone().toString());
+        } else {
+            // for phone prefix
+            return exactWordMatching(StringUtil.removeSpaces(descriptions),
+                    StringUtil.removeSpaces(person.getPhone().toString()));
         }
     }
 

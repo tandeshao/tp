@@ -1,7 +1,6 @@
 package seedu.address.model.person.predicate;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -9,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -58,7 +58,8 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
         } else if (PREFIX_NAME.equals(prefix)) {
             return caseInsensitivePartialMatch(person.getName().toString(), descriptions);
         } else if (PREFIX_PHONE.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getPhone().toString(), descriptions);
+            return caseInsensitivePartialMatch(StringUtil.removeSpaces(person.getPhone().toString()),
+                    StringUtil.removeSpaces(descriptions));
         } else if (PREFIX_TAG.equals(prefix)) {
             return person.getTags().stream().anyMatch(tag -> caseInsensitivePartialMatch(tag.toString(), descriptions));
         } else {

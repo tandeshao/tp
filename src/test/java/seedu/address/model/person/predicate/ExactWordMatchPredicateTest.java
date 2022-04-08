@@ -3,7 +3,7 @@ package seedu.address.model.person.predicate;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -17,7 +17,11 @@ class ExactWordMatchPredicateTest {
     @Test
     void test_exactMatchBetweenWords_returnsTrue() {
         ExactWordMatchPredicate tagPredicate = new ExactWordMatchPredicate(PREFIX_TAG, List.of("colleagues"));
-        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, List.of("hello"));
+        ExactWordMatchPredicate phonePredicateWithSpace = new ExactWordMatchPredicate(PREFIX_PHONE, List.of("+65 "
+                + "90400204"));
+
+        // Space is ignored during the check.
+        assertTrue(phonePredicateWithSpace.test(new PersonBuilder().withPhone("+6590400204").build()));
 
         // case-insensitive search -> returns true
         assertTrue(tagPredicate.test(new PersonBuilder().withTags("Colleagues").build()));
@@ -30,8 +34,6 @@ class ExactWordMatchPredicateTest {
     void test_exactWordMatchBetweenTwoSentences_returnsTrue() {
         ExactWordMatchPredicate addressPredicate = new ExactWordMatchPredicate(PREFIX_ADDRESS, List.of("QueensTown",
                 "street", "10"));
-        ExactWordMatchPredicate memoPredicate = new ExactWordMatchPredicate(PREFIX_MEMO, List.of("hello", "my",
-                "memo"));
         // case-insensitive search -> returns true
         assertTrue(addressPredicate.test(new PersonBuilder().withAddress("Brisbane Street").build()));
 

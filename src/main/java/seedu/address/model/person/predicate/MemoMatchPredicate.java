@@ -26,7 +26,7 @@ public class MemoMatchPredicate implements Predicate<Person> {
      * the predicate matches with any person that has no memo.
      *
      * @param person Person to be checked against.
-     * @return true if domain name is identical to the email argument, false otherwise.
+     * @return True if the memo argument partially matches any word in the person memo. False otherwise.
      */
     @Override
     public boolean test(Person person) {
@@ -40,12 +40,12 @@ public class MemoMatchPredicate implements Predicate<Person> {
     }
 
     /**
-     * Helper method for {@link #test(Person)}. Helps to check if any of the words in a given person memo
-     * partially matches the memo argument. The check if case-insensitive.
+     * Helper method for {@link #test(Person)}. Helps to check if any of the words in the given memo argument
+     * partially matches the person's memo. The check if case-insensitive.
      *
      * @param personMemo Person memo to be tested.
      * @param memoArg Memo argument to be tested.
-     * @return True if the memo argument partially matches any word in the person memo. False otherwise.
+     * @return True if any of the memo argument partially matches a substring in the person's memo, false otherwise.
      */
     private boolean testMemoAttribute(String personMemo, String memoArg) {
         if (memoArg.isEmpty()) {
