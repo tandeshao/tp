@@ -120,7 +120,7 @@ public class ContactedDate {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ContactedDate // instanceof handles nulls
-                && contactedDate.equals(((ContactedDate) other).contactedDate)); // state check
+                && contactedDate.equals(((ContactedDate) other).contactedDate)); // case-insensitive
     }
 
     /**

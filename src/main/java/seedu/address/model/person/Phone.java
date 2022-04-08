@@ -16,7 +16,7 @@ public class Phone {
                     + "It should contain at least 3 numbers and cannot exceed " + CHARACTER_LIMIT
                     + " characters";
     public static final String VALIDATION_REGEX = "(?=^.{3,"
-            + CHARACTER_LIMIT + "}$)\\+?(\\d\\s*){3,}";
+            + CHARACTER_LIMIT + "}$)\\+?(\\d *){3,}";
     public final String phone;
 
     /**
@@ -46,7 +46,8 @@ public class Phone {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && phone.equals(((Phone) other).phone)); // state check
+                && removeAllWhiteSpace(phone)
+                .equals(removeAllWhiteSpace(((Phone) other).phone))); // case-insensitive and ignores white space
     }
 
     /**
@@ -62,6 +63,17 @@ public class Phone {
 
     @Override
     public int hashCode() {
-        return phone.hashCode();
+        return removeAllWhiteSpace(phone).hashCode();
     }
+
+    /**
+     * Removes all white space from the given string.
+     *
+     * @param str String to remove all white space from.
+     * @return String with all white space removed.
+     */
+    private String removeAllWhiteSpace(String str) {
+        return str.replaceAll(" ", "");
+    }
+
 }
