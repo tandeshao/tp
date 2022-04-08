@@ -26,7 +26,7 @@ public class PhoneTest {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
         String edgePhone = "";
-        for (int i = 0; i < Phone.PHONE_NUMBER_MAXIMUM; i++) {
+        for (int i = 0; i < Phone.CHARACTER_LIMIT; i++) {
             edgePhone += "1";
         }
         // invalid phone numbers

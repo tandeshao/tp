@@ -21,7 +21,9 @@ import seedu.address.model.person.predicate.FindPersonPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
+    public static final int CHARACTER_LIMIT = 1000;
+    public static final String MESSAGE_INVALID_PREFIX_ARGUMENT = "Argument for name, email, phone, address, and tag "
+            + "must between 1 and " + CHARACTER_LIMIT + " characters.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose contact details matches any of "
             + "the specified keywords (case-insensitive).\n"
@@ -34,7 +36,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_MEMO + "MEMO]... "
             + "[" + PREFIX_CONTACTED_DATE + "CONTACTED DATE]...\n"
             + "Example: " + COMMAND_WORD + " n/alice bob" + " e/alice@gmail.com";
-    public static final String NO_PREFIX_MESSAGE = "At least one field to find must be provided.";
+    public static final String NO_PREFIX_MESSAGE = "At least one valid prefix must be provided.";
     private final FindPersonPredicate predicate;
 
     public FindCommand(FindPersonPredicate predicate) {

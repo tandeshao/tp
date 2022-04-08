@@ -26,7 +26,7 @@ public class TagTest {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
         String edgeTag = "";
-        for (int i = 0; i < Tag.TAG_CHARACTER_LIMIT; i++) {
+        for (int i = 0; i < Tag.CHARACTER_LIMIT; i++) {
             edgeTag += "a";
         }
         // invalid tag name

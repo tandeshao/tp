@@ -8,13 +8,13 @@ import seedu.address.model.person.Memo;
 public class MemoUtil {
 
     /** A long string that is one less than the maximum allowed characters of {@code Memo}. */
-    public static final String ONE_LESS_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS - 1);
+    public static final String ONE_LESS_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.CHARACTER_LIMIT - 1);
 
     /** A long string that is equal to the maximum allowed characters of {@code Memo}. */
-    public static final String MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS);
+    public static final String MAXIMUM_MEMO_STRING = getStringOfLength(Memo.CHARACTER_LIMIT);
 
     /** A long string that is one more than the maximum allowed characters of {@code Memo}. */
-    public static final String ONE_MORE_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.MAXIMUM_CHARACTERS + 1);
+    public static final String ONE_MORE_THAN_MAXIMUM_MEMO_STRING = getStringOfLength(Memo.CHARACTER_LIMIT + 1);
 
     /**
      * Returns a string of a specified length.

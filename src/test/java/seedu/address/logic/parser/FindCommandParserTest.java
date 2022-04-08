@@ -31,7 +31,7 @@ public class FindCommandParserTest {
         // Negative integer values for ContactedDate -> should result in pare failure
         assertParseFailure(parser, "find c/-1", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
 
-        // Positive value above 2147483647 is invalid.
+        // Positive value above 2147483647 is invalid -> integer overflow.
         assertParseFailure(parser, "find c/2147483648", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
 
     }
