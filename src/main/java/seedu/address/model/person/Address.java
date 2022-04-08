@@ -11,7 +11,7 @@ public class Address {
 
     private static final int MAXIMUM_LENGTH = 800;
     public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank or start with a space, "
-            + "and it cannot exceed" + MAXIMUM_LENGTH + "characters";
+            + "and it cannot exceed " + MAXIMUM_LENGTH + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
