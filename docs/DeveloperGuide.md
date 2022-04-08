@@ -442,13 +442,13 @@ Editing of `ContactedDate` via the `edit` command works similarly, the only diff
 
 **Aspect: `Memo` restrictions:**
 * **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
-    * Pros: Memo can take any character, including any special characters. The limit is imposed to protect from and prevent excessively long strings.  
+    * Pros: Memo can take any character, including any special characters, providing flexibility for users. The limit is imposed to protect from and prevent excessively long strings.
     * Cons: There could be special characters which might not display properly, or malicious characters that mess up the display. However, it is the conscious choice of the user to input such characters. We decided to not be overzealous with the input validation. Allowing any character as memo provides great flexibility for users.
 
 **Aspect: `ContactedDate` restrictions:**
-* **Current implementation:** 
-    * Pros: 
-    * Cons: 
+* **Current implementation:** Date can be only be empty or a valid dd-mm-yyyy date that is not in the future.
+    * Pros: Empty dates can be used by users to represent not contacted. The dd-mm-yyyy format is a common date format in Singapore. Preventing future dates is an intuitive design choice, as it doesn't make sense for last contacted to be in the future.
+    * Cons: Dates can only be represented in the dd-mm-yyyy format. This might be a minor inconvenience for a minority of users who could prefer a different date format. Since the dd-mm-yyyy format is most commonly used in Singapore, we will stick with this format.
     
 ### 4.4. Duplicate detection
 
@@ -458,31 +458,38 @@ For all person attributes, i.e. `Name`, `Phone`, `Email`, `Address`, `ContactedD
 - "John Doe" is equal to "john doe" (different capitalization)
 - "John &#160;&#160;&#160;&#160;&#160; Doe" is equal to "John Doe" (extra white spaces between words)
 
-However, after extra white spaces have been trimmed, a difference in white space is considered as different. For phone, a difference in "+" is also considered as different. For example:
-- "John Doe" is considered different from "JohnDoe" (difference in single white space between words)
-- "65 98765432" is considered different from "6598765432" (difference in single white space between numbers)
-- "+65 98765432" is considered different from "65 98765432" (difference in "+")
+For all person attributes except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. For example:
+- "John Doe" is different from "JohnDoe" (difference in white space)
+
+For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example:
+- "+65 98765432" is equal to "+6598765432" (difference in white space)
+- "+65 98765432" is different from "65 98765432 (difference in '+')"
 
 #### 4.4.1. Design considerations:
 
 **Aspect: Duplicate person:**
 
-* **Current implementation:** Three attributes of a person (`Name`, `Phone` and `Email`) have to be equal to be considered a duplicate.
+* **Current implementation:** Three attributes of a person (`Name`, `Phone` and `Email`) have to be equal to be considered as a duplicate.
     * Pros: Greater flexibility for users as different individuals may share the same name, or phone, or even email. 
     * Cons: Some might argue that both phone number and email should be unique for all contacts. However, there are many situations where individuals might share the same phone or email, or even both. Restricting such cases would be overzealous input validation. Hence, to be inclusive and flexible, we decided that a person is uniquely identified by the three attributes, `Name`, `Phone` and `Email`.
     
 **Aspect: Case sensitivity:**
 
 * **Current implementation:** Case insensitive for all person attributes.
-    * Pros: It reflects reality, words that only differ in case are often treated as identical. Intuitively, "John Doe" and "john doe" are highly likely to be the same person.
+    * Pros: It follows closely to reality, words that only differ in case are often treated as identical. Intuitively, "John Doe" and "john doe" are highly likely to be the same person.
     * Cons: In some rare cases, people might consider "John Doe" and "john doe" to be different individuals. However, this is unlikely and the majority (case-insensitive) approach is favoured.
     
 **Aspect: Extra white spaces between words:**
 
 * **Current implementation:** Extra white spaces (2 or more) between words are trimmed to a single white space for all attributes.
-    * Pros: Similar to "Aspect: Case sensitivity", it reflects reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
-    * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature that helps users to remove accidental extra white spaces to provide a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
+    * Pros: Similar to "Aspect: Case sensitivity", it follows closely to reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
+    * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature, helping users to remove accidental extra white spaces provides a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
 
+**Aspect: Difference in white space:**
+
+* **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
+    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. The exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number.
+    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.  
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Documentation, logging, testing, configuration, dev-ops
@@ -674,7 +681,6 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### 7.1. Launch and shutdown
@@ -692,8 +698,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### 7.2. Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -708,8 +712,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### 7.3. Editing a person's memo
 
