@@ -13,7 +13,7 @@ public class Memo {
     public static final int MAXIMUM_CHARACTERS = 1000;
 
     /** String message that represents message constraints. */
-    public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of "
+    public static final String MESSAGE_CONSTRAINTS = "Memo can only be up to a maximum of "
             + MAXIMUM_CHARACTERS + " characters";
 
     /** Every character is allowed, up to a maximum of MAXIMUM_CHARACTERS. */
@@ -75,7 +75,7 @@ public class Memo {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Memo // instanceof handles nulls
-                && memo.equalsIgnoreCase(((Memo) other).memo)); // state check
+                && memo.equalsIgnoreCase(((Memo) other).memo)); // case-insensitive
     }
 
     /**

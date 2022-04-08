@@ -528,7 +528,7 @@ Format: `exit`
 ### 4.9. Extra information regarding the features
 
 #### 4.9.1. Ignoring case difference
-Abπ ignores case difference for the person attributes `Name`, `Email`, `Address`, `Memo` and `Tag` to provide a more seamless experience that matches the real world.
+Abπ ignores case difference for the person attributes name, email, address, memo and tag to provide a more seamless experience that matches the real world.
 * Attributes that only differs in case sensitivity is considered as identical.
 
 Examples:
@@ -546,20 +546,19 @@ Examples:
 * "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
 
 #### 4.9.3. Preventing duplicate entries
-Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands. 
+Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands.
 
 * Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email.
 * The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** <br>
-For all person attributes, after extra white spaces have been trimmed, a difference in white space is considered as different. For example: <br>
-"John Doe" is different from "JohnDoe" <br>
-"65 98765432" is different from "6598765432" <br>
+For all person attributes except phone, after extra white spaces have been trimmed, a difference in white space is considered as different. For example: <br>
+"John Doe" is different from "JohnDoe" (difference in white space) <br>
 <br>
-For phone, a difference in "+" is also considered as different. For example: <br>
-"+65 98765432" is considered different from "65 98765432"
- 
+For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example: <br>
+"+65 98765432" is equal to "+6598765432" (difference in white space) <br>
+"+65 98765432" is different from "65 98765432 (difference in '+')"
 </div>
 
 #### 4.9.4. Saving the data
