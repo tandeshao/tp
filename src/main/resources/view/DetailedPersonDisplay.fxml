@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="personDisplayPane" prefHeight="400.0" prefWidth="500.0" styleClass="detailed-person-display" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="personDisplayPane" prefHeight="400.0" prefWidth="500.0" styleClass="detailed-person-display" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <ScrollPane fitToWidth="true" styleClass="detailed-person-display">
       <VBox alignment="TOP_CENTER">
          <StackPane styleClass="detailed-name-display">

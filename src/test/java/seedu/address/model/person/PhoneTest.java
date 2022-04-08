@@ -45,6 +45,26 @@ public class PhoneTest {
     }
 
     @Test
+    public void exactEquals() {
+
+        Phone validPhoneAmy = new Phone(VALID_PHONE_AMY);
+
+        // same object -> returns true
+        assertTrue(validPhoneAmy.exactEquals(validPhoneAmy));
+
+        // same values -> returns true
+        Phone validPhoneAmyCopy = new Phone(VALID_PHONE_AMY);
+        assertTrue(validPhoneAmy.exactEquals(validPhoneAmyCopy));
+
+        // null -> returns false
+        assertFalse(validPhoneAmy.exactEquals(null));
+
+        // different phone -> returns false
+        Phone validPhoneBob = new Phone(VALID_PHONE_BOB);
+        assertFalse(validPhoneAmy.exactEquals(validPhoneBob));
+    }
+
+    @Test
     public void equals() {
 
         Phone validPhoneAmy = new Phone(VALID_PHONE_AMY);
