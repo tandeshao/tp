@@ -463,7 +463,7 @@ For all person attributes except `Phone`, after extra white spaces have been tri
 
 For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example:
 - "+65 98765432" is equal to "+6598765432" (difference in white space)
-- "+65 98765432" is different from "65 98765432 (difference in '+')"
+- "+65 98765432" is different from "65 98765432" (difference in '+')
 
 #### 4.4.1. Design considerations:
 
@@ -489,7 +489,13 @@ For phone, even if there is a difference in white space, it is still considered 
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
     * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. The exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number.
-    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.  
+    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.
+
+**Aspect: Phone number with '+':**
+* **Current implementation:** For `Phone`, a difference in '+' is considered as different.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing `+65 98765432` is different from dialing `65 98765432`, both are treated as different numbers in real life.
+    * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Documentation, logging, testing, configuration, dev-ops
