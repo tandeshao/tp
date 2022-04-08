@@ -37,6 +37,30 @@ public class AddressTest {
     }
 
     @Test
+    public void exactEquals() {
+
+        Address validAddressAmy = new Address(VALID_ADDRESS_AMY);
+
+        // same object -> returns true
+        assertTrue(validAddressAmy.exactEquals(validAddressAmy));
+
+        // same values -> returns true
+        Address validAddressAmyCopy = new Address(VALID_ADDRESS_AMY);
+        assertTrue(validAddressAmy.exactEquals(validAddressAmyCopy));
+
+        // different capitalization -> returns false
+        Address validAddressAmyAllCaps = new Address(VALID_ADDRESS_AMY.toUpperCase());
+        assertFalse(validAddressAmy.exactEquals(validAddressAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validAddressAmy.exactEquals(null));
+
+        // different address -> returns false
+        Address validAddressBob = new Address(VALID_ADDRESS_BOB);
+        assertFalse(validAddressAmy.exactEquals(validAddressBob));
+    }
+
+    @Test
     public void equals() {
 
         Address validAddressAmy = new Address(VALID_ADDRESS_AMY);

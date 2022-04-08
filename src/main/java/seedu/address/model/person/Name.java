@@ -54,9 +54,19 @@ public class Name {
                 && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
     }
 
+    /**
+     * Returns true if both names are identical (case-sensitive).
+     *
+     * @param otherName The other name.
+     * @return true if both names are identical.
+     */
+    public boolean exactEquals(Name otherName) {
+        return otherName != null
+                && fullName.equals(otherName.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.toLowerCase().hashCode();
     }
-
 }

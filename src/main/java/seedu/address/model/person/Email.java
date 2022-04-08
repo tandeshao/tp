@@ -65,9 +65,19 @@ public class Email {
                 && email.equalsIgnoreCase(((Email) other).email)); // state check
     }
 
+    /**
+     * Returns true if both email addresses are identical (case-sensitive).
+     *
+     * @param otherEmail The other email address.
+     * @return true if both email addresses are identical.
+     */
+    public boolean exactEquals(Email otherEmail) {
+        return otherEmail != null
+                && email.equals(otherEmail.email);
+    }
+
     @Override
     public int hashCode() {
         return email.toLowerCase().hashCode();
     }
-
 }
