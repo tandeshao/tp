@@ -11,10 +11,10 @@ public class Phone {
 
     public static final int PHONE_NUMBER_MAXIMUM = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers or white spaces."
-                    + " It may also contain '+' at the start, but must be followed by a number."
-                    + "  It should contain at least 3 numbers and cannot exceed "
-                    + PHONE_NUMBER_MAXIMUM + " characters";
+            "Phone numbers should only contain numbers or white spaces. "
+                    + "It may also contain '+' at the start, but must be followed by a number. "
+                    + "It should contain at least 3 numbers and cannot exceed " + PHONE_NUMBER_MAXIMUM
+                    + " characters";
     public static final String VALIDATION_REGEX = "(?=^.{3,"
             + PHONE_NUMBER_MAXIMUM + "}$)\\+?(\\d\\s*){3,}";
     public final String phone;
