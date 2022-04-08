@@ -66,6 +66,13 @@ public class PhoneTest {
         // different phone -> returns false
         Phone validPhoneBob = new Phone(VALID_PHONE_BOB);
         assertFalse(validPhoneAmy.exactEquals(validPhoneBob));
+
+        // white space -> returns false
+        int halfLengthPhoneAmy = VALID_PHONE_AMY.length() / 2;
+        String phoneWithSpace = VALID_PHONE_AMY.substring(0, halfLengthPhoneAmy) + " "
+                + VALID_PHONE_AMY.substring(halfLengthPhoneAmy); // add white space to the center of the phone number
+        Phone validPhoneWithSpace = new Phone(phoneWithSpace);
+        assertFalse(validPhoneAmy.exactEquals(validPhoneWithSpace));
     }
 
     @Test
