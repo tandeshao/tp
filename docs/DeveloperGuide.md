@@ -404,7 +404,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 ### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. 
+The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty.
 - If `Memo` is empty, it will not be displayed. 
 - If `ContactedDate` is empty, it will be displayed as `Not contacted`. 
 
@@ -420,9 +420,9 @@ The following sequence diagram shows how the `edit 1 m/Avid hiker` operation wor
 
 ![EditMemoSequenceDiagram](images/EditMemoSequenceDiagram.png)
 
-Editing of ContactedDate via the `edit` command works similarly, the only difference is the `c/` prefix.
+Editing of `ContactedDate` via the `edit` command works similarly, the only difference is the `c/` prefix.
 
-`Memo` and `ContactedDate` can also be added during the `add` command, with a sequence diagram similar to the above. The following are the differences of the sequence diagram:
+`Memo` and `ContactedDate` can also be added during the `add` command. The sequence diagram is similar to the above, with the following differences:
 - `AddCommandParser` instead of `EditCommandParser`.
 - `AddCommand` instead of `EditCommand`.
 - `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`.
@@ -440,10 +440,19 @@ Editing of ContactedDate via the `edit` command works similarly, the only differ
     * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
     * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
+**Aspect: `Memo` restrictions:**
+* **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
+    * Pros: Memo can take any character, including any special characters. The limit is imposed to protect from and prevent excessively long strings.  
+    * Cons: There could be special characters which might not display properly, or malicious characters that mess up the display. However, it is the conscious choice of the user to input such characters. We decided to not be overzealous with the input validation. Allowing any character as memo provides great flexibility for users.
 
+**Aspect: `ContactedDate` restrictions:**
+* **Current implementation:** 
+    * Pros: 
+    * Cons: 
+    
 ### 4.4. Duplicate detection
 
-Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate. 
+Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate.
 
 For all person attributes, i.e. `Name`, `Phone`, `Email`, `Address`, `ContactedDate`, `Memo` and `Tag`, they are case-insensitive and extra white spaces between words (2 or more) will be trimmed to a single white space. For example:
 - "John Doe" is equal to "john doe" (different capitalization)
@@ -458,7 +467,7 @@ However, after extra white spaces have been trimmed, a difference in white space
 
 **Aspect: Duplicate person:**
 
-* **Current implementation:** Three attributes of a person, i.e. `Name`, `Phone` and `Email` have to be equal to be considered a duplicate.
+* **Current implementation:** Three attributes of a person (`Name`, `Phone` and `Email`) have to be equal to be considered a duplicate.
     * Pros: Greater flexibility for users as different individuals may share the same name, or phone, or even email. 
     * Cons: Some might argue that both phone number and email should be unique for all contacts. However, there are many situations where individuals might share the same phone or email, or even both. Restricting such cases would be overzealous input validation. Hence, to be inclusive and flexible, we decided that a person is uniquely identified by the three attributes, `Name`, `Phone` and `Email`.
     
