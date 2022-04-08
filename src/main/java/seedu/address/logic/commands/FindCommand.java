@@ -24,6 +24,8 @@ public class FindCommand extends Command {
     public static final int CHARACTER_LIMIT = 1000;
     public static final String MESSAGE_INVALID_PREFIX_ARGUMENT = "Argument for name, email, phone, address, and tag "
             + "must between 1 and " + CHARACTER_LIMIT + " characters.";
+    public static final String MESSAGE_CONTACTED_DATE_INVALID_ARG = "Only non-negative integer argument is allowed "
+            + "for ContactedDate. (Non-negative value is within the range of 0 to 2147483647)";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose contact details matches any of "
             + "the specified keywords (case-insensitive).\n"

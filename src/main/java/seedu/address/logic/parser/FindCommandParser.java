@@ -19,8 +19,6 @@ import seedu.address.model.person.predicate.FindPersonPredicate;
  * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    public static final String MESSAGE_INCORRECT_FORMAT = "Only non-negative integer argument is allowed "
-            + "for ContactedDate. (Non-negative value is within the range of 0 to 2147483647)";
     private static final Logger LOGGER = Logger.getLogger(FindCommandParser.class.getName());
 
     /**
@@ -69,7 +67,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, ARRAY_OF_PREFIX);
         if (argMultimap.hasNoValidPrefix()) {
             LOGGER.log(Level.INFO, "Input has no valid prefix");
-                throw new ParseException(NO_PREFIX_MESSAGE);
+            throw new ParseException(NO_PREFIX_MESSAGE);
         }
         checkPrefixArgsInProperFormat(argMultimap);
         return argMultimap;
@@ -90,10 +88,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             try {
                 int parsedIntArg = Integer.parseInt(contactedDateArg);
                 if (parsedIntArg < 0) {
-                    throw new ParseException(MESSAGE_INCORRECT_FORMAT);
+                    throw new ParseException(FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
                 }
             } catch (NumberFormatException formatException) {
-                throw new ParseException(MESSAGE_INCORRECT_FORMAT);
+                throw new ParseException(FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
             }
         }
     }
