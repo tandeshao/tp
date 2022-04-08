@@ -32,7 +32,9 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("+12345")); // only country code
+        assertFalse(Phone.isValidPhone("+ 12345")); // + followed by space
+        assertFalse(Phone.isValidPhone("+9  91")); // less than 3 numbers in phone number part
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone(edgePhone + "1")); // too long

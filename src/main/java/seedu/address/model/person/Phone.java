@@ -11,10 +11,15 @@ public class Phone {
 
     public static final int PHONE_NUMBER_MAXIMUM = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers can start with a + and should only contain numbers and space afterwards. It should be 3 to"
-                    + PHONE_NUMBER_MAXIMUM + " characters long";
+            "Phone numbers contains country code part and number part, country code should follow by a space. "
+                    + "country code part starts with a \"+\" and is optional. "
+                    + "Number part can only have numbers and spaces, it should contain at least 3 numbers. "
+                    + "Country code should not exceed 3 numbers. "
+                    + "The total length should not exceed "
+                    + PHONE_NUMBER_MAXIMUM + " characters"
+                    + "e.g. +65 12345678\n+123 888 777 666";
     public static final String VALIDATION_REGEX = "(?=^.{3,"
-            + PHONE_NUMBER_MAXIMUM + "}$)\\+?(\\s*\\d*)*(\\s*\\d+)+";
+            + PHONE_NUMBER_MAXIMUM + "}$)(\\+\\d{1,3}\\s)?(\\s*\\d){3,}";
     public final String phone;
 
     /**
