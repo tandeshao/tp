@@ -394,7 +394,7 @@ Below is a table that shows the different matching criteria that is present in t
 Examples:
 * `find n/Alex` would match with "alexa".
 * `find p/9040` would match with "90400204".
-* `find p/+65 9040` would match with "+65 90400204".
+* `find p/+65 9040` would match with "+6590400204".
 * `find e/@gmail` would match with anybody that has the "@gmail" domain.
 * `find a/street` would match with anybody that has the string "street" in their address.
 * `find m/Lover` would match with anybody that has the string "lover" in their memo.
