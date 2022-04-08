@@ -406,7 +406,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty.
 - If `Memo` is empty, it will not be displayed. 
-- If `ContactedDate` is empty, it will be displayed as `Not contacted`. 
+- If `ContactedDate` is empty, it will be displayed as "Not contacted".
 
 All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
 
