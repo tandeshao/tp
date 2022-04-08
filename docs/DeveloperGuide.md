@@ -17,9 +17,10 @@ title: Developer Guide
 &nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Design considerations](#421-design-considerations) <br/>
-&nbsp;&nbsp;[4.3. Memo and ContactedDate data fields](#43-memo-and-contacteddate-data-fields) <br/>
+&nbsp;&nbsp;[4.3. Memo and ContactedDate person attributes](#43-memo-and-contacteddate-person-attributes) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
-&nbsp;&nbsp;[4.4. Previous and next feature](#44-previous-and-next-feature) <br/>
+&nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -401,11 +402,15 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 </div>
 
 
-### 4.3. Memo and ContactedDate data fields
+### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. If `Memo` is empty, it will not be displayed. Whereas for `ContactedDate`, if it is empty, it will be displayed as `Not contacted`. All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
+The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. 
+- If `Memo` is empty, it will not be displayed. 
+- If `ContactedDate` is empty, it will be displayed as `Not contacted`. 
 
-A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited by the `edit` command.
+All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
+
+A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited via the `edit` command, with the "m/" and "c/" prefix respectively.
 
 Given below is an example usage scenario and how `Memo` can be edited by the `edit` command.
 
@@ -417,27 +422,57 @@ The following sequence diagram shows how the `edit 1 m/Avid hiker` operation wor
 
 Editing of ContactedDate via the `edit` command works similarly, the only difference is the `c/` prefix.
 
-The `Memo` and `ContactedDate` can also be added during the `add` command. The sequence is similar to the `edit 1 m/Avid hiker` diagram and for brevity, it will be omitted. The following are the differences of the sequence diagram:
-- `AddCommandParser` instead of `EditCommandParser`
-- `AddCommand` instead of `EditCommand`
-- `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`
+`Memo` and `ContactedDate` can also be added during the `add` command, with a sequence diagram similar to the above. The following are the differences of the sequence diagram:
+- `AddCommandParser` instead of `EditCommandParser`.
+- `AddCommand` instead of `EditCommand`.
+- `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`.
 - `Model#updateFilteredPersonList(Predicate)` will not be called.
 
 #### 4.3.1. Design considerations:
 
 **Aspect: Command to modify `Memo` and `ContactedDate`:**
 
-* **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into `add` and `edit` command.
-    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. Adheres to the DRY principle and the Single Responsibility Principle.
+* **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into the existing `add` and `edit` command.
+    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. This design adheres to the DRY principle and the Single Responsibility Principle.
     * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
-    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be edited by its respective command.
+    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
     * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
 
-### 4.4. Previous and next feature
+### 4.4. Duplicate detection
 
+Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate. 
+
+For all person attributes, i.e. `Name`, `Phone`, `Email`, `Address`, `ContactedDate`, `Memo` and `Tag`, they are case-insensitive and extra white spaces between words (2 or more) will be trimmed to a single white space. For example:
+- "John Doe" is equal to "john doe" (different capitalization)
+- "John &#160;&#160;&#160;&#160;&#160; Doe" is equal to "John Doe" (extra white spaces between words)
+
+However, after extra white spaces have been trimmed, a difference in white space is considered as different. For phone, a difference in "+" is also considered as different. For example:
+- "John Doe" is considered different from "JohnDoe" (difference in single white space between words)
+- "65 98765432" is considered different from "6598765432" (difference in single white space between numbers)
+- "+65 98765432" is considered different from "65 98765432" (difference in "+")
+
+#### 4.4.1. Design considerations:
+
+**Aspect: Duplicate person:**
+
+* **Current implementation:** Three attributes of a person, i.e. `Name`, `Phone` and `Email` have to be equal to be considered a duplicate.
+    * Pros: Greater flexibility for users as different individuals may share the same name, or phone, or even email. 
+    * Cons: Some might argue that both phone number and email should be unique for all contacts. However, there are many situations where individuals might share the same phone or email, or even both. Restricting such cases would be overzealous input validation. Hence, to be inclusive and flexible, we decided that a person is uniquely identified by the three attributes, `Name`, `Phone` and `Email`.
+    
+**Aspect: Case sensitivity:**
+
+* **Current implementation:** Case insensitive for all person attributes.
+    * Pros: It reflects reality, words that only differ in case are often treated as identical. Intuitively, "John Doe" and "john doe" are highly likely to be the same person.
+    * Cons: In some rare cases, people might consider "John Doe" and "john doe" to be different individuals. However, this is unlikely and the majority (case-insensitive) approach is favoured.
+    
+**Aspect: Extra white spaces between words:**
+
+* **Current implementation:** Extra white spaces (2 or more) between words are trimmed to a single white space for all attributes.
+    * Pros: Similar to "Aspect: Case sensitivity", it reflects reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
+    * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature that helps users to remove accidental extra white spaces to provide a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
 
 --------------------------------------------------------------------------------------------------------------------
 
