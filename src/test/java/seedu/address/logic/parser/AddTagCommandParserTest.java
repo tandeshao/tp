@@ -15,18 +15,14 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.model.tag.Tag;
 
-/**
- * Contains tests for {@code DeleteTagCommandParse}.
- */
-public class DeleteTagCommandParserTest {
-
+class AddTagCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(ParserUtil.MESSAGE_INVALID_INDEX, DeleteTagCommand.MESSAGE_USAGE);
+            String.format(ParserUtil.MESSAGE_INVALID_INDEX, AddTagCommand.MESSAGE_USAGE);
 
-    private DeleteTagCommandParser parser = new DeleteTagCommandParser();
+    private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -34,7 +30,7 @@ public class DeleteTagCommandParserTest {
         assertParseFailure(parser, VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", DeleteTagCommand.MESSAGE_MISSING_PREFIX);
+        assertParseFailure(parser, "1", AddTagCommand.MESSAGE_MISSING_PREFIX);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -78,10 +74,10 @@ public class DeleteTagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
 
-        Set<Tag> tagsToDelete = new HashSet<>();
-        tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
+        Set<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(new Tag(VALID_TAG_FRIEND));
 
-        DeleteTagCommand expectedCommand = new DeleteTagCommand(targetIndex, tagsToDelete);
+        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, tagsToAdd);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -91,11 +87,11 @@ public class DeleteTagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
 
-        Set<Tag> tagsToDelete = new HashSet<>();
-        tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
-        tagsToDelete.add(new Tag(VALID_TAG_HUSBAND));
+        Set<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(new Tag(VALID_TAG_FRIEND));
+        tagsToAdd.add(new Tag(VALID_TAG_HUSBAND));
 
-        DeleteTagCommand expectedCommand = new DeleteTagCommand(targetIndex, tagsToDelete);
+        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, tagsToAdd);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -105,12 +101,11 @@ public class DeleteTagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_FRIEND;
 
-        Set<Tag> tagsToDelete = new HashSet<>();
-        tagsToDelete.add(new Tag(VALID_TAG_FRIEND));
+        Set<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(new Tag(VALID_TAG_FRIEND));
 
-        DeleteTagCommand expectedCommand = new DeleteTagCommand(targetIndex, tagsToDelete);
+        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, tagsToAdd);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }

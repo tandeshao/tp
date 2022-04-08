@@ -30,7 +30,7 @@ public class Email {
     private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$";
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)+" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = "(?=^.{1," + MAXIMUM_LENGTH + "}$)"
             + LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
     public final String email;
@@ -65,9 +65,19 @@ public class Email {
                 && email.equalsIgnoreCase(((Email) other).email)); // state check
     }
 
+    /**
+     * Returns true if both email addresses are identical (case-sensitive).
+     *
+     * @param otherEmail The other email address.
+     * @return true if both email addresses are identical.
+     */
+    public boolean exactEquals(Email otherEmail) {
+        return otherEmail != null
+                && email.equals(otherEmail.email);
+    }
+
     @Override
     public int hashCode() {
         return email.toLowerCase().hashCode();
     }
-
 }

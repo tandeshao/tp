@@ -51,9 +51,19 @@ public class Address {
                 && address.equalsIgnoreCase(((Address) other).address)); // state check
     }
 
+    /**
+     * Returns true if both addresses are identical (case-sensitive).
+     *
+     * @param otherAddress The other address.
+     * @return true if both addresses are identical.
+     */
+    public boolean exactEquals(Address otherAddress) {
+        return otherAddress != null
+                && address.equals(otherAddress.address);
+    }
+
     @Override
     public int hashCode() {
         return address.toLowerCase().hashCode();
     }
-
 }

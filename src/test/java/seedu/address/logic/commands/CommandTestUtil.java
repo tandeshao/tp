@@ -50,6 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_COLLEAGUE = "colleague";
     public static final String VALID_TAG_WIFE = "wife";
     public static final String VALID_TAG_COMPANION = "companion";
+    public static final String VALID_TAG_FAMILY = "family";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

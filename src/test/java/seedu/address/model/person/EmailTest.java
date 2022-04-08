@@ -63,6 +63,8 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("peterjack@examplecom")); // no period
+        assertFalse(Email.isValidEmail("peter.jack@examplecom")); // no period in domain
         assertFalse(Email.isValidEmail(edgeEmail + "a")); // too long email
 
         // valid email
@@ -70,13 +72,38 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("PeterJack.1190@example.com")); // period in local part
         assertTrue(Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol in local part
         assertTrue(Email.isValidEmail("PeterJack-1190@example.com")); // hyphen in local part
-        assertTrue(Email.isValidEmail("a@bc")); // minimal
-        assertTrue(Email.isValidEmail("123@145")); // numeric local part and domain name
+        assertTrue(Email.isValidEmail("a@bc.co")); // minimal
+        assertTrue(Email.isValidEmail("123@145.cc")); // numeric local part and domain name
         assertTrue(Email.isValidEmail("a1+be.d@example1.com")); // mixture of alphanumeric and special characters
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail("peterjack@comp.nus.edu.sg")); // many periods
         assertTrue(Email.isValidEmail(edgeEmail)); // super long email
+    }
+
+    @Test
+    public void exactEquals() {
+
+        Email validEmailAmy = new Email(VALID_EMAIL_AMY);
+
+        // same object -> returns true
+        assertTrue(validEmailAmy.exactEquals(validEmailAmy));
+
+        // same values -> returns true
+        Email validEmailAmyCopy = new Email(VALID_EMAIL_AMY);
+        assertTrue(validEmailAmy.exactEquals(validEmailAmyCopy));
+
+        // different capitalization -> returns false
+        Email validEmailAmyAllCaps = new Email(VALID_EMAIL_AMY.toUpperCase());
+        assertFalse(validEmailAmy.exactEquals(validEmailAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validEmailAmy.exactEquals(null));
+
+        // different email -> returns false
+        Email validEmailBob = new Email(VALID_EMAIL_BOB);
+        assertFalse(validEmailAmy.exactEquals(validEmailBob));
     }
 
     @Test
