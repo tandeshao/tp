@@ -9,10 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
+    public static final int PHONE_NUMBER_MAXIMUM = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 3 to 31 digits long";
-    public static final int PHONE_NUMBER_MAXIMUM = 31;
-    public static final String VALIDATION_REGEX = "\\d{3," + PHONE_NUMBER_MAXIMUM + "}";
+            "Phone numbers should only contain numbers or white spaces. "
+                    + "It may also contain '+' at the start, but must be followed by a number. "
+                    + "It should contain at least 3 numbers and cannot exceed " + PHONE_NUMBER_MAXIMUM
+                    + " characters";
+    public static final String VALIDATION_REGEX = "(?=^.{3,"
+            + PHONE_NUMBER_MAXIMUM + "}$)\\+?(\\d *){3,}";
     public final String phone;
 
     /**
@@ -42,7 +46,8 @@ public class Phone {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && phone.equals(((Phone) other).phone)); // state check
+                && removeAllWhiteSpace(phone)
+                .equals(removeAllWhiteSpace(((Phone) other).phone))); // case-insensitive and ignores white space
     }
 
     /**
@@ -58,6 +63,17 @@ public class Phone {
 
     @Override
     public int hashCode() {
-        return phone.hashCode();
+        return removeAllWhiteSpace(phone).hashCode();
     }
+
+    /**
+     * Removes all white space from the given string.
+     *
+     * @param str String to remove all white space from.
+     * @return String with all white space removed.
+     */
+    private String removeAllWhiteSpace(String str) {
+        return str.replaceAll(" ", "");
+    }
+
 }

@@ -11,7 +11,7 @@ public class Address {
 
     private static final int MAXIMUM_LENGTH = 800;
     public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank or start with a space, "
-            + "and it cannot exceed" + MAXIMUM_LENGTH + "characters";
+            + "and it cannot exceed " + MAXIMUM_LENGTH + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -48,7 +48,7 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && address.equalsIgnoreCase(((Address) other).address)); // state check
+                && address.equalsIgnoreCase(((Address) other).address)); // case-insensitive
     }
 
     /**
