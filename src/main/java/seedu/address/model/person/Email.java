@@ -62,7 +62,7 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && email.equalsIgnoreCase(((Email) other).email)); // state check
+                && email.equalsIgnoreCase(((Email) other).email)); // case-insensitive
     }
 
     /**

@@ -81,6 +81,13 @@ public class PhoneTest {
         Phone validPhoneAmyCopy = new Phone(VALID_PHONE_AMY);
         assertTrue(validPhoneAmy.equals(validPhoneAmyCopy));
 
+        // white space -> returns true
+        int halfLengthPhoneAmy = VALID_PHONE_AMY.length() / 2;
+        String phoneWithSpace = VALID_PHONE_AMY.substring(0, halfLengthPhoneAmy) + " "
+                + VALID_PHONE_AMY.substring(halfLengthPhoneAmy); // add white space to the center of the phone number
+        Phone validPhoneWithSpace = new Phone(phoneWithSpace);
+        assertTrue(validPhoneAmy.equals(validPhoneWithSpace));
+
         // different types -> returns false
         assertFalse(validPhoneAmy.equals(1));
 
