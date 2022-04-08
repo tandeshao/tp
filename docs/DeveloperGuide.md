@@ -493,7 +493,7 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Aspect: Phone number with '+':**
 * **Current implementation:** For `Phone`, a difference in '+' is considered as different.
-    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing `+65 98765432` is different from dialing `65 98765432`, both are treated as different numbers in real life.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 --------------------------------------------------------------------------------------------------------------------
