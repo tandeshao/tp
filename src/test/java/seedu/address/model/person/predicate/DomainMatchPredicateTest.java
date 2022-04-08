@@ -1,6 +1,7 @@
 package seedu.address.model.person.predicate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -24,5 +25,13 @@ class DomainMatchPredicateTest {
 
         DomainMatchPredicate multipleEmailPredicate = new DomainMatchPredicate(List.of("@mail", "@gmail"));
         assertTrue(multipleEmailPredicate.test(new PersonBuilder().withEmail("tester@gmail.com").build()));
+    }
+
+
+    @Test
+    void test_invalidArgs() {
+        DomainMatchPredicate nullPredicate = new DomainMatchPredicate(null);
+        assertThrows(NullPointerException.class, () ->
+                nullPredicate.test(new PersonBuilder().withEmail("tester@gmail.com").build()));
     }
 }

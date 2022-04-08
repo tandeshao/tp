@@ -59,8 +59,6 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
             return caseInsensitivePartialMatch(person.getName().toString(), descriptions);
         } else if (PREFIX_PHONE.equals(prefix)) {
             return caseInsensitivePartialMatch(person.getPhone().toString(), descriptions);
-        } else if (PREFIX_MEMO.equals(prefix)) {
-            return caseInsensitivePartialMatch(person.getMemo().toString(), descriptions);
         } else if (PREFIX_TAG.equals(prefix)) {
             return person.getTags().stream().anyMatch(tag -> caseInsensitivePartialMatch(tag.toString(), descriptions));
         } else {

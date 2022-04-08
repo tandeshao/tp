@@ -21,11 +21,9 @@ class ExactWordMatchPredicateTest {
 
         // case-insensitive search -> returns true
         assertTrue(tagPredicate.test(new PersonBuilder().withTags("Colleagues").build()));
-        assertTrue(memoPredicate.test(new PersonBuilder().withMemo("Hello").build()));
 
         // same word -> returns true
         assertTrue(tagPredicate.test(new PersonBuilder().withTags("colleagues").build()));
-        assertTrue(memoPredicate.test(new PersonBuilder().withMemo("hello").build()));
     }
 
     @Test
@@ -36,11 +34,9 @@ class ExactWordMatchPredicateTest {
                 "memo"));
         // case-insensitive search -> returns true
         assertTrue(addressPredicate.test(new PersonBuilder().withAddress("Brisbane Street").build()));
-        assertTrue(memoPredicate.test(new PersonBuilder().withMemo("Hello world").build()));
 
         // same word -> returns true
         assertTrue(addressPredicate.test(new PersonBuilder().withAddress("QueensTown street 10").build()));
-        assertTrue(memoPredicate.test(new PersonBuilder().withMemo("hello my memo").build()));
     }
 
     @Test
