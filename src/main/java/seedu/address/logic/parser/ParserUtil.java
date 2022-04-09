@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.trimExtraWhiteSpaces;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -163,16 +164,6 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Replaces 2 or more consecutive whitespaces between words with a single whitespace.
-     *
-     * @param str String to be trimmed.
-     * @return Trimmed string with extra whitespaces removed.
-     */
-    public static String trimExtraWhiteSpaces(String str) {
-        return str.replaceAll("\\s{2,}", " ");
     }
 
 }

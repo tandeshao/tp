@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.util.StringUtil.trimExtraWhiteSpaces;
 import static seedu.address.logic.commands.FindCommand.NO_PREFIX_MESSAGE;
 import static seedu.address.logic.parser.CliSyntax.ARRAY_OF_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
@@ -46,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Removes trailing whitespace from the user input
         String trimmedArgs = args.stripTrailing();
         // Regex to replace 2 or more consecutive whitespaces with a single whitespace between words
-        String modifiedString = ParserUtil.trimExtraWhiteSpaces(trimmedArgs);
+        String modifiedString = trimExtraWhiteSpaces(trimmedArgs);
         if (modifiedString.isEmpty()) {
             LOGGER.log(Level.INFO, "Input is empty");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

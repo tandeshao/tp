@@ -94,13 +94,13 @@ public class StringUtil {
     }
 
     /**
-     * Removes all the white space in the input string.
+     * Removes all the white space from the given string.
      *
-     * @param userInput User input that is targeted for white space removal.
+     * @param str String for white space removal.
      * @return A string that has its whitespaces completely removed.
      */
-    public static String removeSpaces(String userInput) {
-        return userInput.replace(" ", "");
+    public static String removeSpaces(String str) {
+        return str.replace(" ", "");
     }
 
     /**
@@ -113,5 +113,15 @@ public class StringUtil {
         List<String> resultList = new ArrayList<>();
         userList.forEach(inputStr -> resultList.add(inputStr.replace(" ", "")));
         return resultList;
+    }
+
+    /**
+     * Replaces 2 or more consecutive whitespaces between words with a single whitespace.
+     *
+     * @param str String to be trimmed.
+     * @return Trimmed string with extra whitespaces removed.
+     */
+    public static String trimExtraWhiteSpaces(String str) {
+        return str.replaceAll("\\s{2,}", " ");
     }
 }

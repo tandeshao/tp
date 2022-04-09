@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.removeSpaces;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -46,8 +47,8 @@ public class Phone {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && removeAllWhiteSpace(phone)
-                .equals(removeAllWhiteSpace(((Phone) other).phone))); // case-insensitive and ignores white space
+                && removeSpaces(phone)
+                .equals(removeSpaces(((Phone) other).phone))); // case-insensitive and ignores white space
     }
 
     /**
@@ -63,17 +64,7 @@ public class Phone {
 
     @Override
     public int hashCode() {
-        return removeAllWhiteSpace(phone).hashCode();
-    }
-
-    /**
-     * Removes all white space from the given string.
-     *
-     * @param str String to remove all white space from.
-     * @return String with all white space removed.
-     */
-    private String removeAllWhiteSpace(String str) {
-        return str.replaceAll(" ", "");
+        return removeSpaces(phone).hashCode();
     }
 
 }
