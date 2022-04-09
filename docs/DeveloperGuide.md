@@ -17,9 +17,10 @@ title: Developer Guide
 &nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Design considerations](#421-design-considerations) <br/>
-&nbsp;&nbsp;[4.3. Memo and ContactedDate data fields](#43-memo-and-contacteddate-data-fields) <br/>
+&nbsp;&nbsp;[4.3. Memo and ContactedDate person attributes](#43-memo-and-contacteddate-person-attributes) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
-&nbsp;&nbsp;[4.4. Previous and next feature](#44-previous-and-next-feature) <br/>
+&nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -401,11 +402,15 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 </div>
 
 
-### 4.3. Memo and ContactedDate data fields
+### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty. If `Memo` is empty, it will not be displayed. Whereas for `ContactedDate`, if it is empty, it will be displayed as `Not contacted`. All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
+The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty.
+- If `Memo` is empty, it will not be displayed. 
+- If `ContactedDate` is empty, it will be displayed as "Not contacted".
 
-A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited by the `edit` command.
+All `Person` with empty `Memo` or `ContactedDate` will share the same static final empty instance, `EMPTY_MEMO` or `EMPTY_CONTACTED_DATE` respectively.
+
+A `Person` `Memo` and `ContactDate` can be added during the `add` command or edited via the `edit` command, with the "m/" and "c/" prefix respectively.
 
 Given below is an example usage scenario and how `Memo` can be edited by the `edit` command.
 
@@ -415,29 +420,81 @@ The following sequence diagram shows how the `edit 1 m/Avid hiker` operation wor
 
 ![EditMemoSequenceDiagram](images/EditMemoSequenceDiagram.png)
 
-Editing of ContactedDate via the `edit` command works similarly, the only difference is the `c/` prefix.
+Editing of `ContactedDate` via the `edit` command works similarly, the only difference is the `c/` prefix.
 
-The `Memo` and `ContactedDate` can also be added during the `add` command. The sequence is similar to the `edit 1 m/Avid hiker` diagram and for brevity, it will be omitted. The following are the differences of the sequence diagram:
-- `AddCommandParser` instead of `EditCommandParser`
-- `AddCommand` instead of `EditCommand`
-- `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`
+`Memo` and `ContactedDate` can also be added during the `add` command. The sequence diagram is similar to the above, with the following differences:
+- `AddCommandParser` instead of `EditCommandParser`.
+- `AddCommand` instead of `EditCommand`.
+- `Model#addPerson(Person)` instead of `Model#setPerson(Person, Person)`.
 - `Model#updateFilteredPersonList(Predicate)` will not be called.
 
 #### 4.3.1. Design considerations:
 
 **Aspect: Command to modify `Memo` and `ContactedDate`:**
 
-* **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into `add` and `edit` command.
-    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. Adheres to the DRY principle and the Single Responsibility Principle.
+* **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into the existing `add` and `edit` command.
+    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. This design adheres to the DRY principle and the Single Responsibility Principle.
     * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
-    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be edited by its respective command.
+    * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
     * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
+**Aspect: `Memo` restrictions:**
+* **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
+    * Pros: Memo can take any character, including any special characters, providing flexibility for users. The limit is imposed to protect from and prevent excessively long strings.
+    * Cons: There could be special characters which might not display properly, or malicious characters that mess up the display. However, it is the conscious choice of the user to input such characters. We decided to not be overzealous with the input validation. Allowing any character as memo provides great flexibility for users.
 
-### 4.4. Previous and next feature
+**Aspect: `ContactedDate` restrictions:**
+* **Current implementation:** Date can be only be empty or a valid dd-mm-yyyy date that is not in the future.
+    * Pros: Empty dates can be used by users to represent not contacted. The dd-mm-yyyy format is a common date format in Singapore. Preventing future dates is an intuitive design choice, as it doesn't make sense for last contacted to be in the future.
+    * Cons: Dates can only be represented in the dd-mm-yyyy format. This might be a minor inconvenience for a minority of users who could prefer a different date format. Since the dd-mm-yyyy format is most commonly used in Singapore, we will stick with this format.
+    
+### 4.4. Duplicate detection
 
+Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate.
+
+For all person attributes, i.e. `Name`, `Phone`, `Email`, `Address`, `ContactedDate`, `Memo` and `Tag`, they are case-insensitive and extra white spaces between words (2 or more) will be trimmed to a single white space. For example:
+- "John Doe" is equal to "john doe" (different capitalization)
+- "John &#160;&#160;&#160;&#160;&#160; Doe" is equal to "John Doe" (extra white spaces between words)
+
+For all person attributes except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. For example:
+- "John Doe" is different from "JohnDoe" (difference in white space)
+
+For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example:
+- "+65 98765432" is equal to "+6598765432" (difference in white space)
+- "+65 98765432" is different from "65 98765432" (difference in '+')
+
+#### 4.4.1. Design considerations:
+
+**Aspect: Duplicate person:**
+
+* **Current implementation:** Three attributes of a person (`Name`, `Phone` and `Email`) have to be equal to be considered as a duplicate.
+    * Pros: Greater flexibility for users as different individuals may share the same name, or phone, or even email. 
+    * Cons: Some might argue that both phone number and email should be unique for all contacts. However, there are many situations where individuals might share the same phone or email, or even both. Restricting such cases would be overzealous input validation. Hence, to be inclusive and flexible, we decided that a person is uniquely identified by the three attributes, `Name`, `Phone` and `Email`.
+    
+**Aspect: Case sensitivity:**
+
+* **Current implementation:** Case insensitive for all person attributes.
+    * Pros: It follows closely to reality, words that only differ in case are often treated as identical. Intuitively, "John Doe" and "john doe" are highly likely to be the same person.
+    * Cons: In some rare cases, people might consider "John Doe" and "john doe" to be different individuals. However, this is unlikely and the majority (case-insensitive) approach is favoured.
+    
+**Aspect: Extra white spaces between words:**
+
+* **Current implementation:** Extra white spaces (2 or more) between words are trimmed to a single white space for all attributes.
+    * Pros: Similar to "Aspect: Case sensitivity", it follows closely to reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
+    * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature, helping users to remove accidental extra white spaces provides a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
+
+**Aspect: Difference in white space:**
+
+* **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
+    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. The exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number.
+    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.
+
+**Aspect: Phone number with '+':**
+* **Current implementation:** For `Phone`, a difference in '+' is considered as different.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
+    * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -630,7 +687,6 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### 7.1. Launch and shutdown
@@ -648,8 +704,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### 7.2. Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -664,8 +718,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### 7.3. Editing a person's memo
 

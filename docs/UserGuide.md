@@ -46,7 +46,7 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Ignoring case difference](#491-ignoring-case-difference) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Trimming of extra white spaces](#492-trimming-of-extra-white-spaces) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate entries](#493-preventing-duplicate-entries) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate contacts](#493-preventing-duplicate-contacts) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Saving the data](#494-saving-the-data) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Editing the data file](#495-editing-the-data-file) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Backing up the data file](#496-backing-up-the-data-file) <br/>
@@ -265,7 +265,7 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
 
 
@@ -363,7 +363,7 @@ Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
 * `find n/John` followed by `view 1` displays the 1st person in the results of the `find` command.
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 
 :information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.9.7. Predictive viewing](#497-predictive-viewing).
 
@@ -551,10 +551,10 @@ Examples:
 * "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
 * "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
 
-#### 4.9.3. Preventing duplicate entries
-Abπ helps to manage duplicates by preventing duplicate entries of identical name, phone and email when using the `add` and `edit` commands.
+#### 4.9.3. Preventing duplicate contacts
+Abπ helps to manage duplicates by preventing duplicate contacts of identical name, phone and email when using the `add` and `edit` commands.
 
-* Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the exact same name, phone and email.
+* Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the same name, phone and email.
 * The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
 
 <div markdown="span" class="alert alert-info">
