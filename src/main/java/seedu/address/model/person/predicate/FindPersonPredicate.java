@@ -1,6 +1,7 @@
 package seedu.address.model.person.predicate;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTED_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -36,14 +37,19 @@ public class FindPersonPredicate implements Predicate<Person> {
      * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix}) matches any of
      * the following criteria.
      *
-     * Tag uses exact word check, where "find n/redherring" would only match with the name "redherring".
+     * Tag uses exact word check, where "find t/redherring" would only match with the name "redherring".
+     *
      * Contacted date uses a special check where "find c/1" would result in choosing person that had not been
      * contacted for more than 1 day ago.
-     * The other remaining attributes (phone, memo, address, email, name) uses a partial word match where "find
+     *
+     * Memo uses a partial word check where "find m/memo" would result in matching with person that has the memo
+     * "This is a Memo".
+     *
+     * The other remaining attributes (phone, address, email, name) uses a partial word match where "find
      * n/kay" would result in a match with "kay", "kaylee", "kayla", "okay" and "pokaya".
      * Note, using the same prefix more than once in a single query is the same as running the find command more than
-     * once on the filter list and combining the outcome of both filtered result into a single output list. For
-     * example, "find n/benedict" and "find n/alex" would match with both "alex" and "benedict".
+     * once and combining the outcome of both filtered result into a single output list. For example, "find
+     * n/benedict n/alex" would match with anybody that has the name "alex" or "benedict".
      *
      * @param person person to be tested.
      * @return true if person contains the word, false otherwise.
@@ -73,6 +79,8 @@ public class FindPersonPredicate implements Predicate<Person> {
         } else if (attribute.equals(PREFIX_TAG)) {
             predicateToTestAgainst = new ExactWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));
+        } else if (attribute.equals(PREFIX_MEMO)) {
+            predicateToTestAgainst = new MemoMatchPredicate(descriptor.getAllValues(attribute));
         } else {
             predicateToTestAgainst = new PartialWordMatchPredicate(attribute,
                     descriptor.getAllValues(attribute));

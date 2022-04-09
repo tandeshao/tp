@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final int TAG_CHARACTER_LIMIT = 50;
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should not exceed " + TAG_CHARACTER_LIMIT
+    public static final int CHARACTER_LIMIT = 50;
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should not exceed " + CHARACTER_LIMIT
             + " characters and should not be blank.";
-    public static final String VALIDATION_REGEX = "[^\\s].{0," + (TAG_CHARACTER_LIMIT - 1) + "}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0," + (CHARACTER_LIMIT - 1) + "}";
     public final String tagName;
 
     /**

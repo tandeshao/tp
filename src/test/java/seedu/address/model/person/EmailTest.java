@@ -27,8 +27,8 @@ public class EmailTest {
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
 
         String edgeEmail = "";
-        for (int i = 0; i < Email.MAXIMUM_LENGTH - 4; i++) {
-            if (i == (Email.MAXIMUM_LENGTH - 4) / 2) {
+        for (int i = 0; i < Email.CHARACTER_LIMIT - 4; i++) {
+            if (i == (Email.CHARACTER_LIMIT - 4) / 2) {
                 edgeEmail += "@";
                 continue;
             }

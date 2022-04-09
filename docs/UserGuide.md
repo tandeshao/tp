@@ -68,16 +68,17 @@ For users who are interested in using Abπ, this guide is for you as it will hel
 
 **Before we begin, let us understand the different technical terminologies that will be used in this user guide.**
 
- Word | What it means                                                                                                                                              |
-------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-Command box| Text box in the Abπ that allows user to type in texts.                                                                                                     |
-Command| A sentence that causes Abπ to do something when typed into the command box.                                                                                |
-Command word | The first word of every command.                                                                                                                           |
-Parameters | Information that is supplied by the user.                                                                                                                  |
-Execute | The process by which Abπ reads the instructions written by user and acts on it.                                                                            |
-String | A programming terminology that describes an ordered sequence of characters.                                                                                | 
-Prefix | Part of the user input that allows the user to specify certain attributes of a person. <br > Type of prefix:  `n/`, `p/`, `a/`, `e/`, `m/`, `c/` and `t/`. 
-Prefix argument | The input specified by the user after the prefix in the command box.                                                            
+ Word | What it means                                                                                                                                                                                            |
+------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+Command box| Text box in the Abπ that allows user to type in texts.                                                                                                                                                   |
+Command| A sentence that causes Abπ to do something when typed into the command box.                                                                                                                              |
+Command word | The first word of every command.                                                                                                                                                                         |
+Parameters | Information that is supplied by the user.                                                                                                                                                                |
+Execute | The process by which Abπ reads the instructions written by user and acts on it.                                                                                                                          |
+String | A programming terminology that describes an ordered sequence of characters.                                                                                                                              | 
+Prefix | Part of the user input that allows the user to specify certain attributes of a person. <br > Type of prefix:  `n/`, `p/`, `a/`, `e/`, `m/`, `c/` and `t/`.                                               
+Prefix argument  | The input specified by the user after the prefix in the command box.                                                                                                                                     
+Attribute constraints | Constraints that was set by Abπ that specifies how the format of the prefix argument should look like. For eg., Name should not be blank, and its length should be between 1 and 800 (including spaces). | 
 
 <div style="page-break-after: always;"></div>
 
@@ -301,13 +302,16 @@ Examples:
 * Similar to [delete](#431-deleting-a-person-delete) as it cleans up the address book of unwanted contacts. 
 * Allows multiple person to be deleted by specifying the criteria to delete a person by through the use of prefixes.
 * Abπ would use the specified criteria and scan through the person list and delete anybody that matches the criteria.
-* Duplicated prefix arguments are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
+* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
-* Delete contacts that match any of the phone number, email domain or tag specified from the command.
+* Delete contacts that matches any of the phone number, email domain or tag specified from the command.
 * At least one parameter must be present.
-* The scrub command only scrubs contacts that match with any of the specified prefix arguments.
-* This match is case-insensitive.
+* For phone number and tags, an exact match criteria is employed, where `scrub t/family` would only scrub contacts that have the tag "family".
+* For email, an exact match criteria is employed for the email domain. Look at the information box below to learn more about what is an email domain.
+* Note that for phone numbers, white spaces are ignored. That is, ABπ sees "+65 90400204" and "+6590400204" as equivalent numbers. 
+* The matching criteria is case-insensitive.
+* Prefix arguments must conform to the [attribute constraints](#1-introduction).  
 
 <div markdown="span" class="alert alert-info">  
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
@@ -374,25 +378,27 @@ Examples:
 #### 4.5.1. Finding person by their attributes: `find`
 
 * Finds persons whose names contain any of the given keywords.
-* Duplicated prefix arguments are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
+* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 
 Below is a table that shows the different matching criteria that is present in the app:
 
-| Matching criteria                | Attributes that uses the criteria        | Description                                                                                                                                                                                                                                                                                                        | 
-|----------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Partial string matching          | Name, Phone number, Email, Address, Memo | Does a case-insensitive partial match between two strings where it will check if the prefix argument partially matches with the compared string. Note that the order of character matters and this includes the whitespace character.                                                                              |  
-| Exact string matching            | Tags                                     | Does a case-insensitive exact match between two strings where it will check if the prefix argument is equivalent to the compared string.                                                                                                                                                                           |
-| Contacted Date matching criteria | Contacted Date                           | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all. |
+| Matching criteria                | Attributes that uses the criteria  | Prefix Argument Constraints                           | Description                                                                                                                                                                                                                                                                                                                               | 
+|----------------------------------|------------------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Partial string matching          | Name, Phone number, Email, Address | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive partial match between two strings where it will check if the prefix argument partially matches with the compared string. Note that the order of character matters and this includes the whitespace character. For phone numbers, white spaces are ignored. That is, `find p/+65 9040` would match with "+659040". |  
+| Exact string matching            | Tags                               | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive exact match between two strings where it will check if the prefix argument is equivalent to the compared string.                                                                                                                                                                                                  |
+| Contacted Date matching criteria | Contacted Date                     | Prefix argument must be between 0 to 1000 characters. | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all.                        |
+| Memo matching criteria           | Memo                               | Prefix argument must be between 0 to 1000 characters. | Tests if any of the word in the person's memo partially matches to the user's memo prefix argument. If an empty argument is specified, i.e "m/",the predicate matches with any person that has no memo.                                                                                                                                   |   
 
 Examples:
 * `find n/Alex` would match with "alexa".
 * `find p/9040` would match with "90400204".
+* `find p/+65 9040` would match with "+6590400204".
 * `find e/@gmail` would match with anybody that has the "@gmail" domain.
 * `find a/street` would match with anybody that has the string "street" in their address.
 * `find m/Lover` would match with anybody that has the string "lover" in their memo.
-* `find m/` would match with everybody from the person list.
+* `find m/` would match with anybody that has no memo.
 * `find c/5` would match with anybody that had not been contacted for more than 5 days relative to the current day.
 * `find c/` would match with anybody that had not been contacted.
 * `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".

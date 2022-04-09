@@ -26,7 +26,7 @@ public class NameTest {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
         String edgeName = "";
-        for (int i = 0; i < Name.NAME_CHARACTER_LIMIT; i++) {
+        for (int i = 0; i < Name.CHARACTER_LIMIT; i++) {
             edgeName += "a";
         }
         // invalid name
