@@ -706,23 +706,23 @@ testers are expected to do more *exploratory* testing.
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    2. Re-launch the app following the steps from 1.ii. onwards. <br>
+    2. Re-launch the app. <br>
        Expected: The most recent window size and location is retained.
 
 ### 7.2. Adding a person
 
-1. Adding a person <br><br>
+1. Adding a person
 
-    1. Prerequisites: A person with the same name, phone and email does not already exist in the app, otherwise it will be considered as a duplicate. <br><br>
+    1. Prerequisites: A person with the same name, phone and email does not already exist in the app, otherwise it will be considered as a duplicate.
 
     2. Test case: `add n/Mark Tay p/91238492 e/marktay@example.com a/markbuilding` <br>
-       Expected: A person with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added person shown in the status message and the detailed person display. <br><br>
+       Expected: A person with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added person shown in the status message and the detailed person display.
 
     3. Test case: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague` <br>
-       Expected: A person with the name "James Ho", phone "22224444", email "jamesho@example.com", address "123, Clementi Rd, 1234665", contacted date "01-01-2020", memo "Avid hiker", tags "friend" "colleague", is added. Details of the added person shown in the status message and the detailed person display. <br><br>
+       Expected: A person with the name "James Ho", phone "22224444", email "jamesho@example.com", address "123, Clementi Rd, 1234665", contacted date "01-01-2020", memo "Avid hiker", tags "friend" "colleague", is added. Details of the added person shown in the status message and the detailed person display. 
 
     4. Other incorrect add commands to try: `add`, `add hello`, `add p/123 e/123@example.com a/123` (missing name) <br>
-       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Note:
        - Name, phone, email and address are compulsory attributes that must be specified when using the add command.
@@ -731,45 +731,45 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.3. Editing a person
 
-1. Editing a person's attributes while all persons are being shown <br><br>
+1. Editing a person's attributes while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `edit 1 n/Bob` <br>
-       Expected: First contact's name is edited to "Bob". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's name is edited to "Bob". Details of the edited contact shown in the status message and the detailed person display.
 
     3. Test case: `edit 1 p/98765432` <br>
-       Expected: First contact's phone is edited to "98765432". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's phone is edited to "98765432". Details of the edited contact shown in the status message and the detailed person display.
 
     4. Test case: `edit 1 e/example@example.com` <br>
-       Expected: First contact's email is edited to "example@example.com". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's email is edited to "example@example.com". Details of the edited contact shown in the status message and the detailed person display.
 
     5. Test case: `edit 1 a/123 street` <br>
-       Expected: First contact's address is edited to "123 street". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's address is edited to "123 street". Details of the edited contact shown in the status message and the detailed person display.
 
     6. Test case: `edit 1 c/` <br>
-       Expected: First contact's contacted date is edited to "Not contacted". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's contacted date is edited to "Not contacted". Details of the edited contact shown in the status message and the detailed person display.
 
     7. Test case: `edit 1 c/01-01-2020` <br>
-       Expected: First contact's contacted date is edited to "Last contacted on 01-01-2020". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's contacted date is edited to "Last contacted on 01-01-2020". Details of the edited contact shown in the status message and the detailed person display.
 
     8. Test case: `edit 1 m/`<br>
-       Expected: First contact's memo is cleared. Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's memo is cleared. Details of the edited contact shown in the status message and the detailed person display.
 
     9. Test case: `edit 1 m/Avid hiker`<br>
-       Expected: First contact's memo is edited to "Avid hiker". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's memo is edited to "Avid hiker". Details of the edited contact shown in the status message and the detailed person display.
 
     10. Test case: `edit 1 t/`<br>
-        Expected: First contact's tags are cleared. Details of the edited contact shown in the status message and the detailed person display. <br><br>
+        Expected: First contact's tags are cleared. Details of the edited contact shown in the status message and the detailed person display.
 
     11. Test case: `edit 1 t/friend t/colleague`<br>
-        Expected: First contact's tags are edited to "friend" and "colleague". Details of the edited contact shown in the status message and the detailed person display. <br><br>
+        Expected: First contact's tags are edited to "friend" and "colleague". Details of the edited contact shown in the status message and the detailed person display.
 
     12. Other incorrect edit commands to try: `edit`, `edit 1 bob`, `edit x m/Avid hiker` (where x is an integer smaller than 1 or larger than 2147483647) <br>
-        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     13. Other incorrect edit commands to try: `edit x m/Avid hiker` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. <br><br>
+        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
 
     14. Note:
         - Multiple attributes can be edited at once by specifying the corresponding prefix.
@@ -779,21 +779,21 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.4. Adding tags to a person
 
-1. Adding tags to a person while all persons are being shown <br><br>
+1. Adding tags to a person while all persons are being shown
    
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate. <br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate.
     
     2. Test case: `addtag 1 t/friends` <br>
-       Expected: First contact's tags are appended with "friends". Details of the appended tag shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's tags are appended with "friends". Details of the appended tag shown in the status message and the detailed person display.
 
     3. Test case: `addtag 1 t/colleague t/pal` <br>
-       Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags shown in the status message and the detailed person display.
 
     4. Other incorrect addtag commands to try: `addtag`, `addtag hello`, `addtag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
-       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Other incorrect addtag commands to try: `addtag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. <br><br>
+       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
    
     6. Note:
        - If any of the tags to be added already exist in the specified person, a tag already present error message will be shown.
@@ -801,21 +801,21 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.5. Deleting tags of a person
 
-1. Deleting tags of a person while all persons are being shown <br><br>
+1. Deleting tags of a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be deleted must exist in the specified contact. <br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be deleted must exist in the specified contact.
 
     2. Test case: `deletetag 1 t/friends` <br>
-       Expected: First contact's tag "friends" is deleted. Details of the deleted tag shown in the status message and the detailed person display. <br><br>
+       Expected: First contact's tag "friends" is deleted. Details of the deleted tag shown in the status message and the detailed person display.
 
     3. Test case: `deletetag 2 t/colleagues t/friends` <br>
-       Expected: Second contact's tags "colleagues" and "friends" are deleted. Details of the deleted tags shown in the status message and the detailed person display. <br><br>
+       Expected: Second contact's tags "colleagues" and "friends" are deleted. Details of the deleted tags shown in the status message and the detailed person display.
 
     4. Other incorrect deletetag commands to try: `deletetag`, `deletetag hello`, `deletetag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
-       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Other incorrect deletetag commands to try: `deletetag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. <br><br>
+       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
 
     6. Note:
         - If any of the tags to be deleted does not exist in the specified person, a tag does not exist error message will be shown.
@@ -825,13 +825,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `delete 1` <br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. <br><br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an integer smaller than 1 or larger than 2147483647) <br>
-       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. 
@@ -840,41 +840,41 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `find n/alex` <br>
-       Expected: The list will be filtered to show only contacts with name containing "john". The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts with name containing "john". The number of contacts listed will be shown in the status message.
    
     3. Test case: `find p/1234` <br>
-       Expected: The list will be filtered to show only contacts with phone containing "1234". The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts with phone containing "1234". The number of contacts listed will be shown in the status message.
 
     4. Test case: `find e/@example` <br>
-       Expected: The list will be filtered to show only contacts with email containing "@example". The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts with email containing "@example". The number of contacts listed will be shown in the status message.
 
     5. Test case: `find a/geylang` <br>
-       Expected: The list will be filtered to show only contacts with address containing "geylang". The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts with address containing "geylang". The number of contacts listed will be shown in the status message.
 
     6. Test case: `find m/` <br>
-       Expected: The list will be filtered to show only contacts that do not have a memo. The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts that do not have a memo. The number of contacts listed will be shown in the status message.
 
     7. Test case: `find m/climber` <br>
        Expected: The list will be filtered to show only contacts with memo containing "free". The number of 
-a       contacts listed will be shown in the status message. <br><br>
+a       contacts listed will be shown in the status message.
 
     8. Test case: `find c/` <br>
-       Expected: The list will be filtered to show only contacts that have not been contacted at all. The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts that have not been contacted at all. The number of contacts listed will be shown in the status message.
    
     9. Test case: `find c/5` <br>
-       Expected: The list will be filtered to show only contacts that have not been contacted for more than 5 days. The number of contacts listed will be shown in the status message. <br><br>
+       Expected: The list will be filtered to show only contacts that have not been contacted for more than 5 days. The number of contacts listed will be shown in the status message.
 
     10. Test case: `find t/friends` <br>
-         Expected: The list will be filtered to show only contacts with a tag that exactly matches "friends". The number of contacts listed will be shown in the status message. <br><br>
+         Expected: The list will be filtered to show only contacts with a tag that exactly matches "friends". The number of contacts listed will be shown in the status message.
 
     11. Other incorrect find commands to try: `find` <br>
-        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red. <br><br>
+        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     12. Other incorrect delete commands to try: `find bob` <br>
-        Expected: Message displaying that at least one valid prefix must be provided. The text in the command box will also turn red. <br><br>
+        Expected: Message displaying that at least one valid prefix must be provided. The text in the command box will also turn red.
    
     13. Note:
         - Refer to [4.2. Find feature](#42-find-feature) for specific details about the `find` command.
