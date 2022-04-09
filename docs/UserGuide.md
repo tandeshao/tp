@@ -191,7 +191,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 * Contacted date, memo, and tag are optional.
-* Contacted date must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the dd-mm-yyyy format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
+* Contacted date must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags, including 0.
@@ -222,7 +222,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
-* If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the dd-mm-yyyy format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
