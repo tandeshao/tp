@@ -35,7 +35,7 @@ title: Developer Guide
 &nbsp;&nbsp;[7.4. Adding tags to a person](#74-adding-tags-to-a-person) <br/>
 &nbsp;&nbsp;[7.5. Deleting tags of a person](#75-deleting-tags-of-a-person) <br/>
 &nbsp;&nbsp;[7.6. Deleting a person](#76-deleting-a-person) <br/>
-&nbsp;&nbsp;[7.7. Finding a person by their attributes](#77-finding-a-person-by-their-attributes) <br/>
+&nbsp;&nbsp;[7.7. Finding persons by their attributes](#77-finding-persons-by-their-attributes) <br/>
 &nbsp;&nbsp;[7.8. Saving data](#78-saving-data) <br/>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -836,7 +836,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. 
 
-### 7.7. Finding a person by their attributes
+### 7.7. Finding persons by their attributes
 
 1. Finding a person while all persons are being shown
 
