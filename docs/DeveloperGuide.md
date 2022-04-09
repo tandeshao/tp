@@ -854,8 +854,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `find n/alex` <br>
        Expected: The list will be filtered to show only contacts with name containing "john". The number of contacts listed will be shown in the status message.
    
-    3. Test case: `find p/1234` <br>
-       Expected: The list will be filtered to show only contacts with phone containing "1234". The number of contacts listed will be shown in the status message.
+    3. Test case: `find p/2021` <br>
+       Expected: The list will be filtered to show only contacts with phone containing "2021". The number of contacts listed will be shown in the status message.
 
     4. Test case: `find e/@example` <br>
        Expected: The list will be filtered to show only contacts with email containing "@example". The number of contacts listed will be shown in the status message.
@@ -867,7 +867,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The list will be filtered to show only contacts that do not have a memo. The number of contacts listed will be shown in the status message.
 
     7. Test case: `find m/climber` <br>
-       Expected: The list will be filtered to show only contacts with memo containing "free". The number of 
+       Expected: The list will be filtered to show only contacts with memo containing "climber". The number of 
 a       contacts listed will be shown in the status message.
 
     8. Test case: `find c/` <br>
