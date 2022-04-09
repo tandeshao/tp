@@ -106,11 +106,11 @@ Symbol | What it means |
 
 2. Download the latest Abpi.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for Abπ.
+3. Place the file in an empty folder.
 
-4. Double-click the file to start the app. After 10 seconds, if the app still did not start, follow these steps:
+4. Double-click the file to start the app. After 10 seconds, if the app did not start, follow these steps:
    1. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3. 
-   2. Run the “Abpi.jar” file with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
+   2. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
    
    ![Ui](images/ug/Ui.png)
 
@@ -191,7 +191,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 * Contacted date, memo, and tag are optional.
-* Contacted date must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
+* Contacted date must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags, including 0.
@@ -222,7 +222,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
-* If contacted date is specified, it must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
