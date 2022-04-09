@@ -713,7 +713,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a person
 
-    1. Prerequisites: A person with the same name, phone and email does not already exist in the app, otherwise it will be considered as a duplicate.
+    1. Prerequisites: A person with the same name, phone and email must not already exist in the app, otherwise it will be considered as a duplicate.
 
     2. Test case: `add n/Mark Tay p/91238492 e/marktay@example.com a/markbuilding` <br>
        Expected: A person with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added person shown in the status message and the detailed person display.
@@ -771,8 +771,11 @@ testers are expected to do more *exploratory* testing.
     13. Other incorrect edit commands to try: `edit x m/Avid hiker` (where x is an integer larger than the list size and smaller than 2147483648) <br>
         Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
 
-    14. Note:
-        - Multiple attributes can be edited at once by specifying the corresponding prefix.
+    14. Other incorrect edit commands to try: `edit 1` <br>
+        Expected: Message displaying that at least one field to edit must be provided. The text in the command box will also turn red.
+
+    15. Note:
+        - Multiple attributes can be edited at once by specifying the respective prefix.
         - If a person with the same name, phone and email already exist, a duplicate error message will be shown.
         - If the edit does not change anything, a nothing will change error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
@@ -783,8 +786,8 @@ testers are expected to do more *exploratory* testing.
    
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate.
     
-    2. Test case: `addtag 1 t/friends` <br>
-       Expected: First contact's tags are appended with "friends". Details of the appended tag shown in the status message and the detailed person display.
+    2. Test case: `addtag 1 t/family` <br>
+       Expected: First contact's tags are appended with "family". Details of the appended tag shown in the status message and the detailed person display.
 
     3. Test case: `addtag 1 t/colleague t/pal` <br>
        Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags shown in the status message and the detailed person display.
@@ -794,8 +797,11 @@ testers are expected to do more *exploratory* testing.
 
     5. Other incorrect addtag commands to try: `addtag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
-   
-    6. Note:
+
+    6. Other incorrect addtag commands to try: `addtag 1` <br>
+           Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
+
+    7. Note:
        - If any of the tags to be added already exist in the specified person, a tag already present error message will be shown.
        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
@@ -817,7 +823,10 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect deletetag commands to try: `deletetag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
 
-    6. Note:
+    6. Other incorrect deletetag commands to try: `deletetag 1` <br>
+       Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
+
+    7. Note:
         - If any of the tags to be deleted does not exist in the specified person, a tag does not exist error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
