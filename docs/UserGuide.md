@@ -102,19 +102,19 @@ Symbol | What it means |
 
 ## 2. Quick start
 ### 2.1. Installation
-1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your Computer.
-
+1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your computer.
+   
 2. Download the latest Abpi.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
-
+   
 3. Place the file in an empty folder.
 
-4. Double-click the file to start the app. After 10 seconds, if the app did not start, follow these steps:
-   1. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3. 
-   2. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
+4. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3.
+
+5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
    
    ![Ui](images/ug/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
 
    * `list`: Lists all contacts.
@@ -127,7 +127,7 @@ Symbol | What it means |
 
    * `exit` : Exits the app.
 
-6. Refer to the [features](#4-features) below for details of each command.
+7. Refer to the [features](#4-features) below for details of each command.
 
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
