@@ -43,14 +43,15 @@ AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts
 &nbsp;&nbsp;[4.8. Miscellaneous](#48-miscellaneous) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.1. Viewing help](#481-viewing-help-help) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.8.2. Exiting the program](#482-exiting-the-program-exit) <br/>
-&nbsp;&nbsp;[4.9. Extra information regarding the features](#49-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;[4.9. Policy on duplicates](#49-policy-on-duplicates) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.1. Ignoring case difference](#491-ignoring-case-difference) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.2. Trimming of extra white spaces](#492-trimming-of-extra-white-spaces) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.9.3. Preventing duplicate contacts](#493-preventing-duplicate-contacts) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4. Saving the data](#494-saving-the-data) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.5. Editing the data file](#495-editing-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.6. Backing up the data file](#496-backing-up-the-data-file) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.9.7. Predictive viewing](#497-predictive-viewing) <br/>
+&nbsp;&nbsp;[4.10. Extra information regarding the features](#410-extra-information-regarding-the-features) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.10.1. Saving the data](#4101-saving-the-data) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.10.2. Editing the data file](#4102-editing-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.10.3. Backing up the data file](#4103-backing-up-the-data-file) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.10.4. Predictive viewing](#4104-predictive-viewing) <br/>
 [5. FAQ](#5-faq) <br/>
 [6. Command Summary](#6-command-summary) <br/>
 
@@ -101,13 +102,16 @@ Symbol | What it means |
 
 ## 2. Quick start
 ### 2.1. Installation
-1. Ensure you have Java 11 or above installed in your Computer.
+1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your Computer.
 
-2. Download the latest Abπ.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
+2. Download the latest Abpi.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+3. Copy the file to the folder you want to use as the home folder for Abπ.
 
-4. Double-click the file to start the app. The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. After 10 seconds, if the app still did not start, follow these steps:
+   1. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3. 
+   2. Run the “Abpi.jar” file with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
+   
    ![Ui](images/ug/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
@@ -186,16 +190,15 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Contacted date, memo, and tag are optional.
-</div>
+* Contacted date, memo, and tag are optional.
+* Contacted date must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the dd-mm-yyyy format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- A person can have any number of tags, including 0.
+A person can have any number of tags, including 0.
 </div>
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
+:information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
 </div>
 
 Examples:
@@ -217,11 +220,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* All the person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
-* A peron's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
+* A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
+* A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
+* If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the dd-mm-yyyy format, and must not be in the future. For both invalid date and incorrect format, the same error message will be displayed, that it needs to be a valid date following the proper format.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** If contacted date is specified, it must be a valid [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the dd-mm-yyyy format, and must not be a future date. For both invalid date and incorrect format, the same error message will be shown to indicate that it needs to be a valid date that follows the proper format.
+:information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
 </div>
 
 Examples:
@@ -265,7 +269,7 @@ Format: `deletetag INDEX t/TAG…`
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
+To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
 </div>
 
 
@@ -365,7 +369,7 @@ Examples:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.9.7. Predictive viewing](#497-predictive-viewing).
+:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
 
 </div>
 
@@ -404,7 +408,6 @@ Examples:
 * `find t/Family` would only match with anybody that has a tag that is equivalent to the string "family".
 * `find t/colleague t/friends` would match with anybody that has the tag "colleague" or "friends".
 * `find t/family e/@example` would only match with anybody that has a tag "family" and an email domain "@example".
-
 
 <br>
 
@@ -531,7 +534,7 @@ Format: `exit`
 
 <br>
 
-### 4.9. Extra information regarding the features
+### 4.9. Policy on duplicates
 
 #### 4.9.1. Ignoring case difference
 Abπ ignores case difference for the person attributes name, email, address, memo and tag to provide a more seamless experience that matches the real world.
@@ -542,14 +545,22 @@ Examples:
 * "John Doe" and "john doe" is considered as the same name.
 * "LIKES TO DRINK" and "likes to drink" is considered as the same tag.
 
+[Back to Table of Contents](#table-of-contents)
+
+<br>
+
 #### 4.9.2. Trimming of extra white spaces
-Abπ helps to remove accidental extra white spaces between words to provide a cleaner experience. 
+Abπ helps to remove accidental extra white spaces between words to provide a cleaner experience.
 
 * For name, phone, address, memo, and tag, extra white spaces (2 or more) between words will be replaced with a single white space. <br>
 
 Examples:
 * "John &#160;&#160;&#160;&#160;&#160; Doe" will be trimmed to "John Doe".
 * "Likes &#160;&#160;&#160; to &#160;&#160;&#160; drink" will be trimmed to "Likes to drink".
+
+[Back to Table of Contents](#table-of-contents)
+
+<br>
 
 #### 4.9.3. Preventing duplicate contacts
 Abπ helps to manage duplicates by preventing duplicate contacts of identical name, phone and email when using the `add` and `edit` commands.
@@ -567,10 +578,20 @@ For phone, even if there is a difference in white space, it is still considered 
 "+65 98765432" is different from "65 98765432 (difference in '+')"
 </div>
 
-#### 4.9.4. Saving the data
+[Back to Table of Contents](#table-of-contents)
+
+<br>
+
+### 4.10. Extra information regarding the features
+
+#### 4.10.1. Saving the data
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.9.5. Editing the data file
+[Back to Table of Contents](#table-of-contents)
+
+<br>
+
+#### 4.10.2. Editing the data file
 
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -578,7 +599,11 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-#### 4.9.6. Backing up the data file
+[Back to Table of Contents](#table-of-contents)
+
+<br>
+
+#### 4.10.3. Backing up the data file
 
 * Everytime the original data file is corrupted, Abπ would back up your data and store it in "[_Abπ location_]/data/" as "backup[_DD-MM-YY HH-MM-SS_].json". The backup file format will be similar to the backup file shown in the image below.
 
@@ -591,12 +616,13 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Theoretically, a user is able to constantly create backup files using Abπ until the folder size becomes unusually huge. To reduce the folder size, users would need to constantly head over to the data folder and delete unused backup files. The team understands and acknowledges that this may prove to be an inconvenience for some users hence, in future iterations of Abπ, the team would impose a limit on the number of backup files for a better user experience.
-
 </div>
 
+[Back to Table of Contents](#table-of-contents)
 
+<br>
 
-#### 4.9.7. Predictive viewing
+#### 4.10.4. Predictive viewing
 
 Abπ will pre-emptively update the display after various commands:
 
@@ -633,9 +659,7 @@ Simply overwrite the "addressbook.json" data file with your previous "addressboo
 Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/". For more information on how to restore your backup data, take a look [here](#496-backing-up-the-data-file).
-
-
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/". For more information on how to restore your backup data, take a look [here](#4103-backing-up-the-data-file).
 
 [Back to Table of Contents](#table-of-contents)
 
