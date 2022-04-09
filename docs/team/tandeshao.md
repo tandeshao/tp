@@ -2,38 +2,65 @@
 layout: page
 title: Tan De Shao's Project Portfolio Page
 ---
-`To be added soon` tags are added beside the headings to show that the information under the headings are just placeholders and does not accurately represent the project progression.
 
 ### Project: AddressBook Level π (Abπ)
 
-AddressBook - Level π is a desktop address book application that can quickly store, edit and search for contacts via a single command, perfect for users who prefer typing. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about (update) kLoC.
+AddressBook pi (Abπ) is a 360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person.
 
-Given below are my contributions to the project.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9k LoC.
 
-* **New Feature**: Added the ability to undo/redo previous commands.(`to be added soon`)
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+---
 
-* **Code contributed**: [RepoSense link]() (`to be added soon`)
+**Summary of contributions**
+* Code contributed: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=tandeshao&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+* **Features and Enhancement implemented**
+  * Enhancement of the FindCommand (Pull requests [\#55](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/55), [\#118](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/118), [\#268](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/268), [\#192](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/192))
+    * What it does: Allows user to search for a contact in Abπ by using any of the attribute that is available to a person. 
+    * Justification: This feature enhances the original find command by increasing the scope of the search. Previous find command only allows users to search a contact by their name but with the newly enhanced find command, users are now able to search contacts based on a combination of attributes (Name, Phone number, Email, Address, Memo, Contacted Date and Tag).     
+    * Highlights: To develop the find command, we identified the potential problems users might face when using the command and from there, try to come up with an appropriate design that would solve their problems. However, one problem encountered when adopting this approach of development is that it is impossible to find a solution that would solve all the potential problems the user might face. Although some implementations might solve a specific problem, they might also give rise to other problems. Hence, there are always trade-offs to consider when a certain implementation design is proposed.
+  
+  <br>
 
-* **Project management**: (`to be added soon`)
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Scrub Command (Pull requests [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#139](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/139), [\#177](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/177), [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182))
+    * What it does: Allows users to delete multiple person from the address book by specifying the criteria to delete a person by through the use of prefixes.
+    * Justification: Previously, to delete a person from the address book, the user would have to manually delete the contacts 1 by 1 through the use of the `delete` command. However, with the `scrub` command, users now have a means to quickly delete multiple person from the address book. 
+    * Highlights: For deletion of contacts, a strict matching criteria was used (exact word matching) as contact deletion is considered to be a risky operation. Any unintended removal of contacts would be a detrimental feature flaw for the application. Hence, an exact word match criteria is employed where `scrub p/90400204` would only scrub contacts that has the phone number "90400204". 
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  <br>
+  
+  * AddTag command (Pull requests [\#255](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/255), [\#171](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/171))
+    * What it does: Allows users to append one or more tags to a specified person in the address book.
+    * Justification: Before the implementation of the add tag command, users are only able to edit the tag attribute of a person through the use of the `edit` command. As the `edit` command completely replaces the existing tags, it would be inconvenient for the user if he/she would only like to append a new tag to the existing tags that are available to the specified person. Hence, to help users solve that problem, the `addtag` command was developed. 
+    * Highlights: This feature required careful implementation as we would have to consider how Abπ should react if a user tried to append an existing tag to the person's tag attribute.
+    
+  <br>
+  
+  * Add tests for the prefix class (Pull requests [\#76](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/76))
 
-* **Documentation**: (`to be added soon`)
+  <br>
+  
+  * Add tests for the ArgumentMultiMap class (Pull requests [\#77](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/77))
+    
+  <br>
+
+  * Backup system (Pull requests [\#147](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/147), [\#246](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/246))
+    * What it does: Backups the Abπ data so that whenever the "addressbook.json" file is corrupted, users would not lose their existing data of Abπ.
+    * Justification: Everytime the original data file is corrupted, Abπ would load up an empty addressbook and if a user keys in a valid command, the empty data would be saved to the "addressbook.json" file. With that, the original data file of the Abπ is lost and this is a major feature flaw for the application. Hence, a backup system is created.
+    
+  <br>
+  
+* **Documentation**: 
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added documentation for the feature `find`: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#22](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/22/files)
+    * Added documentation for the feature `scrub` and `addtag`: [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182), [\#196](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/196)
 
-* **Community**: (`to be added soon`)
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  <br>
+  
+  * Developer Guide:
+    * Added implementation details of the `find` feature: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123)
+
+<br>
+
+* **Community**:
+  * Reported bugs and suggestions for other teams in the class: [Link to 25 reported bugs/suggestions for other teams](https://github.com/tandeshao/ped/issues)
+  * All other PRs reviewed: [Link to 51 reviewed PRs](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+reviewed-by%3Atandeshao+is%3Aclosed+sort%3Acomments-asc)
