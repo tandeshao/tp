@@ -3,7 +3,8 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Content <br/>
-[1. Acknowledgements](#1-acknowledgements) <br/>
+[Acknowledgements](#acknowledgements) <br/>
+[1. Conventions](#1-conventions) <br/>
 [2. Setting up, getting started](#2-setting-up-getting-started) <br/>
 [3. Design](#3-design) <br/>
 &nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br/>
@@ -40,11 +41,24 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 1. Acknowledgements
+## Acknowledgements
 
 * https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
 
 --------------------------------------------------------------------------------------------------------------------
+
+## 1. Conventions
+When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
+
+
+Symbol | What it means |
+-----|----------------|
+`add` | Words with this format are commands that can cause a response in Abπ or java class/variable names.
+*Italics* | Sentences that are in italics represent additional information.
+:bulb: | Extra tip that may be useful to the reader.
+:information_source: | Important information to take note.
+[here](#1-conventions) |Words that are in this format are clickable links that directs you to a certain webpage.
+---
 
 ## 2. Setting up, getting started
 
@@ -56,7 +70,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The ".puml" files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/docs/diagrams/) folder. _Refer to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams._
 </div>
 
 ### 3.1. Architecture
@@ -69,7 +83,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -91,8 +105,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its API in an interface with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API interface mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -102,13 +116,13 @@ The sections below give more details of each component.
 
 ### 3.2. UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -119,7 +133,7 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -155,7 +169,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -168,7 +182,7 @@ The `Model` component,
 
 ### 3.5. Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -497,7 +511,7 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Aspect: Phone number with '+':**
 * **Current implementation:** For `Phone`, a difference in '+' is considered as different.
-    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1073,9 +1087,9 @@ Guarantees: User will exit Abπ.
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any Mainstream Operating System as long as it has Java `11` or above installed.
+1. Should work on any Mainstream Operating System as long as it has Java 11 or above installed.
 2. Should be for a single user i.e. (not a multi-user product).
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 4. Should respond to a command within 2 seconds.
 5. Should work without requiring an installer.
 6. Should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
@@ -1304,9 +1318,9 @@ a       contacts listed will be shown in the status message.
 
 1. Dealing with corrupted data files
 
-   1. Prerequisites: There must be an "addressbook.json" data file in the "[_Abπ location_]/data/" folder
+   1. Prerequisites: There must be an "addressbook.json" data file in the "[Abπ location]/data/" folder
    2. Remove a line from "addressbook.json" to corrupt it. 
    3. Launch "Abpi.jar". 
    4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
    5. Close the app. <br>
-      Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup[_DD-MM-YY HH-MM-SS_].json" in the same folder.
+      Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
