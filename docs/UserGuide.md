@@ -181,7 +181,7 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
   
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
-* <a name="index" />Index refers to the index number shown in the displayed person list, and it must be positive integer between 1 and 2147483647.
+* <a name="index" />Index refers to the index number shown in the contact display. Index must be positive integer between 1 and 2147483647.
 
 * <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
