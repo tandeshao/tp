@@ -256,7 +256,7 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
 
 </div>
@@ -362,7 +362,7 @@ Below is a table that shows the matching criteria that is used for each person's
 
 <br>
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
 </div>
 
@@ -379,12 +379,12 @@ Below is a table that shows the matching criteria that is used for each person's
 | Tags           | t/     | Exact string matching   | find t/Family would only match with anybody that has a tag that is equivalent to the string "family".           | 
 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+<div markdown="span" class="alert alert-info">
+ :information_source: **Note:** Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
+<div markdown="span" class="alert alert-info">
+ :information_source: **Note:** When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
 <br>
@@ -400,7 +400,7 @@ Below is a table that shows the matching criteria that is used for each person's
   * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would like to find all contacts that have the domain name set as "gmail".  
   
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
@@ -552,106 +552,524 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.3. Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Abπ` and the **Actor** is `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a person**
+<br>
+Guarantees: Adding a contact is successful.
+<br>
 
 **MSS**
 
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.
+1. User requests to add a person and provide details.
+2. Abπ adds the person to the list of contacts.
+<br>
+Use case ends.
 
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects user is attempting to add a contact that already exists.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user that the contact already exists.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC02 - Edit a person**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Editing a contact is successful.
+<br>
+
+**MSS**
+
+1. User requests to edit an existing contact in the contact list and provide details.
+2. Abπ updates the details of the contact.
+    <br>
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1c. Abπ detects user-specified detail is the same as the contact detail.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that there is no change in contact <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Edit a person**
-
-**MSS**
-
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to Edit a specific person in the list.
-4.  AddressBook update the person with new information.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-
-**Use case: Adding a tag to a person**
-
-**MSS**
-
-1.  User find a person.
-2.  AddressBook shows the searching result of the person.
-3.  User requests to add a tap to a specific person.
-4.  AddressBook adds that tag to the person.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. Cannot find the user.
-
-  Use case ends.
-
-* 3a. The tag is invalid.
-
-    * 3a1. The tag exist already.
-
-      ABπ show notification message.
-
-      Use case ends.
-
-    * 3a2. The tag exceeds the max length.
-
-      ABπ show error message.
-
-      Use case resumes at step 2.
-
-**Use case: Adding memo to a person**
+**Use case: UC03 - Appending tags to a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Appending tags to a contact is successful.
+<br>
 
 **MSS**
 
-1.  User find a person.
-2.  AddressBook shows the searching result of the person.
-3.  User requests to add memo to a specific person.
-4.  AddressBook adds that memo to the person.
-
-    Use case ends.
+1. User requests to append one or more tags to an existing contact in Abπ and provide details.
+2. Abπ updates the tag attribute for the contact by appending the new tags.
+   <br>
+   Use case ends.
 
 **Extensions**
 
-* 2a. Cannot find the user.
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+1c. Abπ detects that the user is attempting to append a tag that already exists in the contact.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user of the duplicated tag.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until valid tags are provided by the user.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-  Use case ends.
 
-* 3a. The memo is invalid.
+<br>
 
-    * 3a1. The memo exceeds the max length.
+**Use case: UC04 - Deleting tags from a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Deleting tags from a contact is successful.
+<br>
 
-      ABπ show error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to delete one or more existing tags for a contact and provide details.
+2. Abπ updates the tag attribute for the contact by deleting the user specified tags.
+   <br>
+   Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+1c. Abπ detects that the user is attempting to delete a non-existent tag in the contact.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that the specified tag does not exist.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until valid tags are provided by the user.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC04 - Deleting a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Deleting a contact is successful.
+<br>
+
+**MSS**
+
+1. User requests to delete one contact and provide details.
+2. Abπ deletes the contact from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC05 - Deleting multiple contacts**
+<br>
+Guarantees: Deleting multiple contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to delete multiple contacts and provide details.
+2. Abπ deletes the contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC06 - Clearing all contacts**
+<br>
+Guarantees: Removing all contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. Abπ removes all contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC07 - View contact details**
+
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Viewing contact details is successful.
+<br>
+
+**MSS**
+
+1. User requests to view details of a contact.
+2. Abπ shows the details of a contact.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC08 - Find contacts**
+
+Guarantees: Finding of contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to find contacts and provide details.
+2. Abπ finds the contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC09 - List all contacts**
+
+Guarantees: All contacts in Abπ are shown.
+<br>
+
+**MSS**
+
+1. User requests to list all contacts in Abπ.
+2. Abπ shows all contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC10 - Copying all emails**
+
+Guarantees: All the emails are copied.
+<br>
+
+**MSS**
+
+1. User requests to copy all emails.
+2. Abπ copies all emails to the user's clipboard.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC11 - Undoing actions made by Abπ**
+
+Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
+<br>
+Guarantees: Undoing previously made actions by Abπ is successful.
+<br>
+**MSS**
+
+1. User requests to undo an action made by Abπ.
+2. Abπ undid the action.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC12 - Redoing actions made by Abπ**
+
+Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
+<br>
+Guarantees: Redoing an undid action is successful.
+<br>
+**MSS**
+
+1. User requests to redo an undid action.
+2. Abπ redid the action.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC13 - User is able to retrieve previously executed commands**
+<br>
+Precondition: There must be at least 1 executed command before the user requests to retrieve a previously executed command.
+<br>
+Guarantees: Retrieving a previously executed command is successful.
+<br>
+
+**MSS**
+
+1. User requests to retrieve a previously executed command.
+2. Abπ retrieves the command.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC14 - Get help**
+<br>
+Guarantees: User will get instructions on how to get help.
+<br>
+
+**MSS**
+
+1. User requests help from Abπ.
+2. Abπ provides instructions to the user on how to seek help.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC15 - Exit**
+<br>
+Guarantees: User will exit Abπ.
+<br>
+
+**MSS**
+
+1. User requests to exit from Abπ.
+2. Abπ closes.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
 
 ### 6.4. Non-Functional Requirements
 

@@ -344,7 +344,7 @@ Examples:
 * Similar to [delete](#431-deleting-a-person-delete) as it cleans up the address book of unwanted contacts. 
 * Allows multiple person to be deleted by specifying the criteria to delete a person by through the use of prefixes.
 * Abπ would use the specified criteria and scan through the person list and delete anybody that matches the criteria.
-* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
+* Duplicated prefix arguments are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * Delete contacts that matches any of the phone number, email domain or tag specified from the command.
@@ -353,18 +353,18 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * For email, an exact match criteria is employed for the email domain. Look at the information box below to learn more about what is an email domain.
 * Note that for phone numbers, white spaces are ignored. That is, ABπ sees "+65 90400204" and "+6590400204" as equivalent numbers. 
 * The matching criteria is case-insensitive.
-* Prefix arguments must conform to the [attribute constraints](#1-introduction).  
+* Prefix arguments must conform to the attribute constraints.  
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When different prefixes are specified for the scrub command, the result is equivalent to deleting anybody that matches all the condition specified by the prefix arguments. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** When different prefixes are specified for the scrub command, the result is equivalent to deleting anybody that matches all the condition specified by the prefix arguments. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
 </div>
 
 <br>
@@ -431,7 +431,7 @@ Upon executing the command `view 3`:
 #### 4.5.1. Finding person by their attributes: `find`
 
 * Finds persons whose names contain any of the given keywords.
-* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
+* Duplicated prefix arguments are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 
