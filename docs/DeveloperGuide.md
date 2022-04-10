@@ -518,7 +518,7 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Target user profile**:
 
-* individuals with numerous contacts
+* individuals who want an organized address book
 * with a need to categorize contacts
 * with a need to filter contacts based on attributes
 * prefer desktop applications over other types
@@ -655,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java `11` or above installed.
+1. Should work on any mainstream Operating System as long as it has Java `11` or above installed.
 2. Should be for a single user i.e. (not a multi-user product).
 3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 4. Should respond to a command within 2 seconds.
@@ -672,8 +672,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **JSON**: JavaScript Object Notation
 * **MSS**: Main Success Scenario
-* **OS**: Operating System
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream Operating System**: Windows, Linux, Unix, OS-X
 * **OOP**: Object-oriented programming
 
 --------------------------------------------------------------------------------------------------------------------
