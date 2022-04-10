@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.removeSpaces;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -9,10 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
+    public static final int CHARACTER_LIMIT = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 3 to 31 digits long";
-    public static final int PHONE_NUMBER_MAXIMUM = 31;
-    public static final String VALIDATION_REGEX = "\\d{3," + PHONE_NUMBER_MAXIMUM + "}";
+            "Phone numbers should only contain numbers or white spaces. "
+                    + "It may also contain '+' at the start, but must be followed by a number. "
+                    + "It should contain at least 3 numbers and cannot exceed " + CHARACTER_LIMIT
+                    + " characters";
+    public static final String VALIDATION_REGEX = "(?=^.{3,"
+            + CHARACTER_LIMIT + "}$)\\+?(\\d *){3,}";
     public final String phone;
 
     /**
@@ -42,12 +47,24 @@ public class Phone {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && phone.equals(((Phone) other).phone)); // state check
+                && removeSpaces(phone)
+                .equals(removeSpaces(((Phone) other).phone))); // case-insensitive and ignores white space
+    }
+
+    /**
+     * Returns true if both phone numbers are identical (case-sensitive).
+     *
+     * @param otherPhone The other phone number.
+     * @return true if both phone numbers are identical.
+     */
+    public boolean exactEquals(Phone otherPhone) {
+        return otherPhone != null
+                && phone.equals(otherPhone.phone);
     }
 
     @Override
     public int hashCode() {
-        return phone.hashCode();
+        return removeSpaces(phone).hashCode();
     }
 
 }

@@ -26,7 +26,7 @@ public class NameTest {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
         String edgeName = "";
-        for (int i = 0; i < Name.NAME_CHARACTER_LIMIT; i++) {
+        for (int i = 0; i < Name.CHARACTER_LIMIT; i++) {
             edgeName += "a";
         }
         // invalid name
@@ -42,6 +42,30 @@ public class NameTest {
         assertTrue(Name.isValidName("Peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd"));
         assertTrue(Name.isValidName(edgeName)); //long name
+    }
+
+    @Test
+    public void exactEquals() {
+
+        Name validNameAmy = new Name(VALID_NAME_AMY);
+
+        // same object -> returns true
+        assertTrue(validNameAmy.exactEquals(validNameAmy));
+
+        // same values -> returns true
+        Name validNameAmyCopy = new Name(VALID_NAME_AMY);
+        assertTrue(validNameAmy.exactEquals(validNameAmyCopy));
+
+        // different capitalization -> returns false
+        Name validNameAmyAllCaps = new Name(VALID_NAME_AMY.toUpperCase());
+        assertFalse(validNameAmy.exactEquals(validNameAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validNameAmy.exactEquals(null));
+
+        // different name -> returns false
+        Name validNameBob = new Name(VALID_NAME_BOB);
+        assertFalse(validNameAmy.exactEquals(validNameBob));
     }
 
     @Test

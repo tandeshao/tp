@@ -9,15 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    private static final int MAXIMUM_LENGTH = 800;
+    public static final int CHARACTER_LIMIT = 800;
     public static final String MESSAGE_CONSTRAINTS = "Addresses should not be blank or start with a space, "
-            + "and it cannot exceed" + MAXIMUM_LENGTH + "characters";
+            + "and it cannot exceed " + CHARACTER_LIMIT + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].{0," + (MAXIMUM_LENGTH - 1) + "}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0," + (CHARACTER_LIMIT - 1) + "}";
 
     public final String address;
 
@@ -48,12 +48,22 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && address.equalsIgnoreCase(((Address) other).address)); // state check
+                && address.equalsIgnoreCase(((Address) other).address)); // case-insensitive
+    }
+
+    /**
+     * Returns true if both addresses are identical (case-sensitive).
+     *
+     * @param otherAddress The other address.
+     * @return true if both addresses are identical.
+     */
+    public boolean exactEquals(Address otherAddress) {
+        return otherAddress != null
+                && address.equals(otherAddress.address);
     }
 
     @Override
     public int hashCode() {
         return address.toLowerCase().hashCode();
     }
-
 }

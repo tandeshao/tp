@@ -15,6 +15,7 @@ class FindPersonPredicateTest {
 
     @Test
     void test_validPerson_returnsTrue() {
+        // Checks if person have the partial name "alex", tag "colleague" and a partial phone number that is "9040".
         ArgumentMultimap descriptor = ArgumentTokenizer
                 .tokenize(" n/alex t/colleague p/9040", ARRAY_OF_PREFIX);
         FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
@@ -22,6 +23,13 @@ class FindPersonPredicateTest {
                 .withTags("colleague").build()));
         assertTrue(predicate.test(new PersonBuilder().withName("Alexa")
                 .withPhone("90402").withTags("colleague").build()));
+
+        // Checks if a person have the partial name "alex" or the name "yeoh".
+        ArgumentMultimap samePrefix = ArgumentTokenizer.tokenize(" n/alex n/yeoh", ARRAY_OF_PREFIX);
+        FindPersonPredicate samePrefixPredicate = new FindPersonPredicate(samePrefix);
+        assertTrue(samePrefixPredicate.test(new PersonBuilder().withName("alex").build()));
+        assertTrue(samePrefixPredicate.test(new PersonBuilder().withName("yeoh").build()));
+        assertTrue(samePrefixPredicate.test(new PersonBuilder().withName("Alex").build()));
     }
 
     @Test
@@ -29,7 +37,11 @@ class FindPersonPredicateTest {
         ArgumentMultimap descriptor = ArgumentTokenizer
                 .tokenize(" a/streets t/colleague p/9040", ARRAY_OF_PREFIX);
         FindPersonPredicate predicate = new FindPersonPredicate(descriptor);
+
+        // Person has no tag colleague -> returns false.
         assertFalse(predicate.test(new PersonBuilder().withAddress("street").withPhone("904").build()));
+
+        // Person has no partial phone number that is "9040" -> returns false.
         assertFalse(predicate.test(new PersonBuilder().withName("a").withPhone("123").withTags("colle").build()));
     }
 

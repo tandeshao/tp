@@ -9,17 +9,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final int NAME_CHARACTER_LIMIT = 800;
+    public static final int CHARACTER_LIMIT = 800;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank, "
-                    + "and its length should be between 1 and " + NAME_CHARACTER_LIMIT
+            "Name should not be blank, "
+                    + "and its length should be between 1 and " + CHARACTER_LIMIT
                     + " (including spaces)";
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].{0," + (NAME_CHARACTER_LIMIT - 1) + "}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0," + (CHARACTER_LIMIT - 1) + "}";
 
     public final String fullName;
 
@@ -51,12 +51,22 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
+                && fullName.equalsIgnoreCase(((Name) other).fullName)); // case-insensitive
+    }
+
+    /**
+     * Returns true if both names are identical (case-sensitive).
+     *
+     * @param otherName The other name.
+     * @return true if both names are identical.
+     */
+    public boolean exactEquals(Name otherName) {
+        return otherName != null
+                && fullName.equals(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
         return fullName.toLowerCase().hashCode();
     }
-
 }

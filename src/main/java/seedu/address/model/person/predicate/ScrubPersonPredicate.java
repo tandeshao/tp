@@ -31,7 +31,7 @@ public class ScrubPersonPredicate implements Predicate<Person> {
      * Checks if the Person's attributes (the attribute that corresponds to {@link Prefix})
      * has any word that matches exactly to any word in the given description. Only three attributes
      * are allowed for scrubbing, and they are phone, email and tags. For email, a {@link DomainMatchPredicate} is
-     * used and for phone and tags, {@link ExactWordMatchPredicate} is used.
+     * used, for phone and tags, {@link ExactWordMatchPredicate} is used.
      *
      * @param person person to be tested.
      * @return true if person contains the word, false otherwise.
@@ -43,8 +43,8 @@ public class ScrubPersonPredicate implements Predicate<Person> {
     }
 
     /**
-     * Creates predicate that allows partial matching for email attributes and exact matching for phone and tag
-     * attributes.
+     * Creates predicate that allows partial matching for email attributes and exact matching for tag
+     * attributes and special phone matching for phone attributes.
      *
      * @param prefix Prefix representing the attribute that is target for testing.
      * @return Appropriate predicate that meets the matching requirement of different attributes (see
@@ -55,6 +55,7 @@ public class ScrubPersonPredicate implements Predicate<Person> {
         if (prefix.equals(PREFIX_EMAIL)) {
             predicateToTestPersonAgainst = new DomainMatchPredicate(argMultimap.getAllValues(prefix));
         } else {
+            // When prefix is a t/.
             predicateToTestPersonAgainst = new ExactWordMatchPredicate(prefix, argMultimap.getAllValues(prefix));
         }
         return predicateToTestPersonAgainst;

@@ -26,20 +26,36 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "find ", NO_PREFIX_MESSAGE);
 
         // Special characters for ContactedDate -> should result in pare failure
-        assertParseFailure(parser, "find c/@", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+        assertParseFailure(parser, "find c/@", FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
 
         // Negative integer values for ContactedDate -> should result in pare failure
-        assertParseFailure(parser, "find c/-1", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+        assertParseFailure(parser, "find c/-1", FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
 
-        // Positive value above 2147483647 is invalid.
-        assertParseFailure(parser, "find c/2147483648", FindCommandParser.MESSAGE_INCORRECT_FORMAT);
+        // Positive value above 2147483647 is invalid -> integer overflow.
+        assertParseFailure(parser, "find c/2147483648", FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
 
+        // First valid arg for the prefix follow by a second invalid arg -> parse failure.
+        assertParseFailure(parser, "find e/hi e/", FindCommand.MESSAGE_INVALID_PREFIX_ARGUMENT);
+
+        // First valid arg for the prefix follow by a second invalid arg from a different prefix -> parse failure.
+        assertParseFailure(parser, "find e/hi a/", FindCommand.MESSAGE_INVALID_PREFIX_ARGUMENT);
+
+        // Input exceeded 1001 characters -> parse failure due to violation of upper limit.
+        String inputExceedingThousandChar = "find n/" + "a".repeat(1001);
+        assertParseFailure(parser, inputExceedingThousandChar, FindCommand.MESSAGE_INVALID_PREFIX_ARGUMENT);
+
+        // Input exceeded 1000 digits for contacted date -> parse failure due to violation of upper limit.
+        String inputExceedingThousandDigits = "find c/" + "1".repeat(1000);
+        assertParseFailure(parser, inputExceedingThousandDigits, FindCommand.MESSAGE_CONTACTED_DATE_INVALID_ARG);
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        assertParseSuccess(parser, " n/Alex bob", prepareFindCommand(" n/Alex bob"));
-        assertParseSuccess(parser, " c/1", prepareFindCommand(" c/1"));
+        String singleValidArg = " n/Alex bob";
+        assertParseSuccess(parser, singleValidArg, prepareFindCommand(singleValidArg));
+
+        String validContactedDateArg = " c/1";
+        assertParseSuccess(parser, validContactedDateArg, prepareFindCommand(validContactedDateArg));
 
         // multiple whitespaces between keywords
         String argToBeTested = " n/ Alex bob";
@@ -48,6 +64,18 @@ public class FindCommandParserTest {
         // Max positive integer values -> parse successful.
         String argWithMaxPositiveInteger = " c/2147483647";
         assertParseSuccess(parser, argWithMaxPositiveInteger, prepareFindCommand(argWithMaxPositiveInteger));
+
+        // No arg for contacted date -> parse successful.
+        String emptyContactedDateArg = " c/";
+        assertParseSuccess(parser, emptyContactedDateArg, prepareFindCommand(emptyContactedDateArg));
+
+        // No arg for memo -> parse successful.
+        String emptyMemoArg = " m/";
+        assertParseSuccess(parser, emptyMemoArg, prepareFindCommand(emptyMemoArg));
+
+        // Input is 1000 characters -> parse successful. Boundary value.
+        String inputExceedingThousandChar = " n/" + "a".repeat(1000);
+        assertParseSuccess(parser, inputExceedingThousandChar, prepareFindCommand(inputExceedingThousandChar));
     }
 
     /**

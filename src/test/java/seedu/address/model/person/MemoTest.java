@@ -79,6 +79,27 @@ public class MemoTest {
     }
 
     @Test
+    public void exactEquals() {
+        // same object -> returns true
+        assertTrue(validMemoAmy.exactEquals(validMemoAmy));
+
+        // same values -> returns true
+        Memo validMemoCopy = new Memo(validMemoAmy.memo);
+        assertTrue(validMemoAmy.exactEquals(validMemoCopy));
+
+        // different capitalization -> returns false
+        Memo validMemoAmyAllCaps = new Memo(VALID_MEMO_AMY.toUpperCase());
+        assertFalse(validMemoAmy.exactEquals(validMemoAmyAllCaps));
+
+        // null -> returns false
+        assertFalse(validMemoAmy.exactEquals(null));
+
+        // different memo -> returns false
+        Memo differentMemo = new Memo(VALID_MEMO_BOB);
+        assertFalse(validMemoAmy.exactEquals(differentMemo));
+    }
+
+    @Test
     public void equals() {
         // same object -> returns true
         assertTrue(validMemoAmy.equals(validMemoAmy));
@@ -88,7 +109,7 @@ public class MemoTest {
         assertTrue(validMemoAmy.equals(validMemoCopy));
 
         // different capitalization -> returns true
-        Memo validMemoAmyAllCaps = new Memo(VALID_MEMO_AMY);
+        Memo validMemoAmyAllCaps = new Memo(VALID_MEMO_AMY.toUpperCase());
         assertTrue(validMemoAmy.equals(validMemoAmyAllCaps));
 
         // different types -> returns false

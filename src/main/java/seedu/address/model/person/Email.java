@@ -9,11 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    public static final int MAXIMUM_LENGTH = 400;
+    public static final int CHARACTER_LIMIT = 400;
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
-            + "1. The total length of email should not exceed " + MAXIMUM_LENGTH + " characters\n"
+            + "1. The total length of email should not exceed " + CHARACTER_LIMIT + " characters\n"
             + "2. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
             + "characters.\n"
@@ -30,8 +30,8 @@ public class Email {
     private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$";
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-    public static final String VALIDATION_REGEX = "(?=^.{1," + MAXIMUM_LENGTH + "}$)"
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)+" + DOMAIN_LAST_PART_REGEX;
+    public static final String VALIDATION_REGEX = "(?=^.{1," + CHARACTER_LIMIT + "}$)"
             + LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
     public final String email;
 
@@ -62,12 +62,22 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && email.equalsIgnoreCase(((Email) other).email)); // state check
+                && email.equalsIgnoreCase(((Email) other).email)); // case-insensitive
+    }
+
+    /**
+     * Returns true if both email addresses are identical (case-sensitive).
+     *
+     * @param otherEmail The other email address.
+     * @return true if both email addresses are identical.
+     */
+    public boolean exactEquals(Email otherEmail) {
+        return otherEmail != null
+                && email.equals(otherEmail.email);
     }
 
     @Override
     public int hashCode() {
         return email.toLowerCase().hashCode();
     }
-
 }

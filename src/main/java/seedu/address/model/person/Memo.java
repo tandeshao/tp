@@ -10,14 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Memo {
 
     /** Maximum characters allowed. */
-    public static final int MAXIMUM_CHARACTERS = 1000;
+    public static final int CHARACTER_LIMIT = 1000;
 
     /** String message that represents message constraints. */
-    public static final String MESSAGE_CONSTRAINTS = "Memo can take any values, up to a maximum of "
-            + MAXIMUM_CHARACTERS + " characters";
+    public static final String MESSAGE_CONSTRAINTS = "Memo can only be up to a maximum of "
+            + CHARACTER_LIMIT + " characters";
 
     /** Every character is allowed, up to a maximum of MAXIMUM_CHARACTERS. */
-    public static final String VALIDATION_REGEX = ".{0," + MAXIMUM_CHARACTERS + "}";
+    public static final String VALIDATION_REGEX = ".{0," + CHARACTER_LIMIT + "}";
 
     /** A static empty {@code Memo} object. */
     public static final Memo EMPTY_MEMO = new Memo("");
@@ -75,7 +75,18 @@ public class Memo {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Memo // instanceof handles nulls
-                && memo.equalsIgnoreCase(((Memo) other).memo)); // state check
+                && memo.equalsIgnoreCase(((Memo) other).memo)); // case-insensitive
+    }
+
+    /**
+     * Returns true if both memos are identical (case-sensitive).
+     *
+     * @param otherMemo The other memo.
+     * @return true if both memos are identical.
+     */
+    public boolean exactEquals(Memo otherMemo) {
+        return otherMemo != null
+                && memo.equals(otherMemo.memo);
     }
 
     /**

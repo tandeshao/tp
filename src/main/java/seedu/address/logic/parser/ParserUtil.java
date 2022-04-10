@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.trimExtraWhiteSpaces;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer. \n%1$s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -163,16 +164,6 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Replaces 2 or more consecutive whitespaces between words with a single whitespace.
-     *
-     * @param str String to be trimmed.
-     * @return Trimmed string with extra whitespaces removed.
-     */
-    private static String trimExtraWhiteSpaces(String str) {
-        return str.replaceAll("\\s{2,}", " ");
     }
 
 }
