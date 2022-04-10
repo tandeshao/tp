@@ -89,7 +89,7 @@ When this document is read, certain words or sentences are represented in differ
 
 Symbol | What it means |
 -----|----------------|
-`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause a response in Abπ
+`add` |  Words with this format are commands that can cause a response in Abπ.
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 
 :bulb: | Extra tip that may be useful to the reader.
@@ -654,7 +654,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 #### 4.10.3. Backing up the data file
 
-* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[_Abπ location_]/data/" as "backup[_DD-MM-YY HH-MM-SS_].json". The backup file format will be similar to the backup file shown in the image below.
+* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[Abπ location]/data/" as "backup_[DD-MM-YY HH-MM-SS].json". The backup file format will be similar to the backup file shown in the image below.
 
 ![backupFileImage.png](backupFileImage.png)
 
