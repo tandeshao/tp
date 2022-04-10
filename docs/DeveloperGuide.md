@@ -58,6 +58,7 @@ Symbol | What it means |
 :bulb: | Extra tip that may be useful to the reader.
 :information_source: | Important information to take note.
 [here](#1-conventions) |Words that are in this format are clickable links that directs you to a certain webpage.
+
 ---
 
 ## 2. Setting up, getting started
