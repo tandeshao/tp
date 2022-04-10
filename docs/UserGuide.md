@@ -111,8 +111,6 @@ Symbol | What it means |
 4. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3.
 
 5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
-   
-   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
@@ -183,9 +181,9 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
   
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
-* <a name="index" />The index refers to the index number shown in the displayed person list. The index must be a positive integer between 1 and 2147483647.
+* <a name="index" />Index refers to the index number shown in the displayed person list, and it must be positive integer between 1 and 2147483647.
 
-* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. e.g. "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown, that it needs to be a valid date following the dd-mm-yyyy format.
+* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
 </div>
 
