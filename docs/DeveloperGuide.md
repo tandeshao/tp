@@ -655,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any mainstream Operating System as long as it has Java `11` or above installed.
+1. Should work on any Mainstream Operating System as long as it has Java `11` or above installed.
 2. Should be for a single user i.e. (not a multi-user product).
 3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 4. Should respond to a command within 2 seconds.
