@@ -5,7 +5,7 @@
 start
 :press UP/DOWN arrow-key;
 
-if (Exist previous/next command) then ([yes])
+if () then ([Exist previous/next command])
   :pointer decreases/increases;
   :fetch the result from list;
   :fill into the textbox;
