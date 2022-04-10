@@ -628,7 +628,8 @@ Guarantees: Editing a contact is successful.
 <br>
 1c. Abπ detects user-specified detail is the same as the contact detail.
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that there is no change in contact information.
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that there is no change in contact <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
 <br>
@@ -831,7 +832,7 @@ Guarantees: Viewing contact details is successful.
 **MSS**
 
 1. User requests to view details of a contact.
-2. Abπ removes all contacts from the list of contacts.
+2. Abπ shows the details of a contact.
    <br>
    Use case ends.
 
@@ -911,15 +912,15 @@ Guarantees: All contacts in Abπ are shown.
 
 <br>
 
-**Use case: UC10 - Copying all contacts' email**
+**Use case: UC10 - Copying all emails**
 
-Guarantees: All the contacts' emails are copied.
+Guarantees: All the emails are copied.
 <br>
 
 **MSS**
 
-1. User requests to copy all contacts' email.
-2. Abπ copies all contacts' email to the user's clipboard.
+1. User requests to copy all emails.
+2. Abπ copies all emails to the user's clipboard.
    <br>
    Use case ends.
 
@@ -1058,6 +1059,7 @@ Guarantees: User will exit Abπ.
    Use case ends.
 
 **Extensions**
+
 1a. Abπ detects an error in the input format.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
