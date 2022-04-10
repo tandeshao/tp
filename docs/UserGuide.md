@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 ## Overview
-AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
+AddressBook pi (**Abπ**) is a **360° all-rounded desktop app for managing contacts**, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
 
 ---
 
@@ -111,8 +111,6 @@ Symbol | What it means |
 4. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3.
 
 5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
-   
-   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
@@ -155,7 +153,7 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 ## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-![UiGuide](images/ug/UiGuide.png)
+![UiGuide](images/UiGuide.png)
 
 For each contact in the Contact Display, information is displayed as follows:
 
@@ -187,9 +185,9 @@ For each contact in the Contact Display, information is displayed as follows:
   
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
-* <a name="index" />The index refers to the index number shown in the displayed person list. The index must be a positive integer between 1 and 2147483647.
+* <a name="index" />Index refers to the index number shown in the contact display. Index must be positive integer between 1 and 2147483647.
 
-* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. e.g. "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown, that it needs to be a valid date following the dd-mm-yyyy format.
+* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
 </div>
 

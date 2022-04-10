@@ -8,9 +8,9 @@ title: Abπ
 
 ![Ui](images/Ui.png)
 
-**Abπ is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+AddressBook pi (**Abπ**) is a **360° all-rounded desktop app for managing contacts**, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person.
 
-* If you are interested in using Abπ, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested in using Abπ, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#2-quick-start).
 * If you are interested about developing Abπ, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
