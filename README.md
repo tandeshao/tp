@@ -12,7 +12,7 @@ users who prefer typing via the Command Line Interface(CLI) while still having t
 It helps users keep track of their professional contacts, separating it from their personal contacts.
 <br>
 
-![Ui](docs/images/ug/Ui.png)
+![Ui](docs/images/Ui.png)
 
 **Basic Features in AB3:**
 - [x] Add contacts.
