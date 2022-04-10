@@ -552,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.3. Use cases
 
-(For all use cases below, the **System** is the `Abπ` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Abπ` and the **Actor** is `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a person**
 <br>
@@ -587,8 +587,6 @@ Use case ends.
 &nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the input entered is valid.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
-
-<br>
 
 **Use case: UC02 - Edit a person**
 <br>
@@ -636,8 +634,6 @@ Guarantees: Editing a contact is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
-
 **Use case: UC03 - Appending tags to a contact**
 <br>
 Precondition: There is at least 1 contact in Abπ.
@@ -681,9 +677,6 @@ Guarantees: Appending tags to a contact is successful.
 &nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until valid tags are provided by the user.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
-
-
-<br>
 
 **Use case: UC04 - Deleting tags from a contact**
 <br>
@@ -729,8 +722,6 @@ Guarantees: Deleting tags from a contact is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
-
 **Use case: UC04 - Deleting a contact**
 <br>
 Precondition: There is at least 1 contact in Abπ.
@@ -767,7 +758,6 @@ Guarantees: Deleting a contact is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC05 - Deleting multiple contacts**
 <br>
@@ -793,8 +783,6 @@ Guarantees: Deleting multiple contacts is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
-
 **Use case: UC06 - Clearing all contacts**
 <br>
 Guarantees: Removing all contacts is successful.
@@ -819,7 +807,6 @@ Guarantees: Removing all contacts is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC07 - View contact details**
 Precondition: There is at least 1 contact in Abπ.
@@ -856,7 +843,6 @@ Guarantees: Viewing contact details is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC08 - Find contacts**
 Guarantees: Finding of contacts is successful.
@@ -881,7 +867,6 @@ Guarantees: Finding of contacts is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC09 - List all contacts**
 Guarantees: All contacts in Abπ are shown.
@@ -906,7 +891,6 @@ Guarantees: All contacts in Abπ are shown.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC10 - Copying all contacts' email**
 Guarantees: All the contacts' emails are copied.
@@ -930,8 +914,6 @@ Guarantees: All the contacts' emails are copied.
 &nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
-
-<br>
 
 **Use case: UC11 - Undoing actions made by Abπ**
 Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
@@ -957,7 +939,6 @@ Guarantees: Undoing previously made actions by Abπ is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC12 - Redoing actions made by Abπ**
 Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
@@ -983,7 +964,6 @@ Guarantees: Redoing an undid action is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC13 - User is able to retrieve previously executed commands**
 <br>
@@ -1011,7 +991,6 @@ Guarantees: Retrieving a previously executed command is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC14 - Get help**
 <br>
@@ -1037,7 +1016,6 @@ Guarantees: User will get instructions on how to get help.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-<br>
 
 **Use case: UC15 - Exit**
 <br>
