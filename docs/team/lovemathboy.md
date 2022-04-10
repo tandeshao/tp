@@ -31,7 +31,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Added documentation for `copyemails` and `view` commands (PR [\#40](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/40), [\#190](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/190))
     * Added several images to illustrate command usage and UI (PR [\#294](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/294))
   * Developer Guide:
-    * Added implementation details of the Person Display Panel (PR [\#305](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/305))
+    * Added implementation details of the Person Display Panel (PR [\#307](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/307))
 * **Contributions to team-based tasks**:
   * Enabled assertions for team repo.
   * Main code quality checker and debugger.
