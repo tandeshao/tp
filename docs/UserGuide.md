@@ -157,6 +157,9 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
 ![UiGuide](images/ug/UiGuide.png)
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -174,9 +177,15 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * Parameters can be in any order. e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* Trailing and leading white spaces will be trimmed, i.e. <code>&#160;&#160; delete 1</code> or <code>delete 1 &#160;&#160;</code> will be treated as `delete 1`. 
 
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
+
+* <a name="index" />The index refers to the index number shown in the displayed person list. The index must be a positive integer between 1 and 2147483647.
+
+* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. e.g. "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown, that it needs to be a valid date following the dd-mm-yyyy format.
 
 </div>
 
@@ -191,7 +200,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 * Contacted date, memo, and tag are optional.
-* Contacted date must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must follow the [specified format](#date).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags, including 0.
@@ -216,13 +225,13 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
-* If contacted date is specified, it must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must follow the [specified format](#date).
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -248,7 +257,7 @@ Appends one or more tags to a specified person in the address book.
 
 Format: `addtag INDEX t/TAG…`
 
-* Appends one or more tags to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Appends one or more tags to the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * If any of the tag to be appended already exists in the person's tag list, the command will be rejected.
 
 Examples:
@@ -265,7 +274,7 @@ Deletes one or more tags of a specified person in the address book.
 
 Format: `deletetag INDEX t/TAG…`
 
-* Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes one or more tags of the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -289,9 +298,7 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -359,9 +366,7 @@ Displays the detailed description of the selected person on the right side of th
 
 Format: `view INDEX`
 
-* Displays detailed information of person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Displays detailed information of person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 
 Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
@@ -678,7 +683,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Scrub** | `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​` <br> e.g., `scrub e/@gmail.com`
 **Clear** | `clear`
-**View** | `view INDEX`
+**View** | `view INDEX`<br> e.g., `view 1`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **List** | `list`
 **CopyEmails**| `copyemails`
