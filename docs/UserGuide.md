@@ -112,7 +112,7 @@ Symbol | What it means |
 
 5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
    
-   ![Ui](images/ug/Ui.png)
+   ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
@@ -155,7 +155,7 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 ## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-![UiGuide](images/ug/UiGuide.png)
+![UiGuide](images/UiGuide.png)
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.

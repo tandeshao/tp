@@ -6,7 +6,7 @@ title: Abπ
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T17-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T17-4/tp/branch/master/graph/badge.svg?token=C3O19DLUN8)](https://codecov.io/gh/AY2122S2-CS2103T-T17-4/tp)
 
-![Ui](images/ug/Ui.png)
+![Ui](images/Ui.png)
 
 **Abπ is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
