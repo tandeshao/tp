@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INTEGER_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -28,8 +29,8 @@ public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified tags (case-insensitive) of the "
-            + "person identified by the index number used in the displayed person list. \n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "person identified by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a " + MESSAGE_INTEGER_RANGE + ") "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";

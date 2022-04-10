@@ -30,9 +30,13 @@ title: Developer Guide
 &nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
 [7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
 &nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
-&nbsp;&nbsp;[7.2. Deleting a person](#72-deleting-a-person) <br/>
-&nbsp;&nbsp;[7.3. Editing a person's memo](#73-editing-a-persons-memo) <br/>
-&nbsp;&nbsp;[7.4. Saving data](#74-saving-data) <br/>
+&nbsp;&nbsp;[7.2. Adding a person](#72-adding-a-person) <br/>
+&nbsp;&nbsp;[7.3. Editing a person](#73-editing-a-person) <br/>
+&nbsp;&nbsp;[7.4. Adding tags to a person](#74-adding-tags-to-a-person) <br/>
+&nbsp;&nbsp;[7.5. Deleting tags of a person](#75-deleting-tags-of-a-person) <br/>
+&nbsp;&nbsp;[7.6. Deleting a person](#76-deleting-a-person) <br/>
+&nbsp;&nbsp;[7.7. Finding persons by their attributes](#77-finding-persons-by-their-attributes) <br/>
+&nbsp;&nbsp;[7.8. Saving data](#78-saving-data) <br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -514,23 +518,14 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Target user profile**:
 
-* Marcus is a 26 years old fresh graduate and has started working as a financial advisor.
-* He is well versed in tech and prefers a command-line interface for performing tasks.
-* Due to the nature of his work, he stores numerous client contacts on his google contacts, but dislikes it’s interface.
-* He dislikes mixing his professional and personal contacts.
-* He wants a way to store his clientele details in a separate place.
-* He likes to get things done fast.
-* He prefers typing over using a mouse.
-* He is reasonably comfortable using CLI apps.
+* individuals who want an organized address book
+* with a need to categorize contacts
+* with a need to filter contacts based on attributes
+* prefer desktop applications over other types
+* fast-typers
+* comfortable with command line interface
 
-
-**Value proposition**:
-- Manage contacts faster than a typical mouse/GUI driven app.
-- Display all relevant information of clients on a single application.
-- Saves the insurance agent time and effort to look for a contact.
-- Allow users to consolidate notes pertaining to their clients in a convenient way.
-
-
+**Value proposition**: Consolidate information of contacts on a single application and manage them faster than typical mouse/GUI driven app.
 
 ### 6.2. User stories
 
@@ -545,15 +540,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | edit a contact                                            | correct mistakes I’ve made when adding in the contacts                        |
 | `* * *`  | user     | find my contacts                                          | access my desired contact without having to sieve through my entire phonebook |
 | `* * *`  | user     | save my contacts in the phonebook                         | whenever I re-launch the application, my contacts will still be in it         |
-| `* * *`  | user     | create tags and group the contacts using them             | separate my work and personal contacts                                        |
-| `* * *`  | user     | clear all my entries with a single command                | remove all my contacts without having to manually delete them one at a time   |
-| `* * *`  | user     | delete a person                                           | remove entries that I no longer need                                          |
-| `* * *`  | user     | find a person by name                                     | locate details of persons without having to go through the entire list        |
-| `* * *`  | user     | undo my actions                                           | restore previous address book states                                          |
-| `* * *`  | user     | redo my actions                                           | restore previous undid address book states                                    |
-| `* *`    | user     | not have duplicated phone number or email                 | add and edit contacts without keeping track of duplicates                     |
-| `* *`    | user     | invoke my most recently used command                      | add/modify/delete multiple contacts in a more efficient manner                |
-| `* *`    | user     | find contacts by their name, phone number, tags and email | find the contacts I want quickly                                              |
+| `* * *`  | user     | assign tags to contacts                                   | categorise my contacts                                                        |
+| `* * *`  | user     | delete a person                                           | remove contacts that I no longer need                                         |
+| `* * *`  | user     | clear all contacts with a single command                  | remove all my contacts without having to manually delete them one at a time   |
+| `* * *`  | user     | undo my actions                                           | reverse an accidental command execution                                       |
+| `* * *`  | user     | redo my actions                                           | reverse the undo                                                              |
+| `* *`    | user     | not have duplicated contacts                              | add and edit contacts without keeping track of duplicates                     |
+| `* *`    | user     | invoke my most recently used command                      | access commands that I recently executed                                      |
 | `* *`    | user     | have a memo for each contact                              | keep track of miscellaneous information about a person                        |
 | `* *`    | user     | keep track of the last contacted date of a person         | identify how long it has been since I last contacted a person                 |
 
@@ -1072,22 +1065,25 @@ Guarantees: User will exit Abπ.
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The main window should be resizable in order to fit different screen size.
-
-*{More to be added}*
+1. Should work on any Mainstream Operating System as long as it has Java `11` or above installed.
+2. Should be for a single user i.e. (not a multi-user product).
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should respond to a command within 2 seconds.
+5. Should work without requiring an installer.
+6. Should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
+7. The data should be stored locally and should be in a human editable text file.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### 6.5. Glossary
 
-* **OS**: Operating System
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Abπ**: AddressBook pi
+* **CLI**: Command-Line Interface
 * **DRY**: Don't repeat yourself
+* **GUI**: Graphical User Interface
 * **JSON**: JavaScript Object Notation
+* **MSS**: Main Success Scenario
+* **Mainstream Operating System**: Windows, Linux, Unix, OS-X
 * **OOP**: Object-oriented programming
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1103,51 +1099,206 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the [jar](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases) file and copy into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 1.
+   
+    3. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar <br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app. <br>
        Expected: The most recent window size and location is retained.
 
-### 7.2. Deleting a person
+### 7.2. Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: A person with the same name, phone and email must not already exist in the app, otherwise it will be considered as a duplicate.
+
+    2. Test case: `add n/Mark Tay p/91238492 e/marktay@example.com a/markbuilding` <br>
+       Expected: A person with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added person shown in the status message and the detailed person display.
+
+    3. Test case: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague` <br>
+       Expected: A person with the name "James Ho", phone "22224444", email "jamesho@example.com", address "123, Clementi Rd, 1234665", contacted date "01-01-2020", memo "Avid hiker", tags "friend" "colleague", is added. Details of the added person shown in the status message and the detailed person display. 
+
+    4. Other incorrect add commands to try: `add`, `add hello`, `add p/123 e/123@example.com a/123` (missing name) <br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
+
+    5. Note:
+       - Name, phone, email and address are compulsory attributes that must be specified when using the add command.
+       - If a person with the same name, phone and email already exist, a duplicate error message will be shown.
+       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+
+### 7.3. Editing a person
+
+1. Editing a person's attributes while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `edit 1 n/Bob` <br>
+       Expected: First contact's name is edited to "Bob". Details of the edited contact shown in the status message and the detailed person display.
+
+    3. Test case: `edit 1 p/98765432` <br>
+       Expected: First contact's phone is edited to "98765432". Details of the edited contact shown in the status message and the detailed person display.
+
+    4. Test case: `edit 1 e/example@example.com` <br>
+       Expected: First contact's email is edited to "example@example.com". Details of the edited contact shown in the status message and the detailed person display.
+
+    5. Test case: `edit 1 a/123 street` <br>
+       Expected: First contact's address is edited to "123 street". Details of the edited contact shown in the status message and the detailed person display.
+
+    6. Test case: `edit 1 c/` <br>
+       Expected: First contact's contacted date is edited to "Not contacted". Details of the edited contact shown in the status message and the detailed person display.
+
+    7. Test case: `edit 1 c/01-01-2020` <br>
+       Expected: First contact's contacted date is edited to "Last contacted on 01-01-2020". Details of the edited contact shown in the status message and the detailed person display.
+
+    8. Test case: `edit 1 m/`<br>
+       Expected: First contact's memo is cleared. Details of the edited contact shown in the status message and the detailed person display.
+
+    9. Test case: `edit 1 m/Avid hiker`<br>
+       Expected: First contact's memo is edited to "Avid hiker". Details of the edited contact shown in the status message and the detailed person display.
+
+    10. Test case: `edit 1 t/`<br>
+        Expected: First contact's tags are cleared. Details of the edited contact shown in the status message and the detailed person display.
+
+    11. Test case: `edit 1 t/friend t/colleague`<br>
+        Expected: First contact's tags are edited to "friend" and "colleague". Details of the edited contact shown in the status message and the detailed person display.
+
+    12. Other incorrect edit commands to try: `edit`, `edit 1 bob`, `edit x m/Avid hiker` (where x is an integer smaller than 1 or larger than 2147483647) <br>
+        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
+
+    13. Other incorrect edit commands to try: `edit x m/Avid hiker` (where x is an integer larger than the list size and smaller than 2147483648) <br>
+        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+
+    14. Other incorrect edit commands to try: `edit 1` <br>
+        Expected: Message displaying that at least one field to edit must be provided. The text in the command box will also turn red.
+
+    15. Note:
+        - Multiple attributes can be edited at once by specifying the respective prefix.
+        - If a person with the same name, phone and email already exist, a duplicate error message will be shown.
+        - If the edit does not change anything, a nothing will change error message will be shown.
+        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+
+### 7.4. Adding tags to a person
+
+1. Adding tags to a person while all persons are being shown
+   
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate.
+    
+    2. Test case: `addtag 1 t/family` <br>
+       Expected: First contact's tags are appended with "family". Details of the appended tag shown in the status message and the detailed person display.
+
+    3. Test case: `addtag 1 t/colleague t/pal` <br>
+       Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags shown in the status message and the detailed person display.
+
+    4. Other incorrect addtag commands to try: `addtag`, `addtag hello`, `addtag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
+
+    5. Other incorrect addtag commands to try: `addtag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
+       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+
+    6. Other incorrect addtag commands to try: `addtag 1` <br>
+           Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
+
+    7. Note:
+       - If any of the tags to be added already exist in the specified person, a tag already present error message will be shown.
+       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+
+### 7.5. Deleting tags of a person
+
+1. Deleting tags of a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be deleted must exist in the specified contact.
+
+    2. Test case: `deletetag 1 t/friends` <br>
+       Expected: First contact's tag "friends" is deleted. Details of the deleted tag shown in the status message and the detailed person display.
+
+    3. Test case: `deletetag 2 t/colleagues t/friends` <br>
+       Expected: Second contact's tags "colleagues" and "friends" are deleted. Details of the deleted tags shown in the status message and the detailed person display.
+
+    4. Other incorrect deletetag commands to try: `deletetag`, `deletetag hello`, `deletetag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
+
+    5. Other incorrect deletetag commands to try: `deletetag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
+       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+
+    6. Other incorrect deletetag commands to try: `deletetag 1` <br>
+       Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
+
+    7. Note:
+        - If any of the tags to be deleted does not exist in the specified person, a tag does not exist error message will be shown.
+        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+
+### 7.6. Deleting a person
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1` <br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an integer smaller than 1 or larger than 2147483647) <br>
+       Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
+      Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. 
 
-### 7.3. Editing a person's memo
+### 7.7. Finding persons by their attributes
 
-1. Editing a person's memo while all persons are being shown
+1. Finding a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `edit 1 m/interested in xx policy`<br>
-       Expected: First contact's memo is edited to "interested in xx policy". Details of the edited contact shown in the status message.
+    2. Test case: `find n/alex` <br>
+       Expected: The list will be filtered to show only contacts with name containing "john". The number of contacts listed will be shown in the status message.
+   
+    3. Test case: `find p/2021` <br>
+       Expected: The list will be filtered to show only contacts with phone containing "2021". The number of contacts listed will be shown in the status message.
 
-    3. Test case: `edit 2 m/`<br>
-       Expected: Second contact's memo is cleared. Details of the edited contact shown in the status message.
+    4. Test case: `find e/@example` <br>
+       Expected: The list will be filtered to show only contacts with email containing "@example". The number of contacts listed will be shown in the status message.
 
-    4. Other incorrect edit commands to try: `edit`, `edit 1 bob`, `edit x m/VP`, `...` (where x is larger than the list size or smaller than 1)<br>
-       Expected: Invalid command message displaying the format for proper command usage.
+    5. Test case: `find a/geylang` <br>
+       Expected: The list will be filtered to show only contacts with address containing "geylang". The number of contacts listed will be shown in the status message.
 
-### 7.4. Saving data
+    6. Test case: `find m/` <br>
+       Expected: The list will be filtered to show only contacts that do not have a memo. The number of contacts listed will be shown in the status message.
 
-1. Dealing with missing/corrupted data files
+    7. Test case: `find m/climber` <br>
+       Expected: The list will be filtered to show only contacts with memo containing "climber". The number of 
+a       contacts listed will be shown in the status message.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    8. Test case: `find c/` <br>
+       Expected: The list will be filtered to show only contacts that have not been contacted at all. The number of contacts listed will be shown in the status message.
+   
+    9. Test case: `find c/5` <br>
+       Expected: The list will be filtered to show only contacts that have not been contacted for more than 5 days. The number of contacts listed will be shown in the status message.
 
-1. _{ more test cases …​ }_
+    10. Test case: `find t/friends` <br>
+         Expected: The list will be filtered to show only contacts with a tag that exactly matches "friends". The number of contacts listed will be shown in the status message.
+
+    11. Other incorrect find commands to try: `find` <br>
+        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
+
+    12. Other incorrect delete commands to try: `find bob` <br>
+        Expected: Message displaying that at least one valid prefix must be provided. The text in the command box will also turn red.
+   
+    13. Note:
+        - Refer to [4.2. Find feature](#42-find-feature) for specific details about the `find` command.
+
+### 7.8. Saving data
+
+1. Dealing with corrupted data files
+
+   1. Prerequisites: There must be an "addressbook.json" data file in the "[_Abπ location_]/data/" folder
+   2. Remove a line from "addressbook.json" to corrupt it. 
+   3. Launch "Abpi.jar". 
+   4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
+   5. Close the app. <br>
+      Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup[_DD-MM-YY HH-MM-SS_].json" in the same folder.

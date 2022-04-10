@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -20,7 +21,7 @@ import seedu.address.model.tag.Tag;
 
 class AddTagCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(ParserUtil.MESSAGE_INVALID_INDEX, AddTagCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE);
 
     private AddTagCommandParser parser = new AddTagCommandParser();
 

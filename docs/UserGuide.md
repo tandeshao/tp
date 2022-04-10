@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 ## Overview
-AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
+AddressBook pi (**Abπ**) is a **360° all-rounded desktop app for managing contacts**, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
 
 ---
 
@@ -102,19 +102,17 @@ Symbol | What it means |
 
 ## 2. Quick start
 ### 2.1. Installation
-1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your Computer.
-
+1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your computer.
+   
 2. Download the latest Abpi.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
-
+   
 3. Place the file in an empty folder.
 
-4. Double-click the file to start the app. After 10 seconds, if the app did not start, follow these steps:
-   1. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3. 
-   2. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
-   
-   ![Ui](images/ug/Ui.png)
+4. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
+5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
 
    * `list`: Lists all contacts.
@@ -127,7 +125,7 @@ Symbol | What it means |
 
    * `exit` : Exits the app.
 
-6. Refer to the [features](#4-features) below for details of each command.
+7. Refer to the [features](#4-features) below for details of each command.
 
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
@@ -155,8 +153,15 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 ## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-![UiGuide](images/ug/UiGuide.png)
+![UiGuide](images/UiGuide.png)
 
+For each contact in the Contact Display, information is displayed as follows:
+
+![PersonCard](images/ug/PersonCard.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -174,9 +179,15 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
 
 * Parameters can be in any order. e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* Trailing and leading white spaces will be trimmed, i.e. <code>&#160;&#160; delete 1</code> or <code>delete 1 &#160;&#160;</code> will be treated as `delete 1`. 
 
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
+
+* <a name="index" />Index refers to the index number shown in the contact display. Index must be positive integer between 1 and 2147483647.
+
+* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
 </div>
 
@@ -191,7 +202,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 * Contacted date, memo, and tag are optional.
-* Contacted date must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must follow the [specified format](#date).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags, including 0.
@@ -206,6 +217,16 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
+Visual Example:
+
+Upon executing the third example `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`:
+![AddCommand](images/ug/AddCommand.png)
+
+Observe how each part of the command specifies the details of Betsy Crowe. Notice that since `c/` (Contacted Date) is missing, the contact has the default Contacted Date of "Not contacted".
+
+![AddCommand2](images/ug/AddCommand2.png)
+
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -216,13 +237,13 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
-* If contacted date is specified, it must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. For both invalid date and incorrect format, the same error message will be shown, that it needs to be a valid date following the proper format.
+* If contacted date is specified, it must follow the [specified format](#date).
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -236,6 +257,13 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
+Visual Example:
+
+Upon executing example 1 `edit 1 n/John Doe p/91234567 e/johndoe@example.com`:
+
+![EditCommand](images/ug/EditCommand.png)
+
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -248,12 +276,18 @@ Appends one or more tags to a specified person in the address book.
 
 Format: `addtag INDEX t/TAG…`
 
-* Appends one or more tags to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Appends one or more tags to the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * If any of the tag to be appended already exists in the person's tag list, the command will be rejected.
 
 Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
 * `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
+
+Visual Example:
+
+Upon executing example 2 `addtag 2 t/colleagues t/friends`:
+
+![AddTagCommand](images/ug/AddTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -265,7 +299,7 @@ Deletes one or more tags of a specified person in the address book.
 
 Format: `deletetag INDEX t/TAG…`
 
-* Deletes one or more tags of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes one or more tags of the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 * If any of the tag to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -276,6 +310,12 @@ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Ed
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
+
+Visual Example:
+
+Continuing from the visual example in [4.2.1. Adding tags to a person](#421-adding-tags-to-a-person-addtag), upon executing `deletetag 2 t/colleagues t/friends`:
+
+![DeleteTagCommand](images/ug/DeleteTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -289,9 +329,7 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -337,6 +375,12 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
+Visual Example:
+
+Upon executing the command `scrub t/friends`:
+
+![ScrubCommand](images/ug/ScrubCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -359,13 +403,18 @@ Displays the detailed description of the selected person on the right side of th
 
 Format: `view INDEX`
 
-* Displays detailed information of person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Displays detailed information of person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 
 Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
 * `find n/John` followed by `view 1` displays the 1st person in the results of the `find` command.
+
+Visual Example:
+
+Upon executing the command `view 3`:
+
+![ViewCommand](images/ug/ViewCommand.png)
+
 
 <div markdown="span" class="alert alert-info">
 
@@ -678,7 +727,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Scrub** | `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​` <br> e.g., `scrub e/@gmail.com`
 **Clear** | `clear`
-**View** | `view INDEX`
+**View** | `view INDEX`<br> e.g., `view 1`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEMO] [t/TAG] [c/Days]…​` <br> e.g., `find n/James Jake`
 **List** | `list`
 **CopyEmails**| `copyemails`
