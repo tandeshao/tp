@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -38,7 +39,7 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private static final Logger LOGGER = Logger.getLogger(AddressBookParser.class.getName());
+    private static final Logger LOGGER = LogsCenter.getLogger(AddressBookParser.class.getName());
 
     /**
      * Parses user input into command for execution.
