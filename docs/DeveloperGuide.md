@@ -518,23 +518,14 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Target user profile**:
 
-* Marcus is a 26 years old fresh graduate and has started working as a financial advisor.
-* He is well versed in tech and prefers a command-line interface for performing tasks.
-* Due to the nature of his work, he stores numerous client contacts on his google contacts, but dislikes it’s interface.
-* He dislikes mixing his professional and personal contacts.
-* He wants a way to store his clientele details in a separate place.
-* He likes to get things done fast.
-* He prefers typing over using a mouse.
-* He is reasonably comfortable using CLI apps.
+* individuals who want an organized address book
+* with a need to categorize contacts
+* with a need to filter contacts based on attributes
+* prefer desktop applications over other types
+* fast-typers
+* comfortable with command line interface
 
-
-**Value proposition**:
-- Manage contacts faster than a typical mouse/GUI driven app.
-- Display all relevant information of clients on a single application.
-- Saves the insurance agent time and effort to look for a contact.
-- Allow users to consolidate notes pertaining to their clients in a convenient way.
-
-
+**Value proposition**: Consolidate information of contacts on a single application and manage them faster than typical mouse/GUI driven app.
 
 ### 6.2. User stories
 
@@ -664,22 +655,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The main window should be resizable in order to fit different screen size.
-
-*{More to be added}*
+1. Should work on any Mainstream Operating System as long as it has Java `11` or above installed.
+2. Should be for a single user i.e. (not a multi-user product).
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should respond to a command within 2 seconds.
+5. Should work without requiring an installer.
+6. Should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
+7. The data should be stored locally and should be in a human editable text file.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### 6.5. Glossary
 
-* **OS**: Operating System
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Abπ**: AddressBook pi
+* **CLI**: Command-Line Interface
 * **DRY**: Don't repeat yourself
+* **GUI**: Graphical User Interface
 * **JSON**: JavaScript Object Notation
+* **MSS**: Main Success Scenario
+* **Mainstream Operating System**: Windows, Linux, Unix, OS-X
 * **OOP**: Object-oriented programming
-
 
 --------------------------------------------------------------------------------------------------------------------
 
