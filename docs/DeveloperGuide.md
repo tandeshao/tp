@@ -1087,9 +1087,9 @@ Guarantees: User will exit Abπ.
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any Mainstream Operating System as long as it has Java `11` or above installed.
+1. Should work on any Mainstream Operating System as long as it has Java 11 or above installed.
 2. Should be for a single user i.e. (not a multi-user product).
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 4. Should respond to a command within 2 seconds.
 5. Should work without requiring an installer.
 6. Should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
