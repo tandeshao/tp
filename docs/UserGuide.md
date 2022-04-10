@@ -317,7 +317,7 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * The matching criteria is case-insensitive.
 * Prefix arguments must conform to the [attribute constraints](#1-introduction).  
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
 </div>
 
