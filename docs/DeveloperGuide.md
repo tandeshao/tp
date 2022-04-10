@@ -3,7 +3,8 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-[1. Acknowledgements](#1-acknowledgements) <br/>
+[Acknowledgements](#acknowledgements) <br/>
+[1. Conventions](#1-conventions) <br/>
 [2. Setting up, getting started](#2-setting-up-getting-started) <br/>
 [3. Design](#3-design) <br/>
 &nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br/>
@@ -32,21 +33,35 @@ title: Developer Guide
 &nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
 [7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
 &nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
-&nbsp;&nbsp;[7.2. Adding a person](#72-adding-a-person) <br/>
-&nbsp;&nbsp;[7.3. Editing a person](#73-editing-a-person) <br/>
-&nbsp;&nbsp;[7.4. Adding tags to a person](#74-adding-tags-to-a-person) <br/>
-&nbsp;&nbsp;[7.5. Deleting tags of a person](#75-deleting-tags-of-a-person) <br/>
-&nbsp;&nbsp;[7.6. Deleting a person](#76-deleting-a-person) <br/>
-&nbsp;&nbsp;[7.7. Finding persons by their attributes](#77-finding-persons-by-their-attributes) <br/>
+&nbsp;&nbsp;[7.2. Adding a contact](#72-adding-a-contact) <br/>
+&nbsp;&nbsp;[7.3. Editing a contact](#73-editing-a-contact) <br/>
+&nbsp;&nbsp;[7.4. Adding tags to a contact](#74-adding-tags-to-a-contact) <br/>
+&nbsp;&nbsp;[7.5. Deleting tags of a contact](#75-deleting-tags-of-a-contact) <br/>
+&nbsp;&nbsp;[7.6. Deleting a contact](#76-deleting-a-contact) <br/>
+&nbsp;&nbsp;[7.7. Finding contacts by their attributes](#77-finding-contacts-by-their-attributes) <br/>
 &nbsp;&nbsp;[7.8. Saving data](#78-saving-data) <br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 1. Acknowledgements
+## Acknowledgements
 
 * https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
 
 --------------------------------------------------------------------------------------------------------------------
+
+## 1. Conventions
+When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
+
+
+Symbol | What it means |
+-----|----------------|
+`add` | Words with this format are commands that can cause a response in Abπ or java class/variable names.
+*Italics* | Sentences that are in italics represent additional information.
+:bulb: | Extra tip that may be useful to the reader.
+:information_source: | Important information to take note.
+[here](#1-conventions) |Words that are in this format are clickable links that directs you to a certain webpage.
+
+---
 
 ## 2. Setting up, getting started
 
@@ -58,7 +73,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The ".puml" files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/docs/diagrams/) folder. _Refer to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams._
 </div>
 
 ### 3.1. Architecture
@@ -71,7 +86,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -93,8 +108,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its API in an interface with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API interface mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -104,13 +119,13 @@ The sections below give more details of each component.
 
 ### 3.2. UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -121,7 +136,7 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -157,7 +172,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -170,7 +185,7 @@ The `Model` component,
 
 ### 3.5. Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -260,7 +275,7 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
 
 </div>
@@ -366,7 +381,7 @@ Below is a table that shows the matching criteria that is used for each person's
 
 <br>
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** For all matching criteria, consecutive whitespaces in the query string is treated as a single whitespace. For example, `find n/Alex_ _ _Yeoh` would be treated as `find n/Alex_Yeoh` where "_" represents a single whitespace in the query string.
 </div>
 
@@ -383,12 +398,12 @@ Below is a table that shows the matching criteria that is used for each person's
 | Tags           | t/     | Exact string matching   | find t/Family would only match with anybody that has a tag that is equivalent to the string "family".           | 
 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
+<div markdown="span" class="alert alert-info">
+ :information_source: **Note:** Apart from the `c/` prefix, when multiple of the same prefix is specified in the find command, the search result is equivalent to combining the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `find n/alex n/yeoh` is semantically the same as telling ABπ to find all person that has the name "alex" or the name "yeoh". For `c/`, only the input arguments from the last `c/` prefix will be parsed into the find command. For example, `find c/ c/10` would only show contacts that had not been contacted for at least 10 days from the current date.        
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
+<div markdown="span" class="alert alert-info">
+ :information_source: **Note:** When multiple different prefixes are specified as arguments for the find command, the search result is equivalent to finding all common results between the different results generated from each individual prefix. In other words, `find n/alex p/9020040` is semantically the same as telling ABπ to find all person that has the name "alex" and the phone number "9020040".
 </div>
 
 <br>
@@ -404,7 +419,7 @@ Below is a table that shows the matching criteria that is used for each person's
   * Temporary workaround: Instead of searching for "gmail", users are able to search for "@gmail" if they would like to find all contacts that have the domain name set as "gmail".  
   
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** A word is defined as consecutive characters that is bounded by whitespaces.
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
@@ -501,7 +516,7 @@ For phone, even if there is a difference in white space, it is still considered 
 
 **Aspect: Phone number with '+':**
 * **Current implementation:** For `Phone`, a difference in '+' is considered as different.
-    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the [country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes). For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 ### 4.5. Detailed Person Display
@@ -551,23 +566,14 @@ To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches
 
 **Target user profile**:
 
-* Marcus is a 26 years old fresh graduate and has started working as a financial advisor.
-* He is well versed in tech and prefers a command-line interface for performing tasks.
-* Due to the nature of his work, he stores numerous client contacts on his google contacts, but dislikes it’s interface.
-* He dislikes mixing his professional and personal contacts.
-* He wants a way to store his clientele details in a separate place.
-* He likes to get things done fast.
-* He prefers typing over using a mouse.
-* He is reasonably comfortable using CLI apps.
+* individuals who want an organized address book
+* with a need to categorize contacts
+* with a need to filter contacts based on attributes
+* prefer desktop applications over other types
+* fast-typers
+* comfortable with command line interface
 
-
-**Value proposition**:
-- Manage contacts faster than a typical mouse/GUI driven app.
-- Display all relevant information of clients on a single application.
-- Saves the insurance agent time and effort to look for a contact.
-- Allow users to consolidate notes pertaining to their clients in a convenient way.
-
-
+**Value proposition**: Consolidate information of contacts on a single application and manage them faster than typical mouse/GUI driven app.
 
 ### 6.2. User stories
 
@@ -594,123 +600,545 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.3. Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Abπ` and the **Actor** is `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a person**
+<br>
+Guarantees: Adding a contact is successful.
+<br>
 
 **MSS**
 
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.
+1. User requests to add a person and provide details.
+2. Abπ adds the person to the list of contacts.
+<br>
+Use case ends.
 
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects user is attempting to add a contact that already exists.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user that the contact already exists.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC02 - Edit a person**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Editing a contact is successful.
+<br>
+
+**MSS**
+
+1. User requests to edit an existing contact in the contact list and provide details.
+2. Abπ updates the details of the contact.
+    <br>
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1c. Abπ detects user-specified detail is the same as the contact detail.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that there is no change in contact <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Edit a person**
-
-**MSS**
-
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to Edit a specific person in the list.
-4.  AddressBook update the person with new information.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-
-**Use case: Adding a tag to a person**
-
-**MSS**
-
-1.  User find a person.
-2.  AddressBook shows the searching result of the person.
-3.  User requests to add a tap to a specific person.
-4.  AddressBook adds that tag to the person.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. Cannot find the user.
-
-  Use case ends.
-
-* 3a. The tag is invalid.
-
-    * 3a1. The tag exist already.
-
-      ABπ show notification message.
-
-      Use case ends.
-
-    * 3a2. The tag exceeds the max length.
-
-      ABπ show error message.
-
-      Use case resumes at step 2.
-
-**Use case: Adding memo to a person**
+**Use case: UC03 - Appending tags to a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Appending tags to a contact is successful.
+<br>
 
 **MSS**
 
-1.  User find a person.
-2.  AddressBook shows the searching result of the person.
-3.  User requests to add memo to a specific person.
-4.  AddressBook adds that memo to the person.
-
-    Use case ends.
+1. User requests to append one or more tags to an existing contact in Abπ and provide details.
+2. Abπ updates the tag attribute for the contact by appending the new tags.
+   <br>
+   Use case ends.
 
 **Extensions**
 
-* 2a. Cannot find the user.
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+1c. Abπ detects that the user is attempting to append a tag that already exists in the contact.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user of the duplicated tag.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until valid tags are provided by the user.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-  Use case ends.
 
-* 3a. The memo is invalid.
+<br>
 
-    * 3a1. The memo exceeds the max length.
+**Use case: UC04 - Deleting tags from a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Deleting tags from a contact is successful.
+<br>
 
-      ABπ show error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to delete one or more existing tags for a contact and provide details.
+2. Abπ updates the tag attribute for the contact by deleting the user specified tags.
+   <br>
+   Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+1c. Abπ detects that the user is attempting to delete a non-existent tag in the contact.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c1. Abπ displays an error message and inform the user that the specified tag does not exist.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1c2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1c1 - 1c2 is repeated until valid tags are provided by the user.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC04 - Deleting a contact**
+<br>
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Deleting a contact is successful.
+<br>
+
+**MSS**
+
+1. User requests to delete one contact and provide details.
+2. Abπ deletes the contact from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC05 - Deleting multiple contacts**
+<br>
+Guarantees: Deleting multiple contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to delete multiple contacts and provide details.
+2. Abπ deletes the contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC06 - Clearing all contacts**
+<br>
+Guarantees: Removing all contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. Abπ removes all contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC07 - View contact details**
+
+Precondition: There is at least 1 contact in Abπ.
+<br>
+Guarantees: Viewing contact details is successful.
+<br>
+
+**MSS**
+
+1. User requests to view details of a contact.
+2. Abπ shows the details of a contact.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+<br>
+1b. Abπ detects an invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b1. Abπ displays an error message and inform the user of the invalid index.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1b2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1b1 - 1b2 is repeated until the index entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC08 - Find contacts**
+
+Guarantees: Finding of contacts is successful.
+<br>
+
+**MSS**
+
+1. User requests to find contacts and provide details.
+2. Abπ finds the contacts from the list of contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC09 - List all contacts**
+
+Guarantees: All contacts in Abπ are shown.
+<br>
+
+**MSS**
+
+1. User requests to list all contacts in Abπ.
+2. Abπ shows all contacts.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC10 - Copying all emails**
+
+Guarantees: All the emails are copied.
+<br>
+
+**MSS**
+
+1. User requests to copy all emails.
+2. Abπ copies all emails to the user's clipboard.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC11 - Undoing actions made by Abπ**
+
+Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
+<br>
+Guarantees: Undoing previously made actions by Abπ is successful.
+<br>
+**MSS**
+
+1. User requests to undo an action made by Abπ.
+2. Abπ undid the action.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC12 - Redoing actions made by Abπ**
+
+Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
+<br>
+Guarantees: Redoing an undid action is successful.
+<br>
+**MSS**
+
+1. User requests to redo an undid action.
+2. Abπ redid the action.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC13 - User is able to retrieve previously executed commands**
+<br>
+Precondition: There must be at least 1 executed command before the user requests to retrieve a previously executed command.
+<br>
+Guarantees: Retrieving a previously executed command is successful.
+<br>
+
+**MSS**
+
+1. User requests to retrieve a previously executed command.
+2. Abπ retrieves the command.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC14 - Get help**
+<br>
+Guarantees: User will get instructions on how to get help.
+<br>
+
+**MSS**
+
+1. User requests help from Abπ.
+2. Abπ provides instructions to the user on how to seek help.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+<br>
+
+**Use case: UC15 - Exit**
+<br>
+Guarantees: User will exit Abπ.
+<br>
+
+**MSS**
+
+1. User requests to exit from Abπ.
+2. Abπ closes.
+   <br>
+   Use case ends.
+
+**Extensions**
+
+1a. Abπ detects an error in the input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a1. Abπ displays an error message and inform the user of the valid input format.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1a2. User enters new input.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1 - 1a2 is repeated until the input entered is valid.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
 
 ### 6.4. Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The main window should be resizable in order to fit different screen size.
-
-*{More to be added}*
+1. Should work on any Mainstream Operating System as long as it has Java 11 or above installed.
+2. Should be for a single user i.e. (not a multi-user product).
+3. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+4. Should respond to a command within 2 seconds.
+5. Should work without requiring an installer.
+6. Should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
+7. The data should be stored locally and should be in a human editable text file.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### 6.5. Glossary
 
-* **OS**: Operating System
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Abπ**: AddressBook pi
+* **CLI**: Command-Line Interface
 * **DRY**: Don't repeat yourself
+* **GUI**: Graphical User Interface
 * **JSON**: JavaScript Object Notation
+* **MSS**: Main Success Scenario
+* **Mainstream Operating System**: Windows, Linux, Unix, OS-X
 * **OOP**: Object-oriented programming
 
 [Back to Table of Contents](#table-of-contents)
@@ -743,147 +1171,147 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app. <br>
        Expected: The most recent window size and location is retained.
 
-### 7.2. Adding a person
+### 7.2. Adding a contact
 
-1. Adding a person
+1. Adding a contact
 
-    1. Prerequisites: A person with the same name, phone and email must not already exist in the app, otherwise it will be considered as a duplicate.
+    1. Prerequisites: A contact with the same name, phone and email must not already exist in the app, otherwise it will be considered as a duplicate.
 
     2. Test case: `add n/Mark Tay p/91238492 e/marktay@example.com a/markbuilding` <br>
-       Expected: A person with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added person shown in the status message and the detailed person display.
+       Expected: A contact with the name "Mark Tay", phone "91238492", email "marktay@example.com", address "markbuilding", is added. Details of the added contact are shown in the status message and the detailed person display.
 
     3. Test case: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/01-01-2020 m/Avid hiker t/friend t/colleague` <br>
-       Expected: A person with the name "James Ho", phone "22224444", email "jamesho@example.com", address "123, Clementi Rd, 1234665", contacted date "01-01-2020", memo "Avid hiker", tags "friend" "colleague", is added. Details of the added person shown in the status message and the detailed person display. 
+       Expected: A contact with the name "James Ho", phone "22224444", email "jamesho@example.com", address "123, Clementi Rd, 1234665", contacted date "01-01-2020", memo "Avid hiker", tags "friend" "colleague", is added. Details of the added contact are shown in the status message and the detailed person display. 
 
     4. Other incorrect add commands to try: `add`, `add hello`, `add p/123 e/123@example.com a/123` (missing name) <br>
        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Note:
        - Name, phone, email and address are compulsory attributes that must be specified when using the add command.
-       - If a person with the same name, phone and email already exist, a duplicate error message will be shown.
+       - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
-### 7.3. Editing a person
+### 7.3. Editing a contact
 
-1. Editing a person's attributes while all persons are being shown
+1. Editing a contact's attributes while all contacts are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
     2. Test case: `edit 1 n/Bob` <br>
-       Expected: First contact's name is edited to "Bob". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's name is edited to "Bob". Details of the edited contact are shown in the status message and the detailed person display.
 
     3. Test case: `edit 1 p/98765432` <br>
-       Expected: First contact's phone is edited to "98765432". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's phone is edited to "98765432". Details of the edited contact are shown in the status message and the detailed person display.
 
     4. Test case: `edit 1 e/example@example.com` <br>
-       Expected: First contact's email is edited to "example@example.com". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's email is edited to "example@example.com". Details of the edited contact are shown in the status message and the detailed person display.
 
     5. Test case: `edit 1 a/123 street` <br>
-       Expected: First contact's address is edited to "123 street". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's address is edited to "123 street". Details of the edited contact are shown in the status message and the detailed person display.
 
     6. Test case: `edit 1 c/` <br>
-       Expected: First contact's contacted date is edited to "Not contacted". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's contacted date is edited to "Not contacted". Details of the edited contact are shown in the status message and the detailed person display.
 
     7. Test case: `edit 1 c/01-01-2020` <br>
-       Expected: First contact's contacted date is edited to "Last contacted on 01-01-2020". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's contacted date is edited to "Last contacted on 01-01-2020". Details of the edited contact are shown in the status message and the detailed person display.
 
     8. Test case: `edit 1 m/`<br>
-       Expected: First contact's memo is cleared. Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's memo is cleared. Details of the edited contact are shown in the status message and the detailed person display.
 
     9. Test case: `edit 1 m/Avid hiker`<br>
-       Expected: First contact's memo is edited to "Avid hiker". Details of the edited contact shown in the status message and the detailed person display.
+       Expected: First contact's memo is edited to "Avid hiker". Details of the edited contact are shown in the status message and the detailed person display.
 
     10. Test case: `edit 1 t/`<br>
-        Expected: First contact's tags are cleared. Details of the edited contact shown in the status message and the detailed person display.
+        Expected: First contact's tags are cleared. Details of the edited contact are shown in the status message and the detailed person display.
 
     11. Test case: `edit 1 t/friend t/colleague`<br>
-        Expected: First contact's tags are edited to "friend" and "colleague". Details of the edited contact shown in the status message and the detailed person display.
+        Expected: First contact's tags are edited to "friend" and "colleague". Details of the edited contact are shown in the status message and the detailed person display.
 
     12. Other incorrect edit commands to try: `edit`, `edit 1 bob`, `edit x m/Avid hiker` (where x is an integer smaller than 1 or larger than 2147483647) <br>
         Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     13. Other incorrect edit commands to try: `edit x m/Avid hiker` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-        Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+        Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red.
 
     14. Other incorrect edit commands to try: `edit 1` <br>
         Expected: Message displaying that at least one field to edit must be provided. The text in the command box will also turn red.
 
     15. Note:
         - Multiple attributes can be edited at once by specifying the respective prefix.
-        - If a person with the same name, phone and email already exist, a duplicate error message will be shown.
+        - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
         - If the edit does not change anything, a nothing will change error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
-### 7.4. Adding tags to a person
+### 7.4. Adding tags to a contact
 
-1. Adding tags to a person while all persons are being shown
+1. Adding tags to a contact while all contacts are being shown
    
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list. Tags to be added must not already exist in the specified contact, otherwise it will be considered as a duplicate.
     
     2. Test case: `addtag 1 t/family` <br>
-       Expected: First contact's tags are appended with "family". Details of the appended tag shown in the status message and the detailed person display.
+       Expected: First contact's tags are appended with "family". Details of the appended tag are shown in the status message and the detailed person display.
 
     3. Test case: `addtag 1 t/colleague t/pal` <br>
-       Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags shown in the status message and the detailed person display.
+       Expected: First contact's tags are appended with "colleague" and "pal". Details of the appended tags are shown in the status message and the detailed person display.
 
     4. Other incorrect addtag commands to try: `addtag`, `addtag hello`, `addtag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Other incorrect addtag commands to try: `addtag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+       Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red.
 
     6. Other incorrect addtag commands to try: `addtag 1` <br>
            Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
 
     7. Note:
-       - If any of the tags to be added already exist in the specified person, a tag already present error message will be shown.
+       - If any of the tags to be added already exist in the specified contact, a tag already present error message will be shown.
        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
-### 7.5. Deleting tags of a person
+### 7.5. Deleting tags of a contact
 
-1. Deleting tags of a person while all persons are being shown
+1. Deleting tags of a contact while all contacts are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Tags to be deleted must exist in the specified contact.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list. Tags to be deleted must exist in the specified contact.
 
     2. Test case: `deletetag 1 t/friends` <br>
-       Expected: First contact's tag "friends" is deleted. Details of the deleted tag shown in the status message and the detailed person display.
+       Expected: First contact's tag "friends" is deleted. Details of the deleted tag are shown in the status message and the detailed person display.
 
     3. Test case: `deletetag 2 t/colleagues t/friends` <br>
-       Expected: Second contact's tags "colleagues" and "friends" are deleted. Details of the deleted tags shown in the status message and the detailed person display.
+       Expected: Second contact's tags "colleagues" and "friends" are deleted. Details of the deleted tags are shown in the status message and the detailed person display.
 
     4. Other incorrect deletetag commands to try: `deletetag`, `deletetag hello`, `deletetag x t/friends` (where x is an integer smaller than 1 or larger than 2147483647) <br>
        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     5. Other incorrect deletetag commands to try: `deletetag x t/friends` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-       Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red.
+       Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red.
 
     6. Other incorrect deletetag commands to try: `deletetag 1` <br>
        Expected: Message displaying that at least one t/ must be provided. The text in the command box will also turn red.
 
     7. Note:
-        - If any of the tags to be deleted does not exist in the specified person, a tag does not exist error message will be shown.
+        - If any of the tags to be deleted does not exist in the specified contact, a tag does not exist error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
-### 7.6. Deleting a person
+### 7.6. Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
     2. Test case: `delete 1` <br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
     3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an integer smaller than 1 or larger than 2147483647) <br>
        Expected: Invalid command message displaying the format for proper command usage. The text in the command box will also turn red.
 
     4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
-      Expected: Message displaying that the person index provided does not exist. The text in the command box will also turn red. 
+      Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red. 
 
-### 7.7. Finding persons by their attributes
+### 7.7. Finding contacts by their attributes
 
-1. Finding a person while all persons are being shown
+1. Finding a contact while all contacts are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
     2. Test case: `find n/alex` <br>
        Expected: The list will be filtered to show only contacts with name containing "john". The number of contacts listed will be shown in the status message.
@@ -926,11 +1354,12 @@ a       contacts listed will be shown in the status message.
 
 1. Dealing with corrupted data files
 
-   1. Prerequisites: There must be an "addressbook.json" data file in the "[_Abπ location_]/data/" folder
+   1. Prerequisites: There must be an "addressbook.json" data file in the "[Abπ location]/data/" folder
    2. Remove a line from "addressbook.json" to corrupt it. 
    3. Launch "Abpi.jar". 
    4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
    5. Close the app. <br>
-      Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup[_DD-MM-YY HH-MM-SS_].json" in the same folder.
+
+      Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
 
 [Back to Table of Contents](#table-of-contents)

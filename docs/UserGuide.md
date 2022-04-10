@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 ## Overview
-AddressBook pi (Abπ) is a **360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
+AddressBook pi (**Abπ**) is a **360° all-rounded desktop app for managing contacts**, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person. Whether you are an insurance agent who needs to manage numerous client contacts, or a student leader who needs to contact a large number of students, Abπ has got you covered. So what are you waiting for? Download and try out Abπ today!
 
 ---
 
@@ -89,7 +89,7 @@ When this document is read, certain words or sentences are represented in differ
 
 Symbol | What it means |
 -----|----------------|
-`add` | Words/sentences that have this format of display are texts/keyboard commands that can cause a response in Abπ
+`add` |  Words with this format are commands that can cause a response in Abπ.
 *Italics* | Sentences that are in italics represent additional information.
 :exclamation: | Warning/cautionary statement that should be read. 
 :bulb: | Extra tip that may be useful to the reader.
@@ -111,8 +111,6 @@ Symbol | What it means |
 4. Open a shell console, such as command prompt or terminal, and navigate to the folder in step 3.
 
 5. Run “Abpi.jar” with the "java -jar" command in the shell console to start the app, e.g. java -jar Abpi.jar
-   
-   ![Ui](images/ug/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter on your keyboard will open the help window.<br>
    Some example commands you can try:
@@ -155,7 +153,11 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 ## 3. About
 
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
-![UiGuide](images/ug/UiGuide.png)
+![UiGuide](images/UiGuide.png)
+
+For each contact in the Contact Display, information is displayed as follows:
+
+![PersonCard](images/ug/PersonCard.png)
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.
@@ -183,9 +185,9 @@ This section will bring you through the Graphical User Interface (GUI) of Abπ.
   
 * Commands that do not take in parameters (`help`, `list`, `copyemails`, `undo`, `redo`, `previous`, `next`, `clear`, `exit`) must match the command format exactly, otherwise it will not be recognized. This is to protect from accidental invocations of the wrong command. e.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will be interpreted as an invalid command to protect you from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
 
-* <a name="index" />The index refers to the index number shown in the displayed person list. The index must be a positive integer between 1 and 2147483647.
+* <a name="index" />Index refers to the index number shown in the contact display. Index must be positive integer between 1 and 2147483647.
 
-* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date in the **dd-mm-yyyy** format, and must not be in the future. e.g. "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown, that it needs to be a valid date following the dd-mm-yyyy format.
+* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
 </div>
 
@@ -214,6 +216,16 @@ Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
+
+Visual Example:
+
+Upon executing the third example `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`:
+![AddCommand](images/ug/AddCommand.png)
+
+Observe how each part of the command specifies the details of Betsy Crowe. Notice that since `c/` (Contacted Date) is missing, the contact has the default Contacted Date of "Not contacted".
+
+![AddCommand2](images/ug/AddCommand2.png)
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -245,6 +257,13 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
+Visual Example:
+
+Upon executing example 1 `edit 1 n/John Doe p/91234567 e/johndoe@example.com`:
+
+![EditCommand](images/ug/EditCommand.png)
+
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -263,6 +282,12 @@ Format: `addtag INDEX t/TAG…`
 Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
 * `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
+
+Visual Example:
+
+Upon executing example 2 `addtag 2 t/colleagues t/friends`:
+
+![AddTagCommand](images/ug/AddTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -285,6 +310,12 @@ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Ed
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
+
+Visual Example:
+
+Continuing from the visual example in [4.2.1. Adding tags to a person](#421-adding-tags-to-a-person-addtag), upon executing `deletetag 2 t/colleagues t/friends`:
+
+![DeleteTagCommand](images/ug/DeleteTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -313,7 +344,7 @@ Examples:
 * Similar to [delete](#431-deleting-a-person-delete) as it cleans up the address book of unwanted contacts. 
 * Allows multiple person to be deleted by specifying the criteria to delete a person by through the use of prefixes.
 * Abπ would use the specified criteria and scan through the person list and delete anybody that matches the criteria.
-* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
+* Duplicated prefix arguments are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * Delete contacts that matches any of the phone number, email domain or tag specified from the command.
@@ -322,18 +353,18 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * For email, an exact match criteria is employed for the email domain. Look at the information box below to learn more about what is an email domain.
 * Note that for phone numbers, white spaces are ignored. That is, ABπ sees "+65 90400204" and "+6590400204" as equivalent numbers. 
 * The matching criteria is case-insensitive.
-* Prefix arguments must conform to the [attribute constraints](#1-introduction).  
+* Prefix arguments must conform to the attribute constraints.  
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** When multiple of the same prefix is specified in the scrub command, the result is equivalent to deleting the set of results from the first prefix and the set of results from the second prefix. In other words, the result that is shown from `scrub p/90400203 p/90400202` is semantically the same as telling ABπ to delete all person that has the number "90400203" or the number "90400202".
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- When different prefixes are specified for the scrub command, the result is equivalent to deleting anybody that matches all the condition specified by the prefix arguments. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** When different prefixes are specified for the scrub command, the result is equivalent to deleting anybody that matches all the condition specified by the prefix arguments. In other words, `scrub p/90400203 e/@example` is semantically the same as telling ABπ to delete all person that has the number "90400203" and has the email domain "@example".
 </div>
 
 <br>
@@ -343,6 +374,12 @@ Examples:
 * `scrub e/@gmail` would scrub contacts that have the "@gmail" domain name and this includes "@gmail.com" and "@gmail.sg".
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
+
+Visual Example:
+
+Upon executing the command `scrub t/friends`:
+
+![ScrubCommand](images/ug/ScrubCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -372,6 +409,13 @@ Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
 * `find n/John` followed by `view 1` displays the 1st person in the results of the `find` command.
 
+Visual Example:
+
+Upon executing the command `view 3`:
+
+![ViewCommand](images/ug/ViewCommand.png)
+
+
 <div markdown="span" class="alert alert-info">
 
 :information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
@@ -387,7 +431,7 @@ Examples:
 #### 4.5.1. Finding person by their attributes: `find`
 
 * Finds persons whose names contain any of the given keywords.
-* Duplicated [prefix arguments](#1-introduction) are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
+* Duplicated prefix arguments are treated as the same criteria to search a person by. E.g. The result from `find t/family t/family` is the same as the result from `find t/family`. 
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 
@@ -610,7 +654,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 #### 4.10.3. Backing up the data file
 
-* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[_Abπ location_]/data/" as "backup[_DD-MM-YY HH-MM-SS_].json". The backup file format will be similar to the backup file shown in the image below.
+* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[Abπ location]/data/" as "backup_[DD-MM-YY HH-MM-SS].json". The backup file format will be similar to the backup file shown in the image below.
 
 ![backupFileImage.png](backupFileImage.png)
 
