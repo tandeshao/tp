@@ -155,6 +155,10 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 This section will bring you through the Graphical User Interface (GUI) of Abπ.
 ![UiGuide](images/UiGuide.png)
 
+For each contact in the Contact Display, information is displayed as follows:
+
+![PersonCard](images/ug/PersonCard.png)
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.
 </div>
@@ -213,6 +217,16 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
 
+Visual Example:
+
+Upon executing the third example `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`:
+![AddCommand](images/ug/AddCommand.png)
+
+Observe how each part of the command specifies the details of Betsy Crowe. Notice that since `c/` (Contacted Date) is missing, the contact has the default Contacted Date of "Not contacted".
+
+![AddCommand2](images/ug/AddCommand2.png)
+
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -243,6 +257,13 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
+Visual Example:
+
+Upon executing example 1 `edit 1 n/John Doe p/91234567 e/johndoe@example.com`:
+
+![EditCommand](images/ug/EditCommand.png)
+
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -261,6 +282,12 @@ Format: `addtag INDEX t/TAG…`
 Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
 * `addtag 2 t/colleagues t/friends` appends the tag "colleagues" and "friends" to the 2nd person in the displayed person list.
+
+Visual Example:
+
+Upon executing example 2 `addtag 2 t/colleagues t/friends`:
+
+![AddTagCommand](images/ug/AddTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -283,6 +310,12 @@ To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Ed
 Examples:
 * `deletetag 1 t/friends` deletes the tag "friends" of the 1st person in the displayed list if the tag exists.
 * `deletetag 2 t/colleagues t/friends` deletes the tag "colleagues" and "friends" of the 2nd person in the displayed list if both tags exist.
+
+Visual Example:
+
+Continuing from the visual example in [4.2.1. Adding tags to a person](#421-adding-tags-to-a-person-addtag), upon executing `deletetag 2 t/colleagues t/friends`:
+
+![DeleteTagCommand](images/ug/DeleteTagCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -342,6 +375,12 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
+Visual Example:
+
+Upon executing the command `scrub t/friends`:
+
+![ScrubCommand](images/ug/ScrubCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 <br>
@@ -369,6 +408,13 @@ Format: `view INDEX`
 Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
 * `find n/John` followed by `view 1` displays the 1st person in the results of the `find` command.
+
+Visual Example:
+
+Upon executing the command `view 3`:
+
+![ViewCommand](images/ug/ViewCommand.png)
+
 
 <div markdown="span" class="alert alert-info">
 
