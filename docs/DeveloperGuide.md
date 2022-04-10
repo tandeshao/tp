@@ -560,6 +560,7 @@ Guarantees: Adding a contact is successful.
 <br>
 
 **MSS**
+
 1. User requests to add a person and provide details.
 2. Abπ adds the person to the list of contacts.
 <br>
@@ -597,6 +598,7 @@ Guarantees: Editing a contact is successful.
 <br>
 
 **MSS**
+
 1. User requests to edit an existing contact in the contact list and provide details.
 2. Abπ updates the details of the contact.
     <br>
@@ -820,6 +822,7 @@ Guarantees: Removing all contacts is successful.
 <br>
 
 **Use case: UC07 - View contact details**
+
 Precondition: There is at least 1 contact in Abπ.
 <br>
 Guarantees: Viewing contact details is successful.
@@ -857,6 +860,7 @@ Guarantees: Viewing contact details is successful.
 <br>
 
 **Use case: UC08 - Find contacts**
+
 Guarantees: Finding of contacts is successful.
 <br>
 
@@ -882,6 +886,7 @@ Guarantees: Finding of contacts is successful.
 <br>
 
 **Use case: UC09 - List all contacts**
+
 Guarantees: All contacts in Abπ are shown.
 <br>
 
@@ -907,6 +912,7 @@ Guarantees: All contacts in Abπ are shown.
 <br>
 
 **Use case: UC10 - Copying all contacts' email**
+
 Guarantees: All the contacts' emails are copied.
 <br>
 
@@ -932,6 +938,7 @@ Guarantees: All the contacts' emails are copied.
 <br>
 
 **Use case: UC11 - Undoing actions made by Abπ**
+
 Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
 <br>
 Guarantees: Undoing previously made actions by Abπ is successful.
@@ -958,6 +965,7 @@ Guarantees: Undoing previously made actions by Abπ is successful.
 <br>
 
 **Use case: UC12 - Redoing actions made by Abπ**
+
 Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
 <br>
 Guarantees: Redoing an undid action is successful.
