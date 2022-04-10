@@ -257,7 +257,7 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
-<div markdown="span" class="alert alert-info">  
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
 
 </div>
@@ -511,7 +511,7 @@ It auto-fills the textbox with the previous command.
 
 * For example, after successfully executed "find n/Alice", "find n/Bob", pressing the up-arrow
 key will automatically fill-in the textbox with "find n/Bob", pressing up-arrow key again will
-fill-in the textbox with "find n/Alice", and then pressing down-arrow key will 
+fill-in the textbox with "find n/Alice", and then pressing down-arrow key will
 fill-in textbox with "find n/Bob" again.
 
 **Picture explain:**<br>
@@ -521,7 +521,7 @@ When the CommandList is empty, the pointer will point to position 0.
 
 **Step 1, User executed "find n/Alice":**
 ![CommandListState1](images/CommandList1.png)
-When the CommandList has one history, the pointer will point to position 1, 
+When the CommandList has one history, the pointer will point to position 1,
 which is the next position and is empty.
 
 **Step 2, User executed "find n/Bob":**
@@ -532,7 +532,7 @@ which is the next position and is empty.
 **Step 3, User pressed up-arrow key:**
 "find n/Bob" is fetched and auto-filled in textbox
 ![CommandListState4](images/CommandList3.png)
-When the user presses up-arrow key, CommandList will decrease the pointer by one. 
+When the user presses up-arrow key, CommandList will decrease the pointer by one.
 Now the pointer points to position 1, which is the previous input. Then the information
 pointed by pointer will be fetched and auto-filled into the command-box.
 
