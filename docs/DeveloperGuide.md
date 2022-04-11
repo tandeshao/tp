@@ -1014,6 +1014,8 @@ Guarantees: Removing all contacts is successful.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC08 - View contact details**
 
 Precondition: There is at least 1 contact in Abπ.
@@ -1078,7 +1080,9 @@ Guarantees: Finding of contacts is successful.
 
 <br>
 
-**Use case: UC010 - List all contacts**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC10 - List all contacts**
 
 Guarantees: All contacts in Abπ are shown.
 <br>
@@ -1262,6 +1266,7 @@ Guarantees: User will exit Abπ.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
 
 ### 6.4. Non-Functional Requirements
 
@@ -1288,6 +1293,8 @@ Guarantees: User will exit Abπ.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 7. Appendix: Instructions for manual testing
 
