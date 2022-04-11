@@ -874,8 +874,9 @@ Guarantees: Appending tags to a contact is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-
 <br>
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04 - Deleting tags from a contact**
 <br>
@@ -923,7 +924,7 @@ Guarantees: Deleting tags from a contact is successful.
 
 <br>
 
-**Use case: UC04 - Deleting a contact**
+**Use case: UC05 - Deleting a contact**
 <br>
 Precondition: There is at least 1 contact in Abπ.
 <br>
@@ -961,7 +962,7 @@ Guarantees: Deleting a contact is successful.
 
 <br>
 
-**Use case: UC05 - Deleting multiple contacts**
+**Use case: UC06 - Deleting multiple contacts**
 <br>
 Guarantees: Deleting multiple contacts is successful.
 <br>
@@ -987,7 +988,7 @@ Guarantees: Deleting multiple contacts is successful.
 
 <br>
 
-**Use case: UC06 - Clearing all contacts**
+**Use case: UC07 - Clearing all contacts**
 <br>
 Guarantees: Removing all contacts is successful.
 <br>
@@ -1013,7 +1014,7 @@ Guarantees: Removing all contacts is successful.
 
 <br>
 
-**Use case: UC07 - View contact details**
+**Use case: UC08 - View contact details**
 
 Precondition: There is at least 1 contact in Abπ.
 <br>
@@ -1051,7 +1052,7 @@ Guarantees: Viewing contact details is successful.
 
 <br>
 
-**Use case: UC08 - Find contacts**
+**Use case: UC09 - Find contacts**
 
 Guarantees: Finding of contacts is successful.
 <br>
@@ -1077,7 +1078,7 @@ Guarantees: Finding of contacts is successful.
 
 <br>
 
-**Use case: UC09 - List all contacts**
+**Use case: UC010 - List all contacts**
 
 Guarantees: All contacts in Abπ are shown.
 <br>
@@ -1103,7 +1104,7 @@ Guarantees: All contacts in Abπ are shown.
 
 <br>
 
-**Use case: UC10 - Copying all emails**
+**Use case: UC11 - Copying all emails**
 
 Guarantees: All the emails are copied.
 <br>
@@ -1129,7 +1130,7 @@ Guarantees: All the emails are copied.
 
 <br>
 
-**Use case: UC11 - Undoing actions made by Abπ**
+**Use case: UC12 - Undoing actions made by Abπ**
 
 Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
 <br>
@@ -1156,7 +1157,7 @@ Guarantees: Undoing previously made actions by Abπ is successful.
 
 <br>
 
-**Use case: UC12 - Redoing actions made by Abπ**
+**Use case: UC13 - Redoing actions made by Abπ**
 
 Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
 <br>
@@ -1183,7 +1184,7 @@ Guarantees: Redoing an undid action is successful.
 
 <br>
 
-**Use case: UC13 - User is able to retrieve previously executed commands**
+**Use case: UC14 - User is able to retrieve previously executed commands**
 <br>
 Precondition: There must be at least 1 executed command before the user requests to retrieve a previously executed command.
 <br>
@@ -1211,7 +1212,7 @@ Guarantees: Retrieving a previously executed command is successful.
 
 <br>
 
-**Use case: UC14 - Get help**
+**Use case: UC15 - Get help**
 <br>
 Guarantees: User will get instructions on how to get help.
 <br>
@@ -1237,7 +1238,7 @@ Guarantees: User will get instructions on how to get help.
 
 <br>
 
-**Use case: UC15 - Exit**
+**Use case: UC16 - Exit**
 <br>
 Guarantees: User will exit Abπ.
 <br>
