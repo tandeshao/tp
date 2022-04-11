@@ -253,7 +253,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
 * If the contacted date is specified, it must follow the [specified format](#date).
 
-<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -266,6 +265,7 @@ Examples:
 * `edit 2 m/Avid hiker` edits the memo of the 2nd person to be `Avid hiker`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
+
 
 Visual Example:
 
