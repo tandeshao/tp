@@ -271,12 +271,12 @@ The following sequence diagram shows how the undo operation works:
 :information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Step 7. The user can't make up his mind and decides to redo his undo. He executes `redo` to revert the previously undid command `delete 2`. The `redo` command calls `Model#redoAddressBook()`, which will increment the `currentStateIndex`, shifting it right once. `currentStateIndex` now points to the previous undid address book state, and restores the address book to that state.
+Step 7. The user can't make up his mind and decides to redo his undo. He executes `redo` to revert the previously undid command `delete 2`. The `redo` command calls `Model#redoAddressBook()`, which will increment the `currentStateIndex`, shifting it right once. `currentStateIndex` now points to the address book state that was undone, and restores the address book to that state.
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If there is nothing to redo, it will return an error to the user rather than performing the redo mechanism.
+:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undo command to revert. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If there is nothing to redo, it will return an error to the user rather than performing the redo mechanism.
 </div>
 
 Step 8. The user executes the `list` command. Commands that do not modify the address book state, such as `list`, will not call `Model#saveAddressBookState()`. Hence, `stateHistory` does not change.
@@ -426,7 +426,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 ### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. both can be empty.
+The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. either can be empty.
 - If `Memo` is empty, it will not be displayed. 
 - If `ContactedDate` is empty, it will be displayed as "Not contacted".
 
@@ -464,7 +464,7 @@ Editing of `ContactedDate` via the `edit` command works similarly.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
     * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
-    * Cons: There will be a lot of code duplication, the new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
+    * Cons: There will be a lot of code duplication - the new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
 **Aspect: `Memo` restrictions:**
 * **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
