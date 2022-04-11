@@ -511,7 +511,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### 4.7. Quality of Life
 
@@ -591,7 +591,7 @@ Format: `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### 4.9. Policy on duplicates
 
