@@ -431,7 +431,7 @@ Upon executing the command `view 3`:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need for a `view` command. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
+:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
 
 </div>
 
