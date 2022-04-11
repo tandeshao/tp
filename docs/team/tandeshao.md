@@ -19,8 +19,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * What it does: Allows user to search for a contact in Abπ by using any of the attribute that is available to a person. 
     * Justification: This feature enhances the original find command by increasing the scope of the search. Previous find command only allows users to search a contact by their name but with the newly enhanced find command, users are now able to search contacts based on a combination of attributes (Name, Phone number, Email, Address, Memo, Contacted Date and Tag).     
     * Highlights: To develop the find command, we identified the potential problems users might face when using the command and from there, try to come up with an appropriate design that would solve their problems. However, one problem encountered when adopting this approach of development is that it is impossible to find a solution that would solve all the potential problems the user might face. Although some implementations might solve a specific problem, they might also give rise to other problems. Hence, there are always trade-offs to consider when a certain implementation design is proposed.
-  
-  <br>
+
+<div style="page-break-after: always;"></div>
 
   * Scrub Command (Pull requests [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#139](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/139), [\#177](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/177), [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182))
     * What it does: Allows users to delete multiple person from the address book by specifying the criteria to delete a person by through the use of prefixes.
@@ -48,8 +48,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * What it does: Backups the Abπ data so that whenever the "addressbook.json" file is corrupted, users would not lose their existing data of Abπ.
     * Justification: Everytime the original data file is corrupted, Abπ would load up an empty addressbook and if a user keys in a valid command, the empty data would be saved to the "addressbook.json" file. With that, the original data file of the Abπ is lost and this is a major feature flaw for the application. Hence, a backup system is created.
     
-  <br>
-  
+
+<div style="page-break-after: always;"></div>
+
 * **Documentation**: 
   * User Guide:
     * Added documentation for the feature `find`: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#22](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/22/files)
