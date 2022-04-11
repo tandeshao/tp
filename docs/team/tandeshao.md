@@ -20,30 +20,26 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Justification: This feature enhances the original find command by increasing the scope of the search. Previous find command only allows users to search a contact by their name but with the newly enhanced find command, users are now able to search contacts based on a combination of attributes (Name, Phone number, Email, Address, Memo, Contacted Date and Tag).     
     * Highlights: To develop the find command, we identified the potential problems users might face when using the command and from there, try to come up with an appropriate design that would solve their problems. However, one problem encountered when adopting this approach of development is that it is impossible to find a solution that would solve all the potential problems the user might face. Although some implementations might solve a specific problem, they might also give rise to other problems. Hence, there are always trade-offs to consider when a certain implementation design is proposed.
 
-<div style="page-break-after: always;"></div>
+  <div style="page-break-after: always;"></div>
+
+  <br>
 
   * Scrub Command (Pull requests [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#139](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/139), [\#177](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/177), [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182))
     * What it does: Allows users to delete multiple person from the address book by specifying the criteria to delete a person by through the use of prefixes.
     * Justification: Previously, to delete a person from the address book, the user would have to manually delete the contacts 1 by 1 through the use of the `delete` command. However, with the `scrub` command, users now have a means to quickly delete multiple person from the address book. 
     * Highlights: For deletion of contacts, a strict matching criteria was used (exact word matching) as contact deletion is considered to be a risky operation. Any unintended removal of contacts would be a detrimental feature flaw for the application. Hence, an exact word match criteria is employed where `scrub p/90400204` would only scrub contacts that has the phone number "90400204". 
 
-  <br>
   
   * AddTag command (Pull requests [\#255](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/255), [\#171](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/171))
     * What it does: Allows users to append one or more tags to a specified person in the address book.
     * Justification: Before the implementation of the add tag command, users are only able to edit the tag attribute of a person through the use of the `edit` command. As the `edit` command completely replaces the existing tags, it would be inconvenient for the user if he/she would only like to append a new tag to the existing tags that are available to the specified person. Hence, to help users solve that problem, the `addtag` command was developed. 
     * Highlights: This feature required careful implementation as we would have to consider how Abπ should react if a user tried to append an existing tag to the person's tag attribute.
     
-  <br>
   
   * Add tests for the prefix class (Pull requests [\#76](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/76))
-
-  <br>
   
   * Add tests for the ArgumentMultiMap class (Pull requests [\#77](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/77))
-    
-  <br>
-
+  
   * Backup system (Pull requests [\#147](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/147), [\#246](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/246))
     * What it does: Backups the Abπ data so that whenever the "addressbook.json" file is corrupted, users would not lose their existing data of Abπ.
     * Justification: Everytime the original data file is corrupted, Abπ would load up an empty addressbook and if a user keys in a valid command, the empty data would be saved to the "addressbook.json" file. With that, the original data file of the Abπ is lost and this is a major feature flaw for the application. Hence, a backup system is created.
@@ -51,20 +47,20 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 <div style="page-break-after: always;"></div>
 
+<br>
+
 * **Documentation**: 
   * User Guide:
     * Added documentation for the feature `find`: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#22](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/22/files)
     * Added documentation for the feature `scrub` and `addtag`: [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182), [\#196](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/196)
-
-  <br>
+    
   
   * Developer Guide:
     * Added implementation details of the `find` feature: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#315](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/315)
     * Added use cases for Abπ: [\#298](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/298)
     * Added conventions: [\#300](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/300), [\#302](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/302)
     * Added implementation details for the backup feature: [\#319](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/319)
-
-<br>
+    
 
 * **Community**:
   * Reported bugs and suggestions for other teams in the class: [Link to reported bugs/suggestions for other teams](https://github.com/tandeshao/ped/issues)
