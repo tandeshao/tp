@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find n/alice")
+[-> LogicManager : execute("find n/bob")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/alice")
+LogicManager -> AddressBookParser : parseCommand("find n/bob")
 activate AddressBookParser
 
 create FindCommandParser
@@ -28,7 +28,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(" n/alice")
+AddressBookParser -> FindCommandParser : parse(" n/bob")
 activate FindCommandParser
 
 ref over FindCommandParser : get FindPersonPredicate
@@ -49,7 +49,7 @@ destroy FindCommandParser
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
 
-LogicManager -> FindCommand : execute(Model)
+LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
 FindCommand -> Model : updateFilteredPersonList(predicate)
