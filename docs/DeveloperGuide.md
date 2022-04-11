@@ -572,41 +572,41 @@ fill-in the textbox with "find n/Alice", and then pressing down-arrow key will
 fill-in textbox with "find n/Bob" again.
 
 **Picture explain:**<br>
-**Step 0, no user input yet:**
-![CommandListState0](images/CommandList0.png)
+**Step 0, no user input yet:**<br>
+![CommandListState0](images/CommandList0.png)<br>
 When the CommandList is empty, the pointer will point to position 0.
 
-**Step 1, User executed "find n/Alice":**
-![CommandListState1](images/CommandList1.png)
+**Step 1, User executed "find n/Alice":**<br>
+![CommandListState1](images/CommandList1.png)<br>
 When the CommandList has one history, the pointer will point to position 1,
 which is the next position and is empty.
 
-**Step 2, User executed "find n/Bob":**
-![CommandListState2](images/CommandList2.png)
+**Step 2, User executed "find n/Bob":**<br>
+![CommandListState2](images/CommandList2.png)<br>
 When the CommandList has two history, the pointer will point to position 2,
 which is the next position and is empty.
 
 **Step 3, User pressed up-arrow key:**
-"find n/Bob" is fetched and auto-filled in textbox
-![CommandListState4](images/CommandList3.png)
+"find n/Bob" is fetched and auto-filled in textbox<br>
+![CommandListState4](images/CommandList3.png)<br>
 When the user presses up-arrow key, CommandList will decrease the pointer by one.
 Now the pointer points to position 1, which is the previous input. Then the information
 pointed by pointer will be fetched and auto-filled into the command-box.
 
-**Step 5, User pressed up-arrow key again:**
-"find n/Alice" is fetched and auto-filled in textbox
-![CommandListState5](images/CommandList4.png)
+**Step 5, User pressed up-arrow key again:**<br>
+"find n/Alice" is fetched and auto-filled in textbox<br>
+![CommandListState5](images/CommandList4.png)<br>
 When the user presses up-arrow key again, CommandList will decrease the pointer by one.
 Now the pointer points to position 1, which is the previous input. Then the information
 pointed by pointer will be fetched and auto-filled into the command-box.
 
-**Step 6, User pressed down-arrow key:**
-"find n/Bob" is fetched and auto-filled in textbox
-![CommandListState6](images/CommandList5.png)
+**Step 6, User pressed down-arrow key:**<br>
+"find n/Bob" is fetched and auto-filled in textbox<br>
+![CommandListState6](images/CommandList5.png)<br>
 When the user presses down-arrow key, CommandList will increase the pointer by one.
 Now the pointer points to position 2, which is the next input. Then the information
 pointed by pointer will be fetched and auto-filled into the command-box.
-
+<br><br>
 To conclude, when user have not yet press the up-arrow key, the pointer will always point to
 the next position of CommandList. So that when user presses the up-arrow key, pointer will decrease
 by one to point to the previous position and fetch the history.
