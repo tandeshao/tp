@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.StateAddressBook;
@@ -25,7 +26,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_EMPTY = "There is nothing to undo (Max "
             + StateAddressBook.UNDO_REDO_CAPACITY + " undoable actions)";
 
-    private static final Logger LOGGER = Logger.getLogger(UndoCommand.class.getName());
+    private static final Logger LOGGER = LogsCenter.getLogger(UndoCommand.class.getName());
 
     /**
      * Executes the undo command and returns the result message.

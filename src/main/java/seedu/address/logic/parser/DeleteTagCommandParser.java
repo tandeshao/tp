@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
-    private static final Logger LOGGER = Logger.getLogger(DeleteTagCommandParser.class.getName());
+    private static final Logger LOGGER = LogsCenter.getLogger(DeleteTagCommandParser.class.getName());
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTagCommand
@@ -37,7 +39,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             LOGGER.log(Level.INFO, "Invalid command format");
-            throw new ParseException(String.format(pe.getMessage(), DeleteTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isEmpty()) {
