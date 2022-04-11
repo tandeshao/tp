@@ -105,7 +105,7 @@ public class StateAddressBook extends AddressBook {
      * Returns true if {@code stateHistory} is full, i.e. equal to UNDO_REDO_CAPACITY + 1 to account for initial state,
      * otherwise returns false.
      *
-     * @return true if full; otherwise false.
+     * @return If full true; otherwise false.
      */
     private boolean isFull() {
         return stateHistory.size() == UNDO_REDO_CAPACITY + 1;
@@ -114,8 +114,8 @@ public class StateAddressBook extends AddressBook {
     /**
      * Checks if two {@code StateAddressBook} is equal.
      *
-     * @param other the other {@code StateAddressBook} object.
-     * @return true if equal; otherwise false.
+     * @param other The other {@code StateAddressBook} object.
+     * @return If equal true; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
