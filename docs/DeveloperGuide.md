@@ -436,6 +436,8 @@ Below is a table that shows the matching criteria that is used for each person's
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
   * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
     * Tags was chosen to follow the exact string match criteria because users are likely to remember the full word of a tag and search for them.
     * For contacted date, a special matching criteria is created specifically for this attribute because the semantics of finding a person by their last contacted date is different from the other attributes. 
@@ -452,6 +454,7 @@ Below is a table that shows the matching criteria that is used for each person's
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.3. Memo and ContactedDate person attributes
 
