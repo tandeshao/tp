@@ -289,6 +289,8 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undo command to revert. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If there is nothing to redo, it will return an error to the user rather than performing the redo mechanism.
 </div>
@@ -300,6 +302,8 @@ Step 8. The user executes the `list` command. Commands that do not modify the ad
 Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared by calling `StateAddressBook#clearAfterCurrentStateIndex()`. Why it is implemented as such is because it no longer makes sense to redo the `clear` command (state3:AddressBook). This behaviour follows modern application undo and redo functionality.
 
 ![UndoRedoState8](images/UndoRedoState8.png)
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
