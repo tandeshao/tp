@@ -22,6 +22,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Justification: Lengthy text inside a Person Card gets cut-off, hence a scrollable panel to display the details of a person will allow users to view the full details of a person.
     * Highlights: Due to the implementation of "predictive display" where the display will automatically update on several commands, this resulted in several bugs. Debugging this feature was difficult, as there were a lot of bugs involving undoes and redoes not updating the display properly. In addition, designing this feature was difficult as it required an interaction between logic (commands updating the display), model (person object to be displayed), and the UI itself.
       <br>
+  <div style="page-break-after: always;"></div>
+
   * View command (PR [\#188](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/188))
     * What it does: Manually updates the Person Display Panel
     * This command goes hand in hand with the previous feature.
