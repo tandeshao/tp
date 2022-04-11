@@ -383,6 +383,8 @@ Examples:
 * `scrub p/90200402` would scrub contacts that have the number "90200402".
 * `scrub t/family` would scrub contacts that have the tag "family".
 
+<div style="page-break-after: always;"></div>
+
 Visual Example:
 
 Upon executing the command `scrub t/friends`:
@@ -402,6 +404,8 @@ Format: `clear`
 [Back to Table of Contents](#table-of-contents)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### 4.4. Displaying person details
 
