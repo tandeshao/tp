@@ -405,8 +405,6 @@ Format: `clear`
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### 4.4. Displaying person details
 
 #### 4.4.1. Viewing person details: `view`
@@ -436,7 +434,7 @@ Upon executing the command `view 3`:
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### 4.5. Filtering the address book
 
