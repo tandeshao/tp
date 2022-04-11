@@ -266,6 +266,7 @@ Examples:
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
 
+<div style="page-break-after: always;"></div>
 
 Visual Example:
 
