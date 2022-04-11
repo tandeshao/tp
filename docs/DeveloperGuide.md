@@ -371,6 +371,8 @@ Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` obje
 Step 5. `LogicManager` will then call `FindCommand#execute(Model)` method and this method will invoke 
 `Model#updateFilteredPersonList(Predicate)` where it will update the filter for the person list in the address book.
 
+<div style="page-break-after: always;"></div>
+
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
 <br>
@@ -393,6 +395,7 @@ Step 6. After the filter has been updated, each person in the person list will b
 * **Current implementation:** Different search criteria for different search parameters. <br /> 
 The following table shows the available matching criteria for Abπ and a description to explain the implementation details of the matching criteria:
 
+<div style="page-break-after: always;"></div>
 
 | Matching criteria                | Description                                                                                                                                                                                                                                                                                                        | 
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
