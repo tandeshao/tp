@@ -515,7 +515,8 @@ For phone, even if there is a difference in white space, it is still considered 
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
     * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. <br> 
-     The only exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number in reality.
+     The only exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. <br>
+     For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number in reality.
     * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for `Phone`, we decided to stick with the normal convention, where a difference in white space is considered as different.
 
 **Aspect: Phone number with '+':**
