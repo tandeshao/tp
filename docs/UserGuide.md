@@ -250,6 +250,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
 * If the contacted date is specified, it must follow the [specified format](#date).
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
 </div>
@@ -361,6 +363,8 @@ Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
 * Note that for phone numbers, white spaces are ignored. That is, ABπ sees "+65 90400204" and "+6590400204" as equivalent numbers. 
 * The matching criteria is case-insensitive.
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
 </div>
@@ -401,7 +405,6 @@ Format: `clear`
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
 
 ### 4.4. Displaying person details
 
