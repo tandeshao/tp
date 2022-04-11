@@ -57,12 +57,13 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   <br>
   
   * Developer Guide:
-    * Added implementation details of the `find` feature: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123)
+    * Added implementation details of the `find` feature: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#315](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/315)
     * Added use cases for Abπ: [\#298](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/298)
     * Added conventions: [\#300](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/300), [\#302](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/302)
+    * Added implementation details for the backup feature: [\#319](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/319)
 
 <br>
 
 * **Community**:
-  * Reported bugs and suggestions for other teams in the class: [Link to 25 reported bugs/suggestions for other teams](https://github.com/tandeshao/ped/issues)
-  * All other PRs reviewed: [Link to 51 reviewed PRs](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+reviewed-by%3Atandeshao+is%3Aclosed+sort%3Acomments-asc)
+  * Reported bugs and suggestions for other teams in the class: [Link to reported bugs/suggestions for other teams](https://github.com/tandeshao/ped/issues)
+  * All other PRs reviewed: [Link to reviewed PRs](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+reviewed-by%3Atandeshao+is%3Aclosed+sort%3Acomments-asc)
