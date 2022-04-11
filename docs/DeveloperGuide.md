@@ -167,7 +167,7 @@ How the parsing works:
 ### 3.4. Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -179,7 +179,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="500" />
 
 </div>
 
@@ -240,7 +240,7 @@ Step 3. The user executes `delete 2` to delete the second person. The `delete` c
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a `Command#execute` fails, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into `stateHistory` and `currentStateIndex` will not change.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a `Command#execute(Model)` fails, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into `stateHistory` and `currentStateIndex` will not change.
 
 </div>
 
@@ -256,11 +256,11 @@ Step 5. The user decides that clearing his address book was not a good idea. He 
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user wants to revert his `delete 2` command from Step 3 as well. He executes `undo` to revert the deletion. Similarly to Step 5, the `delete` command calls `Model#undoAddressBook()`, which will decrement the `currentStateIndex`, shifting it left once. `currentStateIndex` now points to the previous address book state, and restores the address book to that state.
+Step 6. The user wants to revert his `delete 2` command from Step 3 as well. He executes `undo` to revert the deletion. Similar to Step 5, the `undo` command calls `Model#undoAddressBook()`, which will decrement the `currentStateIndex`, shifting it left once. `currentStateIndex` now points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateIndex` is at index 0, there are no previous address book states to restore. The `undo` command calls `Model#canUndoAddressBook()` to check if it is undoable. In this case, if `undo` is executed once more, return an error will be returned to the user rather than performing the undo mechanism.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateIndex` is at index 0, there are no previous address book states to restore. The `undo` command calls `Model#canUndoAddressBook()` to check if it is undoable. In this case, if `undo` is executed once more, an error will be returned to the user rather than performing the undo mechanism.
 
 </div>
 
@@ -268,24 +268,23 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Step 7. The user can't make up his mind and decides to redo his undo. He executes `redo` to revert the previously undid command `delete 2`. The `delete` command calls `Model#redoAddressBook()`, which will increment the `currentStateIndex`, shifting it right once. `currentStateIndex` now points to the previous undid address book state, and restores the address book to that state.
+Step 7. The user can't make up his mind and decides to redo his undo. He executes `redo` to revert the previously undid command `delete 2`. The `redo` command calls `Model#redoAddressBook()`, which will increment the `currentStateIndex`, shifting it right once. `currentStateIndex` now points to the address book state that was undone, and restores the address book to that state.
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
-
+:information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undo command to revert. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If there is nothing to redo, it will return an error to the user rather than performing the redo mechanism.
 </div>
 
 Step 8. The user executes the `list` command. Commands that do not modify the address book state, such as `list`, will not call `Model#saveAddressBookState()`. Hence, `stateHistory` does not change.
 
 ![UndoRedoState7](images/UndoRedoState7.png)
 
-Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared by calling `StateAddressBook#clearAfterCurrentStateIndex()`. Why this is so is because it no longer makes sense to redo the `clear` command. This behaviour follows modern application undo and redo functionality.
+Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared by calling `StateAddressBook#clearAfterCurrentStateIndex()`. Why it is implemented as such is because it no longer makes sense to redo the `clear` command (state3:AddressBook). This behaviour follows modern application undo and redo functionality.
 
 ![UndoRedoState8](images/UndoRedoState8.png)
 
@@ -326,9 +325,14 @@ The address book find command allow users to search contacts based on their name
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
 
 <img src="images/FindSequenceDiagram.png"/>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 <br/>
 <br/>
 <img src="images/FindPersonPredicate.png"/>
+<br/>
+<br/>
+<img src="images/CommandResult.png" width="600px"/>
 
 Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 
@@ -344,8 +348,8 @@ Step 3. The `ArgumentMultimap` object is passed as an argument into the  `FindPe
 
 Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` object to create the `FindCommand` object and this object is returned to `LogicManager`.
 
-Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and this method will invoke 
-`Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)` where it will update the filter for the person list in the address book.
+Step 5. `LogicManager` will then call `FindCommand#execute(Model)` method and this method will invoke 
+`Model#updateFilteredPersonList(Predicate)` where it will update the filter for the person list in the address book.
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
@@ -428,7 +432,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 ### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty.
+The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. either can be empty.
 - If `Memo` is empty, it will not be displayed. 
 - If `ContactedDate` is empty, it will be displayed as "Not contacted".
 
@@ -438,13 +442,17 @@ A `Person` `Memo` and `ContactDate` can be added during the `add` command or edi
 
 Given below is an example usage scenario and how `Memo` can be edited by the `edit` command.
 
-Step 1. The user wants to edit the `Memo` of the first person in the address book and executes `edit 1 m/Avid hiker`.
+Step 1. The user wants to edit the `Memo` of the first person in the address book and executes `edit 1 m/mute`.
 
-The following sequence diagram shows how the `edit 1 m/Avid hiker` operation works:
+The following sequence diagram shows how the `edit 1 m/mute` operation works:
 
 ![EditMemoSequenceDiagram](images/EditMemoSequenceDiagram.png)
 
-Editing of `ContactedDate` via the `edit` command works similarly, the only difference is the `c/` prefix.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Editing of `ContactedDate` via the `edit` command works similarly.
 
 `Memo` and `ContactedDate` can also be added during the `add` command. The sequence diagram is similar to the above, with the following differences:
 - `AddCommandParser` instead of `EditCommandParser`.
@@ -457,12 +465,12 @@ Editing of `ContactedDate` via the `edit` command works similarly, the only diff
 **Aspect: Command to modify `Memo` and `ContactedDate`:**
 
 * **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into the existing `add` and `edit` command.
-    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. This design adheres to the DRY principle and the Single Responsibility Principle.
+    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, adhering to the DRY principle and the Single Responsibility Principle.
     * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
     * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
-    * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
+    * Cons: There will be a lot of code duplication - the new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
 **Aspect: `Memo` restrictions:**
 * **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
@@ -512,12 +520,15 @@ For phone, even if there is a difference in white space, it is still considered 
 **Aspect: Difference in white space:**
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
-    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. The exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number.
-    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.
+    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. <br> 
+     The only exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. <br>
+     For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number in reality.
+    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for `Phone`, we decided to stick with the normal convention, where a difference in white space is considered as different.
 
 **Aspect: Phone number with '+':**
 * **Current implementation:** For `Phone`, a difference in '+' is considered as different.
-    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. <br>
+     For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 ### 4.5. Previous and next feature
@@ -609,6 +620,36 @@ To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches
 * **Alternative:** Store `PersonOnDisplay` directly inside `AddressBook`
     * Pros: Since `PersonOnDisplay` is now part of the state in an `AddressBook`, `view` commands can now be undone.
     * Cons: Breaks Single Responsibility Principle, as `AddressBook` now contains both the list of contacts and `PersonOnDisplay`.
+
+
+### 4.7. Backup Feature
+
+To save the user's contacts in Abπ, a user would have to key in any valid command before closing the application. However, when Abπ reads a corrupted data file, the application will show an empty list of contacts upon start up. If this empty list is saved, this would overwrite the previously saved data file, effectively deleting the original contacts the user had in Abπ.   
+ 
+To resolve this issue, a backup method `JsonAddressBookStorage#backupFile(Path, Path)` is implemented where it is triggered whenever Abπ reads a corrupted data file. Essentially, this backup method copies the original data in the "addressbook.json" file and creates a backup file named as "backup_[DD-MM-YY HH-MM-SS].json" within the same "data" folder. As a result, this will effectively back up the original data file before any further action is made by the user.
+<br>
+
+_The backup file is located at "[_Abπ location_]/data/" where [_Abπ location_] is the location of the "Abpi.jar" application._
+
+
+#### 4.7.1 Design Considerations:
+**Aspect: Limiting the number of backup files:**
+
+* **Current implementation:** Abπ currently allows multiple backups to be made where each backup is uniquely identified by its creation timestamp.
+  * Pros: The user's original data file is retained even after multiple attempts in loading a corrupted data file into Abπ.  
+  * Cons: There is no hard limit imposed on the number of back up files created. As a result, the size of the data folder might become huge if there is a constant attempt in loading corrupted data files into Abπ and the folder is left unsupervised for a long period of time.
+  
+* **Alternative 1:** Overwrite the contents of the existing backup file with the new backup data whenever the backup method is invoked. 
+  * Pros: This implementation would allow at most one backup file to exist in the data folder, removing the problem of allowing the creation of unlimited backup files.
+  * Cons: If there were consecutive attempts in loading the corrupted data file, the user's original data file would be lost.
+
+* **Alternative 2:** Impose a hard limit on the number of backup files created in the data folder.
+  * Pros: It would remove the problem of allowing the creation of unlimited backup file. 
+  * Cons: Costly in terms of time and effort to implement.
+
+
+
+<br>
 
 [Back to Table of Contents](#table-of-contents)
 
