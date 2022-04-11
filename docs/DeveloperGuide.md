@@ -1348,7 +1348,7 @@ testers are expected to do more *exploratory* testing.
     5. Note:
        - Name, phone, email and address are compulsory attributes that must be specified when using the add command.
        - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
-       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+       - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
 
 <div style="page-break-after: always;"></div>
 
@@ -1401,7 +1401,7 @@ testers are expected to do more *exploratory* testing.
         - Multiple attributes can be edited at once by specifying the respective prefix.
         - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
         - If the edit does not change anything, a nothing will change error message will be shown.
-        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+        - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
 
 <div style="page-break-after: always;"></div>
 
@@ -1428,7 +1428,7 @@ testers are expected to do more *exploratory* testing.
 
     7. Note:
        - If any of the tags to be added already exist in the specified contact, a tag already present error message will be shown.
-       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+       - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
 
 <div style="page-break-after: always;"></div>
 
@@ -1455,7 +1455,7 @@ testers are expected to do more *exploratory* testing.
 
     7. Note:
         - If any of the tags to be deleted does not exist in the specified contact, a tag does not exist error message will be shown.
-        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+        - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
 
 <div style="page-break-after: always;"></div>
 
