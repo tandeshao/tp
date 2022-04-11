@@ -640,6 +640,8 @@ This section will outline the design choices of implementing the panel to displa
 
 To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches a `ChangeListener` from `DetailedPersonDisplay` and passes the `ChangeListener` to `ModelManager`. This way, whenever the `PersonOnDisplay` object changes inside `ModelManager`, `DetailedPersonDisplay` will receive an update and modify the display with the updated information accordingly.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.6.1. Design considerations:
 
 **Aspect: PersonOnDisplay:**
@@ -697,6 +699,8 @@ _The backup file is located at "[Abπ location]/data/" where [Abπ location] is 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 6. Appendix: Requirements
 
 ### 6.1. Product scope
@@ -734,6 +738,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | invoke my most recently used command                      | access commands that I recently executed                                      |
 | `* *`    | user     | have a memo for each contact                              | keep track of miscellaneous information about a person                        |
 | `* *`    | user     | keep track of the last contacted date of a person         | identify how long it has been since I last contacted a person                 |
+
+<div style="page-break-after: always;"></div>
 
 ### 6.3. Use cases
 
