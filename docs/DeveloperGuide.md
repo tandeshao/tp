@@ -259,7 +259,7 @@ Step 6. The user wants to revert his `delete 2` command from Step 3 as well. He 
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateIndex` is at index 0, there are no previous address book states to restore. The `undo` command calls `Model#canUndoAddressBook()` to check if it is undoable. In this case, if `undo` is executed once more, return an error will be returned to the user rather than performing the undo mechanism.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateIndex` is at index 0, there are no previous address book states to restore. The `undo` command calls `Model#canUndoAddressBook()` to check if it is undoable. In this case, if `undo` is executed once more, an error will be returned to the user rather than performing the undo mechanism.
 
 </div>
 
@@ -267,8 +267,8 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Step 7. The user can't make up his mind and decides to redo his undo. He executes `redo` to revert the previously undid command `delete 2`. The `delete` command calls `Model#redoAddressBook()`, which will increment the `currentStateIndex`, shifting it right once. `currentStateIndex` now points to the previous undid address book state, and restores the address book to that state.
@@ -277,7 +277,6 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undone AddressBook states to restore. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than performing the redo mechanism.
-
 </div>
 
 Step 8. The user executes the `list` command. Commands that do not modify the address book state, such as `list`, will not call `Model#saveAddressBookState()`. Hence, `stateHistory` does not change.
@@ -437,11 +436,15 @@ A `Person` `Memo` and `ContactDate` can be added during the `add` command or edi
 
 Given below is an example usage scenario and how `Memo` can be edited by the `edit` command.
 
-Step 1. The user wants to edit the `Memo` of the first person in the address book and executes `edit 1 m/Avid hiker`.
+Step 1. The user wants to edit the `Memo` of the first person in the address book and executes `edit 1 m/mute`.
 
-The following sequence diagram shows how the `edit 1 m/Avid hiker` operation works:
+The following sequence diagram shows how the `edit 1 m/mute` operation works:
 
 ![EditMemoSequenceDiagram](images/EditMemoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Editing of `ContactedDate` via the `edit` command works similarly, the only difference is the `c/` prefix.
 
