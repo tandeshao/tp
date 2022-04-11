@@ -325,9 +325,14 @@ The address book find command allow users to search contacts based on their name
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
 
 <img src="images/FindSequenceDiagram.png"/>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 <br/>
 <br/>
 <img src="images/FindPersonPredicate.png"/>
+<br/>
+<br/>
+<img src="images/CommandResult.png" width="600px"/>
 
 Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 
@@ -343,8 +348,8 @@ Step 3. The `ArgumentMultimap` object is passed as an argument into the  `FindPe
 
 Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` object to create the `FindCommand` object and this object is returned to `LogicManager`.
 
-Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and this method will invoke 
-`Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)` where it will update the filter for the person list in the address book.
+Step 5. `LogicManager` will then call `FindCommand#execute(Model)` method and this method will invoke 
+`Model#updateFilteredPersonList(Predicate)` where it will update the filter for the person list in the address book.
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 

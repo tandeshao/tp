@@ -6,19 +6,13 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "command:FindCommand" as FindCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-skinparam BoxPadding 10
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-
-[-> LogicManager : execute("find n/alice")
+[-> LogicManager : execute("find n/ia")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/alice")
+LogicManager -> AddressBookParser : parseCommand("find n/ia")
 activate AddressBookParser
 
 create FindCommandParser
@@ -28,7 +22,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(" n/alice")
+AddressBookParser -> FindCommandParser : parse(" n/ia")
 activate FindCommandParser
 
 ref over FindCommandParser : get FindPersonPredicate
@@ -49,21 +43,10 @@ destroy FindCommandParser
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
 
-LogicManager -> FindCommand : execute(Model)
+LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(predicate)
-activate Model
-
-Model --> FindCommand
-deactivate Model
-
-create CommandResult
-FindCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> FindCommand
-deactivate CommandResult
+ref over FindCommand : get CommandResult
 
 FindCommand --> LogicManager
 deactivate FindCommand

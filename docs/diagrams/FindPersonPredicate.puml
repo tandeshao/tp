@@ -9,8 +9,8 @@ participant "predicate:FindPersonPredicate" as FindPersonPredicate LOGIC_COLOR
 end box
 
 
-activate FindCommandParser
-FindCommandParser -> FindCommandParser : createArgMap(" n/alice")
+
+FindCommandParser -> FindCommandParser : createArgMap(" n/ia")
 activate FindCommandParser
 create ArgMultimap
 FindCommandParser -> ArgMultimap
