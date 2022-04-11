@@ -1468,7 +1468,8 @@ a       contacts listed will be shown in the status message.
    3. Launch "Abpi.jar". 
    4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
    5. Close the app. <br>
-
       Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
+   6. Note:
+      - Refer to [4.7. Backup Feature](#47-backup-feature) for specific details about the backup data file.
 
 [Back to Table of Contents](#table-of-contents)
