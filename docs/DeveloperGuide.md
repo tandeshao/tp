@@ -615,6 +615,36 @@ To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches
     * Pros: Since `PersonOnDisplay` is now part of the state in an `AddressBook`, `view` commands can now be undone.
     * Cons: Breaks Single Responsibility Principle, as `AddressBook` now contains both the list of contacts and `PersonOnDisplay`.
 
+
+### 4.7. Backup Feature
+
+To save the user's contacts in Abπ, a user would have to key in any valid command before closing the application. However, when Abπ reads a corrupted data file, the application will show an empty list of contacts upon start up. If this empty list is saved, this would overwrite the previously saved data file, effectively deleting the original contacts the user had in Abπ.   
+ 
+To resolve this issue, a backup method `JsonAddressBookStorage#backupFile(Path, Path)` is implemented where it is triggered whenever Abπ reads a corrupted data file. Essentially, this backup method copies the original data in the "addressbook.json" file and creates a backup file named as "backup_[DD-MM-YY HH-MM-SS].json" within the same "data" folder. As a result, this will effectively back up the original data file before any further action is made by the user.
+<br>
+
+_The backup file is located at "[_Abπ location_]/data/" where [_Abπ location_] is the location of the "Abpi.jar" application._
+
+
+#### 4.7.1 Design Considerations:
+**Aspect: Limiting the number of backup files:**
+
+* **Current implementation:** Abπ currently allows multiple backups to be made where each backup is uniquely identified by its creation timestamp.
+  * Pros: The user's original data file is retained even after multiple attempts in loading a corrupted data file into Abπ.  
+  * Cons: There is no hard limit imposed on the number of back up files created. As a result, the size of the data folder might become huge if there is a constant attempt in loading corrupted data files into Abπ and the folder is left unsupervised for a long period of time.
+  
+* **Alternative 1:** Overwrite the contents of the existing backup file with the new backup data whenever the backup method is invoked. 
+  * Pros: This implementation would allow at most one backup file to exist in the data folder, removing the problem of allowing the creation of unlimited backup files.
+  * Cons: If there were consecutive attempts in loading the corrupted data file, the user's original data file would be lost.
+
+* **Alternative 2:** Impose a hard limit on the number of backup files created in the data folder.
+  * Pros: It would remove the problem of allowing the creation of unlimited backup file. 
+  * Cons: Costly in terms of time and effort to implement.
+
+
+
+<br>
+
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
