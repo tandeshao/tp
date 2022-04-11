@@ -58,6 +58,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   
   * Developer Guide:
     * Added implementation details of the `find` feature: [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123)
+    * Added use cases for Abπ: [\#298](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/298)
+    * Added conventions: [\#300](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/300), [\#302](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/302)
 
 <br>
 
