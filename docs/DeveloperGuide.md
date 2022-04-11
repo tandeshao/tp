@@ -321,6 +321,8 @@ The address book find command allow users to search contacts based on their name
 Given below is a sequence diagram to show the execution flow of the find command and a walk-through for each step of the execution:
 
 <img src="images/FindSequenceDiagram.png"/>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 <br/>
 <br/>
 <img src="images/FindPersonPredicate.png"/>
