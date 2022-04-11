@@ -342,8 +342,8 @@ Step 3. The `ArgumentMultimap` object is passed as an argument into the  `FindPe
 
 Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` object to create the `FindCommand` object and this object is returned to `LogicManager`.
 
-Step 5. `LogicManager` will then call`FindCommand#execute(Model)` method and this method will invoke 
-`Model#updateFilteredPersonList(PersonContainsKeywordsPredicate)` where it will update the filter for the person list in the address book.
+Step 5. `LogicManager` will then call `FindCommand#execute(Model)` method and this method will invoke 
+`Model#updateFilteredPersonList(Predicate)` where it will update the filter for the person list in the address book.
 
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
