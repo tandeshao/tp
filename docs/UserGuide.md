@@ -529,8 +529,8 @@ Format: `undo`
 </div>
 
 Examples:
-* `undo` after calling `delete 1` restores the address book to its previous state prior to the deletion.
-* `undo` after calling `edit 1 n/Bob` restores the address book to its previous state prior to the edit.
+* `undo` after calling `delete 1` reverts the deletion.
+* `undo` after calling `edit 1 n/Bob` reverts the edit.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -549,7 +549,7 @@ Format: `redo`
 </div>
 
 Examples:
-* `redo` after calling `undo` restores the address book to its previous state prior to undo.
+* `redo` after calling `undo` reverts the undo.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -619,7 +619,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### 4.9.3. Preventing duplicate contacts
 Abπ helps to manage duplicates by preventing duplicate contacts of identical name, phone and email when using the `add` and `edit` commands.
@@ -648,7 +648,7 @@ Abπ data are saved in the hard disk automatically after any command that change
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### 4.10.2. Editing the data file
 
@@ -679,7 +679,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### 4.10.4. Predictive viewing
 
