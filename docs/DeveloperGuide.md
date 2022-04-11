@@ -321,13 +321,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative:** Individual command knows how to undo and redo by itself.
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
     * Cons: It will take a considerable amount of effort to implement and maintain. Commands that are developed in the future, if applicable, must also support this, which adds to the complexity. It must be done meticulously to ensure that the implementation of each individual command is correct.
-    
+
+<div style="page-break-after: always;"></div>
+
 **Aspect: stateHistory data structure:**
 
 * **Current implementation:** `stateHistory` is an `ArrayList`.
     * Pros: Easy to implement and less prone to bugs.
     * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which has a time complexity of O(n).
-<div style="page-break-after: always;"></div>
+
 * **Alternative 1:** Use a doubly linked list with next and previous pointers. 
     * Pros: O(1) time complexity for all `StateAddressBook` methods.
     * Cons: Java in-built lists do not support next and previous pointers. We will need to carefully implement a doubly linked list and ensure that it is bug free.
