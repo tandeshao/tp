@@ -688,6 +688,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 #### 4.10.4. Predictive viewing
