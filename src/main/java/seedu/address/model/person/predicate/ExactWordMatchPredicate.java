@@ -22,8 +22,8 @@ public class ExactWordMatchPredicate implements Predicate<Person> {
 
     /**
      * Constructor for ExactWordMatchPredicate
-     * @param prefix use to retrieve the corresponding {@link Person} attribute.
-     * @param descriptions descriptions that are tested against.
+     * @param prefix Use to retrieve the corresponding {@link Person} attribute.
+     * @param descriptions Descriptions that are tested against.
      */
     public ExactWordMatchPredicate(Prefix prefix, List<String> descriptions) {
         this.descriptions = descriptions;
@@ -35,8 +35,8 @@ public class ExactWordMatchPredicate implements Predicate<Person> {
      * Checks if the Person's attribute (the attribute that corresponds to {@link #prefix})
      * has any word that matches exactly to any word in the given description.
      *
-     * @param person person to be tested.
-     * @return true if person contains the word, false otherwise.
+     * @param person Person to be tested.
+     * @return True if person contains the word, false otherwise.
      */
     @Override
     public boolean test(Person person) {

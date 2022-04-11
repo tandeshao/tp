@@ -32,7 +32,9 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      * Parses the given {@code String} of arguments into the ScrubCommand. Trims off all
      * leading and trailing white space and returns a ScrubCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args String argument to be parsed into ScrubCommand.
+     * @return ScrubCommand.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public ScrubCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
@@ -90,7 +92,7 @@ public class ScrubCommandParser implements Parser<ScrubCommand> {
      *
      * @param args String argument to be checked.
      * @param prefixes Array of prefixes that are checked against.
-     * @return true if any prefix in prefixes is within the args, false otherwise.
+     * @return True if any prefix in prefixes is within the args, false otherwise.
      */
     private boolean containsPrefix(String args, Prefix... prefixes) {
         return Arrays.stream(prefixes).anyMatch(prefix -> args.contains(prefix.toString()));

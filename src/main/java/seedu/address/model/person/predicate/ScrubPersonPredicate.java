@@ -33,8 +33,8 @@ public class ScrubPersonPredicate implements Predicate<Person> {
      * are allowed for scrubbing, and they are phone, email and tags. For email, a {@link DomainMatchPredicate} is
      * used, for phone and tags, {@link ExactWordMatchPredicate} is used.
      *
-     * @param person person to be tested.
-     * @return true if person contains the word, false otherwise.
+     * @param person Person to be tested.
+     * @return True if person contains the word, false otherwise.
      */
     @Override
     public boolean test(Person person) {
