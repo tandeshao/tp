@@ -743,7 +743,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.3. Use cases
 
-(For all use cases below, the **System** is `Abπ` and the **Actor** is `user`, unless specified otherwise)
+(For all use cases below, the **System** is Abπ and the **Actor** is user, unless specified otherwise)
 
 **Use case: UC01 - Add a person**
 <br>
