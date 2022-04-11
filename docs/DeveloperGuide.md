@@ -327,10 +327,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Current implementation:** `stateHistory` is an `ArrayList`.
     * Pros: Easy to implement and less prone to bugs.
     * Cons: Inefficiency of removing old states. Since `stateHistory` is an `ArrayList`, when `StateAddressBook#saveState()` is called and `StateAddressBook#isFull()` is true, i.e. `stateHistory.size()` is equal to `UNDO_REDO_CAPACITY` + 1, the first index is removed via `ArrayList.remove(0)`, which has a time complexity of O(n).
-
+<div style="page-break-after: always;"></div>
 * **Alternative 1:** Use a doubly linked list with next and previous pointers. 
     * Pros: O(1) time complexity for all `StateAddressBook` methods.
     * Cons: Java in-built lists do not support next and previous pointers. We will need to carefully implement a doubly linked list and ensure that it is bug free.
+
 * **Alternative 2:** Use a `Deque` to store previous states and a `Stack` to store undid states.
     * Pros: O(1) time complexity for all `StateAddressBook` methods.
     * Cons: It can be tricky to implement the interactions between undo and redo. For example `undo`, followed by `redo`, and then `undo` again. The interaction between undo and redo needs to be managed carefully.
