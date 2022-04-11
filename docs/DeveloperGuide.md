@@ -426,7 +426,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 ### 4.3. Memo and ContactedDate person attributes
 
-The address book `Memo` and `ContactedDate` are data fields, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional fields, that is, both can be empty.
+The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. both can be empty.
 - If `Memo` is empty, it will not be displayed. 
 - If `ContactedDate` is empty, it will be displayed as "Not contacted".
 
@@ -446,7 +446,7 @@ The following sequence diagram shows how the `edit 1 m/mute` operation works:
 :information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Editing of `ContactedDate` via the `edit` command works similarly, the only difference is the `c/` prefix.
+Editing of `ContactedDate` via the `edit` command works similarly.
 
 `Memo` and `ContactedDate` can also be added during the `add` command. The sequence diagram is similar to the above, with the following differences:
 - `AddCommandParser` instead of `EditCommandParser`.
@@ -459,12 +459,12 @@ Editing of `ContactedDate` via the `edit` command works similarly, the only diff
 **Aspect: Command to modify `Memo` and `ContactedDate`:**
 
 * **Current implementation:** Modification of `Memo` and `ContactedDate` are integrated into the existing `add` and `edit` command.
-    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, fewer commands for the users to remember. This design adheres to the DRY principle and the Single Responsibility Principle.
+    * Pros: Both fields can be optionally added during the `add` command or edited with the `edit` command. This builds upon existing commands, adhering to the DRY principle and the Single Responsibility Principle.
     * Cons: Requires more rigorous testing of `add` and `edit` command as this increases the number of possible arguments that can be parsed by `AddCommandParser` and `EditCommandParser` respectively.
 
 * **Alternative:** Implement individual commands to edit `Memo` and `ContactedDate`.
     * Pros: `Memo` and `ContactedDate` will be separated from the `add` and `edit` command. It can only be added/edited by its respective command.
-    * Cons: There will be a lot of code duplication. The new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
+    * Cons: There will be a lot of code duplication, the new commands to edit `Memo` and `ContactedDate` will be similar to the `edit` command. We feel that this would violate the DRY principle.
 
 **Aspect: `Memo` restrictions:**
 * **Current implementation:** The only restriction for `Memo` is the maximum number of characters allowed, 1000 characters.
@@ -514,12 +514,14 @@ For phone, even if there is a difference in white space, it is still considered 
 **Aspect: Difference in white space:**
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
-    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. The exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number.
-    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for phone, we decided to stick with the normal convention, where a difference in white space is considered as different.
+    * Pros: Again, it follows closely to reality. Except `Phone`, we can agree that "therapist" and "the rapist", a difference in white space, have vastly different meanings. Intuitively, spaces are used as to separate different words, resulting in different meanings when separated. <br> 
+     The only exception is `Phone`, the white spaces between phone numbers are only for cosmetic purposes. For example, when dialing "+65 98765432" or "+6598765432", both refers to the same number in reality.
+    * Cons: "John Doe" and "JohnDoe", although they look similar, will be considered as different. However, if we allow them to be treated as equal, "therapist" and "the rapist" will also be considered as equal, which is no go. Hence, except for `Phone`, we decided to stick with the normal convention, where a difference in white space is considered as different.
 
 **Aspect: Phone number with '+':**
 * **Current implementation:** For `Phone`, a difference in '+' is considered as different.
-    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
+    * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. <br>
+     For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
 ### 4.5. Detailed Person Display
