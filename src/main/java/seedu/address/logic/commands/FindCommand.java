@@ -51,7 +51,7 @@ public class FindCommand extends Command {
      * {@link #predicate} condition.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return message that should be reflected in the {@link seedu.address.ui.Ui}.
+     * @return Message that should be reflected in the {@link seedu.address.ui.Ui}.
      */
     @Override
     public CommandResult execute(Model model) {
@@ -65,12 +65,6 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, numberOfFilteredPerson));
     }
 
-    /**
-     * Checks if two {@code FindCommand} are equal.
-     *
-     * @param other the other {@code FindCommand} object.
-     * @return true if equal; otherwise false.
-     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

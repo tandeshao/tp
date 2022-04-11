@@ -22,8 +22,8 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
 
     /**
      * Constructor for PartialWordMatchPredicate
-     * @param prefix use to retrieve the corresponding {@link Person} attribute.
-     * @param descriptions descriptions that are tested against.
+     * @param prefix Use to retrieve the corresponding {@link Person} attribute.
+     * @param descriptions Descriptions that are tested against.
      */
     public PartialWordMatchPredicate(Prefix prefix, List<String> descriptions) {
         this.descriptions = descriptions;
@@ -34,9 +34,9 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
      * Conducts a case-insensitive partial match on both the attribute and description.
      * For example: "memo" would match with "This is a memo".
      *
-     * @param attribute person attribute that is tested.
-     * @param descriptions description that is supplied by the user.
-     * @return true if there is a partial match between attribute and description, false otherwise.
+     * @param attribute Person attribute that is tested.
+     * @param descriptions Description that is supplied by the user.
+     * @return True if there is a partial match between attribute and description, false otherwise.
      */
     private boolean caseInsensitivePartialMatch(String attribute, List<String> descriptions) {
         return descriptions.stream().anyMatch(description ->
@@ -48,8 +48,8 @@ public class PartialWordMatchPredicate implements Predicate<Person> {
      * Checks if the Person's attribute (the attribute that corresponds to {@link #prefix})
      * has any word that partially matches the given description.
      *
-     * @param person person to be tested.
-     * @return true if person contains the word, false otherwise.
+     * @param person Person to be tested.
+     * @return True if person contains the word, false otherwise.
      */
     @Override
     public boolean test(Person person) {

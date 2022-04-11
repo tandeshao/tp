@@ -28,7 +28,7 @@ public class DomainMatchPredicate implements Predicate<Person> {
      * .com) of the user argument. This test is case-insensitive.
      *
      * @param person Person to be checked against.
-     * @return true if domain name is identical to the email argument, false otherwise.
+     * @return True if domain name is identical to the email argument, false otherwise.
      */
     @Override
     public boolean test(Person person) {

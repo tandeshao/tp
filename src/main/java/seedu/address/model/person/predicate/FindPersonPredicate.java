@@ -26,7 +26,7 @@ public class FindPersonPredicate implements Predicate<Person> {
     /**
      * Constructs Predicate function.
      *
-     * @param descriptor description to search a person by.
+     * @param descriptor Description to search a person by.
      */
     public FindPersonPredicate(ArgumentMultimap descriptor) {
         this.descriptor = descriptor;
@@ -51,8 +51,8 @@ public class FindPersonPredicate implements Predicate<Person> {
      * once and combining the outcome of both filtered result into a single output list. For example, "find
      * n/benedict n/alex" would match with anybody that has the name "alex" or "benedict".
      *
-     * @param person person to be tested.
-     * @return true if person contains the word, false otherwise.
+     * @param person Person to be tested.
+     * @return True if person contains the word, false otherwise.
      */
     @Override
     public boolean test(Person person) {
@@ -67,10 +67,10 @@ public class FindPersonPredicate implements Predicate<Person> {
 
     /**
      * Checks if the attribute that corresponds with the attribute matches with the predicate.
-     * @param person person to be tested.
-     * @param attribute the prefix that identifies which attribute of the person should the predicate be
+     * @param person Person to be tested.
+     * @param attribute The prefix that identifies which attribute of the person should the predicate be
      *               testing against.
-     * @return true if the person's attribute passes the test, false otherwise.
+     * @return True if the person's attribute passes the test, false otherwise.
      */
     private boolean testPersonAttribute(Person person, Prefix attribute) {
         Predicate<Person> predicateToTestAgainst;
@@ -91,8 +91,8 @@ public class FindPersonPredicate implements Predicate<Person> {
     /**
      * Equal method to check if two {@link FindPersonPredicate} are equal.
      *
-     * @param other other PersonContainsKeywordsPredicate object.
-     * @return true if both {@link FindPersonPredicate} object are the same, false otherwise.
+     * @param other Other PersonContainsKeywordsPredicate object.
+     * @return True if both {@link FindPersonPredicate} object are the same, false otherwise.
      */
     @Override
     public boolean equals(Object other) {

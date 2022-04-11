@@ -23,10 +23,12 @@ public class FindCommandParser implements Parser<FindCommand> {
     private static final Logger LOGGER = Logger.getLogger(FindCommandParser.class.getName());
 
     /**
-     * Parses the given {@code String} of arguments into the FindCommand. Trims off all
-     * leading and trailing white space and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments into the FindCommand. Trims off all leading and trailing white
+     * space and returns a FindCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args String argument to be parsed into FindCommand.
+     * @return FindCommand.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         LOGGER.log(Level.INFO, "Parsing user input");
@@ -60,9 +62,9 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Parses the given user argument and check if there is any valid prefix.
      * If no valid prefix is found, a parse exception is thrown. Else, a new ArgumentMultimap is created.
      *
-     * @param modifiedString user input that has its trailing and leading whitespaces removed.
+     * @param modifiedString User input that has its trailing and leading whitespaces removed.
      * @return ArgumentMultimap that stores the description to search a person by.
-     * @throws ParseException if there are no valid prefix in the user input.
+     * @throws ParseException If there are no valid prefix in the user input.
      */
     private ArgumentMultimap createArgMap(String modifiedString) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(modifiedString, ARRAY_OF_PREFIX);

@@ -73,12 +73,6 @@ public class ScrubCommand extends Command {
         return numberOfDeletedPerson;
     }
 
-    /**
-     * Checks if two ScrubCommand are the same.
-     *
-     * @param other ScrubCommand to be checked against.
-     * @return True if both are the same ScrubCommand, false otherwise.
-     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
