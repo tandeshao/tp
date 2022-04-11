@@ -59,7 +59,7 @@ public class AddCommand extends Command {
      * Executes the add command and returns the result message.
      *
      * @param model {@code Model} which the add command should operate on.
-     * @return feedback message of the add operation result for display.
+     * @return Feedback message of the add operation result for display.
      * @throws CommandException If an error occurs during add command execution.
      */
     @Override
@@ -78,7 +78,7 @@ public class AddCommand extends Command {
     /**
      * Checks if two {@code AddCommand} is equal.
      *
-     * @param other the other {@code AddCommand} object.
+     * @param other The other {@code AddCommand} object.
      * @return If equal true; otherwise false.
      */
     @Override
