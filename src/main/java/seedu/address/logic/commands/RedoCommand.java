@@ -33,7 +33,7 @@ public class RedoCommand extends Command {
      * Restores the {@code Model}'s address book to its previous undid state.
      *
      * @param model {@code Model} which the redo command should operate on.
-     * @return feedback message of the redo operation result for display.
+     * @return Feedback message of the redo operation result for display.
      * @throws CommandException If an error occurs during redo command execution.
      */
     @Override
@@ -56,8 +56,8 @@ public class RedoCommand extends Command {
     /**
      * Checks if two {@code RedoCommand} are equal.
      *
-     * @param other the other {@code RedoCommand} object.
-     * @return true if equal; otherwise false.
+     * @param other The other {@code RedoCommand} object.
+     * @return If equal true; otherwise false.
      */
     @Override
     public boolean equals(Object other) {

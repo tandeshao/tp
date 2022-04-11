@@ -33,7 +33,7 @@ public class UndoCommand extends Command {
      * Restores the {@code Model}'s address book to its previous state.
      *
      * @param model {@code Model} which the undo command should operate on.
-     * @return feedback message of the undo operation result for display.
+     * @return Feedback message of the undo operation result for display.
      * @throws CommandException If an error occurs during undo command execution.
      */
     @Override
@@ -56,8 +56,8 @@ public class UndoCommand extends Command {
     /**
      * Checks if two {@code UndoCommand} are equal.
      *
-     * @param other the other {@code UndoCommand} object.
-     * @return true if equal; otherwise false.
+     * @param other The other {@code UndoCommand} object.
+     * @return If equal true; otherwise false.
      */
     @Override
     public boolean equals(Object other) {
