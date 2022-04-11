@@ -10,7 +10,7 @@ end box
 
 
 activate FindCommandParser
-FindCommandParser -> FindCommandParser : createArgMap(" n/bob")
+FindCommandParser -> FindCommandParser : createArgMap(" n/ia")
 activate FindCommandParser
 create ArgMultimap
 FindCommandParser -> ArgMultimap

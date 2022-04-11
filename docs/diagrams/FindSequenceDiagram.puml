@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find n/bob")
+[-> LogicManager : execute("find n/ia")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/bob")
+LogicManager -> AddressBookParser : parseCommand("find n/ia")
 activate AddressBookParser
 
 create FindCommandParser
@@ -28,7 +28,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(" n/bob")
+AddressBookParser -> FindCommandParser : parse(" n/ia")
 activate FindCommandParser
 
 ref over FindCommandParser : get FindPersonPredicate
