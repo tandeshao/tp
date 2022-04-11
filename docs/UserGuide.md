@@ -666,7 +666,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 * Everytime the original data file is corrupted, Abπ would back up your data and store it in "[Abπ location]/data/" as "backup_[DD-MM-YY HH-MM-SS].json". The backup file format will be similar to the backup file shown in the image below.
 
-![backupFileImage.png](backupFileImage.png)
+![backupFileImage.png](images/backupFileImage.png)
 
 * To reload your data from the backup file into Abπ, fix the corrupted entries in the backup file to a proper json format, rename the file as "addressbook.json" and overwrite the existing "addressbook.json" file.
 * Backup files are generated when Abπ fails to read the data in the "addressbook.json" file.
