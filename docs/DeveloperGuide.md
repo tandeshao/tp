@@ -22,8 +22,9 @@ title: Developer Guide
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
 &nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
-&nbsp;&nbsp;[4.5. Detailed Person Display](#45-detailed-person-display) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1. Design considerations](#451-design-considerations) <br/>
+&nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
+&nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Design considerations](#461-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -519,7 +520,72 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
-### 4.5. Detailed Person Display
+### 4.5. Previous and next feature
+Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs.
+To implement this feature, a "Recorder" class to record the recent user inputs is firstly
+needed to be added. Thus, a `CommandList` Class was created to record the recent commands.
+Either, typing `previous` or press the up arrow key will invoke `previous command`.
+It auto-fills the textbox with the previous command.
+
+* For example, after successfully executed "find n/Alice", "find n/Bob", pressing the up-arrow
+key will automatically fill-in the textbox with "find n/Bob", pressing up-arrow key again will
+fill-in the textbox with "find n/Alice", and then pressing down-arrow key will
+fill-in textbox with "find n/Bob" again.
+
+**Picture explain:**<br>
+**Step 0, no user input yet:**
+![CommandListState0](images/CommandList0.png)
+When the CommandList is empty, the pointer will point to position 0.
+
+**Step 1, User executed "find n/Alice":**
+![CommandListState1](images/CommandList1.png)
+When the CommandList has one history, the pointer will point to position 1,
+which is the next position and is empty.
+
+**Step 2, User executed "find n/Bob":**
+![CommandListState2](images/CommandList2.png)
+When the CommandList has two history, the pointer will point to position 2,
+which is the next position and is empty.
+
+**Step 3, User pressed up-arrow key:**
+"find n/Bob" is fetched and auto-filled in textbox
+![CommandListState4](images/CommandList3.png)
+When the user presses up-arrow key, CommandList will decrease the pointer by one.
+Now the pointer points to position 1, which is the previous input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+**Step 5, User pressed up-arrow key again:**
+"find n/Alice" is fetched and auto-filled in textbox
+![CommandListState5](images/CommandList4.png)
+When the user presses up-arrow key again, CommandList will decrease the pointer by one.
+Now the pointer points to position 1, which is the previous input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+**Step 6, User pressed down-arrow key:**
+"find n/Bob" is fetched and auto-filled in textbox
+![CommandListState6](images/CommandList5.png)
+When the user presses down-arrow key, CommandList will increase the pointer by one.
+Now the pointer points to position 2, which is the next input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+To conclude, when user have not yet press the up-arrow key, the pointer will always point to
+the next position of CommandList. So that when user presses the up-arrow key, pointer will decrease
+by one to point to the previous position and fetch the history.
+When There is no previous/next command available, a CommandException will be thrown
+and error message will be shown in the message-box.
+<br><br>
+**Aspect: The execution of PreviousCommand/NextCommand:**
+
+When a `PreviousCommand` or `NextCommand` is being executed, if it is executed successfully,
+it will return a special `CommandResult`(with `CommandRemark` set to `HISTORY`) to inform `UI` and ask `UI` to auto-fill the textbox
+with the most recent Command. If it is not executed successfully(i.e. there is no previous
+or next command available), it will throw `CommandException` and show the error message.
+
+The following activity diagram summarizes what happens when a user executes PreviousCommand/NextCommand:
+
+<img src="images/HistoryActivityDiagram.png" width="482" />
+
+### 4.6. Detailed Person Display
 
 This section will outline the design choices of implementing the panel to display person details. A class diagram outlining the important classes, methods, and variables is shown below:
 
@@ -533,7 +599,7 @@ This section will outline the design choices of implementing the panel to displa
 
 To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches a `ChangeListener` from `DetailedPersonDisplay` and passes the `ChangeListener` to `ModelManager`. This way, whenever the `PersonOnDisplay` object changes inside `ModelManager`, `DetailedPersonDisplay` will receive an update and modify the display with the updated information accordingly.
 
-#### 4.5.1. Design considerations:
+#### 4.6.1. Design considerations:
 
 **Aspect: PersonOnDisplay:**
 
