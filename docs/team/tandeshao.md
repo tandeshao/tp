@@ -3,16 +3,17 @@ layout: page
 title: Tan De Shao's Project Portfolio Page
 ---
 
-### Project: AddressBook Level π (Abπ)
+### Project: AddressBook π (Abπ)
 
 AddressBook pi (Abπ) is a 360° all-rounded desktop app for managing contacts, optimized for use via a Command Line Interface (CLI). Abπ is catered towards fast-typers and individuals who want an organized address book with key features including efficient filtering of contacts based on various attributes (name, email, tags, etc.), copying of all emails in the address book and a memo section that allows you to note down notable details about a person.
 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9k LoC.
 
----
 
 **Summary of contributions**
+
 * Code contributed: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=tandeshao&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+
 * **Features and Enhancement implemented**
   * Enhancement of the FindCommand (Pull requests [\#55](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/55), [\#118](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/118), [\#268](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/268), [\#192](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/192))
     * What it does: Allows user to search for a contact in Abπ by using any of the attribute that is available to a person. 
