@@ -9,7 +9,7 @@ AddressBook pi (Abπ) is a 360° all-rounded desktop app for managing contacts, 
 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9k LoC.
 
-####My contributions to the project:
+#### My contributions to the project:
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=xpzmichael&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByNone&checkedFileTypes=docs~functional-code~test-code~other)
 
@@ -27,7 +27,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * Wrote additional tests to ensure the implementation of constrains for Name, Phone, Address, email, and Tag.
   * Implement new feature: Easy Navigation among input history using up/down errow key.
     * [\#61](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/61), 
-    allows user to invoke the most recent command by typing command keyword. 
+    allows user to invoke the most recent command by typing `command keyword`. 
     Modified `CommandResult` using enum to indicate the type of command being executed.
     * [\#132](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/132), [\#146](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/146)
     allows user to go through input history by pressing `up/down arrow key`<br>

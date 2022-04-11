@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Content <br/>
+## Table of Contents
 [Acknowledgements](#acknowledgements) <br/>
 [1. Conventions](#1-conventions) <br/>
 [2. Setting up, getting started](#2-setting-up-getting-started) <br/>
@@ -22,6 +22,9 @@ title: Developer Guide
 &nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
 &nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
+&nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
+&nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Design considerations](#461-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -195,6 +198,8 @@ The `Storage` component,
 ### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -520,6 +525,98 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
 
+### 4.5. Previous and next feature
+Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs.
+To implement this feature, a "Recorder" class to record the recent user inputs is firstly
+needed to be added. Thus, a `CommandList` Class was created to record the recent commands.
+Either, typing `previous` or press the up arrow key will invoke `previous command`.
+It auto-fills the textbox with the previous command.
+
+* For example, after successfully executed "find n/Alice", "find n/Bob", pressing the up-arrow
+key will automatically fill-in the textbox with "find n/Bob", pressing up-arrow key again will
+fill-in the textbox with "find n/Alice", and then pressing down-arrow key will
+fill-in textbox with "find n/Bob" again.
+
+**Picture explain:**<br>
+**Step 0, no user input yet:**
+![CommandListState0](images/CommandList0.png)
+When the CommandList is empty, the pointer will point to position 0.
+
+**Step 1, User executed "find n/Alice":**
+![CommandListState1](images/CommandList1.png)
+When the CommandList has one history, the pointer will point to position 1,
+which is the next position and is empty.
+
+**Step 2, User executed "find n/Bob":**
+![CommandListState2](images/CommandList2.png)
+When the CommandList has two history, the pointer will point to position 2,
+which is the next position and is empty.
+
+**Step 3, User pressed up-arrow key:**
+"find n/Bob" is fetched and auto-filled in textbox
+![CommandListState4](images/CommandList3.png)
+When the user presses up-arrow key, CommandList will decrease the pointer by one.
+Now the pointer points to position 1, which is the previous input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+**Step 5, User pressed up-arrow key again:**
+"find n/Alice" is fetched and auto-filled in textbox
+![CommandListState5](images/CommandList4.png)
+When the user presses up-arrow key again, CommandList will decrease the pointer by one.
+Now the pointer points to position 1, which is the previous input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+**Step 6, User pressed down-arrow key:**
+"find n/Bob" is fetched and auto-filled in textbox
+![CommandListState6](images/CommandList5.png)
+When the user presses down-arrow key, CommandList will increase the pointer by one.
+Now the pointer points to position 2, which is the next input. Then the information
+pointed by pointer will be fetched and auto-filled into the command-box.
+
+To conclude, when user have not yet press the up-arrow key, the pointer will always point to
+the next position of CommandList. So that when user presses the up-arrow key, pointer will decrease
+by one to point to the previous position and fetch the history.
+When There is no previous/next command available, a CommandException will be thrown
+and error message will be shown in the message-box.
+<br><br>
+**Aspect: The execution of PreviousCommand/NextCommand:**
+
+When a `PreviousCommand` or `NextCommand` is being executed, if it is executed successfully,
+it will return a special `CommandResult`(with `CommandRemark` set to `HISTORY`) to inform `UI` and ask `UI` to auto-fill the textbox
+with the most recent Command. If it is not executed successfully(i.e. there is no previous
+or next command available), it will throw `CommandException` and show the error message.
+
+The following activity diagram summarizes what happens when a user executes PreviousCommand/NextCommand:
+
+<img src="images/HistoryActivityDiagram.png" width="482" />
+
+### 4.6. Detailed Person Display
+
+This section will outline the design choices of implementing the panel to display person details. A class diagram outlining the important classes, methods, and variables is shown below:
+
+![DetailedPersonDisplayPanelClassDiagram](images/DetailedPersonDisplayPanelClassDiagram.png)
+
+`ModelManager` handles adding, changing, and deleting the current `PersonOnDisplay` via listeners. The listener detects changes to the filterable list of contacts stored in the `StateAddressBook` and updates the `PersonOnDisplay` via the methods:
+
+* `ModelManager#updateDisplayUponAddition()` - Updates what the display should contain upon the addition of a `Person`. In the current implementation, it simply updates `PersonOnDisplay` to the newly added `Person`.
+* `ModelManager#updateDisplayUponDeletion()` - Updates what the display should contain upon the deletion of a `Person`. In the current implementation, it updates the display to blank if the current `PersonOnDisplay` has been removed from the data.
+* `ModelManager#updateDisplayUponModification()` - Updates what the display should contain upon any modifications of attributes of a `Person`. In the current implementation, it updates `PersonOnDisplay` to display the edited data of the edited `Person`.
+
+To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches a `ChangeListener` from `DetailedPersonDisplay` and passes the `ChangeListener` to `ModelManager`. This way, whenever the `PersonOnDisplay` object changes inside `ModelManager`, `DetailedPersonDisplay` will receive an update and modify the display with the updated information accordingly.
+
+#### 4.6.1. Design considerations:
+
+**Aspect: PersonOnDisplay:**
+
+* **Current implementation:** `PersonOnDisplay` is currently located in `ModelManager`
+    * Pros: Great flexibility as `ModelManager` already handles additions, modifications, and deletions to the `StateAddressBook`. 
+    * Cons: Unable to undo `view` commands or go back to what you were viewing before.
+* **Alternative:** Store `PersonOnDisplay` directly inside `AddressBook`
+    * Pros: Since `PersonOnDisplay` is now part of the state in an `AddressBook`, `view` commands can now be undone.
+    * Cons: Breaks Single Responsibility Principle, as `AddressBook` now contains both the list of contacts and `PersonOnDisplay`.
+
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Documentation, logging, testing, configuration, dev-ops
@@ -529,6 +626,8 @@ For phone, even if there is a difference in white space, it is still considered 
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1113,6 +1212,8 @@ Guarantees: User will exit Abπ.
 * **Mainstream Operating System**: Windows, Linux, Unix, OS-X
 * **OOP**: Object-oriented programming
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Appendix: Instructions for manual testing
@@ -1329,4 +1430,7 @@ a       contacts listed will be shown in the status message.
    3. Launch "Abpi.jar". 
    4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
    5. Close the app. <br>
+
       Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
+
+[Back to Table of Contents](#table-of-contents)
