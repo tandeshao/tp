@@ -1134,6 +1134,8 @@ Guarantees: All the emails are copied.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC12 - Undoing actions made by Abπ**
 
 Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
@@ -1188,6 +1190,8 @@ Guarantees: Redoing an undid action is successful.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC14 - User is able to retrieve previously executed commands**
 <br>
 Precondition: There must be at least 1 executed command before the user requests to retrieve a previously executed command.
@@ -1241,6 +1245,8 @@ Guarantees: User will get instructions on how to get help.
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC16 - Exit**
 <br>
@@ -1321,6 +1327,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Re-launch the app. <br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.2. Adding a contact
 
