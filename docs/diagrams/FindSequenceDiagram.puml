@@ -7,9 +7,8 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "command:FindCommand" as FindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-end box
 
-skinparam BoxPadding 10
+end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
