@@ -324,6 +324,9 @@ Given below is a sequence diagram to show the execution flow of the find command
 <br/>
 <br/>
 <img src="images/FindPersonPredicate.png"/>
+<br/>
+<br/>
+<img src="images/CommandResult.png" width="600px"/>
 
 Step 1. When a user invokes a find command from the Ui, `LogicManager` will be called, which parses the user input into `AddressbookParser#parseCommand(String)`.
 

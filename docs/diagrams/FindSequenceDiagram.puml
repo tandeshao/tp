@@ -6,13 +6,8 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "command:FindCommand" as FindCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
 
 [-> LogicManager : execute("find n/ia")
 activate LogicManager
@@ -51,18 +46,7 @@ deactivate AddressBookParser
 LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(predicate)
-activate Model
-
-Model --> FindCommand
-deactivate Model
-
-create CommandResult
-FindCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> FindCommand
-deactivate CommandResult
+ref over FindCommand : get CommandResult
 
 FindCommand --> LogicManager
 deactivate FindCommand
