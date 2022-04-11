@@ -213,6 +213,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO]
 A person can have any number of tags, including 0.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
 </div>
