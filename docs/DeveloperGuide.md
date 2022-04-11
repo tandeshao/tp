@@ -15,18 +15,12 @@ title: Developer Guide
 &nbsp;&nbsp;[3.6. Common classes](#36-common-classes) <br/>
 [4. Implementation](#4-implementation) <br/>
 &nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Design considerations](#421-design-considerations) <br/>
 &nbsp;&nbsp;[4.3. Memo and ContactedDate person attributes](#43-memo-and-contacteddate-person-attributes) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
 &nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
 &nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
 &nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Design considerations](#461-design-considerations) <br/>
 &nbsp;&nbsp;[4.7. Backup Feature](#47-backup-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Design considerations](#471-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -547,6 +541,8 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: Similar to "Aspect: Case sensitivity", it follows closely to reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
     * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature, helping users to remove accidental extra white spaces provides a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
 
+<div style="page-break-after: always;"></div>
+
 **Aspect: Difference in white space:**
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
@@ -560,6 +556,8 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. <br>
      For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5. Previous and next feature
 Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs.
@@ -625,6 +623,8 @@ or next command available), it will throw `CommandException` and show the error 
 The following activity diagram summarizes what happens when a user executes PreviousCommand/NextCommand:
 
 <img src="images/HistoryActivityDiagram.png" width="482" />
+
+<div style="page-break-after: always;"></div>
 
 ### 4.6. Detailed Person Display
 
