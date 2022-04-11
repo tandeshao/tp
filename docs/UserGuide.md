@@ -22,7 +22,7 @@ AddressBook pi (**Abπ**) is a **360° all-rounded desktop app for managing cont
 &nbsp;&nbsp;[4.1. Adding and Editing a person](#41-adding-and-editing-a-person) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Adding a person](#411-adding-a-person-add) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Editing a person](#412-editing-a-person-edit) <br/>
-&nbsp;&nbsp;[4.2. Adding and Editing a person's tag](#42-adding-and-editing-a-persons-tag) <br/>
+&nbsp;&nbsp;[4.2. Adding and Deleting a person's tag](#42-adding-and-deleting-a-persons-tag) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Adding tags to a person](#421-adding-tags-to-a-person-addtag) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.2.2. Deleting tags of a person](#422-deleting-tags-of-a-person-deletetag) <br/>
 &nbsp;&nbsp;[4.3. Removing persons](#43-removing-persons) <br/>
@@ -81,7 +81,7 @@ Prefix | Part of the user input that allows the user to specify certain attribut
 Prefix argument  | The input specified by the user after the prefix in the command box.                                                                                                                                     
 Attribute constraints | Constraints that was set by Abπ that specifies how the format of the prefix argument should look like. For eg., Name should not be blank, and its length should be between 1 and 800 (including spaces). | 
 
-<div style="page-break-after: always;"></div>
+<br>
 
 ### 1.1. Conventions
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
@@ -127,6 +127,8 @@ Symbol | What it means |
 
 7. Refer to the [features](#4-features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 ### 2.2. System Requirements
 Ideally, the machine you are running on should be able to run Java. Below is a list of system specifications that supports Abπ.
 
@@ -148,6 +150,8 @@ _For more information on Java, click [here](https://www.oracle.com/java/technolo
 * Intel-based Mac running Mac OS X 10.8.3+, 10.9+
 * Administrator privileges for installation
 
+---
+
 <div style="page-break-after: always;"></div>
 
 ## 3. About
@@ -162,6 +166,8 @@ For each contact in the Contact Display, information is displayed as follows:
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ sorts contacts in chronological order, i.e. contacts added first will be at the top of the contact display, and contacts added last will be at the bottom.
 </div>
+
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -187,7 +193,7 @@ For each contact in the Contact Display, information is displayed as follows:
 
 * <a name="index" />Index refers to the index number shown in the contact display. Index must be positive integer between 1 and 2147483647.
 
-* <a name="date" />Dates must be a **valid** [AD](https://en.wikipedia.org/wiki/Anno_Domini) date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
+* <a name="date" />Dates must be a **valid** _[AD](https://en.wikipedia.org/wiki/Anno_Domini)_ date following the **dd-mm-yyyy** format, and must not be in the future. Examples of valid dates are: "01-01-2020", "31-01-2020". <br> For both invalid date and incorrect date format, the same error message will be shown.
 
 </div>
 
@@ -268,7 +274,9 @@ Upon executing example 1 `edit 1 n/John Doe p/91234567 e/johndoe@example.com`:
 
 <br>
 
-### 4.2. Adding and Editing a person's tag
+<div style="page-break-after: always;"></div>
+
+### 4.2. Adding and Deleting a person's tag
 
 #### 4.2.1. Adding tags to a person: `addtag`
 
