@@ -624,6 +624,8 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 #### 4.9.3. Preventing duplicate contacts
@@ -652,6 +654,8 @@ For phone, even if there is a difference in white space, it is still considered 
 Abπ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
+
+<br>
 
 <div style="page-break-after: always;"></div>
 
