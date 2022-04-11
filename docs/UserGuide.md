@@ -395,7 +395,6 @@ Upon executing the command `scrub t/friends`:
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
 
 #### 4.3.3. Clearing all entries: `clear`
 
@@ -404,6 +403,9 @@ Clears all entries from the address book.
 Format: `clear`
 
 [Back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
 
 
 ### 4.4. Displaying person details
