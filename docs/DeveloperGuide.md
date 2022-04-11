@@ -33,7 +33,7 @@ title: Developer Guide
 &nbsp;&nbsp;[6.2. User stories](#62-user-stories) <br/>
 &nbsp;&nbsp;[6.3. Use cases](#63-use-cases) <br/>
 &nbsp;&nbsp;[6.4. Non-Functional Requirements](#64-non-functional-requirements) <br/>
-&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
+&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/> <div style="page-break-after: always;"></div>
 [7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
 &nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
 &nbsp;&nbsp;[7.2. Adding a contact](#72-adding-a-contact) <br/>
@@ -51,6 +51,8 @@ title: Developer Guide
 * https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Conventions
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
@@ -71,6 +73,8 @@ Symbol | What it means |
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 3. Design
 
@@ -1470,6 +1474,6 @@ a       contacts listed will be shown in the status message.
    5. Close the app. <br>
       Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
    6. Note:
-      - Refer to [4.7. Backup Feature](#47-backup-feature) for specific details about the backup data file.
+      - Refer to [4.7. Backup Feature](#47-backup-feature) for specific details about the backup data files.
 
 [Back to Table of Contents](#table-of-contents)
