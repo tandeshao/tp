@@ -25,6 +25,8 @@ title: Developer Guide
 &nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
 &nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Design considerations](#461-design-considerations) <br/>
+&nbsp;&nbsp;[4.7. Backup Feature](#47-backup-feature) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Design considerations](#471-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -626,10 +628,10 @@ To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches
 
 To save the user's contacts in Abπ, a user would have to key in any valid command before closing the application. However, when Abπ reads a corrupted data file, the application will show an empty list of contacts upon start up. If this empty list is saved, this would overwrite the previously saved data file, effectively deleting the original contacts the user had in Abπ.   
  
-To resolve this issue, a backup method `JsonAddressBookStorage#backupFile(Path, Path)` is implemented where it is triggered whenever Abπ reads a corrupted data file. Essentially, this backup method copies the original data in the "addressbook.json" file and creates a backup file named as "backup_[DD-MM-YY HH-MM-SS].json" within the same "data" folder. As a result, this will effectively back up the original data file before any further action is made by the user.
+To resolve this issue, a backup method `JsonAddressBookStorage#backupFile(Path, Path)` is implemented where it is triggered whenever Abπ reads a corrupted data file. Essentially, this backup method copies the original data in the "addressbook.json" file and creates a backup file named as "backup_[_DD-MM-YY HH-MM-SS_].json" within the same "data" folder. As a result, this will effectively back up the original data file before any further action is made by the user.
 <br>
 
-_The backup file is located at "[_Abπ location_]/data/" where [_Abπ location_] is the location of the "Abpi.jar" application._
+_The backup file is located at "[Abπ location]/data/" where [Abπ location] is the location of the "Abpi.jar" application._
 
 
 #### 4.7.1 Design Considerations:
