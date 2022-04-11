@@ -1350,6 +1350,8 @@ testers are expected to do more *exploratory* testing.
        - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
+<div style="page-break-after: always;"></div>
+
 ### 7.3. Editing a contact
 
 1. Editing a contact's attributes while all contacts are being shown
@@ -1401,6 +1403,8 @@ testers are expected to do more *exploratory* testing.
         - If the edit does not change anything, a nothing will change error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
+<div style="page-break-after: always;"></div>
+
 ### 7.4. Adding tags to a contact
 
 1. Adding tags to a contact while all contacts are being shown
@@ -1425,6 +1429,8 @@ testers are expected to do more *exploratory* testing.
     7. Note:
        - If any of the tags to be added already exist in the specified contact, a tag already present error message will be shown.
        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.5. Deleting tags of a contact
 
@@ -1451,6 +1457,8 @@ testers are expected to do more *exploratory* testing.
         - If any of the tags to be deleted does not exist in the specified contact, a tag does not exist error message will be shown.
         - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
 
+<div style="page-break-after: always;"></div>
+
 ### 7.6. Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -1465,6 +1473,8 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
       Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red. 
+
+<div style="page-break-after: always;"></div>
 
 ### 7.7. Finding contacts by their attributes
 
