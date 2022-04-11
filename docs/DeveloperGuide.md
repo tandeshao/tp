@@ -16,7 +16,7 @@ title: Developer Guide
 [4. Implementation](#4-implementation) <br/>
 &nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
-&nbsp;&nbsp;[4.3. Memo and Contacted date feature](#43-memo-and-contacted-date-feature) <br/>
+&nbsp;&nbsp;[4.3. Memo and contacted date feature](#43-memo-and-contacted-date-feature) <br/>
 &nbsp;&nbsp;[4.4. Duplicate detection feature](#44-duplicate-detection-feature) <br/>
 &nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
 &nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
@@ -450,7 +450,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 <div style="page-break-after: always;"></div>
 
-### 4.3. Memo and Contacted date feature
+### 4.3. Memo and contacted date feature
 
 The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. either can be empty.
 - If `Memo` is empty, it will not be displayed. 
