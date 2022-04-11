@@ -213,7 +213,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO]
 A person can have any number of tags, including 0.
 </div>
 
-<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -223,6 +222,8 @@ Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
+
+<div style="page-break-after: always;"></div>
 
 Visual Example:
 
