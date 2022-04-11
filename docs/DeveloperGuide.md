@@ -503,6 +503,8 @@ Editing of `ContactedDate` via the `edit` command works similarly.
     * Pros: Memo can take any character, including any special characters, providing flexibility for users. The limit is imposed to protect from and prevent excessively long strings.
     * Cons: There could be special characters which might not display properly, or malicious characters that mess up the display. However, it is the conscious choice of the user to input such characters. We decided to not be overzealous with the input validation. Allowing any character as memo provides great flexibility for users.
 
+<div style="page-break-after: always;"></div>
+
 **Aspect: `ContactedDate` restrictions:**
 * **Current implementation:** Date can be only be empty or a valid dd-mm-yyyy date that is not in the future.
     * Pros: Empty dates can be used by users to represent not contacted. The dd-mm-yyyy format is a common date format in Singapore. Preventing future dates is an intuitive design choice, as it doesn't make sense for last contacted to be in the future.
@@ -522,6 +524,8 @@ For all person attributes except `Phone`, after extra white spaces have been tri
 For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example:
 - "+65 98765432" is equal to "+6598765432" (difference in white space)
 - "+65 98765432" is different from "65 98765432" (difference in '+')
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.1. Design considerations:
 
