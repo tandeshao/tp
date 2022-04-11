@@ -15,18 +15,12 @@ title: Developer Guide
 &nbsp;&nbsp;[3.6. Common classes](#36-common-classes) <br/>
 [4. Implementation](#4-implementation) <br/>
 &nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Design considerations](#411-design-considerations) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Design considerations](#421-design-considerations) <br/>
-&nbsp;&nbsp;[4.3. Memo and ContactedDate person attributes](#43-memo-and-contacteddate-person-attributes) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Design considerations](#431-design-considerations) <br/>
-&nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Design considerations](#441-design-considerations) <br/>
+&nbsp;&nbsp;[4.3. Memo and contacted date feature](#43-memo-and-contacted-date-feature) <br/>
+&nbsp;&nbsp;[4.4. Duplicate detection feature](#44-duplicate-detection-feature) <br/>
 &nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
 &nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Design considerations](#461-design-considerations) <br/>
 &nbsp;&nbsp;[4.7. Backup Feature](#47-backup-feature) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1. Design considerations](#471-design-considerations) <br/>
 [5. Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops) <br/>
 [6. Appendix: Requirements](#6-appendix-requirements) <br/>
 &nbsp;&nbsp;[6.1. Product scope](#61-product-scope) <br/>
@@ -52,6 +46,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Conventions
 When this document is read, certain words or sentences are represented in different fonts, typefaces, sizes and weights. This highlighting is systematic where different words will be represented in the same style to indicate their inclusion in a specific category. Below is a table that shows what those categories are and how they are represented by each format/symbol.
 
@@ -71,6 +67,8 @@ Symbol | What it means |
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 3. Design
 
@@ -126,6 +124,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -136,6 +136,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3. Logic component
 
@@ -185,6 +187,7 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### 3.5. Storage component
 
@@ -196,6 +199,8 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div style="page-break-after: always;"></div>
 
 ### 3.6. Common classes
 
@@ -278,6 +283,8 @@ Step 7. The user can't make up his mind and decides to redo his undo. He execute
 
 ![UndoRedoState6](images/UndoRedoState6.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** If `currentStateIndex` is at index `stateHistory.size() - 1`, pointing to the latest address book state, there are no undo command to revert. The `redo` command calls `Model#canRedoAddressBook()` to check if this is the case. If there is nothing to redo, it will return an error to the user rather than performing the redo mechanism.
 </div>
@@ -289,6 +296,8 @@ Step 8. The user executes the `list` command. Commands that do not modify the ad
 Step 9. The user executes `add n/Tom …​`, which calls `Model#saveAddressBookState()`. Since `currentStateIndex` is not pointing at the end of the `stateHistory`, all address book states after the `currentStateIndex` will be cleared by calling `StateAddressBook#clearAfterCurrentStateIndex()`. Why it is implemented as such is because it no longer makes sense to redo the `clear` command (state3:AddressBook). This behaviour follows modern application undo and redo functionality.
 
 ![UndoRedoState8](images/UndoRedoState8.png)
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -306,7 +315,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative:** Individual command knows how to undo and redo by itself.
     * Pros: `stateHistory` will use less memory. E.g. for `delete` it only needs to save the person being deleted.
     * Cons: It will take a considerable amount of effort to implement and maintain. Commands that are developed in the future, if applicable, must also support this, which adds to the complexity. It must be done meticulously to ensure that the implementation of each individual command is correct.
-    
+
+<div style="page-break-after: always;"></div>
+
 **Aspect: stateHistory data structure:**
 
 * **Current implementation:** `stateHistory` is an `ArrayList`.
@@ -316,6 +327,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1:** Use a doubly linked list with next and previous pointers. 
     * Pros: O(1) time complexity for all `StateAddressBook` methods.
     * Cons: Java in-built lists do not support next and previous pointers. We will need to carefully implement a doubly linked list and ensure that it is bug free.
+
 * **Alternative 2:** Use a `Deque` to store previous states and a `Stack` to store undid states.
     * Pros: O(1) time complexity for all `StateAddressBook` methods.
     * Cons: It can be tricky to implement the interactions between undo and redo. For example `undo`, followed by `redo`, and then `undo` again. The interaction between undo and redo needs to be managed carefully.
@@ -353,6 +365,8 @@ Step 4. `FindCommandParser` will then use the created `FindPersonPredicate` obje
 Step 5. `LogicManager` will then call `FindCommand#execute(Model)` method and this method will invoke 
 `Model#updateFilteredPersonList(Predicate)` where it will update the filter for the person list in the address book.
 
+<div style="page-break-after: always;"></div>
+
 Step 6. After the filter has been updated, each person in the person list will be tested against the predicate to see if any of the information in the person's attribute matches any of the keywords provided by the user. The filtered list is created and returned to the Ui.
 
 <br>
@@ -375,6 +389,7 @@ Step 6. After the filter has been updated, each person in the person list will b
 * **Current implementation:** Different search criteria for different search parameters. <br /> 
 The following table shows the available matching criteria for Abπ and a description to explain the implementation details of the matching criteria:
 
+<div style="page-break-after: always;"></div>
 
 | Matching criteria                | Description                                                                                                                                                                                                                                                                                                        | 
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -415,6 +430,8 @@ Below is a table that shows the matching criteria that is used for each person's
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
   * Pros: Allows for a more accurate search that meets the needs of the user (as opposed to adopting a single search criteria for all the person's attribute). 
     * Tags was chosen to follow the exact string match criteria because users are likely to remember the full word of a tag and search for them.
     * For contacted date, a special matching criteria is created specifically for this attribute because the semantics of finding a person by their last contacted date is different from the other attributes. 
@@ -431,8 +448,9 @@ Below is a table that shows the matching criteria that is used for each person's
 e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence! 
 </div>
 
+<div style="page-break-after: always;"></div>
 
-### 4.3. Memo and ContactedDate person attributes
+### 4.3. Memo and contacted date feature
 
 The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. either can be empty.
 - If `Memo` is empty, it will not be displayed. 
@@ -479,12 +497,14 @@ Editing of `ContactedDate` via the `edit` command works similarly.
     * Pros: Memo can take any character, including any special characters, providing flexibility for users. The limit is imposed to protect from and prevent excessively long strings.
     * Cons: There could be special characters which might not display properly, or malicious characters that mess up the display. However, it is the conscious choice of the user to input such characters. We decided to not be overzealous with the input validation. Allowing any character as memo provides great flexibility for users.
 
+<div style="page-break-after: always;"></div>
+
 **Aspect: `ContactedDate` restrictions:**
 * **Current implementation:** Date can be only be empty or a valid dd-mm-yyyy date that is not in the future.
     * Pros: Empty dates can be used by users to represent not contacted. The dd-mm-yyyy format is a common date format in Singapore. Preventing future dates is an intuitive design choice, as it doesn't make sense for last contacted to be in the future.
     * Cons: Dates can only be represented in the dd-mm-yyyy format. This might be a minor inconvenience for a minority of users who could prefer a different date format. Since the dd-mm-yyyy format is most commonly used in Singapore, we will stick with this format.
     
-### 4.4. Duplicate detection
+### 4.4. Duplicate detection feature
 
 Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate.
 
@@ -498,6 +518,8 @@ For all person attributes except `Phone`, after extra white spaces have been tri
 For phone, even if there is a difference in white space, it is still considered to be equal. However, a difference in '+' is considered as different. For example:
 - "+65 98765432" is equal to "+6598765432" (difference in white space)
 - "+65 98765432" is different from "65 98765432" (difference in '+')
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.1. Design considerations:
 
@@ -519,6 +541,8 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: Similar to "Aspect: Case sensitivity", it follows closely to reality, person attributes such as name that only differ in extra white spaces between words are often treated as identical. Intuitively, "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" are highly likely to be the same person.
     * Cons: In some rare cases, people might consider "John &#160;&#160;&#160;&#160;&#160; Doe" and "John Doe" to be different individuals. However, this is unlikely. Trimming extra white spaces between words is a quality of life feature, helping users to remove accidental extra white spaces provides a cleaner experience. This behaviour follows modern applications, such as Microsoft Teams.
 
+<div style="page-break-after: always;"></div>
+
 **Aspect: Difference in white space:**
 
 * **Current implementation:** For all person attributes, except `Phone`, after extra white spaces have been trimmed, a difference in white space is considered as different. 
@@ -532,6 +556,8 @@ For phone, even if there is a difference in white space, it is still considered 
     * Pros: This implementation follows closely to how phone numbers work in reality. '+' is part of the _[country calling code](https://en.wikipedia.org/wiki/List_of_country_calling_codes)_. <br>
      For example, dialing "+65 98765432" is different from dialing "65 98765432", both are treated as different numbers in real life.
     * Cons: No significant cons to mention, just that users must ensure that they input the proper phone number with '+' if applicable.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5. Previous and next feature
 Pressing up-arrow key and down-arrow key allows user to navigate among the recent user inputs.
@@ -598,6 +624,8 @@ The following activity diagram summarizes what happens when a user executes Prev
 
 <img src="images/HistoryActivityDiagram.png" width="482" />
 
+<div style="page-break-after: always;"></div>
+
 ### 4.6. Detailed Person Display
 
 This section will outline the design choices of implementing the panel to display person details. A class diagram outlining the important classes, methods, and variables is shown below:
@@ -611,6 +639,8 @@ This section will outline the design choices of implementing the panel to displa
 * `ModelManager#updateDisplayUponModification()` - Updates what the display should contain upon any modifications of attributes of a `Person`. In the current implementation, it updates `PersonOnDisplay` to display the edited data of the edited `Person`.
 
 To link the `PersonOnDisplay` with `DetailedPersonDisplay`, `MainWindow` fetches a `ChangeListener` from `DetailedPersonDisplay` and passes the `ChangeListener` to `ModelManager`. This way, whenever the `PersonOnDisplay` object changes inside `ModelManager`, `DetailedPersonDisplay` will receive an update and modify the display with the updated information accordingly.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.6.1. Design considerations:
 
@@ -669,6 +699,8 @@ _The backup file is located at "[Abπ location]/data/" where [Abπ location] is 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 6. Appendix: Requirements
 
 ### 6.1. Product scope
@@ -707,9 +739,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | have a memo for each contact                              | keep track of miscellaneous information about a person                        |
 | `* *`    | user     | keep track of the last contacted date of a person         | identify how long it has been since I last contacted a person                 |
 
+<div style="page-break-after: always;"></div>
+
 ### 6.3. Use cases
 
-(For all use cases below, the **System** is `Abπ` and the **Actor** is `user`, unless specified otherwise)
+(For all use cases below, the **System** is Abπ and the **Actor** is user, unless specified otherwise)
 
 **Use case: UC01 - Add a person**
 <br>
@@ -840,8 +874,9 @@ Guarantees: Appending tags to a contact is successful.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
-
 <br>
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04 - Deleting tags from a contact**
 <br>
@@ -889,7 +924,7 @@ Guarantees: Deleting tags from a contact is successful.
 
 <br>
 
-**Use case: UC04 - Deleting a contact**
+**Use case: UC05 - Deleting a contact**
 <br>
 Precondition: There is at least 1 contact in Abπ.
 <br>
@@ -927,7 +962,7 @@ Guarantees: Deleting a contact is successful.
 
 <br>
 
-**Use case: UC05 - Deleting multiple contacts**
+**Use case: UC06 - Deleting multiple contacts**
 <br>
 Guarantees: Deleting multiple contacts is successful.
 <br>
@@ -953,7 +988,7 @@ Guarantees: Deleting multiple contacts is successful.
 
 <br>
 
-**Use case: UC06 - Clearing all contacts**
+**Use case: UC07 - Clearing all contacts**
 <br>
 Guarantees: Removing all contacts is successful.
 <br>
@@ -979,7 +1014,9 @@ Guarantees: Removing all contacts is successful.
 
 <br>
 
-**Use case: UC07 - View contact details**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC08 - View contact details**
 
 Precondition: There is at least 1 contact in Abπ.
 <br>
@@ -1017,7 +1054,7 @@ Guarantees: Viewing contact details is successful.
 
 <br>
 
-**Use case: UC08 - Find contacts**
+**Use case: UC09 - Find contacts**
 
 Guarantees: Finding of contacts is successful.
 <br>
@@ -1043,7 +1080,9 @@ Guarantees: Finding of contacts is successful.
 
 <br>
 
-**Use case: UC09 - List all contacts**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC10 - List all contacts**
 
 Guarantees: All contacts in Abπ are shown.
 <br>
@@ -1069,7 +1108,7 @@ Guarantees: All contacts in Abπ are shown.
 
 <br>
 
-**Use case: UC10 - Copying all emails**
+**Use case: UC11 - Copying all emails**
 
 Guarantees: All the emails are copied.
 <br>
@@ -1095,7 +1134,9 @@ Guarantees: All the emails are copied.
 
 <br>
 
-**Use case: UC11 - Undoing actions made by Abπ**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC12 - Undoing actions made by Abπ**
 
 Precondition: There must be at least 1 action made by Abπ before user requests to undo an action. 
 <br>
@@ -1122,7 +1163,7 @@ Guarantees: Undoing previously made actions by Abπ is successful.
 
 <br>
 
-**Use case: UC12 - Redoing actions made by Abπ**
+**Use case: UC13 - Redoing actions made by Abπ**
 
 Precondition: There must be at least 1 undid action made by Abπ before user requests to redo.
 <br>
@@ -1149,7 +1190,9 @@ Guarantees: Redoing an undid action is successful.
 
 <br>
 
-**Use case: UC13 - User is able to retrieve previously executed commands**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC14 - User is able to retrieve previously executed commands**
 <br>
 Precondition: There must be at least 1 executed command before the user requests to retrieve a previously executed command.
 <br>
@@ -1177,7 +1220,7 @@ Guarantees: Retrieving a previously executed command is successful.
 
 <br>
 
-**Use case: UC14 - Get help**
+**Use case: UC15 - Get help**
 <br>
 Guarantees: User will get instructions on how to get help.
 <br>
@@ -1203,7 +1246,9 @@ Guarantees: User will get instructions on how to get help.
 
 <br>
 
-**Use case: UC15 - Exit**
+<div style="page-break-after: always;"></div>
+
+**Use case: UC16 - Exit**
 <br>
 Guarantees: User will exit Abπ.
 <br>
@@ -1227,6 +1272,7 @@ Guarantees: User will exit Abπ.
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
 
 ### 6.4. Non-Functional Requirements
 
@@ -1254,6 +1300,8 @@ Guarantees: User will exit Abπ.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
@@ -1280,6 +1328,8 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app. <br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 ### 7.2. Adding a contact
 
 1. Adding a contact
@@ -1298,7 +1348,9 @@ testers are expected to do more *exploratory* testing.
     5. Note:
        - Name, phone, email and address are compulsory attributes that must be specified when using the add command.
        - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
-       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+       - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.3. Editing a contact
 
@@ -1349,7 +1401,9 @@ testers are expected to do more *exploratory* testing.
         - Multiple attributes can be edited at once by specifying the respective prefix.
         - If a contact with the same name, phone and email already exist, a duplicate error message will be shown.
         - If the edit does not change anything, a nothing will change error message will be shown.
-        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+        - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.4. Adding tags to a contact
 
@@ -1374,7 +1428,9 @@ testers are expected to do more *exploratory* testing.
 
     7. Note:
        - If any of the tags to be added already exist in the specified contact, a tag already present error message will be shown.
-       - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+       - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.5. Deleting tags of a contact
 
@@ -1399,7 +1455,9 @@ testers are expected to do more *exploratory* testing.
 
     7. Note:
         - If any of the tags to be deleted does not exist in the specified contact, a tag does not exist error message will be shown.
-        - Refer to [4.4. Duplicate detection](#44-duplicate-detection) for specific details about duplicate detection.
+        - Refer to [4.4. Duplicate detection feature](#44-duplicate-detection-feature) for specific details about duplicate detection.
+
+<div style="page-break-after: always;"></div>
 
 ### 7.6. Deleting a contact
 
@@ -1415,6 +1473,8 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try: `delete x` (where x is an integer larger than the list size and smaller than 2147483648) <br>
       Expected: Message displaying that the contact index provided does not exist. The text in the command box will also turn red. 
+
+<div style="page-break-after: always;"></div>
 
 ### 7.7. Finding contacts by their attributes
 
@@ -1468,7 +1528,8 @@ a       contacts listed will be shown in the status message.
    3. Launch "Abpi.jar". 
    4. Execute `add n/bob p/123 e/123@example.com a/123 street`.
    5. Close the app. <br>
-
       Expected: When the corrupted data file is read, an empty addressbook will be loaded. After the command `add n/bob p/123 e/123@example.com a/123 street` is executed, the current list overwrites the existing data file. When the app is closed, a backup copy of the previous data file will be created, named as "backup_[DD-MM-YY HH-MM-SS].json" in the same folder.
+   6. Note:
+      - Refer to [4.7. Backup Feature](#47-backup-feature) for specific details about the backup data files.
 
 [Back to Table of Contents](#table-of-contents)
