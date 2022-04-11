@@ -16,8 +16,8 @@ title: Developer Guide
 [4. Implementation](#4-implementation) <br/>
 &nbsp;&nbsp;[4.1. Undo and redo feature](#41-undo-and-redo-feature) <br/>
 &nbsp;&nbsp;[4.2. Find feature](#42-find-feature) <br/>
-&nbsp;&nbsp;[4.3. Memo and ContactedDate person attributes](#43-memo-and-contacteddate-person-attributes) <br/>
-&nbsp;&nbsp;[4.4. Duplicate detection](#44-duplicate-detection) <br/>
+&nbsp;&nbsp;[4.3. Memo and ContactedDate feature](#43-memo-and-contacteddate-feature) <br/>
+&nbsp;&nbsp;[4.4. Duplicate detection feature](#44-duplicate-detection-feature) <br/>
 &nbsp;&nbsp;[4.5. Previous and next feature](#45-previous-and-next-feature) <br/>
 &nbsp;&nbsp;[4.6. Detailed Person Display](#46-detailed-person-display) <br/>
 &nbsp;&nbsp;[4.7. Backup Feature](#47-backup-feature) <br/>
@@ -450,7 +450,7 @@ e.g. "This is a sentence!" contains the word "This", "is", "a" and "sentence!
 
 <div style="page-break-after: always;"></div>
 
-### 4.3. Memo and ContactedDate person attributes
+### 4.3. Memo and ContactedDate feature
 
 The address book `Memo` and `ContactedDate` are person attributes, part of `Person`. `Memo` allow users to store miscellaneous information about a `Person`, while `ContactedDate` allow users to keep track of the last contacted date of a `Person`. `Memo` and `ContactedDate` are optional attributes, i.e. either can be empty.
 - If `Memo` is empty, it will not be displayed. 
@@ -504,7 +504,7 @@ Editing of `ContactedDate` via the `edit` command works similarly.
     * Pros: Empty dates can be used by users to represent not contacted. The dd-mm-yyyy format is a common date format in Singapore. Preventing future dates is an intuitive design choice, as it doesn't make sense for last contacted to be in the future.
     * Cons: Dates can only be represented in the dd-mm-yyyy format. This might be a minor inconvenience for a minority of users who could prefer a different date format. Since the dd-mm-yyyy format is most commonly used in Singapore, we will stick with this format.
     
-### 4.4. Duplicate detection
+### 4.4. Duplicate detection feature
 
 Duplicate detection helps users to manage duplicated contacts by preventing duplicated entries. A duplicate is defined as such, a contact is a duplicate if there already exists a contact in Abπ with the same name, phone and email. Duplicate detection is integrated into the `add` and `edit` command, which throws an exception if a contact to be added / edited is a duplicate.
 
