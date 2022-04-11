@@ -33,7 +33,7 @@ title: Developer Guide
 &nbsp;&nbsp;[6.2. User stories](#62-user-stories) <br/>
 &nbsp;&nbsp;[6.3. Use cases](#63-use-cases) <br/>
 &nbsp;&nbsp;[6.4. Non-Functional Requirements](#64-non-functional-requirements) <br/>
-&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/> <div style="page-break-after: always;"></div>
+&nbsp;&nbsp;[6.5. Glossary](#65-glossary) <br/>
 [7. Appendix: Instructions for manual testing](#7-appendix-instructions-for-manual-testing) <br/>
 &nbsp;&nbsp;[7.1. Launch and shutdown](#71-launch-and-shutdown) <br/>
 &nbsp;&nbsp;[7.2. Adding a contact](#72-adding-a-contact) <br/>
@@ -130,6 +130,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -140,6 +142,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3. Logic component
 
@@ -189,6 +193,7 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### 3.5. Storage component
 
